@@ -11,33 +11,48 @@ onready var chat_input = $'Base_UI/Chat_&_Rolls_Results/VBoxContainer/Chat_Input
 
 
 func _input(event):
+	
+	'# Chat Input'
 	if Input.is_action_just_pressed("enter"):
+		var rollDice 
+		'# Chat roll input'
 		if '/r' in chat_input.text:
-			if 'd3' in chat_input.text:
-				return rolld3()
-			if 'd4' in chat_input.text:
-				return rolld4()
-			if 'd6' in chat_input.text:
-				return rolld6()
-			if 'd8' in chat_input.text:
-				return rolld8()
-			if 'd10' in chat_input.text:
-				return rolld10()
-			if 'd12' in chat_input.text:
-				return rolld12()
-			if 'd20' in chat_input.text:
-				return rolld20()
-			if 'd100' in chat_input.text:
-				return rolld100()
+			rollDice = chat_input.text
+			rollDice = rollDice.split(' ')
+			rollDice = Array(rollDice)
+			
+			if rollDice.size() > 1:
+				rollDice = rollDice[1]
+				rollDice = rollDice.replace('d', '')
+				rollDice = int(rollDice)
 				
-		return Add_Text_On_Chat()
+				if rollDice == 3:
+					return rolld3()
+				if rollDice == 4:
+					return rolld4()
+				if rollDice == 6:
+					return rolld6()
+				if rollDice == 8:
+					return rolld8()
+				if rollDice == 10:
+					return rolld10()
+				if rollDice == 12:
+					return rolld12()
+				if rollDice == 20:
+					return rolld20()
+				if rollDice == 100:
+					return rolld100()
+		else:		
+			return Add_Text_On_Chat()
+			
 	if Input.is_action_just_released("enter"):
 		return Clear_Input_TextBox()
 		
 func Add_Text_On_Chat():
 	var txt
-	txt = str(chat_input.text)
-	chat.add_text(txt + '\n\n')
+	txt = chat_input.text
+	chat.add_text(str(txt) + '\n\n')
+
 
 func Clear_Input_TextBox():
 	chat_input.text = ''
