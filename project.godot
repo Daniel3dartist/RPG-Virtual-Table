@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Rpg Virtual Table"
 run/main_scene="res://Scenes/Table.tscn"
-config/icon="res://Ico.png"
+config/icon="res://icon.png"
 
 [input]
 
