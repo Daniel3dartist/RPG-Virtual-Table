@@ -18,6 +18,7 @@ _global_script_class_icons={
 config/name="Rpg Virtual Table"
 run/main_scene="res://Scenes/Table.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://RPG Virtual Table.ico"
 
 [input]
 
@@ -30,4 +31,5 @@ enter={
 
 [rendering]
 
+threads/thread_model=2
 environment/default_environment="res://default_env.tres"

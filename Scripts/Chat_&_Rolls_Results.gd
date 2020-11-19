@@ -96,7 +96,6 @@ func rolld12():
 func rolld20():
 	var d20v
 	d20v = randi() % 20 + 1
-	print(d20v)
 	d20v = 'Rolling d20 = ' + str(d20v) 
 	chat.add_text(d20v + '\n\n')
 
