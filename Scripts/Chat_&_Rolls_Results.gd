@@ -1,8 +1,8 @@
 extends Control
 
 
-onready var chat = $"Base_UI/Chat_&_Rolls_Results/VBoxContainer/Chat"
-onready var chat_input = $'Base_UI/Chat_&_Rolls_Results/VBoxContainer/Chat_Input'
+onready var chat = $"Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Chat"
+onready var chat_input = $"Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Chat_Input"
 
 
 # Called when the node enters the scene tree for the first time.
@@ -106,3 +106,36 @@ func rolld100():
 	d100v = 'Rolling d100 = ' + str(d100v) 
 	chat.add_text(d100v + '\n\n')	
 
+
+
+
+func _on_d3_b_pressed():
+	return rolld3()
+
+
+func _on_d4_b_pressed():
+	return rolld4()
+
+
+func _on_d6_b_pressed():
+	return rolld6()
+
+
+func _on_d8_b_pressed():
+	return rolld8()
+
+
+func _on_d10_b_pressed():
+	return rolld10()
+
+
+func _on_d12_b_pressed():
+	return rolld12()
+
+
+func _on_d20_b_pressed():
+	return rolld20()
+
+
+func _on_d100_b_pressed():
+	return rolld100()
