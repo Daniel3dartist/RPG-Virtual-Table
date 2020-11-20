@@ -3,20 +3,20 @@ extends Control
 # ===============================================[ Score Attributes var ]============================================================= #
 
 # Inputs values
-onready var STR_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column/STR_Input'
-onready var DEX_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column/DEX_Input'
-onready var CON_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column/CON_Input'
-onready var INT_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column/INT_Input'
-onready var WIS_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column/WIS_Input'
-onready var CHA_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column/CHA_Input'
+onready var STR_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/STR_Input'
+onready var DEX_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/DEX_Input'
+onready var CON_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/CON_Input'
+onready var INT_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/INT_Input'
+onready var WIS_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/WIS_Input'
+onready var CHA_Input = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/CHA_Input'
 
 # Mods Values
-onready var STR_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column/STR_Mod_Value'
-onready var DEX_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column/DEX_Mod_Value'
-onready var CON_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column/CON_Mod_Value'
-onready var INT_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column/INT_Mod_Value'
-onready var WIS_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column/WIS_Mod_Value'
-onready var CHA_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column/CHA_Mod_Value'
+onready var STR_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/STR_Mod_Value'
+onready var DEX_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/DEX_Mod_Value'
+onready var CON_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/CON_Mod_Value'
+onready var INT_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/INT_Mod_Value'
+onready var WIS_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/WIS_Mod_Value'
+onready var CHA_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/CHA_Mod_Value'
 
 func _input(event):
 	# STR
