@@ -1,8 +1,40 @@
-[gd_scene format=2]
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Character_Sheet.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.909804, 0.721569, 0.533333, 1 )
+border_width_left = 10
+border_width_right = 10
+border_color = Color( 0.92041, 0.740643, 0.560875, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color( 0.395996, 0.231256, 0.066515, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.800293, 0.650238, 0.500183, 1 )
+border_width_left = 10
+border_width_right = 10
+border_color = Color( 0.8, 0.65098, 0.501961, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color( 0.694118, 0.34902, 0.00784314, 0.458824 )
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.921569, 0.741176, 0.560784, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
 
 [node name="Character_Sheet" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -56,7 +88,7 @@ margin_top = 18.0
 margin_right = 325.0
 margin_bottom = 42.0
 
-[node name="CharacterRace_BoxC3" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
+[node name="CharacterRace_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
 margin_left = 329.0
 margin_right = 654.0
 margin_bottom = 42.0
@@ -66,19 +98,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Character_Race_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC3"]
+[node name="Character_Race_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC"]
 margin_right = 325.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Race"
 align = 1
 
-[node name="Character_Race" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC3"]
+[node name="Character_Race" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC"]
 margin_top = 18.0
 margin_right = 325.0
 margin_bottom = 42.0
 
-[node name="CharacterClass_BoxC2" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
+[node name="CharacterClass_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
 margin_left = 658.0
 margin_right = 984.0
 margin_bottom = 42.0
@@ -88,59 +120,71 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharacterClass_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC2"]
+[node name="CharacterClass_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC"]
 margin_right = 326.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Class"
 align = 1
 
-[node name="Character_Class" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC2"]
+[node name="Character_Class" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC"]
 margin_top = 18.0
 margin_right = 326.0
 margin_bottom = 42.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea"]
+[node name="Sheet_TabContainer" type="TabContainer" parent="ColorRect/SheetArea"]
 margin_top = 46.0
 margin_right = 984.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="Core_Stats" type="Label" parent="ColorRect/SheetArea/VBoxContainer"]
-margin_right = 984.0
-margin_bottom = 14.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Core Stats"
-align = 1
-
-[node name="Score_&_Mod" type="VBoxContainer" parent="ColorRect/SheetArea/VBoxContainer"]
-margin_top = 18.0
-margin_right = 984.0
-margin_bottom = 200.0
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod"]
-margin_right = 984.0
-margin_bottom = 182.0
+custom_styles/tab_fg = SubResource( 3 )
+custom_styles/tab_bg = SubResource( 4 )
+custom_styles/panel = SubResource( 2 )
+custom_colors/font_color_bg = Color( 0, 0, 0, 1 )
+custom_colors/font_color_fg = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer"]
-margin_right = 984.0
-margin_bottom = 182.0
+[node name="Core Stats" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer"]
+[node name="Score_&_Mod" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats"]
+margin_right = 192.0
+margin_bottom = 200.0
+size_flags_horizontal = 0
+size_flags_vertical = 2
+
+[node name="Core_Stats" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod"]
+margin_right = 192.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Core Stats"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod"]
+margin_top = 18.0
+margin_right = 192.0
+margin_bottom = 200.0
+
+[node name="Attributes_Column" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer"]
 margin_right = 29.0
 margin_bottom = 182.0
 
-[node name="Align_Space" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Align_Space" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Attributes_Column"]
 margin_right = 29.0
 margin_bottom = 14.0
 size_flags_vertical = 1
 
-[node name="STR" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="STR" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Attributes_Column"]
 margin_top = 18.0
 margin_right = 29.0
 margin_bottom = 42.0
@@ -150,7 +194,7 @@ text = "STR"
 align = 1
 valign = 1
 
-[node name="DEX" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="DEX" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Attributes_Column"]
 margin_top = 46.0
 margin_right = 29.0
 margin_bottom = 70.0
@@ -160,7 +204,7 @@ text = "DEX"
 align = 1
 valign = 1
 
-[node name="CON" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CON" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Attributes_Column"]
 margin_top = 74.0
 margin_right = 29.0
 margin_bottom = 98.0
@@ -170,7 +214,7 @@ text = "CON"
 align = 1
 valign = 1
 
-[node name="INT" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="INT" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Attributes_Column"]
 margin_top = 102.0
 margin_right = 29.0
 margin_bottom = 126.0
@@ -180,7 +224,7 @@ text = "INT"
 align = 1
 valign = 1
 
-[node name="WIS" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="WIS" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Attributes_Column"]
 margin_top = 130.0
 margin_right = 29.0
 margin_bottom = 154.0
@@ -190,7 +234,7 @@ text = "WIS"
 align = 1
 valign = 1
 
-[node name="CHA" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CHA" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Attributes_Column"]
 margin_top = 158.0
 margin_right = 29.0
 margin_bottom = 182.0
@@ -200,12 +244,12 @@ text = "CHA"
 align = 1
 valign = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer"]
+[node name="Score_Column" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer"]
 margin_left = 33.0
 margin_right = 91.0
 margin_bottom = 182.0
 
-[node name="Score_Description" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="Score_Description" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column"]
 margin_right = 58.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -216,7 +260,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="STR_Input" type="LineEdit" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="STR_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column"]
 margin_top = 18.0
 margin_right = 58.0
 margin_bottom = 42.0
@@ -226,7 +270,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DEX_Input" type="LineEdit" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="DEX_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column"]
 margin_top = 46.0
 margin_right = 58.0
 margin_bottom = 70.0
@@ -236,7 +280,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CON_Input" type="LineEdit" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="CON_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column"]
 margin_top = 74.0
 margin_right = 58.0
 margin_bottom = 98.0
@@ -246,7 +290,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="INT_Input" type="LineEdit" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="INT_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column"]
 margin_top = 102.0
 margin_right = 58.0
 margin_bottom = 126.0
@@ -256,7 +300,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WIS_Input" type="LineEdit" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="WIS_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column"]
 margin_top = 130.0
 margin_right = 58.0
 margin_bottom = 154.0
@@ -266,7 +310,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CHA_Input" type="LineEdit" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="CHA_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Score_Column"]
 margin_top = 158.0
 margin_right = 58.0
 margin_bottom = 182.0
@@ -276,12 +320,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer"]
+[node name="Mod_Column" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer"]
 margin_left = 95.0
 margin_right = 123.0
 margin_bottom = 182.0
 
-[node name="Mod_Description" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="Mod_Description" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column"]
 margin_right = 28.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -292,7 +336,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="STR_Mod_Value" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="STR_Mod_Value" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column"]
 margin_top = 18.0
 margin_right = 28.0
 margin_bottom = 42.0
@@ -305,7 +349,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DEX_Mod_Value" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="DEX_Mod_Value" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column"]
 margin_top = 46.0
 margin_right = 28.0
 margin_bottom = 70.0
@@ -319,7 +363,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CON_Mod_Value" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="CON_Mod_Value" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column"]
 margin_top = 74.0
 margin_right = 28.0
 margin_bottom = 98.0
@@ -333,7 +377,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="INT_Mod_Value" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="INT_Mod_Value" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column"]
 margin_top = 102.0
 margin_right = 28.0
 margin_bottom = 126.0
@@ -347,7 +391,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WIS_Mod_Value" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="WIS_Mod_Value" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column"]
 margin_top = 130.0
 margin_right = 28.0
 margin_bottom = 154.0
@@ -361,7 +405,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CHA_Mod_Value" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="CHA_Mod_Value" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/Mod_Column"]
 margin_top = 158.0
 margin_right = 28.0
 margin_bottom = 182.0
@@ -375,12 +419,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer4" type="VBoxContainer" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer"]
+[node name="SaveRoll_Column" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer"]
 margin_left = 127.0
 margin_right = 192.0
 margin_bottom = 182.0
 
-[node name="Save_Roll_Description" type="Label" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer4"]
+[node name="Save_Roll_Description" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/SaveRoll_Column"]
 margin_right = 65.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -391,7 +435,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="STR_Save_Roll" type="Button" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer4"]
+[node name="STR_Save_Roll" type="Button" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/SaveRoll_Column"]
 margin_top = 18.0
 margin_right = 65.0
 margin_bottom = 42.0
@@ -399,7 +443,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SaveRoll"
 
-[node name="DEX_Save_Roll" type="Button" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer4"]
+[node name="DEX_Save_Roll" type="Button" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/SaveRoll_Column"]
 margin_top = 46.0
 margin_right = 65.0
 margin_bottom = 70.0
@@ -407,7 +451,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SaveRoll"
 
-[node name="CON_Save_Roll" type="Button" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer4"]
+[node name="CON_Save_Roll" type="Button" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/SaveRoll_Column"]
 margin_top = 74.0
 margin_right = 65.0
 margin_bottom = 98.0
@@ -415,7 +459,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SaveRoll"
 
-[node name="INT_Save_Roll" type="Button" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer4"]
+[node name="INT_Save_Roll" type="Button" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/SaveRoll_Column"]
 margin_top = 102.0
 margin_right = 65.0
 margin_bottom = 126.0
@@ -423,7 +467,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SaveRoll"
 
-[node name="WIS_Save_Roll" type="Button" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer4"]
+[node name="WIS_Save_Roll" type="Button" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/SaveRoll_Column"]
 margin_top = 130.0
 margin_right = 65.0
 margin_bottom = 154.0
@@ -431,10 +475,54 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SaveRoll"
 
-[node name="CHA_Save_Roll" type="Button" parent="ColorRect/SheetArea/VBoxContainer/Score_&_Mod/VBoxContainer/HBoxContainer/VBoxContainer4"]
+[node name="CHA_Save_Roll" type="Button" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/Score_&_Mod/HBoxContainer/SaveRoll_Column"]
 margin_top = 158.0
 margin_right = 65.0
 margin_bottom = 182.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "SaveRoll"
+
+[node name="Skills" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+margin_right = -944.0
+margin_bottom = -450.0
+
+[node name="Background" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+
+[node name="Class" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+
+[node name="Weapons" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+
+[node name="Spellbook" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+
+[node name="Armour" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+
+[node name="Inventory" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
