@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Chat_&_Rolls_Results.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/D3.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Scenes/D12.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/D100.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/D20.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scripts/Bot.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 10.0
@@ -27,6 +28,16 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Bot" type="Node" parent="."]
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Bot"]
+script = ExtResource( 10 )
+
+[node name="HeartbeatTimer" type="Timer" parent="Bot/HTTPRequest"]
+
+[node name="InvalidSessionTimer" type="Timer" parent="Bot/HTTPRequest"]
+one_shot = true
 
 [node name="Background_base" type="CanvasLayer" parent="."]
 
@@ -174,6 +185,8 @@ wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
+[connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d3_b" to="." method="_on_d3_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d4_b" to="." method="_on_d4_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d6_b" to="." method="_on_d6_b_pressed"]
