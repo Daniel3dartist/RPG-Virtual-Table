@@ -3,6 +3,9 @@ extends Control
 
 onready var chat = $"Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Chat"
 onready var chat_input = $"Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Chat_Input"
+onready var bot = $'Bot/HTTPRequest'
+onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
+onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
 
 # Called when the node enters the scene tree for the first time.
@@ -141,3 +144,150 @@ func _on_d100_b_pressed():
 
 # ============================[ Bot ]============================#
 
+var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.-GI0WKCN9kBemi5m3P6G29HgXuA" # Make sure to actually replace this with your token!
+var client : WebSocketClient
+var heartbeat_interval : float
+var last_sequence : float
+var session_id : String
+var heartbeat_ack_received := true
+var invalid_session_is_resumable : bool
+
+func _ready() -> void:
+	randomize()
+	client = WebSocketClient.new()
+	client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
+	client.connect("connection_established", self, "_connection_established")
+	client.connect("connection_closed", self, "_connection_closed")
+	client.connect("server_close_request", self, "_server_close_request")
+	client.connect("data_received", self, "_data_received")
+
+func _process(_delta : float) -> void:
+	# Check if the client is not disconnected, there's no point to poll it if it is
+	if client.get_connection_status() != NetworkedMultiplayerPeer.CONNECTION_DISCONNECTED:
+		client.poll()
+	else:
+		# If it is disconnected, try to resume
+		client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
+
+func _connection_established(protocol : String) -> void:
+	print("We are connected! Protocol: %s" % protocol)
+
+func _connection_closed(was_clean_close : bool) -> void:
+	print("We disconnected. Clean close: %s" % was_clean_close)
+
+func _server_close_request(code : int, reason : String) -> void:
+	print("The server requested a clean close. Code: %s, reason: %s" % [code, reason])
+
+func _data_received() -> void:
+	var packet := client.get_peer(1).get_packet()
+	var data := packet.get_string_from_utf8()
+	var json_parsed := JSON.parse(data)
+	var dict : Dictionary = json_parsed.result
+	var op = str(dict["op"]) # Convert it to string for easier checking
+	print(op)
+	match op:
+		"0": # Opcode 0 Dispatch (Events)
+			handle_events(dict)
+		"9": # Opcode 9 Invalid Session
+			invalid_session_is_resumable = dict["d"]
+			ist.one_shot = true
+			ist.wait_time = rand_range(1, 5)
+			ist.start()
+		"10": # Opcode 10 Hello
+			# Set our timer
+			heartbeat_interval = dict["d"]["heartbeat_interval"] / 1000
+			hbt.wait_time = heartbeat_interval
+			hbt.start()
+
+			var d := {}
+			if !session_id:
+				# Send Opcode 2 Identify to the Gateway
+				d = {
+					"op" : 2,
+					"d" : { "token" : token, "properties" : {} }
+				}
+			else:
+				# Send Opcode 6 Resume to the Gateway
+				d = {
+					"op" : 6,
+					"d" : { "token" : token, "session_id" : session_id, "seq" : last_sequence}
+				}
+			send_dictionary_as_packet(d)
+		"11": # Opcode 11 Heartbeat ACK
+			heartbeat_ack_received = true
+			print("We've received a Heartbeat ACK from the gateway.")
+
+
+func _on_HeartbeatTimer_timeout() -> void: # Send Opcode 1 Heartbeat payloads every heartbeat_interval
+	if !heartbeat_ack_received:
+		# We haven't received a Heartbeat ACK back, so we'll disconnect
+		client.disconnect_from_host(1002)
+		return
+	var d := {"op" : 1, "d" : last_sequence}
+	send_dictionary_as_packet(d)
+	heartbeat_ack_received = false
+	print("We've send a Heartbeat to the gateway.")
+
+func send_dictionary_as_packet(d : Dictionary) -> void:
+	var query = to_json(d)
+	client.get_peer(1).put_packet(query.to_utf8())
+
+func handle_events(dict : Dictionary) -> void:
+	last_sequence = dict["s"]
+	var event_name : String = dict["t"]
+	print(event_name)
+	match event_name:
+		"READY":
+			session_id = dict["d"]["session_id"]
+		"GUILD_MEMBER_ADD":
+			var guild_id = dict["d"]["guild_id"]
+			var headers := ["Authorization: Bot %s" % token]
+
+			# Get all channels of the guild
+			bot.request("https://discord.com/api/guilds/%s/channels" % guild_id, headers)
+			var data_received = yield(self, "request_completed") # await
+			var channels = JSON.parse(data_received[3].get_string_from_utf8()).result
+			var channel_id
+			for channel in channels:
+				# Find the first text channel and get its ID
+				if str(channel["type"]) == "0":
+					channel_id = channel["id"]
+					break
+			if channel_id: # If we found at least one text channel
+				var username = dict["d"]["user"]["username"]
+				var message_to_send := {"content" : "Welcome %s!" % username}
+				var query := JSON.print(message_to_send)
+				headers.append("Content-Type: application/json")
+				bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+		"MESSAGE_CREATE":
+			var channel_id = dict["d"]["channel_id"]
+			var message_content = dict["d"]["content"]
+
+			var headers := ["Authorization: Bot %s" % token, "Content-Type: application/json"]
+			var query : String
+
+			if message_content.to_upper() == "ORAMA":
+				var message_to_send := {"content" : "Interactive"}
+				query = JSON.print(message_to_send)
+			else:
+				var txt = str(message_content + '\n\n')
+				chat.add_text(txt)
+			
+			if query:
+				bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+
+func _on_InvalidSessionTimer_timeout() -> void:
+	var d := {}
+	if invalid_session_is_resumable && session_id:
+		# Send Opcode 6 Resume to the Gateway
+		d = {
+			"op" : 6,
+			"d" : { "token" : token, "session_id" : session_id, "seq" : last_sequence}
+		}
+	else:
+		# Send Opcode 2 Identify to the Gateway
+		d = {
+			"op" : 2,
+			"d" : { "token" : token, "properties" : {} }
+		}
+	send_dictionary_as_packet(d)

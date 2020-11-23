@@ -1,6 +1,6 @@
 extends HTTPRequest
 
-var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.PnuRzwbvYUznXavrAPbSuzxYSUs" # Make sure to actually replace this with your token!
+var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.-GI0WKCN9kBemi5m3P6G29HgXuA" # Make sure to actually replace this with your token!
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float
@@ -125,15 +125,7 @@ func handle_events(dict : Dictionary) -> void:
 			if message_content.to_upper() == "ORAMA":
 				var message_to_send := {"content" : "Interactive"}
 				query = JSON.print(message_to_send)
-			elif message_content.to_upper() == "WEBSITE":
-				var message_to_send := {"content" : "http://oramagamestudios.com/"}
-				query = JSON.print(message_to_send)
-			elif message_content.to_upper() == "BLOG":
-				var message_to_send := {"content" : "https://functionoverload590613498.wordpress.com"}
-				query = JSON.print(message_to_send)
-			elif message_content.to_upper() == "GITHUB":
-				var message_to_send := {"content" : "https://github.com/OverloadedOrama"}
-				query = JSON.print(message_to_send)
+			
 			if query:
 				request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 

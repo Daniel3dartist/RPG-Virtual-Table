@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scripts/Chat_&_Rolls_Results.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/D3.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Scenes/D12.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/D100.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/D20.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scripts/Bot.gd" type="Script" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 10.0
@@ -32,7 +31,6 @@ __meta__ = {
 [node name="Bot" type="Node" parent="."]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Bot"]
-script = ExtResource( 10 )
 
 [node name="HeartbeatTimer" type="Timer" parent="Bot/HTTPRequest"]
 
