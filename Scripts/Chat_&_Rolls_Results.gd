@@ -7,10 +7,28 @@ onready var bot = $'Bot/HTTPRequest'
 onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
 onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
+var text_to_Discord 
 
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	chat_input.connect(Control.text_entered, self, Control.text_entered)
+
+var token := "" # Make sure to actually replace this with your token!
+var client : WebSocketClient
+var heartbeat_interval : float
+var last_sequence : float
+var session_id : String
+var heartbeat_ack_received := true
+var invalid_session_is_resumable : bool
+
+
+
+func _ready() -> void:
+	randomize()
+	client = WebSocketClient.new()
+	client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
+	client.connect("connection_established", self, "_connection_established")
+	client.connect("connection_closed", self, "_connection_closed")
+	client.connect("server_close_request", self, "_server_close_request")
+	client.connect("data_received", self, "_data_received")
+	client.connect("input", self, "_input")
 
 
 func _input(event):
@@ -18,6 +36,19 @@ func _input(event):
 	'# Chat Input'
 	if Input.is_action_just_pressed("enter"):
 		var rollDice 
+		
+		var query : String
+		var message_to_send := {"content" : "Ola mundo" }
+		var channel_id
+		var packet := client.get_peer(1).get_packet()
+		var data := packet.get_string_from_utf8()
+		var json_parsed := JSON.parse(data)
+		#var dict : Dictionary = json_parsed.result
+		var headers := ["Authorization: Bot %s" % token]
+		
+		text_to_Discord = chat_input.text
+		print('text to discord: ' + text_to_Discord)
+		
 		'# Chat roll input'
 		if '/r' in chat_input.text:
 			rollDice = chat_input.text
@@ -47,7 +78,16 @@ func _input(event):
 					return rolld100()
 		else:		
 			return Add_Text_On_Chat()
-			
+		
+#		return handle_events()
+		channel_id = "780370698508959755"
+		print('Text to Discord é: ', text_to_Discord)
+		message_to_send = text_to_Discord
+		query = JSON.print(message_to_send)
+		print('Q: ' + query)
+		headers.append("Content-Type: application/json")
+		bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+		
 	if Input.is_action_just_released("enter"):
 		return Clear_Input_TextBox()
 		
@@ -144,23 +184,6 @@ func _on_d100_b_pressed():
 
 # ============================[ Bot ]============================#
 
-var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.-GI0WKCN9kBemi5m3P6G29HgXuA" # Make sure to actually replace this with your token!
-var client : WebSocketClient
-var heartbeat_interval : float
-var last_sequence : float
-var session_id : String
-var heartbeat_ack_received := true
-var invalid_session_is_resumable : bool
-
-func _ready() -> void:
-	randomize()
-	client = WebSocketClient.new()
-	client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
-	client.connect("connection_established", self, "_connection_established")
-	client.connect("connection_closed", self, "_connection_closed")
-	client.connect("server_close_request", self, "_server_close_request")
-	client.connect("data_received", self, "_data_received")
-
 func _process(_delta : float) -> void:
 	# Check if the client is not disconnected, there's no point to poll it if it is
 	if client.get_connection_status() != NetworkedMultiplayerPeer.CONNECTION_DISCONNECTED:
@@ -168,9 +191,24 @@ func _process(_delta : float) -> void:
 	else:
 		# If it is disconnected, try to resume
 		client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
+		
+	if Input.is_action_just_released("enter"):
+		var query : String
+		var channel_id = "780370698508959755"
+		var message_to_send := {"content" : text_to_Discord }
+		var headers := ["Authorization: Bot %s" % token]
+		
+		print('Text to Discord é: ', text_to_Discord)
+		
+		query = JSON.print(message_to_send)
+		print('Q: ' + query)
+		headers.append("Content-Type: application/json")
+		bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+			
 
 func _connection_established(protocol : String) -> void:
 	print("We are connected! Protocol: %s" % protocol)
+	
 
 func _connection_closed(was_clean_close : bool) -> void:
 	print("We disconnected. Clean close: %s" % was_clean_close)
@@ -188,6 +226,19 @@ func _data_received() -> void:
 	match op:
 		"0": # Opcode 0 Dispatch (Events)
 			handle_events(dict)
+			if Input.is_action_just_pressed("enter"):
+				var query
+				var channel_id 
+				channel_id = dict["d"]["780370698508959755"]
+				print('Text to Discord é: ', text_to_Discord)
+				var message_to_send = {"content" : text_to_Discord }
+				var headers := ["Authorization: Bot %s" % token]
+				
+				query = JSON.print(message_to_send)
+				print('Q: ' + query)
+				headers.append("Content-Type: application/json")
+				bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+		
 		"9": # Opcode 9 Invalid Session
 			invalid_session_is_resumable = dict["d"]
 			ist.one_shot = true
@@ -216,6 +267,7 @@ func _data_received() -> void:
 		"11": # Opcode 11 Heartbeat ACK
 			heartbeat_ack_received = true
 			print("We've received a Heartbeat ACK from the gateway.")
+		
 
 
 func _on_HeartbeatTimer_timeout() -> void: # Send Opcode 1 Heartbeat payloads every heartbeat_interval
@@ -248,11 +300,25 @@ func handle_events(dict : Dictionary) -> void:
 			var data_received = yield(self, "request_completed") # await
 			var channels = JSON.parse(data_received[3].get_string_from_utf8()).result
 			var channel_id
+			
+
+				
 			for channel in channels:
 				# Find the first text channel and get its ID
 				if str(channel["type"]) == "0":
 					channel_id = channel["id"]
 					break
+				
+			if Input.is_action_just_released("enter"):
+				var query : String
+				channel_id = dict["d"]["780370698508959755"] 
+				print('Text to Discord é: ', text_to_Discord)
+				var message_to_send := {"content" : "Ola mundo" }
+				query = JSON.print(message_to_send)
+				print('Q: ' + query)
+				headers.append("Content-Type: application/json")
+				bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+			
 			if channel_id: # If we found at least one text channel
 				var username = dict["d"]["user"]["username"]
 				var message_to_send := {"content" : "Welcome %s!" % username}
@@ -266,9 +332,14 @@ func handle_events(dict : Dictionary) -> void:
 			var headers := ["Authorization: Bot %s" % token, "Content-Type: application/json"]
 			var query : String
 
+
 			if message_content.to_upper() == "ORAMA":
-				var message_to_send := {"content" : "Interactive"}
+#				var message_to_send := {"content" : "Interactive"}
+				var message_to_send := {"content" : text_to_Discord}
 				query = JSON.print(message_to_send)
+				print('canal: ' + str(channel_id))
+				print('headers: ' + str(headers))
+				print('query: ' + str(query))
 			else:
 				var txt = str(message_content + '\n\n')
 				chat.add_text(txt)
