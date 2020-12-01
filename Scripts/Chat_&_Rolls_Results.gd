@@ -192,7 +192,7 @@ func _process(_delta : float) -> void:
 		# If it is disconnected, try to resume
 		client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
 		
-	if Input.is_action_just_released("enter"):
+	if Input.is_action_just_pressed("enter"):
 		var query : String
 		var channel_id = "780370698508959755"
 		var message_to_send := {"content" : text_to_Discord }
@@ -226,18 +226,6 @@ func _data_received() -> void:
 	match op:
 		"0": # Opcode 0 Dispatch (Events)
 			handle_events(dict)
-			if Input.is_action_just_pressed("enter"):
-				var query
-				var channel_id 
-				channel_id = dict["d"]["780370698508959755"]
-				print('Text to Discord é: ', text_to_Discord)
-				var message_to_send = {"content" : text_to_Discord }
-				var headers := ["Authorization: Bot %s" % token]
-				
-				query = JSON.print(message_to_send)
-				print('Q: ' + query)
-				headers.append("Content-Type: application/json")
-				bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 		
 		"9": # Opcode 9 Invalid Session
 			invalid_session_is_resumable = dict["d"]
@@ -308,16 +296,6 @@ func handle_events(dict : Dictionary) -> void:
 				if str(channel["type"]) == "0":
 					channel_id = channel["id"]
 					break
-				
-			if Input.is_action_just_released("enter"):
-				var query : String
-				channel_id = dict["d"]["780370698508959755"] 
-				print('Text to Discord é: ', text_to_Discord)
-				var message_to_send := {"content" : "Ola mundo" }
-				query = JSON.print(message_to_send)
-				print('Q: ' + query)
-				headers.append("Content-Type: application/json")
-				bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 			
 			if channel_id: # If we found at least one text channel
 				var username = dict["d"]["user"]["username"]
@@ -335,15 +313,21 @@ func handle_events(dict : Dictionary) -> void:
 
 			if message_content.to_upper() == "ORAMA":
 #				var message_to_send := {"content" : "Interactive"}
-				var message_to_send := {"content" : text_to_Discord}
+				var message_to_send := {"content" : "interact" }
 				query = JSON.print(message_to_send)
 				print('canal: ' + str(channel_id))
 				print('headers: ' + str(headers))
 				print('query: ' + str(query))
-			else:
-				var txt = str(message_content + '\n\n')
-				chat.add_text(txt)
 			
+			
+			var txt = str(message_content)
+			print("Essa é a mensagem content: " + txt)
+			print('Esse é o texto para o Discord: ' + text_to_Discord)
+				
+			if txt != text_to_Discord:
+				txt = txt + '\n\n'
+				chat.add_text(txt)
+						
 			if query:
 				bot.request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 
