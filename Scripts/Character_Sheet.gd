@@ -45,7 +45,7 @@ func _input(event):
 
 		num = int(STR_Input.text)
 		strMod = num
-		strMod = str(strMod - 10)
+		strMod = str((strMod - 10) / 2)
 		STR_Mod_Value.text = strMod
 		strCompareNum = num
 
@@ -56,7 +56,7 @@ func _input(event):
 
 		num = int(DEX_Input.text)
 		dexMod = num
-		dexMod = str(dexMod - 10)
+		dexMod = str((dexMod - 10) / 2)
 		DEX_Mod_Value.text = dexMod
 		dexCompareNum = num
 
@@ -67,7 +67,7 @@ func _input(event):
 
 		num = int(CON_Input.text)
 		conMod = num
-		conMod = str(conMod - 10)
+		conMod = str((conMod - 10) / 2)
 		CON_Mod_Value.text =conMod
 		conCompareNum = num
 
@@ -78,7 +78,7 @@ func _input(event):
 
 		num = int(INT_Input.text)
 		intMod = num
-		intMod = str(intMod - 10)
+		intMod = str((intMod - 10) / 2)
 		INT_Mod_Value.text = intMod
 		intCompareNum = num
 
@@ -89,7 +89,7 @@ func _input(event):
 
 		num = int(WIS_Input.text)
 		wisMod = num
-		wisMod = str(wisMod - 10)
+		wisMod = str((wisMod - 10) / 2)
 		WIS_Mod_Value.text =wisMod
 		wisCompareNum = num
 
@@ -100,6 +100,6 @@ func _input(event):
 
 		num = int(CHA_Input.text)
 		chaMod = num
-		chaMod = str(chaMod - 10)
+		chaMod = str((chaMod - 10) / 2)
 		CHA_Mod_Value.text = chaMod
 		chaCompareNum = num

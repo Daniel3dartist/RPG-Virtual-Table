@@ -20,6 +20,11 @@ run/main_scene="res://Scenes/Table.tscn"
 config/icon="res://icon.png"
 config/windows_native_icon="res://RPG Virtual Table.ico"
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [input]
 
 enter={

@@ -10,7 +10,7 @@ onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 var text_to_Discord 
 
 
-var token := "" # Make sure to actually replace this with your token!
+var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.DeaIEeHr15HivuPfIW88L3es154" # Bot token
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float

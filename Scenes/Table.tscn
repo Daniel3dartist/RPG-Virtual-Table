@@ -68,8 +68,8 @@ __meta__ = {
 }
 
 [node name="Chat" type="RichTextLabel" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput"]
-margin_right = 292.0
-margin_bottom = 431.0
+margin_right = 428.0
+margin_bottom = 482.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/normal = SubResource( 1 )
@@ -78,11 +78,12 @@ bbcode_enabled = true
 scroll_following = true
 
 [node name="Dice_Buttons" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput"]
-margin_top = 435.0
-margin_right = 292.0
-margin_bottom = 469.0
+margin_top = 486.0
+margin_right = 428.0
+margin_bottom = 526.0
+rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_vertical = 0
 size_flags_stretch_ratio = 0.08
 __meta__ = {
 "_edit_use_anchors_": false
@@ -95,83 +96,92 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 0.0
-margin_right = 28.0
-margin_bottom = 34.0
+margin_right = 50.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="d4_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 32.0
+margin_left = 54.0
 margin_top = 0.0
-margin_right = 60.0
-margin_bottom = 34.0
+margin_right = 104.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="d6_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 4 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 64.0
+margin_left = 108.0
 margin_top = 0.0
-margin_right = 92.0
-margin_bottom = 34.0
+margin_right = 158.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="d8_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 5 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 96.0
+margin_left = 162.0
 margin_top = 0.0
-margin_right = 124.0
-margin_bottom = 34.0
+margin_right = 212.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="d10_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 6 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 128.0
+margin_left = 216.0
 margin_top = 0.0
-margin_right = 164.0
-margin_bottom = 34.0
+margin_right = 266.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="d12_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 7 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 168.0
+margin_left = 270.0
 margin_top = 0.0
-margin_right = 204.0
-margin_bottom = 34.0
+margin_right = 320.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="d20_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 9 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 208.0
+margin_left = 324.0
 margin_top = 0.0
-margin_right = 244.0
-margin_bottom = 34.0
+margin_right = 374.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="d100_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 8 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 248.0
+margin_left = 378.0
 margin_top = 0.0
-margin_right = 292.0
-margin_bottom = 34.0
+margin_right = 428.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 50, 0 )
 
 [node name="Chat_Input" type="TextEdit" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput"]
-margin_top = 473.0
-margin_right = 292.0
-margin_bottom = 560.0
+margin_top = 530.0
+margin_right = 428.0
+margin_bottom = 680.0
+rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
