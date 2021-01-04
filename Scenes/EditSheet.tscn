@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Edit" type="Button"]
+margin_left = 84.0
+margin_right = 120.0
+margin_bottom = 40.0
+text = "Edit"

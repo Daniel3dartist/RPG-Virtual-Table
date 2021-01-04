@@ -105,7 +105,7 @@ margin_bottom = 42.0
 
 [node name="CharacterRace_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
 margin_left = 414.0
-margin_right = 825.0
+margin_right = 824.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -114,7 +114,7 @@ __meta__ = {
 }
 
 [node name="Character_Race_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC"]
-margin_right = 411.0
+margin_right = 410.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Race"
@@ -122,11 +122,11 @@ align = 1
 
 [node name="Character_Race" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC"]
 margin_top = 18.0
-margin_right = 411.0
+margin_right = 410.0
 margin_bottom = 42.0
 
 [node name="CharacterClass_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
-margin_left = 829.0
+margin_left = 828.0
 margin_right = 1240.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
@@ -136,7 +136,7 @@ __meta__ = {
 }
 
 [node name="CharacterClass_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC"]
-margin_right = 411.0
+margin_right = 412.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Class"
@@ -144,7 +144,7 @@ align = 1
 
 [node name="Character_Class" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC"]
 margin_top = 18.0
-margin_right = 411.0
+margin_right = 412.0
 margin_bottom = 42.0
 
 [node name="Sheet_TabContainer" type="TabContainer" parent="ColorRect/SheetArea"]
@@ -173,6 +173,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats"]
+margin_left = 25.0
+margin_top = 25.0
 margin_right = 192.0
 margin_bottom = 200.0
 size_flags_horizontal = 0

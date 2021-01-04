@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Delet" type="Button"]
+margin_left = 124.0
+margin_right = 171.0
+margin_bottom = 40.0
+text = "Delet"

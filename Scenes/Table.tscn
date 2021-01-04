@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Chat_&_Rolls_Results.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/D3.tscn" type="PackedScene" id=2]
@@ -11,13 +11,16 @@
 [ext_resource path="res://Scenes/D20.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 10.0
 content_margin_bottom = 10.0
 bg_color = Color( 0.266667, 0.262745, 0.262745, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.266667, 0.262745, 0.262745, 1 )
 
 [node name="Table" type="Control"]
@@ -57,6 +60,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HBoxContainer" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
+margin_left = 449.0
+margin_right = 721.0
+margin_bottom = 715.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sheets" type="Button" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer"]
+margin_right = 48.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Sheet"
+
+[node name="SplitSheetList" type="HSplitContainer" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer"]
+margin_left = 52.0
+margin_right = 272.0
+margin_bottom = 715.0
+size_flags_horizontal = 3
+custom_styles/bg = SubResource( 1 )
+
+[node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList"]
+margin_right = 220.0
+margin_bottom = 715.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Sheet Creator" type="Button" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"]
+margin_right = 220.0
+margin_bottom = 20.0
+text = "Creat a sheet"
+
 [node name="Chat_Buttons_ChatInput" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
 anchor_bottom = 1.0
 margin_left = 20.0
@@ -72,7 +108,7 @@ margin_right = 428.0
 margin_bottom = 482.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/normal = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 scroll_following = true
@@ -185,7 +221,7 @@ rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
-custom_styles/normal = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
 custom_colors/font_color_selected = Color( 0, 0, 0, 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 shortcut_keys_enabled = false
@@ -195,6 +231,7 @@ __meta__ = {
 }
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
 [connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]
+[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList/Sheet Creator" to="." method="_on_Sheet_Creator_button_up"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d3_b" to="." method="_on_d3_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d4_b" to="." method="_on_d4_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d6_b" to="." method="_on_d6_b_pressed"]

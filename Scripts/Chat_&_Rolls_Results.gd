@@ -1,23 +1,33 @@
 extends Control
 
+# Character Sheet vars
+onready var sheet_list = $"Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"
 
+var sheet_call_h_box = preload('res://Scenes/SheetCallHBox.tscn')
+var default_sheet_Call = preload("res://Scenes/SheetCall.tscn")
+var sheet_edit = preload("res://Scenes/EditSheet.tscn")
+var sheet_delete = preload('res://Scenes/DeleteSheet.tscn')
+var default_sheet = preload("res://Scenes/Character_Sheet.tscn")
+var sheet_num = 00
+
+# Chat vars
 onready var chat = $"Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Chat"
 onready var chat_input = $"Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Chat_Input"
+
+var text_to_Discord 
+
+# Bot vars
 onready var bot = $'Bot/HTTPRequest'
 onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
 onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
-var text_to_Discord 
-
-
-var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.DeaIEeHr15HivuPfIW88L3es154" # Bot token
+var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.Za_kpgM3hmFijHAMH8sdI-pryXo" # Bot token
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float
 var session_id : String
 var heartbeat_ack_received := true
 var invalid_session_is_resumable : bool
-
 
 
 func _ready() -> void:
@@ -29,6 +39,7 @@ func _ready() -> void:
 	client.connect("server_close_request", self, "_server_close_request")
 	client.connect("data_received", self, "_data_received")
 	client.connect("input", self, "_input")
+	
 
 
 func _input(event):
@@ -149,8 +160,6 @@ func rolld100():
 	chat.add_text(d100v + '\n\n')	
 
 
-
-
 func _on_d3_b_pressed():
 	return rolld3()
 
@@ -182,7 +191,6 @@ func _on_d20_b_pressed():
 func _on_d100_b_pressed():
 	return rolld100()
 
-# ============================[ Bot ]============================#
 
 func _process(_delta : float) -> void:
 	# Check if the client is not disconnected, there's no point to poll it if it is
@@ -208,7 +216,6 @@ func _process(_delta : float) -> void:
 
 func _connection_established(protocol : String) -> void:
 	print("We are connected! Protocol: %s" % protocol)
-	
 
 func _connection_closed(was_clean_close : bool) -> void:
 	print("We disconnected. Clean close: %s" % was_clean_close)
@@ -256,7 +263,6 @@ func _data_received() -> void:
 			heartbeat_ack_received = true
 			print("We've received a Heartbeat ACK from the gateway.")
 		
-
 
 func _on_HeartbeatTimer_timeout() -> void: # Send Opcode 1 Heartbeat payloads every heartbeat_interval
 	if !heartbeat_ack_received:
@@ -346,3 +352,21 @@ func _on_InvalidSessionTimer_timeout() -> void:
 			"d" : { "token" : token, "properties" : {} }
 		}
 	send_dictionary_as_packet(d)
+
+
+func _on_Sheet_Creator_button_up():
+	var sheet_box_instance = sheet_call_h_box.instance()
+	var sheet_call_instance = default_sheet_Call.instance()
+#	var sheet_edit_instace = sheet_edit.instance()
+#	var sheet_delete_instace = sheet_delete.instance()
+	
+	var txt = 'Sheet'
+	
+	if sheet_num > 0:
+		txt = txt + ('(%s)' % str(sheet_num))
+	
+	sheet_call_instance.text = txt
+	sheet_box_instance.add_child(sheet_call_instance)
+	sheet_list.add_child(sheet_box_instance)
+	sheet_num = sheet_num + 1
+	
