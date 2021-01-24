@@ -1,7 +1,10 @@
 [gd_scene format=2]
 
-[node name="Delet" type="Button"]
+[node name="Delete" type="Button"]
 margin_left = 124.0
 margin_right = 171.0
 margin_bottom = 40.0
 text = "Delet"
+__meta__ = {
+"_edit_use_anchors_": false
+}

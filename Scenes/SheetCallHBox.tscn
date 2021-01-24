@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/DeleteSheet.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/EditSheet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/SheetCallHBox.gd" type="Script" id=3]
 
 [node name="SheetCallHBox" type="HBoxContainer"]
@@ -17,9 +16,6 @@ margin_bottom = 40.0
 
 [node name="Delete" parent="." instance=ExtResource( 1 )]
 margin_left = 4.0
-margin_right = 51.0
-
-[node name="Edit" parent="." instance=ExtResource( 2 )]
-margin_left = 55.0
-margin_right = 91.0
-[connection signal="button_up" from="Delete" to="." method="_on_Delet_button_up"]
+margin_right = 59.0
+text = "Delete"
+[connection signal="button_up" from="Delete" to="." method="_on_Delete_button_up"]

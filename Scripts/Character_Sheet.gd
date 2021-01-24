@@ -103,3 +103,7 @@ func _input(event):
 		chaMod = str((chaMod - 10) / 2)
 		CHA_Mod_Value.text = chaMod
 		chaCompareNum = num
+
+
+func _on_Sheet_Exit_button_up():
+	self.queue_free()

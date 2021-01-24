@@ -1,0 +1,4 @@
+[gd_scene format=2]
+
+[node name="Sheet_Pop" type="CanvasLayer"]
+layer = 128

@@ -47,8 +47,14 @@ expand_margin_top = 3.0
 expand_margin_bottom = 3.0
 
 [node name="Character_Sheet" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -500.0
+margin_top = -300.0
+margin_right = 500.0
+margin_bottom = 300.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -73,9 +79,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sheet_Exit" type="Button" parent="ColorRect/SheetArea"]
+margin_right = 35.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+text = "Exit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="CharacterBaseArea" type="HBoxContainer" parent="ColorRect/SheetArea"]
-margin_right = 1240.0
-margin_bottom = 42.0
+margin_top = 24.0
+margin_right = 960.0
+margin_bottom = 66.0
 size_flags_horizontal = 3
 alignment = 1
 __meta__ = {
@@ -83,7 +99,7 @@ __meta__ = {
 }
 
 [node name="CharacterName_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
-margin_right = 410.0
+margin_right = 317.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -92,7 +108,7 @@ __meta__ = {
 }
 
 [node name="Character_Name_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC"]
-margin_right = 410.0
+margin_right = 317.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Character Name"
@@ -100,12 +116,12 @@ align = 1
 
 [node name="Character_Name" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC"]
 margin_top = 18.0
-margin_right = 410.0
+margin_right = 317.0
 margin_bottom = 42.0
 
 [node name="CharacterRace_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
-margin_left = 414.0
-margin_right = 824.0
+margin_left = 321.0
+margin_right = 638.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -114,7 +130,7 @@ __meta__ = {
 }
 
 [node name="Character_Race_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC"]
-margin_right = 410.0
+margin_right = 317.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Race"
@@ -122,12 +138,12 @@ align = 1
 
 [node name="Character_Race" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterRace_BoxC"]
 margin_top = 18.0
-margin_right = 410.0
+margin_right = 317.0
 margin_bottom = 42.0
 
 [node name="CharacterClass_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
-margin_left = 828.0
-margin_right = 1240.0
+margin_left = 642.0
+margin_right = 960.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -136,7 +152,7 @@ __meta__ = {
 }
 
 [node name="CharacterClass_Description" type="Label" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC"]
-margin_right = 412.0
+margin_right = 318.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Class"
@@ -144,13 +160,13 @@ align = 1
 
 [node name="Character_Class" type="LineEdit" parent="ColorRect/SheetArea/CharacterBaseArea/CharacterClass_BoxC"]
 margin_top = 18.0
-margin_right = 412.0
+margin_right = 318.0
 margin_bottom = 42.0
 
 [node name="Sheet_TabContainer" type="TabContainer" parent="ColorRect/SheetArea"]
-margin_top = 46.0
-margin_right = 1240.0
-margin_bottom = 680.0
+margin_top = 70.0
+margin_right = 960.0
+margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/tab_fg = SubResource( 1 )
@@ -173,8 +189,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats"]
-margin_left = 25.0
-margin_top = 25.0
 margin_right = 192.0
 margin_bottom = 200.0
 size_flags_horizontal = 0
@@ -571,3 +585,4 @@ margin_left = 1.0
 margin_top = 25.0
 margin_right = -1.0
 margin_bottom = -1.0
+[connection signal="button_up" from="ColorRect/SheetArea/Sheet_Exit" to="." method="_on_Sheet_Exit_button_up"]

@@ -2,12 +2,12 @@ extends Control
 
 # Character Sheet vars
 onready var sheet_list = $"Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"
+onready var sheet_spaw = $'Sheet_Spaw'
 
 var sheet_call_h_box = preload('res://Scenes/SheetCallHBox.tscn')
 var default_sheet_Call = preload("res://Scenes/SheetCall.tscn")
-var sheet_edit = preload("res://Scenes/EditSheet.tscn")
-var sheet_delete = preload('res://Scenes/DeleteSheet.tscn')
 var default_sheet = preload("res://Scenes/Character_Sheet.tscn")
+var sheet_delete_buttom = preload("res://Scenes/DeleteSheet.tscn")
 var sheet_num = 00
 
 # Chat vars
@@ -21,7 +21,7 @@ onready var bot = $'Bot/HTTPRequest'
 onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
 onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
-var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.Za_kpgM3hmFijHAMH8sdI-pryXo" # Bot token
+var token := "#" # Bot token
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float
@@ -31,6 +31,7 @@ var invalid_session_is_resumable : bool
 
 
 func _ready() -> void:
+	sheet_delete_buttom.connect('button_up', self, '_on_Delete_button_up')
 	randomize()
 	client = WebSocketClient.new()
 	client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
@@ -317,13 +318,13 @@ func handle_events(dict : Dictionary) -> void:
 			var query : String
 
 
-			if message_content.to_upper() == "ORAMA":
+#			if message_content.to_upper() == "ORAMA":
 #				var message_to_send := {"content" : "Interactive"}
-				var message_to_send := {"content" : "interact" }
-				query = JSON.print(message_to_send)
-				print('canal: ' + str(channel_id))
-				print('headers: ' + str(headers))
-				print('query: ' + str(query))
+#				var message_to_send := {"content" : "interact" }
+#				query = JSON.print(message_to_send)
+#				print('canal: ' + str(channel_id))
+#				print('headers: ' + str(headers))
+#				print('query: ' + str(query))
 			
 			
 			var txt = str(message_content)
@@ -353,12 +354,14 @@ func _on_InvalidSessionTimer_timeout() -> void:
 		}
 	send_dictionary_as_packet(d)
 
-
+# Button for add Character Sheet
 func _on_Sheet_Creator_button_up():
+	return Creat_Character_Sheet()
+
+# Function for creat a Character Sheet on Table	
+func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_h_box.instance()
 	var sheet_call_instance = default_sheet_Call.instance()
-#	var sheet_edit_instace = sheet_edit.instance()
-#	var sheet_delete_instace = sheet_delete.instance()
 	
 	var txt = 'Sheet'
 	
@@ -369,4 +372,12 @@ func _on_Sheet_Creator_button_up():
 	sheet_box_instance.add_child(sheet_call_instance)
 	sheet_list.add_child(sheet_box_instance)
 	sheet_num = sheet_num + 1
+
+func _on_call_Sheeet(name_txt):
+	var sheet_instance = default_sheet.instance()
 	
+	sheet_spaw.add_child(sheet_instance)
+	
+func _on_Delete_button_up():
+	sheet_num = sheet_num - 1
+	print('Sheet deleted. \n Sheets = %s' % str(sheet_num))
