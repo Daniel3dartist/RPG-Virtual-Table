@@ -1,15 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Fonts/Hind_Siliguri/HindSiliguri-SemiBold.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://Scenes/Fonts_MainMenuButtons.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Fonts/Fonts_MainMenu.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Fonts/Fonts_MainMenuButtons.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Main Menu.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Load Table Menu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
-
-[sub_resource type="DynamicFont" id=2]
-size = 60
-extra_spacing_bottom = -40
-font_data = ExtResource( 1 )
 
 [node name="Main Menu" type="Control"]
 anchor_right = 1.0
@@ -18,6 +14,7 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+load_table_menu = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -42,13 +39,12 @@ __meta__ = {
 margin_right = 501.0
 margin_bottom = 119.0
 custom_styles/normal = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = " Virtual Communit 
 RPG Table"
 align = 1
 valign = 1
-percent_visible = -0.0434783
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 189.0
@@ -92,4 +88,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Continue" to="." method="_on_Continue_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Load table" to="." method="_on_Load_table_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_button_up"]

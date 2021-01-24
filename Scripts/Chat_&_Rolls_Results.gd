@@ -21,7 +21,7 @@ onready var bot = $'Bot/HTTPRequest'
 onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
 onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
-var token := "#" # Bot token
+var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.ZlLnjAzX708CY6U70x03e2FHOBM" # Bot token
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float
@@ -373,7 +373,7 @@ func Creat_Character_Sheet():
 	sheet_list.add_child(sheet_box_instance)
 	sheet_num = sheet_num + 1
 
-func _on_call_Sheeet(name_txt):
+func _on_call_Sheet(name_txt):
 	var sheet_instance = default_sheet.instance()
 	
 	sheet_spaw.add_child(sheet_instance)
