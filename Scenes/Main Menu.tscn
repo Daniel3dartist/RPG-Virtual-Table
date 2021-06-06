@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fonts/Fonts_MainMenu.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/Fonts_MainMenuButtons.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Main Menu.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/Load Table Menu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -14,12 +13,14 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-load_table_menu = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.596078, 0.596078, 0.596078, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -35,27 +36,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-margin_right = 501.0
+[node name="App Title" type="Label" parent="VBoxContainer"]
+margin_right = 532.0
 margin_bottom = 119.0
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = " Virtual Communit 
+text = " Community Virtual 
 RPG Table"
 align = 1
 valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 189.0
-margin_right = 501.0
+margin_right = 532.0
 margin_bottom = 520.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 13
 
 [node name="Continue" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_right = 501.0
+margin_right = 532.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -64,7 +65,7 @@ text = "Continue last table"
 
 [node name="Load table" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_top = 86.0
-margin_right = 501.0
+margin_right = 532.0
 margin_bottom = 159.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -73,7 +74,7 @@ text = "Load table"
 
 [node name="Settings" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_top = 172.0
-margin_right = 501.0
+margin_right = 532.0
 margin_bottom = 245.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -82,7 +83,7 @@ text = "Settings"
 
 [node name="Exit" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_top = 258.0
-margin_right = 501.0
+margin_right = 532.0
 margin_bottom = 331.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -90,4 +91,5 @@ custom_fonts/font = ExtResource( 2 )
 text = "Exit"
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Load table" to="." method="_on_Load_table_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Settings" to="." method="_on_Settings_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_button_up"]

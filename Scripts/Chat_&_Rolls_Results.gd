@@ -21,7 +21,7 @@ onready var bot = $'Bot/HTTPRequest'
 onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
 onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
-var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.ZlLnjAzX708CY6U70x03e2FHOBM" # Bot token
+var token := "" # Bot token
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float

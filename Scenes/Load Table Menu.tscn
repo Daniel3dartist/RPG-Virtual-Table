@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Fonts/Fonts_MainMenu.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/Fonts_MainMenuButtons.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Load Table Menu.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/MainMenu_Button.tscn" type="PackedScene" id=4]
 
 [node name="Load Table Menu" type="Control"]
 anchor_right = 1.0
@@ -30,18 +31,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Load Table" type="Label" parent="ColorRect/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer"]
 margin_right = 1180.0
-margin_bottom = 58.0
+margin_bottom = 104.0
+
+[node name="Main Menu" parent="ColorRect/VBoxContainer/HBoxContainer" instance=ExtResource( 4 )]
+
+[node name="Load Table" type="Label" parent="ColorRect/VBoxContainer/HBoxContainer"]
+margin_left = 108.0
+margin_top = 23.0
+margin_right = 1180.0
+margin_bottom = 81.0
+size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Load Table"
 align = 1
 valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/VBoxContainer"]
-margin_top = 128.0
+margin_top = 174.0
 margin_right = 1180.0
-margin_bottom = 186.0
+margin_bottom = 232.0
 custom_constants/separation = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer/VBoxContainer"]

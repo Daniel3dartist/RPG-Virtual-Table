@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/MainMenu_Button.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Hind_Siliguri/HindSiliguri-SemiBold.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 60
+font_data = ExtResource( 2 )
+
+[node name="Main Menu" type="Button"]
+margin_right = 104.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 104, 104 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+theme = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "<"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_up" from="." to="." method="_on_Main_Menu_button_up"]
