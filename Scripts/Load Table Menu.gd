@@ -21,6 +21,10 @@ func _on_Main_Menu_button_up():
 func _on_Add_a_New_Table_button_up():
 	var txt = 'Table'
 	
+	var r = randf() + randf()
+	var g = randf() + randf()
+	var b = randf() + randf()
+	
 	var tcolor = table_color.instance()
 	var Tname = table_name.instance()
 	var table = add_table.instance()
@@ -29,6 +33,7 @@ func _on_Add_a_New_Table_button_up():
 	
 	tdbox.add_child(Tname)
 	#tdbox.add_child(Tname)
+	tcolor.color = Color(r, g, b)
 	
 	if table_num > 0:
 		txt = txt + ('(%s)' % str(table_num))
