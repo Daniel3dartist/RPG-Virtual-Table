@@ -230,6 +230,180 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Base_Menu" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -151.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main_Menu" type="Button" parent="Base_UI/Chat_&_Rolls_Results/Base_Menu"]
+margin_right = 84.0
+margin_bottom = 40.0
+text = "Main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="Button" parent="Base_UI/Chat_&_Rolls_Results/Base_Menu"]
+margin_left = 88.0
+margin_right = 151.0
+margin_bottom = 40.0
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="Control" parent="Base_UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -782.0
+margin_right = -2.0
+margin_bottom = 697.0
+rect_min_size = Vector2( 780, 697 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Base_UI/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.376471, 0.376471, 0.376471, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Base_UI/Settings"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -51.0001
+margin_right = -1.00006
+margin_bottom = 30.0
+rect_min_size = Vector2( 50, 30 )
+size_flags_horizontal = 0
+text = "Close"
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Base_UI/Settings"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 40.0
+margin_right = -6.10352e-05
+margin_bottom = 2.99994
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Base_UI/Settings/VBoxContainer"]
+margin_right = 779.0
+margin_bottom = 59.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Base_UI/Settings/VBoxContainer/HBoxContainer"]
+margin_right = 718.0
+margin_bottom = 59.0
+size_flags_horizontal = 3
+
+[node name="Bot token" type="Label" parent="Base_UI/Settings/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 718.0
+margin_bottom = 31.0
+text = "Bot Token
+"
+
+[node name="Token_Input" type="LineEdit" parent="Base_UI/Settings/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 35.0
+margin_right = 718.0
+margin_bottom = 59.0
+text = "Set the token here..."
+
+[node name="Submit_Bot_Token_Key" type="Button" parent="Base_UI/Settings/VBoxContainer/HBoxContainer"]
+margin_left = 722.0
+margin_right = 779.0
+margin_bottom = 59.0
+text = "Submit"
+
+[node name="Bot token key" type="Control" parent="Base_UI"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -280.0
+margin_top = -150.0
+margin_right = 280.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 560, 300 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Base_UI/Bot token key"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.87451, 0.74902, 0.509804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Base_UI/Bot token key"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -270.0
+margin_top = -140.0
+margin_right = 270.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Base_UI/Bot token key/HBoxContainer"]
+margin_right = 483.0
+margin_bottom = 280.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Base_UI/Bot token key/HBoxContainer/VBoxContainer"]
+margin_right = 483.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Bot Token Key"
+
+[node name="Token_Input_02" type="LineEdit" parent="Base_UI/Bot token key/HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 483.0
+margin_bottom = 42.0
+text = "Set the token here..."
+
+[node name="Submit_Bot_Token_Key_02" type="Button" parent="Base_UI/Bot token key/HBoxContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 483.0
+margin_bottom = 66.0
+text = "Submit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Close" type="Button" parent="Base_UI/Bot token key/HBoxContainer"]
+margin_left = 493.0
+margin_right = 540.0
+margin_bottom = 20.0
+size_flags_vertical = 0
+text = "Close"
+
 [node name="Sheet_Spaw" type="CanvasLayer" parent="."]
 layer = 120
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
@@ -243,3 +417,7 @@ layer = 120
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d12_b" to="." method="_on_d12_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d20_b" to="." method="_on_d20_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d100_b" to="." method="_on_d100_b_pressed"]
+[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Main_Menu" to="." method="_on_Main_Menu_button_up"]
+[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Settings" to="." method="_on_Settings_button_up"]
+[connection signal="button_up" from="Base_UI/Settings/VBoxContainer/HBoxContainer/Submit_Bot_Token_Key" to="." method="_on_Submit_Bot_Token_Key_button_up"]
+[connection signal="button_up" from="Base_UI/Bot token key/HBoxContainer/VBoxContainer/Submit_Bot_Token_Key_02" to="." method="_on_Submit_Bot_Token_Key_02_button_up"]

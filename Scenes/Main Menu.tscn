@@ -1,12 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/Fonts_MainMenu.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/Fonts_MainMenuButtons.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Main Menu.gd" type="Script" id=3]
+[ext_resource path="res://SandBoxTester/Bot&User.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
-[node name="Main Menu" type="Control"]
+[node name="Main Menu" type="Control" groups=[
+"Persist",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
@@ -22,15 +25,68 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Bot&User" type="Control" parent="."]
+margin_right = 532.0
+margin_bottom = 57.0
+size_flags_horizontal = 3
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Bot&User"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 300.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bot" type="HBoxContainer" parent="Bot&User/VBoxContainer"]
+margin_right = 280.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Bot Token" type="Button" parent="Bot&User/VBoxContainer/Bot"]
+margin_right = 76.0
+margin_bottom = 24.0
+text = "Bot Token"
+
+[node name="LineEdit" type="LineEdit" parent="Bot&User/VBoxContainer/Bot"]
+margin_left = 80.0
+margin_right = 280.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Insert your Bot Token here..."
+
+[node name="User" type="HBoxContainer" parent="Bot&User/VBoxContainer"]
+margin_top = 28.0
+margin_right = 280.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="User Nickname" type="Button" parent="Bot&User/VBoxContainer/User"]
+margin_right = 76.0
+margin_bottom = 24.0
+text = "Bot Token"
+
+[node name="LineEdit" type="LineEdit" parent="Bot&User/VBoxContainer/User"]
+margin_left = 80.0
+margin_right = 280.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -250.5
-margin_top = -260.0
-margin_right = 250.5
-margin_bottom = 260.0
+margin_left = -266.0
+margin_top = -281.0
+margin_right = 266.0
+margin_bottom = 280.0
 custom_constants/separation = 70
 __meta__ = {
 "_edit_use_anchors_": false
@@ -50,45 +106,52 @@ valign = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 189.0
 margin_right = 532.0
-margin_bottom = 520.0
+margin_bottom = 561.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 13
 
 [node name="Continue" type="Button" parent="VBoxContainer/VBoxContainer"]
 margin_right = 532.0
-margin_bottom = 73.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Continue last table"
 
 [node name="Load table" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 86.0
+margin_top = 96.0
 margin_right = 532.0
-margin_bottom = 159.0
+margin_bottom = 179.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Load table"
 
 [node name="Settings" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 172.0
+margin_top = 192.0
 margin_right = 532.0
-margin_bottom = 245.0
+margin_bottom = 275.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Settings"
 
 [node name="Exit" type="Button" parent="VBoxContainer/VBoxContainer"]
-margin_top = 258.0
+margin_top = 288.0
 margin_right = 532.0
-margin_bottom = 331.0
+margin_bottom = 372.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Load table" to="." method="_on_Load_table_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Settings" to="." method="_on_Settings_button_up"]

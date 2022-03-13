@@ -1,5 +1,27 @@
 extends Control
 
+# Token inputs var to pass
+#var input_token_key := ''  # Bot token key gived from the player DM
+onready var token_to_pass = $'Base_UI/Bot token key/HBoxContainer/VBoxContainer/Token_Input_02'
+onready var token_input = $'Base_UI/Settings/VBoxContainer/HBoxContainer/VBoxContainer/Token_Input'
+#onready var key = $'res://Scenes/botkey.tscn'
+
+#func _on_Submit_Bot_Token_Key_button_up():
+#	print('\n \n \n  Esse é a key \n', token_input.text, '\n \n \n')
+#	input_token_key = token_input.get_text()
+#	return set_bot_token_key()
+
+
+#func _on_Submit_Bot_Token_Key_02_button_up():
+#	token_input.text = str(token_to_pass.get_text()) 
+#	print('\n \n \n  Esse é a key \n', token_input.text, '\n \n \n')
+#	input_token_key = token_input.get_text()
+#	return set_bot_token_key()
+	
+#func set_bot_token_key():
+#	input_token_key = token_input.get_text()
+#	input_token_key = 'Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.bf-vRgCUXeOKCrWpjVBOVFR9Kog'
+
 # Character Sheet vars
 onready var sheet_list = $"Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"
 onready var sheet_spaw = $'Sheet_Spaw'
@@ -21,7 +43,10 @@ onready var bot = $'Bot/HTTPRequest'
 onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
 onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
-var token := "" # Bot token
+var token := ''
+#var token := str(input_token_key) # Bot token
+#var key_pass = key.text
+#var token := str(key_pass)
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float
@@ -74,19 +99,19 @@ func _input(event):
 				
 				if rollDice == 3:
 					return rolld3()
-				if rollDice == 4:
+				elif rollDice == 4:
 					return rolld4()
-				if rollDice == 6:
+				elif rollDice == 6:
 					return rolld6()
-				if rollDice == 8:
+				elif rollDice == 8:
 					return rolld8()
-				if rollDice == 10:
+				elif rollDice == 10:
 					return rolld10()
-				if rollDice == 12:
+				elif rollDice == 12:
 					return rolld12()
-				if rollDice == 20:
+				elif rollDice == 20:
 					return rolld20()
-				if rollDice == 100:
+				elif rollDice == 100:
 					return rolld100()
 		else:		
 			return Add_Text_On_Chat()
@@ -381,3 +406,18 @@ func _on_call_Sheet(name_txt):
 func _on_Delete_button_up():
 	sheet_num = sheet_num - 1
 	print('Sheet deleted. \n Sheets = %s' % str(sheet_num))
+
+# func to call the main menu
+func _on_Main_Menu_button_up():
+	var main_menu = 'res://Scenes/Main Menu.tscn' # set main menu path
+	get_tree().change_scene(main_menu) # call the main menu scene
+
+# func to call the settings in table menu (that settings no have the same func from the main menu settings menu)
+func _on_Settings_button_up():
+	pass # Replace with function body.
+
+
+
+
+
+

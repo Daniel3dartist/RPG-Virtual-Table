@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Label" type="Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.bf-vRgCUXeOKCrWpjVBOVFR9Kog"
+__meta__ = {
+"_edit_use_anchors_": false
+}
