@@ -68,12 +68,12 @@ margin_bottom = 52.0
 size_flags_horizontal = 3
 
 [node name="User Nickname" type="Button" parent="Bot&User/VBoxContainer/User"]
-margin_right = 76.0
+margin_right = 40.0
 margin_bottom = 24.0
-text = "Bot Token"
+text = "Nick"
 
 [node name="LineEdit" type="LineEdit" parent="Bot&User/VBoxContainer/User"]
-margin_left = 80.0
+margin_left = 44.0
 margin_right = 280.0
 margin_bottom = 24.0
 size_flags_horizontal = 3

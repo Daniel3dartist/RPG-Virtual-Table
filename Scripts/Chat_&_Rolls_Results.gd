@@ -43,7 +43,7 @@ onready var bot = $'Bot/HTTPRequest'
 onready var hbt = $'Bot/HTTPRequest/HeartbeatTimer'
 onready var ist = $'Bot/HTTPRequest/InvalidSessionTimer'
 
-var token := ''
+var token 
 #var token := str(input_token_key) # Bot token
 #var key_pass = key.text
 #var token := str(key_pass)
@@ -56,6 +56,14 @@ var invalid_session_is_resumable : bool
 
 
 func _ready() -> void:
+	var f = File.new()
+	var fpath = 'res://Saves_Teste/User_Config.json'
+	
+	f.open(fpath, File.READ)
+	f = f.get_as_text()
+	f = parse_json(f)
+	token = f['BotToken']
+	
 	sheet_delete_buttom.connect('button_up', self, '_on_Delete_button_up')
 	randomize()
 	client = WebSocketClient.new()
@@ -83,11 +91,12 @@ func _input(event):
 		#var dict : Dictionary = json_parsed.result
 		var headers := ["Authorization: Bot %s" % token]
 		
-		text_to_Discord = chat_input.text
+		text_to_Discord = str(chat_input.text)
 		print('text to discord: ' + text_to_Discord)
+		print('Esse é o 1 da string: ', text_to_Discord.left(2))
 		
 		'# Chat roll input'
-		if '/r' in chat_input.text:
+		if '/r' in chat_input.text.left(2):
 			rollDice = chat_input.text
 			rollDice = rollDice.split(' ')
 			rollDice = Array(rollDice)
