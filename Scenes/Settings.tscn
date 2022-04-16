@@ -55,20 +55,20 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/Window Mode_Container"]
-margin_left = 460.0
+margin_left = 435.0
 margin_top = 3.0
-margin_right = 560.0
+margin_right = 535.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 100, 0 )
 text = "Window Mode"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Window Mode_Container"]
-margin_left = 580.0
-margin_right = 720.0
+margin_left = 555.0
+margin_right = 745.0
 margin_bottom = 20.0
 custom_constants/separation = 10
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer"]
+[node name="WBack" type="Button" parent="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 20.0
 text = "<"
@@ -76,15 +76,14 @@ text = "<"
 [node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer"]
 margin_left = 30.0
 margin_top = 3.0
-margin_right = 110.0
+margin_right = 160.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 80, 0 )
-text = "Window"
+rect_min_size = Vector2( 130, 0 )
 align = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer"]
-margin_left = 120.0
-margin_right = 140.0
+[node name="WFront" type="Button" parent="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer"]
+margin_left = 170.0
+margin_right = 190.0
 margin_bottom = 20.0
 text = ">"
 
@@ -96,20 +95,20 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/Resolution_Container"]
-margin_left = 460.0
+margin_left = 435.0
 margin_top = 3.0
-margin_right = 560.0
+margin_right = 535.0
 margin_bottom = 17.0
 rect_min_size = Vector2( 100, 0 )
 text = "Resolution"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/Resolution_Container"]
-margin_left = 580.0
-margin_right = 720.0
+margin_left = 555.0
+margin_right = 745.0
 margin_bottom = 20.0
 custom_constants/separation = 10
 
-[node name="Button" type="Button" parent="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer"]
+[node name="RBack" type="Button" parent="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer"]
 margin_right = 20.0
 margin_bottom = 20.0
 text = "<"
@@ -117,14 +116,14 @@ text = "<"
 [node name="Label2" type="Label" parent="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer"]
 margin_left = 30.0
 margin_top = 3.0
-margin_right = 110.0
+margin_right = 160.0
 margin_bottom = 17.0
-rect_min_size = Vector2( 80, 0 )
-text = "1920 x 1080"
+rect_min_size = Vector2( 130, 0 )
+align = 1
 
-[node name="Button2" type="Button" parent="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer"]
-margin_left = 120.0
-margin_right = 140.0
+[node name="RFront" type="Button" parent="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer"]
+margin_left = 170.0
+margin_right = 190.0
 margin_bottom = 20.0
 text = ">"
 
@@ -147,3 +146,11 @@ margin_left = 586.0
 margin_right = 644.0
 margin_bottom = 20.0
 text = "Default"
+
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_Button_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_WBack_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WFront" to="." method="_on_WFront_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer/RBack" to="." method="_on_RBack_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer/RFront" to="." method="_on_RFront_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/HBoxContainer/Save_Settings" to="." method="_on_Save_Settings_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/HBoxContainer/Restore" to="." method="_on_Restore_button_up"]
