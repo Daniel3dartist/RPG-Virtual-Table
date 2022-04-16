@@ -3,5 +3,6 @@
 [ext_resource path="res://Fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 25
+size = 30
+use_filter = true
 font_data = ExtResource( 1 )
