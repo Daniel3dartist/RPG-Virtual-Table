@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://SandBoxTester/Bot&User.gd" type="Script" id=1]
+[ext_resource path="res://Test_SandBox/Bot&User.gd" type="Script" id=1]
 
 [node name="Bot&User" type="Control"]
 margin_right = 250.0
@@ -50,5 +50,6 @@ margin_left = 88.0
 margin_right = 300.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+
 [connection signal="button_up" from="VBoxContainer/Bot/Bot Token" to="." method="_on_Bot_Token_button_up"]
 [connection signal="button_up" from="VBoxContainer/User/User Nickname" to="." method="_on_User_Nickname_button_up"]
