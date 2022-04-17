@@ -56,7 +56,7 @@ func check_settings_file():
 	if ftest != true:
 		print('Creating a new settings file ')
 		fpathtest.close()
-		tkey = 1
+		tkey = 0
 		rkey = 4
 		windowsl.text = types_of_windows_modes[tkey]
 		resolutionsl.text = resolutions[rkey]
@@ -178,7 +178,7 @@ func _on_Restore_button_up():
 func creat_file():
 	var f = File.new()
 	
-	settings_keys = [1, 4]
+	settings_keys = [0, 4]
 	f.open(fpath, File.WRITE)
 	f.store_string(to_json(settings_keys))
 	print('"settings.json" created')
