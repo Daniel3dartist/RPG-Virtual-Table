@@ -36,50 +36,80 @@ func check_settings_file():
 		content = parse_json(content)
 		tkey = int(content[0])
 		rkey = int(content[1])
-		windowsl = types_of_windows_modes[tkey]
-		resolutionsl = resolutions[rkey]
+		windowsl.text = types_of_windows_modes[tkey]
+		resolutionsl.text = resolutions[rkey]
 		f.close()
 
 
 # Window modes
 func _on_WBack_button_up():
-	var tscreen = types_of_windows_modes
+	var twindow = types_of_windows_modes
 	var k = types_of_windows_modes[tkey]
 	
 	print(types_of_windows_modes[tkey])
 	if k != types_of_windows_modes[0]:
 		tkey = tkey - 1
-		windowsl.text = str(tscreen[tkey])
+		windowsl.text = str(twindow[tkey])
 		print(str(tkey))
 	else:
-		tkey = 2
+		tkey = -1
 		print(tkey)
-		windowsl.text = tscreen[tkey]
-		print(tscreen[tkey])
+		windowsl.text = twindow[tkey]
+		print(twindow[tkey])
 
 
 func _on_WFront_button_up():
-	var tscreen = types_of_windows_modes
+	var twindow = types_of_windows_modes
 	var k = types_of_windows_modes[tkey]
 	
-	print(types_of_windows_modes[tkey])
+	print(k)
 	if k != types_of_windows_modes[2]:
 		tkey = tkey + 1
-		windowsl.text = tscreen[tkey]
+		windowsl.text = twindow[tkey]
 		print(str(tkey))
 	else:
 		tkey = 0
 		print(tkey)
-		windowsl.text = tscreen[tkey]
-		print(tscreen[tkey])
+		windowsl.text = twindow[tkey]
+		print(twindow[tkey])
+
 
 # Resolutions
 func _on_RBack_button_up():
-	pass # Replace with function body.
+	var screen = resolutions
+	var k = resolutions[rkey]
+	
+	print('Essa é a lista de keys: ' + str(screen.size()))
+	
+	print(k)
+	if k != resolutions[0]:
+		rkey = rkey - 1
+		resolutionsl.text = screen[rkey]
+		print(screen[rkey])
+	else:
+		rkey = -1
+		resolutionsl.text = screen[rkey]
+		print("Rkey é " + str(rkey))
+		print("Resolutions.text é: " + resolutionsl.text)
 
 
 func _on_RFront_button_up():
-	pass # Replace with function body.
+	var screen = resolutions
+	var k = resolutions[rkey]
+	
+	print('Essa é a lista de keys: ' + str(screen.size()))
+	
+	print(k)
+	if k != resolutions[0]:
+		rkey = rkey + 1
+		resolutionsl.text = screen[rkey]
+		print(screen[rkey])
+	else:
+		rkey = 0
+		resolutionsl.text = screen[rkey]
+		print("Rkey é " + str(rkey))
+		print("Resolutions.text é: " + resolutionsl.text)
+
 
 # Save Settings
 func _on_Save_Settings_button_up():
@@ -101,7 +131,9 @@ func _on_Save_Settings_button_up():
 
 # Restore Settings
 func _on_Restore_button_up():
-	pass # Replace with function body.
+# 0, 4
+	windowsl.text = types_of_windows_modes[0]
+	resolutionsl.text = resolutions[4]
 
 
 func creat_file():
