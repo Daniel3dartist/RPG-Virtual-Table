@@ -9,9 +9,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -58,16 +55,16 @@ custom_constants/separation = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/VBoxContainer/VBoxContainer"]
 margin_right = 1180.0
-margin_bottom = 38.0
+margin_bottom = 45.0
 
 [node name="Add a New Table" type="Button" parent="ColorRect/VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 116.0
-margin_bottom = 38.0
+margin_right = 139.0
+margin_bottom = 45.0
 custom_fonts/font = ExtResource( 2 )
 text = "New table"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="ColorRect/VBoxContainer/VBoxContainer"]
-margin_top = 58.0
+margin_top = 65.0
 margin_right = 1180.0
 margin_bottom = 446.0
 size_flags_horizontal = 3
@@ -78,7 +75,7 @@ __meta__ = {
 
 [node name="Table List" type="VBoxContainer" parent="ColorRect/VBoxContainer/VBoxContainer/ScrollContainer"]
 margin_right = 1180.0
-margin_bottom = 388.0
+margin_bottom = 381.0
 rect_min_size = Vector2( 120, 120 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -87,4 +84,5 @@ __meta__ = {
 }
 
 [node name="Space" type="Control" parent="ColorRect/VBoxContainer/VBoxContainer/ScrollContainer"]
+
 [connection signal="button_up" from="ColorRect/VBoxContainer/VBoxContainer/HBoxContainer/Add a New Table" to="." method="_on_Add_a_New_Table_button_up"]

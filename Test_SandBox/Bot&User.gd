@@ -3,7 +3,7 @@ extends Control
 onready var botline = $'VBoxContainer/Bot/LineEdit'
 onready var userline = $'VBoxContainer/User/LineEdit'
 
-var fpath = 'res://Saves_Teste/User_Config.json'
+var fpath = 'res://data/User_Config.json'
 var itens = {'UserNick' : '', 'BotToken' : '' }
 
 

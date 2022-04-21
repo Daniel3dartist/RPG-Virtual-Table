@@ -158,6 +158,7 @@ margin_left = -175.0
 margin_top = -150.0
 margin_right = 175.0
 margin_bottom = 150.0
+items = [ "", null, 0, false, false, 0, 0, null, "", false ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupMenu"]
 anchor_right = 1.0

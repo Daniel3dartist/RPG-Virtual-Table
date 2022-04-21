@@ -16,6 +16,11 @@ var tcard = preload('res://Scenes/Card.tscn')
 # Place to list the tables
 onready var table_list = $'ColorRect/VBoxContainer/VBoxContainer/ScrollContainer/Table List'
 
+
+func _ready():
+	Creat_Table_List()
+
+
 func _on_Main_Menu_button_up():
 	get_tree().change_scene(main_menu)
 
@@ -49,4 +54,5 @@ func _on_Add_a_New_Table_button_up():
 	table_num = table_num + 1
 
 
-
+func Creat_Table_List():
+	pass
