@@ -31,5 +31,6 @@ margin_right = 55.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 50, 50 )
 text = "Edit"
+
 [connection signal="button_up" from="VBoxContainer/Delete_Table" to="." method="_on_Delete_Table_button_up"]
 [connection signal="button_up" from="VBoxContainer/Edit_Table" to="." method="_on_Edit_Table_button_up"]

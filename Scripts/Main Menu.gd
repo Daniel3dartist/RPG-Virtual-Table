@@ -1,6 +1,6 @@
 extends Control
 
-var on_dev_pc = true
+var on_dev_pc = false
 var fpath = 'res://data/Settings.json'
 
 var tkey 

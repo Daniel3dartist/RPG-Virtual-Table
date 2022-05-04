@@ -148,6 +148,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="button_up" from="Bot&User/VBoxContainer/Bot/Bot Token" to="Bot&User" method="_on_Bot_Token_button_up"]
+[connection signal="button_up" from="Bot&User/VBoxContainer/User/User Nickname" to="Bot&User" method="_on_User_Nickname_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Load table" to="." method="_on_Load_table_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Settings" to="." method="_on_Settings_button_up"]
