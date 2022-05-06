@@ -6,50 +6,67 @@
 margin_right = 250.0
 margin_bottom = 60.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 300.0
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 284.0
 margin_bottom = 52.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bot" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 300.0
+[node name="Bot" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_right = 284.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+alignment = 1
 
-[node name="Bot Token" type="Button" parent="VBoxContainer/Bot"]
-margin_right = 76.0
-margin_bottom = 24.0
+[node name="Bot Token label" type="Label" parent="HBoxContainer/VBoxContainer/Bot"]
+margin_top = 5.0
+margin_right = 80.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 80, 0 )
 text = "Bot Token"
+align = 1
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Bot"]
-margin_left = 80.0
-margin_right = 300.0
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/Bot"]
+margin_left = 84.0
+margin_right = 284.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 text = "Insert your Bot Token here..."
 
-[node name="User" type="HBoxContainer" parent="VBoxContainer"]
+[node name="User" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 28.0
-margin_right = 300.0
+margin_right = 284.0
 margin_bottom = 52.0
 size_flags_horizontal = 3
 
-[node name="User Nickname" type="Button" parent="VBoxContainer/User"]
-margin_right = 84.0
-margin_bottom = 24.0
+[node name="User Name label2" type="Label" parent="HBoxContainer/VBoxContainer/User"]
+margin_top = 5.0
+margin_right = 80.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 80, 0 )
 text = "User Name"
+align = 1
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/User"]
-margin_left = 88.0
-margin_right = 300.0
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/VBoxContainer/User"]
+margin_left = 84.0
+margin_right = 284.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 
-[connection signal="button_up" from="VBoxContainer/Bot/Bot Token" to="." method="_on_Bot_Token_button_up"]
-[connection signal="button_up" from="VBoxContainer/User/User Nickname" to="." method="_on_User_Nickname_button_up"]
+[node name="Save_User_Bot" type="Button" parent="HBoxContainer"]
+margin_left = 288.0
+margin_right = 329.0
+margin_bottom = 52.0
+text = "Save"
+
+[connection signal="button_up" from="HBoxContainer/Save_User_Bot" to="." method="_on_Save_User_Bot_button_up"]

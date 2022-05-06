@@ -1,7 +1,7 @@
 extends Control
 
-onready var botline = $'VBoxContainer/Bot/LineEdit'
-onready var userline = $'VBoxContainer/User/LineEdit'
+onready var botline = $'HBoxContainer/VBoxContainer/Bot/LineEdit'
+onready var userline = $'HBoxContainer/VBoxContainer/User/LineEdit'
 
 var fpath = 'res://data/User_Config.json'
 var itens = {'UserNick' : '', 'BotToken' : '' }
@@ -46,14 +46,6 @@ func creat_file():
 	f.close()
 
 
-
-func _on_Bot_Token_button_up():
-	updating_file()
-
-
-func _on_User_Nickname_button_up():
-	updating_file()
-
 func updating_file():
 	var f = File.new()
 	var txt
@@ -64,10 +56,13 @@ func updating_file():
 	
 	txt['BotToken'] = botline.text
 	txt['UserNick'] = userline.text
-	print('Esse é o TXT com a mudança das Keys: ', txt)
 	
 	f.open(fpath, File.WRITE)
 	f.store_string(to_json(txt))
-	print('User_config.json updated \n', 'The new string is: ', txt, '\n')
+	print('User_config.json updated \n')
 	f.close()
 
+
+
+func _on_Save_User_Bot_button_up():
+	updating_file()
