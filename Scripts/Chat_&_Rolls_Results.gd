@@ -57,7 +57,7 @@ var invalid_session_is_resumable : bool
 
 func _ready() -> void:
 	var f = File.new()
-	var fpath = 'res://Saves_Teste/User_Config.json'
+	var fpath = 'res://data/User_Config.json'
 	
 	f.open(fpath, File.READ)
 	f = f.get_as_text()

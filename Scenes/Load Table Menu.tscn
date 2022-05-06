@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/Fonts_MainMenu.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/Fonts_MainMenuButtons.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scripts/Load Table Menu.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/MainMenu_Button.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxLine" id=1]
+content_margin_left = 5.0
+content_margin_right = 5.0
+content_margin_top = 5.0
+content_margin_bottom = 1.0
+color = Color( 0.329412, 0.329412, 0.329412, 0.882353 )
+thickness = 4
 
 [node name="Load Table Menu" type="Control"]
 anchor_right = 1.0
@@ -69,20 +77,29 @@ margin_right = 1180.0
 margin_bottom = 446.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/bg = SubResource( 1 )
+scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Table List" type="VBoxContainer" parent="ColorRect/VBoxContainer/VBoxContainer/ScrollContainer"]
-margin_right = 1180.0
-margin_bottom = 381.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1175.0
+margin_bottom = 380.0
 rect_min_size = Vector2( 120, 120 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Space" type="Control" parent="ColorRect/VBoxContainer/VBoxContainer/ScrollContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 5.0
+margin_bottom = 5.0
 
 [connection signal="button_up" from="ColorRect/VBoxContainer/VBoxContainer/HBoxContainer/Add a New Table" to="." method="_on_Add_a_New_Table_button_up"]

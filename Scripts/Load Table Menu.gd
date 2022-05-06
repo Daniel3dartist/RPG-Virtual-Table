@@ -29,6 +29,9 @@ var table_name = preload("res://Scenes/Table Name.tscn")
 var table_color = preload("res://Scenes/Table_color.tscn")
 var table_desc_itens = preload("res://Scenes/Table_desc_itens.tscn")
 var tcard = preload('res://Scenes/Card.tscn')
+var play_scene_button = preload('res://Scenes/Play_Scene_Button.tscn')
+var txt_editor = preload('res://Scenes/TextEdit.tscn')
+var color_rec = preload('res://Scenes/ColorRect.tscn')
 
 # Place to list the tables
 onready var table_list = $'ColorRect/VBoxContainer/VBoxContainer/ScrollContainer/Table List'
@@ -111,6 +114,10 @@ func organize_the_table_list(value):
 	var card = tcard.instance()
 	var card_itens = table_description.instance()
 	var tdbox = table_desc_itens.instance()
+	var BplaySc = play_scene_button.instance()
+	var txted = txt_editor.instance()
+	var Crect = color_rec.instance()
+	var Hcont = table_description.instance()
 
 	f.open(fpath, File.READ)
 	txtparse = f.get_as_text()
@@ -127,10 +134,17 @@ func organize_the_table_list(value):
 	tcolor.color = Color(txtparse[value]['pic'][0],txtparse[value]['pic'][1],txtparse[value]['pic'][2])
 	Tname.text = txtparse[value]['name']
 	card_itens.add_child(tcolor)
+	Hcont.add_child(Crect)
+	Hcont.add_child(BplaySc)
+	tdbox.add_child(txted)
+	tdbox.add_child(Hcont)
 	card_itens.add_child(tdbox)
 	card.add_child(card_itens)
-	card.connect('delet_table', self, '_delete_table')
 	table_list.add_child(card)
+
+	card.connect('delet_table', self, '_delete_table')
+	BplaySc.connect('playscene', self, '_play_scene')
+
 	print('This is Num: ' , value)
 	print('This is Num: ', n)
 	table_num = value + 1
@@ -152,8 +166,11 @@ func add_table():
 	var card = tcard.instance()
 	var card_itens = table_description.instance()
 	var tdbox = table_desc_itens.instance()
-	
-#	card.connect('delet_table', owner, '_delete_table')
+	var BplaySc = play_scene_button.instance()
+	var txted = txt_editor.instance()
+	var Crect = color_rec.instance()
+	var Hcont = table_description.instance()
+
 	tdbox.add_child(Tname)
 	tcolor.color = Color(r, g, b)
 
@@ -169,7 +186,12 @@ func add_table():
 
 	Tname.text = str(txt) 
 	card_itens.add_child(tcolor)
+	Hcont.add_child(Crect)
+	Hcont.add_child(BplaySc)
+	tdbox.add_child(txted)
+	tdbox.add_child(Hcont)
 	card_itens.add_child(tdbox)
+#	card_itens.add_child(BplaySc)
 	card.add_child(card_itens)
 	card.connect('delet_table', self, '_delete_table')
 
@@ -199,3 +221,7 @@ func _delete_table(value):
 	else:
 		table_num = 0
 	update_list_json()
+
+
+func _play_scene():
+	get_tree().change_scene('res://Scenes/Table.tscn')

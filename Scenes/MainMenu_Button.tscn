@@ -20,7 +20,5 @@ theme = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
 text = "<"
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
 [connection signal="button_up" from="." to="." method="_on_Main_Menu_button_up"]

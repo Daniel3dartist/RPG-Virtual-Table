@@ -1,10 +1,16 @@
 [gd_scene format=2]
 
 [node name="Table_desc_itens" type="VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -153.5
+margin_top = -86.5
+margin_right = 153.5
+margin_bottom = 86.5
 size_flags_horizontal = 3
-size_flags_vertical = 3
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

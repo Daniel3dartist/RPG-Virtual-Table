@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Play_Scene_Button.gd" type="Script" id=1]
+
+[node name="Play_Scene" type="Button"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -60.0
+margin_top = -30.0
+size_flags_horizontal = 0
+text = "Play"
+script = ExtResource( 1 )
+
+[connection signal="button_up" from="." to="." method="_on_Play_Scene_button_up"]
