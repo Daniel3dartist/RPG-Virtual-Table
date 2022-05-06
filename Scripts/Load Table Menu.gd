@@ -10,6 +10,7 @@ var table_num = 0
 var num_of_tables 
 var last_table = 0
 var n = 0
+var dkey
 
 # Table dictionary of itens
 var tboxdic = {
@@ -38,14 +39,14 @@ func _ready():
 	var txtparse
 	var size
 	var sz = 0
-	
+
 	check_if_Table_List_File_Exist()
 	f.open(fpath, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
 	print('TXT parse: (%s)' % str(txtparse))
 	f.close()
-	
+
 	size = txtparse.size()
 	while size > sz:
 		print(size)
@@ -54,13 +55,9 @@ func _ready():
 		organize_the_table_list(sz)
 		sz += 1
 
-#func _process(delta):
-#	if num_of_tables > 0:
-#		organize_the_table_list()
-
-
 func _on_Main_Menu_button_up():
 	get_tree().change_scene(main_menu)
+
 
 func _on_Add_a_New_Table_button_up():
 	add_table()
@@ -85,28 +82,19 @@ func check_if_Table_List_File_Exist():
 		Creat_Table_List()
 	else:
 		print('Table List File exist... \n')
-#		organize_the_table_list()
 
 func update_list_json():
 	var f = File.new()
-	var box
+	var txtparse
+
+	f.open(fpath, File.READ)
+	txtparse = f.get_as_text()
+	txtparse = parse_json(txtparse)
+	txtparse.remove(dkey)
 	
-	tboxdic['number'] = table_num
-	tboxdic['name'] = "Origame"
-	tboxdic['pic'] = Color(2, 25, 50)
-	tboxdic['desc'] = "Isso é uma desc"
-#	tboxdic = {
-#		'number': table_num,
-#		'name': Tname.text
-#	}
 	f.open(fpath, File.WRITE)
-#	box = tboxlist.append(tboxdic)
-	box = tboxdic
-#	box = txtparse
-#	box = parse_json(box)
-#	box = box.append(tboxdic)
-#	print("Box: (%s)" % str(box))
-	f.store_string(to_json(tboxlist))
+	f.store_string(to_json(txtparse))
+#	f.close
 	print('Table List File updated... \n')
 
 
@@ -127,11 +115,10 @@ func organize_the_table_list(value):
 	f.open(fpath, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
-#	print('TXT parse: (%s)' % str(txtparse))
 	f.close()
 	
 #	print('Esse é a lista do NUM: ', txtparse[n])
-	
+	tboxlist = txtparse
 	keysn = txtparse.size() #+ 1
 	print('Keysn: ' , keysn)
 
@@ -142,12 +129,11 @@ func organize_the_table_list(value):
 	card_itens.add_child(tcolor)
 	card_itens.add_child(tdbox)
 	card.add_child(card_itens)
+	card.connect('delet_table', self, '_delete_table')
 	table_list.add_child(card)
 	print('This is Num: ' , value)
 	print('This is Num: ', n)
 	table_num = value + 1
-
-
 
 
 func add_table():
@@ -166,24 +152,26 @@ func add_table():
 	var card = tcard.instance()
 	var card_itens = table_description.instance()
 	var tdbox = table_desc_itens.instance()
-
-	tdbox.add_child(Tname)
-	#tdbox.add_child(Tname)
-	tcolor.color = Color(r, g, b)
 	
-	if table_num > 0:
-		txt = txt + ('(%s)' % str(table_num))
+#	card.connect('delet_table', owner, '_delete_table')
+	tdbox.add_child(Tname)
+	tcolor.color = Color(r, g, b)
+
 	
 	f.open(fpath, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
-#	print('TXT parse: (%s)' % str(txtparse))
+	tboxlist = txtparse
 	f.close()
-	
-	Tname.text = txt
+	if table_num != 0 :
+		txt = txt + ('(%s)' % str(table_num))
+
+
+	Tname.text = str(txt) 
 	card_itens.add_child(tcolor)
 	card_itens.add_child(tdbox)
 	card.add_child(card_itens)
+	card.connect('delet_table', self, '_delete_table')
 
 
 	tboxdic = {
@@ -195,15 +183,19 @@ func add_table():
 
 	f.open(fpath, File.WRITE)
 	txtparse.push_back(tboxdic)
-#	tboxlist.push_back(txtparse))
 	f.store_string(to_json(txtparse))
 	f.close()
 	print('Table List File updated... \n')
-	
-
-#	update_list_json()
-	
 	table_list.add_child(card)
 	table_num += 1
-	print("Esse é o novo Table_Num 000: ", table_num)
+	tboxlist = txtparse
 
+
+func _delete_table(value):
+	dkey = value
+	tboxlist.remove(dkey)
+	if tboxlist.empty() == false:
+		table_num = tboxlist[-1]['number'] + 1
+	else:
+		table_num = 0
+	update_list_json()
