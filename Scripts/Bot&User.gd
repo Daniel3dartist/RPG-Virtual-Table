@@ -3,8 +3,7 @@ extends Control
 onready var botline = $'HBoxContainer/VBoxContainer/Bot/LineEdit'
 onready var userline = $'HBoxContainer/VBoxContainer/User/LineEdit'
 
-var fpath = 'res://data/User_Config.json'
-var itens = {'UserNick' : '', 'BotToken' : '' }
+var fpath = 'res://data/User.ini'
 
 
 func _ready():
@@ -12,56 +11,39 @@ func _ready():
 
 
 func check_base_file():
-	var fpathtest = File.new()
-	var ftest
-#	var itens = {'UserNick' : userline.txt, 'BotToken' : botline.txt }
+	var config = ConfigFile.new()
+	var err
 
-	ftest = fpathtest.file_exists(fpath)
+	err = config.load(fpath)
 	
-	if ftest != true:
-		print('"User_Config.json" not found \n' + 'Creating "User_Config.json" file')
-		creat_file()
-	else:
-		var f = File.new()
-		var content
-		var p
-		
-		print('"User_Config.json" already exists')
-		f.open(fpath, File.READ)
-		
-		content = f.get_as_text()
-		content = parse_json(content)
-		userline.text = content['UserNick']
-		botline.text = content['BotToken']
-#		btext.set_text('0000') 
-		f.close()
-	
+	if err != OK:
+		print('"User_Config.cfg" not found \n' + 'Creating "User_Config.cfg" file')
+		config.set_value("User", "Nickname", "Type your username here")
+		config.set_value("User", "BotToken", '*'.repeat(25))
+		config.save(fpath)
+		userline.text = "Type your username here"
+		botline.text = '*'.repeat(25)
+		print('Passou 01')
 
-func creat_file():
-	var f = File.new()
-	
-	f.open(fpath, File.WRITE)
-	f.store_string(to_json(itens))
-	print('"User_Config.json" created')
-	f.close()
+
+	for User in config.get_sections():
+		var n = config.get_value(User, "Nickname")
+		var sz = config.get_value(User, "BotToken")
+		
+		userline.text = str(config.get_value(User, "Nickname"))
+		botline.text = '*'.repeat(sz.length())
 
 
 func updating_file():
-	var f = File.new()
-	var txt
+	var config = ConfigFile.new()
+	var sz
 	
-	f.open(fpath, File.READ)
-	txt = f.get_as_text()
-	txt = parse_json(txt)
-	
-	txt['BotToken'] = botline.text
-	txt['UserNick'] = userline.text
-	
-	f.open(fpath, File.WRITE)
-	f.store_string(to_json(txt))
-	print('User_config.json updated \n')
-	f.close()
-
+	config.set_value("User", "Nickname", userline.text )
+	config.set_value("User", "BotToken", botline.text)
+	config.save(fpath)
+	print(botline.text)
+	sz = botline.text
+	botline.text = '*'.repeat(sz.length())
 
 
 func _on_Save_User_Bot_button_up():
