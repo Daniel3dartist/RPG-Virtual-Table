@@ -149,7 +149,7 @@ margin_right = 644.0
 margin_bottom = 20.0
 text = "Default"
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
+[node name="PopupMenu" type="CenterContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -158,19 +158,29 @@ margin_left = -175.0
 margin_top = -150.0
 margin_right = 175.0
 margin_bottom = 150.0
-items = [ "", null, 0, false, false, 0, 0, null, "", false ]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect2" type="ColorRect" parent="PopupMenu"]
+margin_right = 350.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 350, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.242615, 0.279617, 0.390625, 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PopupMenu"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = 98.0
+margin_top = 13.0
+margin_right = 252.0
+margin_bottom = 287.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Countdown" type="Label" parent="PopupMenu/VBoxContainer"]
-margin_top = 13.0
-margin_right = 350.0
-margin_bottom = 263.0
+margin_right = 154.0
+margin_bottom = 250.0
 rect_min_size = Vector2( 0, 250 )
 size_flags_horizontal = 3
 text = "15
@@ -179,29 +189,28 @@ align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PopupMenu/VBoxContainer"]
-margin_top = 267.0
-margin_right = 350.0
-margin_bottom = 287.0
+margin_top = 254.0
+margin_right = 154.0
+margin_bottom = 274.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="Accepted" type="Button" parent="PopupMenu/VBoxContainer/HBoxContainer"]
-margin_left = 98.0
-margin_right = 170.0
+margin_right = 72.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 72, 20 )
 text = "Accepted"
 
 [node name="Restore_Last" type="Button" parent="PopupMenu/VBoxContainer/HBoxContainer"]
-margin_left = 180.0
-margin_right = 252.0
+margin_left = 82.0
+margin_right = 154.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 72, 0 )
 text = "Cancel"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_Button_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_WBack_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_Button_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WFront" to="." method="_on_WFront_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer/RBack" to="." method="_on_RBack_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer/RFront" to="." method="_on_RFront_button_up"]
