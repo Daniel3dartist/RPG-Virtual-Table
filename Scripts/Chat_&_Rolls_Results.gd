@@ -56,13 +56,17 @@ var invalid_session_is_resumable : bool
 
 
 func _ready() -> void:
-	var f = File.new()
-	var fpath = 'res://data/User_Config.json'
-	
-	f.open(fpath, File.READ)
-	f = f.get_as_text()
-	f = parse_json(f)
-	token = f['BotToken']
+	var config = ConfigFile.new()
+	var fpath = 'res://data/User_Config.ini'
+	var err
+
+	err = config.load(fpath)
+	if err != OK:
+		print('Config file not found')
+		token = ''
+	else:
+		for User in config.get_sections():
+			token = config.get_value(User, "BotToken")
 	
 	sheet_delete_buttom.connect('button_up', self, '_on_Delete_button_up')
 	randomize()

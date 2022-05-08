@@ -1,17 +1,10 @@
 extends Control
 
 var on_dev_pc = false
-var fpath = 'res://data/Settings.json'
+var fpath = 'res://data/Settings.ini'
 
-var tkey 
-var rkey 
-
-var xy 
-var vx 
-var vy 
-
-var types_of_windows_modes = ['Window', 'Full Screen', 'Borderless Window']
-var resolutions = ['640 x 480', '800 x 600', '1024 x 768', '1152 x 864','1280 x 720', '1280 x 800', '1280 x 1024', '1366 x 768', '1440 x 900', '1600 x 900', '1680 x 1050', '1920 x 1080', '2560 x 1440', '2048 x 1080', '3840 x 2160', '7680 x 4320']
+#var types_of_windows_modes = ['Window', 'Full Screen', 'Borderless Window']
+#var resolutions = ['640 x 480', '800 x 600', '1024 x 768', '1152 x 864','1280 x 720', '1280 x 800', '1280 x 1024', '1366 x 768', '1440 x 900', '1600 x 900', '1680 x 1050', '1920 x 1080', '2560 x 1440', '2048 x 1080', '3840 x 2160', '7680 x 4320']
 
 var next_scene = 'res://Scenes/Table.tscn'
 var load_table_menu = 'res://Scenes/Load Table Menu.tscn'
@@ -19,6 +12,7 @@ var load_table_menu = 'res://Scenes/Load Table Menu.tscn'
 var settings_menu = 'res://Scenes/Settings.tscn'
 
 func _ready():
+	print('Initializing...')
 	creat_directory()
 	check_settings_file()
 
@@ -72,36 +66,23 @@ func creat_directory():
 
 
 func check_settings_file():
-	var fpathtest = File.new()
-	var ftest
-	var f
-	var content
-
-	ftest = fpathtest.file_exists(fpath)
-	if ftest == true:
-		f = File.new()
-		print('Settings file allready exists')
-		
-		f.open(fpath, File.READ)
-		content = f.get_as_text()
-		content = parse_json(content)
-	#	print('Esse é o content: ' + str(content[1]))
-		tkey = int(content[0])
-		rkey = int(content[1])
-		f.close()
-
-		xy = resolutions[int(content[1])].split('x')
-		vx = xy[0]
-		vy = xy[1]
-		OS.window_size = Vector2(vx, vy)
-
-		windows_mod()
+	var config = ConfigFile.new()
+	var err
+	var window 
+	var resolution
 
 
-
-func windows_mod():
-	var window = types_of_windows_modes[tkey]
+	err = config.load(fpath)
+	if err != OK:
+		print("Settings file is missing")
 	
+	for Video in config.get_sections():
+		window = config.get_value(Video, "Window")
+		resolution = config.get_value(Video, "Resolution")
+	
+	resolution = resolution.split('x')
+	OS.window_size = Vector2(resolution[0], resolution[1])
+
 	if window == 'Window':
 		OS.window_fullscreen = false
 		OS.window_borderless = false
@@ -116,3 +97,4 @@ func windows_mod():
 		OS.window_fullscreen = false
 		OS.window_borderless = true
 		OS.window_maximized = true
+	print('Window: %s \n'% window,'Resolution: %s\n' % resolution )
