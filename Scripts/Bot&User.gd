@@ -3,7 +3,7 @@ extends Control
 onready var botline = $'HBoxContainer/VBoxContainer/Bot/LineEdit'
 onready var userline = $'HBoxContainer/VBoxContainer/User/LineEdit'
 
-var fpath = 'res://data/User.ini'
+var fpath = 'res://data/User_settings.ini'
 
 
 func _ready():
