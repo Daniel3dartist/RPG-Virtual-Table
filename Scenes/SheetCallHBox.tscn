@@ -7,15 +7,10 @@
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sheet Buttom Place" type="Control" parent="."]
-margin_bottom = 40.0
 
 [node name="Delete" parent="." instance=ExtResource( 1 )]
-margin_left = 4.0
-margin_right = 59.0
+margin_left = 0.0
+margin_right = 55.0
 text = "Delete"
+
 [connection signal="button_up" from="Delete" to="." method="_on_Delete_button_up"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scripts/Chat_&_Rolls_Results.gd" type="Script" id=1]
+[ext_resource path="res://Test_SandBox/Table_test.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/D3.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/D4.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/D6.tscn" type="PackedScene" id=4]
@@ -70,13 +70,14 @@ size_flags_vertical = 0
 text = "Sheet"
 
 [node name="SplitSheetList" type="HSplitContainer" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer"]
+visible = false
 margin_left = 52.0
 margin_right = 259.0
 margin_bottom = 715.0
 size_flags_horizontal = 3
 custom_styles/bg = SubResource( 1 )
 
-[node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList" groups=["grupo01"]]
+[node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList"]
 margin_right = 207.0
 margin_bottom = 715.0
 size_flags_horizontal = 3
@@ -255,6 +256,7 @@ layer = 120
 
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
 [connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]
+[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/HBoxContainer/Sheets" to="." method="_on_Sheets_button_up"]
 [connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList/Sheet Creator" to="." method="_on_Sheet_Creator_button_up"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d3_b" to="." method="_on_d3_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d4_b" to="." method="_on_d4_b_pressed"]

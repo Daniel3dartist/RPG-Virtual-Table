@@ -6,21 +6,6 @@ onready var token_to_pass = $'Base_UI/Bot token key/HBoxContainer/VBoxContainer/
 onready var token_input = $'Base_UI/Settings/VBoxContainer/HBoxContainer/VBoxContainer/Token_Input'
 #onready var key = $'res://Scenes/botkey.tscn'
 
-#func _on_Submit_Bot_Token_Key_button_up():
-#	print('\n \n \n  Esse é a key \n', token_input.text, '\n \n \n')
-#	input_token_key = token_input.get_text()
-#	return set_bot_token_key()
-
-
-#func _on_Submit_Bot_Token_Key_02_button_up():
-#	token_input.text = str(token_to_pass.get_text()) 
-#	print('\n \n \n  Esse é a key \n', token_input.text, '\n \n \n')
-#	input_token_key = token_input.get_text()
-#	return set_bot_token_key()
-	
-#func set_bot_token_key():
-#	input_token_key = token_input.get_text()
-#	input_token_key = 'Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.bf-vRgCUXeOKCrWpjVBOVFR9Kog'
 
 # Character Sheet vars
 onready var sheet_list = $"Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"
@@ -57,8 +42,13 @@ var invalid_session_is_resumable : bool
 
 func _ready() -> void:
 	var config = ConfigFile.new()
-	var fpath = 'res://data/User_Config.ini'
+	var fpath = 'res://data/User_settings.ini'
 	var err
+
+	var save_game = File.new()
+	save_game.open("user://data/savegame.txt", File.WRITE)
+	save_game.store_string(to_json('Isso mesmo'))
+	save_game.close()
 
 	err = config.load(fpath)
 	if err != OK:
@@ -67,6 +57,7 @@ func _ready() -> void:
 	else:
 		for User in config.get_sections():
 			token = config.get_value(User, "BotToken")
+	print(token)
 	
 	sheet_delete_buttom.connect('button_up', self, '_on_Delete_button_up')
 	randomize()
@@ -78,7 +69,7 @@ func _ready() -> void:
 	client.connect("data_received", self, "_data_received")
 	client.connect("input", self, "_input")
 	
-
+	load_game()
 
 func _input(event):
 	
@@ -130,7 +121,7 @@ func _input(event):
 			return Add_Text_On_Chat()
 		
 #		return handle_events()
-		channel_id = "780370698508959755"
+		channel_id = "780392848884760599"
 		print('Text to Discord é: ', text_to_Discord)
 		message_to_send = text_to_Discord
 		query = JSON.print(message_to_send)
@@ -366,8 +357,8 @@ func handle_events(dict : Dictionary) -> void:
 			
 			
 			var txt = str(message_content)
-			print("Essa é a mensagem content: " + txt)
-			print('Esse é o texto para o Discord: ' + text_to_Discord)
+			print("Essa é a mensagem content: " , txt)
+			print('Esse é o texto para o Discord: ' , text_to_Discord)
 				
 			if txt != text_to_Discord:
 				txt = txt + '\n\n'
@@ -427,10 +418,69 @@ func _on_Main_Menu_button_up():
 
 # func to call the settings in table menu (that settings no have the same func from the main menu settings menu)
 func _on_Settings_button_up():
-	pass # Replace with function body.
+	_save_game()
 
 
 
+# Note: This can be called from anywhere inside the tree. This function
+# is path independent.
+func load_game():
+	var save_game = File.new()
+	if save_game.file_exists("user://data/savegame.save"):
+		if not save_game.file_exists("user://data/savegame.save"):
+			return # Error! We don't have a save to load.
 
+		# We need to revert the game state so we're not cloning objects
+		# during loading. This will vary wildly depending on the needs of a
+		# project, so take care with this step.
+		# For our example, we will accomplish this by deleting saveable objects.
+		var save_nodes = get_tree().get_nodes_in_group('grupo01')
+		for i in save_nodes:
+			i.queue_free()
 
+		# Load the file line by line and process that dictionary to restore
+		# the object it represents.
+		save_game.open("user://savegame.save", File.READ)
+		while save_game.get_position() < save_game.get_len():
+			# Get the saved dictionary from the next line in the save file
+			var node_data = parse_json(save_game.get_line())
 
+			# Firstly, we need to create the object and add it to the tree and set its position.
+			var new_object = load(node_data["filename"]).instance()
+			get_node(node_data["parent"]).add_child(new_object)
+			new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+
+			# Now we set the remaining variables.
+			for i in node_data.keys():
+				if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
+					continue
+				new_object.set(i, node_data[i])
+
+		save_game.close()
+		print('Created Save')
+	else:
+		_save_game()
+
+func _save_game():
+	var save_game = File.new()
+	save_game.open("user://data/savegame.save", File.WRITE)
+	
+	var save_nodes = get_tree().get_nodes_in_group('grupo01')
+	#for node in save_nodes:
+		# Check the node is an instanced scene so it can be instanced again during load.
+	#	if node.filename.empty():
+		#	print("persistent node '%s' is not an instanced scene, skipped" % node.name)
+		#	continue
+
+		# Check the node has a save function.
+#		if !node.has_method("save"):
+	#		print("persistent node '%s' is missing a save() function, skipped" % node.name)
+	#		continue
+
+		# Call the node's save function.
+#	var node_data = node.call("save")
+
+		# Store the save dictionary as a new line in the save file.
+	save_game.store_string(to_json(save_nodes))
+	save_game.close()
+	print('Load Game')

@@ -2,7 +2,7 @@ extends Control
 
 var t = true
 
-var fpath = 'res://data/table_list.json'
+var fpath = 'res://data/table_list.save'
 var main_menu = 'res://Scenes/Main Menu.tscn'
 
 # Number of table created
