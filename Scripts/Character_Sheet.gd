@@ -1,5 +1,20 @@
 extends Control
 
+var fpath 
+var sheet
+var core_status= {
+		'str' : '',
+		'dex': '',
+		'con': '',
+		'int': '',
+		'wis': '',
+		'cha': '',
+	}
+
+
+signal give_data(index)
+
+
 # ===============================================[ Score Attributes var ]============================================================= #
 
 # Inputs values
@@ -17,6 +32,13 @@ onready var CON_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/
 onready var INT_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/INT_Mod_Value'
 onready var WIS_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/WIS_Mod_Value'
 onready var CHA_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Mod_Column/CHA_Mod_Value'
+
+
+func _ready():
+	var table = self.get_parent().get_parent()
+	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
+	emit_signal("give_data", self.get_index())
+	print('iniciado')
 
 func _input(event):
 	# STR
@@ -43,22 +65,28 @@ func _input(event):
 		var strMod
 		var num
 
+
 		num = int(STR_Input.text)
 		strMod = num
+		core_status['str'] = num
 		strMod = str((strMod - 10) / 2)
 		STR_Mod_Value.text = strMod
 		strCompareNum = num
+
 
 	# DEX Mod Input
 	if dexDefault != dexCompareNum:
 		var dexMod
 		var num
-
 		num = int(DEX_Input.text)
+		core_status['dex'] = num
 		dexMod = num
 		dexMod = str((dexMod - 10) / 2)
 		DEX_Mod_Value.text = dexMod
 		dexCompareNum = num
+		_Update_Save()
+		print('diferente')
+
 
 	# CON Mod Input
 	if conDefault != conCompareNum:
@@ -66,10 +94,12 @@ func _input(event):
 		var num
 
 		num = int(CON_Input.text)
+		core_status['con'] = num
 		conMod = num
 		conMod = str((conMod - 10) / 2)
 		CON_Mod_Value.text =conMod
 		conCompareNum = num
+		_Update_Save()
 
 	# INT Mod Input
 	if intDefault != intCompareNum:
@@ -77,10 +107,12 @@ func _input(event):
 		var num
 
 		num = int(INT_Input.text)
+		core_status['int'] = num
 		intMod = num
 		intMod = str((intMod - 10) / 2)
 		INT_Mod_Value.text = intMod
 		intCompareNum = num
+		_Update_Save()
 
 	# WIS Mod Input
 	if wisDefault != wisCompareNum:
@@ -88,10 +120,12 @@ func _input(event):
 		var num
 
 		num = int(WIS_Input.text)
+		core_status['wis'] = num
 		wisMod = num
 		wisMod = str((wisMod - 10) / 2)
 		WIS_Mod_Value.text =wisMod
 		wisCompareNum = num
+		_Update_Save()
 
 	# CHA Mod Input
 	if chaDefault != chaCompareNum:
@@ -99,11 +133,53 @@ func _input(event):
 		var num
 
 		num = int(CHA_Input.text)
+		core_status['cha'] = num
 		chaMod = num
 		chaMod = str((chaMod - 10) / 2)
 		CHA_Mod_Value.text = chaMod
 		chaCompareNum = num
-
+		_Update_Save()
 
 func _on_Sheet_Exit_button_up():
 	self.queue_free()
+
+
+func _Receive_Sheet_Data(data_path):
+	sheet = {
+		'data': '',
+		'path': data_path,
+	}
+	print('Data recebido ', data_path)
+
+
+
+func _Initialize_Sheet():
+	var sheet_save = ConfigFile.new()
+	var err
+	var core_status
+	
+	err = sheet_save.load(str(sheet['path']))
+	if err != OK:
+		print('Erro when try to load sheet data...')
+	else:
+		if self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text == '':
+			for Sheet in sheet_save.get_sections():
+				self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = sheet_save.get_value(Sheet, "Name")
+			for Status in sheet_save.get_sections():
+				core_status = sheet_save.get_value(Status, "core status")
+				self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/STR_Input').text = core_status['str']
+
+func _Update_Save():
+	var sheet_save = ConfigFile.new()
+	var err
+	var txt = self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text
+	print(sheet['path'])
+	err = sheet_save.load(sheet['path'])
+	if err != OK:
+		print('Erro when try to load sheet data...')
+		pass
+	
+	sheet_save.set_value('Sheet,', 'Name', txt )
+	sheet_save.set_value('Status', 'core status', core_status )
+	sheet_save.save(sheet['path'])
+

@@ -56,9 +56,6 @@ margin_top = -300.0
 margin_right = 500.0
 margin_bottom = 300.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -169,11 +166,11 @@ margin_right = 960.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_colors/font_color_bg = Color( 0, 0, 0, 1 )
+custom_colors/font_color_fg = Color( 0, 0, 0, 1 )
 custom_styles/tab_fg = SubResource( 1 )
 custom_styles/tab_bg = SubResource( 2 )
 custom_styles/panel = SubResource( 3 )
-custom_colors/font_color_bg = Color( 0, 0, 0, 1 )
-custom_colors/font_color_fg = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -204,8 +201,8 @@ margin_right = 192.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/normal = SubResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 4 )
 text = "Core Stats"
 align = 1
 valign = 1
@@ -585,4 +582,5 @@ margin_left = 1.0
 margin_top = 25.0
 margin_right = -1.0
 margin_bottom = -1.0
+
 [connection signal="button_up" from="ColorRect/SheetArea/Sheet_Exit" to="." method="_on_Sheet_Exit_button_up"]
