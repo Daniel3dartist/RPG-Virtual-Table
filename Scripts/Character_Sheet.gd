@@ -3,12 +3,12 @@ extends Control
 var fpath 
 var sheet
 var core_status= {
-		'str' : '',
-		'dex': '',
-		'con': '',
-		'int': '',
-		'wis': '',
-		'cha': '',
+		'str' : 10,
+		'dex': 10,
+		'con': 10,
+		'int': 10,
+		'wis': 10,
+		'cha': 10,
 	}
 
 
@@ -39,6 +39,8 @@ func _ready():
 	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
 	emit_signal("give_data", self.get_index())
 	print('iniciado')
+	_Initialize_Sheet()
+	
 
 func _input(event):
 	# STR
@@ -163,11 +165,10 @@ func _Initialize_Sheet():
 		print('Erro when try to load sheet data...')
 	else:
 		if self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text == '':
-			for Sheet in sheet_save.get_sections():
-				self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = sheet_save.get_value(Sheet, "Name")
-			for Status in sheet_save.get_sections():
-				core_status = sheet_save.get_value(Status, "core status")
-				self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/STR_Input').text = core_status['str']
+			self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = sheet_save.get_value("Sheet", "Name")
+			print('config: ', sheet_save.get_value("Sheet", "Name"))
+			core_status = sheet_save.get_value("Status", "core status")
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/STR_Input').text = str(core_status['str'])
 
 func _Update_Save():
 	var sheet_save = ConfigFile.new()
@@ -179,7 +180,7 @@ func _Update_Save():
 		print('Erro when try to load sheet data...')
 		pass
 	
-	sheet_save.set_value('Sheet,', 'Name', txt )
+	sheet_save.set_value('Sheet', 'Name', txt )
 	sheet_save.set_value('Status', 'core status', core_status )
 	sheet_save.save(sheet['path'])
 
