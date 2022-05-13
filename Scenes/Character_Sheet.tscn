@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Character_Sheet.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -63,9 +62,6 @@ layer = 128
 
 [node name="Node2D" type="Node2D" parent="CanvasLayer"]
 position = Vector2( 639.388, 400 )
-
-[node name="Icon" type="Sprite" parent="CanvasLayer/Node2D"]
-texture = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0

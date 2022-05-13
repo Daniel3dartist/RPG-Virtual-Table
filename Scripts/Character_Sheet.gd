@@ -16,7 +16,6 @@ var dragging = false
 var click_radius = 450
 var off_set
 var pos
-var f
 onready var pos2d = self.get_node('CanvasLayer/Node2D')
 
 signal give_data(index)
