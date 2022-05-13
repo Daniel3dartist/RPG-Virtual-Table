@@ -11,6 +11,12 @@ var core_status= {
 		'cha': 10,
 	}
 
+# Drag-and-drop vars
+var dragging = false
+var click_radius = 450
+var off_set
+var pos
+onready var pos2d = self.get_node('CanvasLayer/Node2D')
 
 signal give_data(index)
 
@@ -61,6 +67,8 @@ func _input(event):
 	# CHA
 	var chaDefault = int(CHA_Input.text)
 	var chaCompareNum = 10
+
+
 
 	# STR Mod Input
 	if strDefault != strCompareNum:
@@ -140,6 +148,29 @@ func _input(event):
 		CHA_Mod_Value.text = chaMod
 		chaCompareNum = num
 		_Update_Save()
+
+# Drag-and-drop sheet
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+		off_set = rect_position - get_global_mouse_position()
+		pos = pos2d.position - rect_position
+		if event.is_pressed() == false:
+			dragging = false
+		if (event.position - pos2d.position).length() <= click_radius:
+#		if rect_size.length() <= click_radius:
+			if not dragging and event.pressed:
+				dragging = true
+			if dragging and not event.pressed:
+				dragging = false
+
+func _physics_process(delta):
+#	 if self.get_node('Position2D').intersect_shape(get_viewport().get_mouse_position()):
+#		pass
+	
+	if dragging == true:
+		var view = get_viewport().get_mouse_position()
+		rect_position = get_viewport().get_mouse_position() + off_set
+		pos2d.position = rect_position + pos
+
 
 func _on_Sheet_Exit_button_up():
 	self.queue_free()

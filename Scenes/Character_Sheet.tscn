@@ -57,6 +57,12 @@ margin_right = 500.0
 margin_bottom = 300.0
 script = ExtResource( 1 )
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+position = Vector2( 639.388, 400 )
+
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
