@@ -87,7 +87,6 @@ func _input(event):
 		DEX_Mod_Value.text = dexMod
 		dexCompareNum = num
 		_Update_Save()
-		print('diferente')
 
 
 	# CON Mod Input
@@ -160,6 +159,13 @@ func _Initialize_Sheet():
 	var err
 	var core_status
 	
+	var strtxt = self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/STR_Input')
+	var dextxt = self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/DEX_Input')
+	var contxt = self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/CON_Input')
+	var inttxt = self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/INT_Input')
+	var wistxt = self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/WIS_Input')
+	var chatxt = self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/CHA_Input')
+
 	err = sheet_save.load(str(sheet['path']))
 	if err != OK:
 		print('Erro when try to load sheet data...')
@@ -167,14 +173,24 @@ func _Initialize_Sheet():
 		if self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text == '':
 			self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = sheet_save.get_value("Sheet", "Name")
 			print('config: ', sheet_save.get_value("Sheet", "Name"))
+			
 			core_status = sheet_save.get_value("Status", "core status")
-			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column/STR_Input').text = str(core_status['str'])
+			print(core_status)
+			if core_status != null:
+				strtxt.text = str(core_status['str'])
+				dextxt.text = str(core_status['dex'])
+				contxt.text = str(core_status['con'])
+				inttxt.text = str(core_status['int'])
+				wistxt.text = str(core_status['wis'])
+				chatxt.text = str(core_status['cha'])
+			else:
+				_Update_Save()
 
 func _Update_Save():
 	var sheet_save = ConfigFile.new()
 	var err
 	var txt = self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text
-	print(sheet['path'])
+#	print(sheet['path'])
 	err = sheet_save.load(sheet['path'])
 	if err != OK:
 		print('Erro when try to load sheet data...')
