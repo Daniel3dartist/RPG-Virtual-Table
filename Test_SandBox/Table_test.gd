@@ -12,7 +12,7 @@ var sheet = {
 	}
 var character_sheet_path = preload("res://Scenes/Character_Sheet.tscn")
 
-onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"
+onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList"
 var sheet_call_Hbox = preload('res://Scenes/SheetCallHBox.tscn')
 var sheet_call = preload("res://Scenes/SheetCall.tscn")
 
