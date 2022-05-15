@@ -1,6 +1,6 @@
 extends Control
 
-var fpath = 'res://Test_SandBox/Sheet_List.save'
+var fpath 
 
 var snum
 var sheet_num = 0
@@ -10,11 +10,11 @@ var sheet = {
 		'Number': '',
 		'Path': '',
 	}
-var character_sheet_path = preload("res://Scenes/Character_Sheet.tscn")
+var character_sheet_path = preload("res://Scenes/Sheet/Character_Sheet.tscn")
 
 onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList"
-var sheet_call_Hbox = preload('res://Scenes/SheetCallHBox.tscn')
-var sheet_call = preload("res://Scenes/SheetCall.tscn")
+var sheet_call_Hbox = preload('res://Scenes/Table/SheetCallHBox.tscn')
+var sheet_call = preload("res://Scenes/Table/SheetCall.tscn")
 
 # signals
 signal receive_sheet_data(data_path)
@@ -22,9 +22,15 @@ signal receive_sheet_data(data_path)
 # Functions
 func _ready():
 	var config = ConfigFile.new()
-	var err = config.load(fpath)
+#	var err = config.load('res://data/last_played.ini')
+	var last = ConfigFile.new()
 	var sz = 0
 	var num
+	
+	last.load('res://data/last_played.ini')
+	print(last.get_sections())
+	fpath = last.get_value("Last Played", "Last table")['path']
+	print('Self Index ready table: \n', fpath)
 	
 	check_exist_file()
 	config.load(fpath)
@@ -38,21 +44,19 @@ func _ready():
 
 func check_exist_file():
 	var config = ConfigFile.new()
-	var err = config.load(fpath)
+	var err 
+	var dir = Directory.new()
 	
-	var sheet_box_instance = sheet_call_Hbox.instance()
-	var sheet_call_instance = sheet_call.instance()
-	var txt = 'Sheet'
-	var SPath = 'Sheet/Sheet'
-	var Dname = txt
-	var Dpath = 'res://data/Sheets/'
-	var sz = 0
+	err = dir.open(fpath + '/Sheets')
+	if err != OK:
+		dir.open(fpath)
+		dir.make_dir('Sheets')
 	
-	
+	err = config.load(fpath + '/Sheet_List.save')
 	if err != OK:
 		print('File not found...')
 		config.set_value("Sheets", "Sheets", sheet_list)
-		config.save(fpath)
+		config.save(fpath + '/Sheet_List.save')
 	else:
 		for Sheets in config.get_sections():
 			sheet_list = config.get_value(Sheets, "Sheets")
@@ -74,30 +78,31 @@ func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_Hbox.instance()
 	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = 'Sheet/Sheet'
+	var SPath = '%s/Sheet/Sheet' % fpath
 	var dir = Directory.new()
 	var Dname = txt
-	var Dpath = 'res://data/Sheets/'
+	var Dpath =  '%s/Sheets' % fpath
 
 	sheet_num = sheet_list.size()
-	
+	print(Dpath)
 	if sheet_num > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath = Dname + '/'+ Dname
-		Dpath = Dpath + Dname
+		SPath =fpath + '/'+ Dname + '/'+ Dname
+		Dpath = Dpath + '/'+ Dname
 		print(Dpath)
 
 	sheet = {
 		'Name': txt,
 		'Number': sheet_num,
-		'Path': 'res://data/Sheets/%s.save' % SPath,
+		'Path': '%s.save' % SPath,
 	}
+	
 	
 #	dir.open(Dpath)
 #	dir.make_dir(Dname)
 	
-	dir.open('res://data/Sheets/')
+	dir.open('%s/Sheets/' % fpath)
 	dir.make_dir(Dname)
 	
 	sheet_list.push_back(sheet)
@@ -105,20 +110,22 @@ func Creat_Character_Sheet():
 	sheet_box_instance.add_child(sheet_call_instance)
 	sheet_container.add_child(sheet_box_instance)
 	sheet_num = sheet_num + 1
+	sheet_box_instance.connect('delete_sheet', self, '_Delete_Sheet')
 	sheet_call_instance.connect("call_sheet", self, '_Call_Sheet')
 	
 	var save = ConfigFile.new()
 	save.set_value("Sheet", "Name", txt)
 	save.save(sheet["Path"])
+	print('fpath: ', fpath)
 	update_list()
 
 func update_list():
 	var config = ConfigFile.new()
-	var err = config.load(fpath)
+	var err = config.load(fpath + '/Sheet_List.save')
 	
 	if err == OK:
 		config.set_value("Sheets", "Sheets", sheet_list)
-		config.save(fpath)
+		config.save(fpath + '/Sheet_List.save')
 
 
 func _Call_Sheet(value):
@@ -141,23 +148,44 @@ func organize_sheet_list(sz):
 	var sheet_box_instance = sheet_call_Hbox.instance()
 	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = 'Sheet/Sheet'
+	var SPath = '%s/Sheet/Sheet' % fpath
 	var Dname = txt
 
 	if sz > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath = Dname + '/'+ Dname
+		SPath = fpath + '/'+ Dname + '/'+ Dname
+		print('Spath SPath ',SPath)
 
 	sheet = {
 		'Name': txt,
 		'Number': sheet_num,
-		'Path': 'res://data/Sheets/%s.save' % SPath,
+		'Path': '%s.save' % SPath,
 	}
 		
 		
 	sheet_call_instance.text = txt
 	sheet_box_instance.add_child(sheet_call_instance)
 	sheet_container.add_child(sheet_box_instance)
+	sheet_box_instance.connect('delete_sheet', self, '_Delete_Sheet')
 	sheet_call_instance.connect("call_sheet", self, '_Call_Sheet')
 	sheet_num += 1
+
+
+func _on_Main_Menu_button_up():
+	var main_menu = 'res://Scenes/Main Menu/Main Menu.tscn' # set main menu path
+	get_tree().change_scene(main_menu) # call the main menu scene
+
+
+func _Delete_Sheet(index):
+	var dir = Directory.new()
+	var name = sheet_list[index - 1]['Name']
+	name = name.replace(' ', '')
+	print('Sheet_List: ', sheet_list[index - 1])
+	print('Name dir: ', name)
+	dir.open(fpath + '/Sheets')
+	dir.remove(fpath + '/Sheets/%s' % name)
+	print('delete sheet ')
+	
+	sheet_list.remove(index - 1)
+	update_list()

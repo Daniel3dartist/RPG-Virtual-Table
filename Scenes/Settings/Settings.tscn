@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/MainMenu_Button.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Main Menu/MainMenu_Button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Fonts/Fonts_MainMenu.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Fonts/Fonts_MainMenuButtons.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Scripts/Settings.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Settings/Settings.gd" type="Script" id=4]
 
 [node name="Settings" type="Control"]
 anchor_right = 1.0

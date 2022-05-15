@@ -11,10 +11,10 @@ onready var token_input = $'Base_UI/Settings/VBoxContainer/HBoxContainer/VBoxCon
 onready var sheet_list = $"Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"
 onready var sheet_spaw = $'Sheet_Spaw'
 
-var sheet_call_h_box = preload('res://Scenes/SheetCallHBox.tscn')
-var default_sheet_Call = preload("res://Scenes/SheetCall.tscn")
-var default_sheet = preload("res://Scenes/Character_Sheet.tscn")
-var sheet_delete_buttom = preload("res://Scenes/DeleteSheet.tscn")
+var sheet_call_h_box = preload('res://Scenes/Table/SheetCallHBox.tscn')
+var default_sheet_Call = preload("res://Scenes/Table/SheetCall.tscn")
+var default_sheet = preload("res://Scenes/Sheet/Character_Sheet.tscn")
+var sheet_delete_buttom = preload("res://Scenes/Table/DeleteSheet.tscn")
 var sheet_num = 00
 
 # Chat vars

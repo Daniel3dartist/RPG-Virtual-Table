@@ -17,21 +17,22 @@ var tboxdic = {
 	'number': '',
 	'name': '',
 	'pic': '',
-	'desc': ''}
+	'desc': '',
+	'path': ''}
 
 # List of table container saved
 var tboxlist = []
 
 # Default scenes to add
-var add_table = preload("res://Scenes/Table.tscn")
-var table_description = preload("res://Scenes/Table Description.tscn")
-var table_name = preload("res://Scenes/Table Name.tscn")
-var table_color = preload("res://Scenes/Table_color.tscn")
-var table_desc_itens = preload("res://Scenes/Table_desc_itens.tscn")
-var tcard = preload('res://Scenes/Card.tscn')
-var play_scene_button = preload('res://Scenes/Play_Scene_Button.tscn')
-var txt_editor = preload('res://Scenes/TextEdit.tscn')
-var color_rec = preload('res://Scenes/ColorRect.tscn')
+var add_table = preload("res://Scenes/Table/Table.tscn")
+var table_description = preload("res://Scenes/Load Table/Table Description.tscn")
+var table_name = preload("res://Scenes/Load Table/Table Name.tscn")
+var table_color = preload("res://Scenes/Load Table/Table_color.tscn")
+var table_desc_itens = preload("res://Scenes/Load Table/Table_desc_itens.tscn")
+var tcard = preload('res://Scenes/Load Table/Card.tscn')
+var play_scene_button = preload('res://Scenes/Load Table/Play_Scene_Button.tscn')
+var txt_editor = preload('res://Scenes/Load Table/TextEdit.tscn')
+var color_rec = preload('res://Scenes/Load Table/ColorRect.tscn')
 
 # Place to list the tables
 onready var table_list = $'ColorRect/VBoxContainer/VBoxContainer/ScrollContainer/Table List'
@@ -152,6 +153,7 @@ func organize_the_table_list(value):
 
 func add_table():
 	var f = File.new()
+	var dir = Directory.new()
 	
 	var txt = 'Table'
 	var txtparse
@@ -174,7 +176,7 @@ func add_table():
 	tdbox.add_child(Tname)
 	tcolor.color = Color(r, g, b)
 
-	
+
 	f.open(fpath, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
@@ -183,6 +185,8 @@ func add_table():
 	if table_num != 0 :
 		txt = txt + ('(%s)' % str(table_num))
 
+	dir.open('res://data/Tables/')
+	dir.make_dir(txt)
 
 	Tname.text = str(txt) 
 	card_itens.add_child(tcolor)
@@ -194,13 +198,15 @@ func add_table():
 #	card_itens.add_child(BplaySc)
 	card.add_child(card_itens)
 	card.connect('delet_table', self, '_delete_table')
+	BplaySc.connect('playscene', self, '_play_scene')
 
 
 	tboxdic = {
 		'number': table_num,
 		'name': Tname.text,
 		'pic': [r,g,b],
-		'desc': 'none'
+		'desc': 'none',
+		'path': 'res://data/Tables/%s' % txt
 	}
 
 	f.open(fpath, File.WRITE)
@@ -223,5 +229,21 @@ func _delete_table(value):
 	update_list_json()
 
 
-func _play_scene():
-	get_tree().change_scene('res://Scenes/Table.tscn')
+func _play_scene(index):
+	var config = ConfigFile.new()
+	var test = config.load('res://data/last_played.ini')
+	var table = tboxlist[index]
+	var parent = index
+	
+	print('Play get parent 01: ', parent)
+	
+	print('Play get parent 02: ', table)
+
+	if test != OK:
+		print("File 'last_played.ini' not found")
+		
+	config.set_value('Last Played', 'Last table', table)
+	config.save('res://data/last_played.ini')
+
+#	get_tree().change_scene('res://Scenes/Table/Table.tscn')
+	get_tree().change_scene('res://Test_SandBox/Table_test.tscn')

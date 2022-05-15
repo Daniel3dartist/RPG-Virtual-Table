@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Scripts/Chat_&_Rolls_Results.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/D3.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/D4.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/D6.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/D8.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/D10.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/D12.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/D100.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/D20.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Dices/D20.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Dices/D4.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Dices/D100.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Dices/D3.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Dices/D6.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Dices/D8.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Dices/D10.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Dices/D12.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Table/Chat_&_Rolls_Results.gd" type="Script" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
@@ -26,7 +26,7 @@ bg_color = Color( 0.266667, 0.262745, 0.262745, 1 )
 [node name="Table" type="Control" groups=["grupo01"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource( 9 )
 
 [node name="Bot" type="Node" parent="."]
 
@@ -119,7 +119,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="d3_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 2 )]
+[node name="d3_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 4 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -130,7 +130,7 @@ margin_right = 50.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d4_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 3 )]
+[node name="d4_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 2 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -141,7 +141,7 @@ margin_right = 104.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d6_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 4 )]
+[node name="d6_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 5 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -152,7 +152,7 @@ margin_right = 158.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d8_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 5 )]
+[node name="d8_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 6 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -163,7 +163,7 @@ margin_right = 212.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d10_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 6 )]
+[node name="d10_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 7 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -174,7 +174,7 @@ margin_right = 266.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d12_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 7 )]
+[node name="d12_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 8 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -185,7 +185,7 @@ margin_right = 320.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d20_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 9 )]
+[node name="d20_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 1 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -196,7 +196,7 @@ margin_right = 374.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d100_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 8 )]
+[node name="d100_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0

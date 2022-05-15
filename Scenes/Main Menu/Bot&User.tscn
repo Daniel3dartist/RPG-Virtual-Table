@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Scripts/Bot&User.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Main Menu/Bot&User.gd" type="Script" id=1]
 
 [node name="Bot&User" type="Control"]
 margin_right = 250.0

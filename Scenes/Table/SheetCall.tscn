@@ -1,11 +1,12 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Scripts/SheetCall.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Table/SheetCall.gd" type="Script" id=1]
 
 [node name="Sheet" type="Button"]
 margin_right = 60.0
 margin_bottom = 40.0
-rect_min_size = Vector2( 200, 0 )
+rect_min_size = Vector2( 200, 50 )
+size_flags_horizontal = 3
 text = "Sheet"
 script = ExtResource( 1 )
 

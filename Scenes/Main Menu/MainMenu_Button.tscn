@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/MainMenu_Button.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Main Menu/MainMenu_Button.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Hind_Siliguri/HindSiliguri-SemiBold.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="Theme" id=1]

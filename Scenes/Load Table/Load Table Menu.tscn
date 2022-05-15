@@ -2,8 +2,8 @@
 
 [ext_resource path="res://Fonts/Fonts_MainMenu.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/Fonts_MainMenuButtons.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Scripts/Load Table Menu.gd" type="Script" id=3]
-[ext_resource path="res://Scenes/MainMenu_Button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Load Table/Load Table Menu.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Main Menu/MainMenu_Button.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxLine" id=1]
 content_margin_left = 5.0

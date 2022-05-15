@@ -1,0 +1,19 @@
+[Sheets]
+
+Sheets=[ {
+"Name": "Sheet",
+"Number": 0,
+"Path": "res://data/Sheets/Sheet/Sheet.save"
+}, {
+"Name": "Sheet (1)",
+"Number": 1,
+"Path": "res://data/Sheets/Sheet(1)/Sheet(1).save"
+}, {
+"Name": "Sheet (2)",
+"Number": 2,
+"Path": "res://data/Sheets/Sheet(2)/Sheet(2).save"
+}, {
+"Name": "Sheet (3)",
+"Number": 3,
+"Path": "res://data/Sheets/Sheet(3)/Sheet(3).save"
+} ]
