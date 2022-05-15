@@ -37,11 +37,6 @@ one_shot = true
 
 [node name="Background_base" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Background_base"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.360784, 0.360784, 0.360784, 1 )
-
 [node name="Base_UI" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -60,7 +55,6 @@ size_flags_stretch_ratio = 0.87
 tab_align = 0
 
 [node name="Chat_Buttons_ChatInput" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -197,6 +191,7 @@ __meta__ = {
 }
 
 [node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -238,7 +233,9 @@ __meta__ = {
 [node name="Sheet_Spaw" type="CanvasLayer" parent="."]
 layer = 120
 
-[node name="Grid" parent="." instance=ExtResource( 10 )]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Grid" parent="Node2D" instance=ExtResource( 10 )]
 
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
 [connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]

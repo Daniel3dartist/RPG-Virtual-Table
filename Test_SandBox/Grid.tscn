@@ -1,12 +1,68 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Test_SandBox/Grid.gd" type="Script" id=1]
+[ext_resource path="res://Test_SandBox/Camera2D.gd" type="Script" id=3]
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/player.png-76af97e0ee22ef8d82692aaa90b77d04.stex"
+
+[sub_resource type="AtlasTexture" id=3]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.0457746, 0.834507 )
+colors = PoolColorArray( 0.824219, 0.795242, 0.795242, 1, 0.823529, 0.796078, 0.796078, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="TileSet" id=1]
+0/name = "player.png 0"
+0/texture = SubResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( -10, -10, 115, 135 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
 
 [node name="Grid" type="Node2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 5
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 573.906, 339.029 )
+current = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 3 )
 
-[node name="TileMap" type="TileMap" parent="CanvasLayer"]
+[node name="Player" type="Sprite" parent="Camera2D"]
+position = Vector2( 0.0449219, -93.3797 )
+texture = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Camera2D"]
+texture = SubResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="Camera2D"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4965.0
+margin_top = -3052.0
+margin_right = 4571.0
+margin_bottom = 3569.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 5 )
+expand = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 1 )
+cell_tile_origin = 1
 format = 1
+tile_data = PoolIntArray( 65551, 0, 0, 262150, 0, 0, 458762, 0, 0, 458764, 0, 0, 524305, 0, 0, 589827, 0, 0 )
 script = ExtResource( 1 )

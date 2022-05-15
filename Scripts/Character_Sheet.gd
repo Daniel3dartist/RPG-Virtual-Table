@@ -162,13 +162,13 @@ func _input(event):
 			if dragging and not event.pressed:
 				dragging = false
 
-func _physics_process(delta):
+func _process(delta):
 #	 if self.get_node('Position2D').intersect_shape(get_viewport().get_mouse_position()):
 #		pass
 	
 	if dragging == true:
 		var view = get_viewport().get_mouse_position()
-		rect_position = get_viewport().get_mouse_position() + off_set
+		rect_position = view + off_set
 		pos2d.position = rect_position + pos
 
 
