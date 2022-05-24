@@ -1,5 +1,15 @@
 extends Control
 
+var itens = []
+var sub_itens = []
+var item = {
+	'name': '',
+	'path': ''
+}
+var num = 0
+var path
+
+
 var t = true
 
 var fpath = 'res://data/table_list.save'
@@ -37,6 +47,7 @@ var color_rec = preload('res://Scenes/Load Table/ColorRect.tscn')
 # Place to list the tables
 onready var table_list = $'ColorRect/VBoxContainer/VBoxContainer/ScrollContainer/Table List'
 
+var next
 
 func _ready():
 	var f = File.new()
@@ -220,14 +231,94 @@ func add_table():
 
 
 func _delete_table(value):
-	dkey = value
-	tboxlist.remove(dkey)
-	if tboxlist.empty() == false:
-		table_num = tboxlist[-1]['number'] + 1
-	else:
-		table_num = 0
-	update_list_json()
+#func get_itens():
+	print('This is Value: ', tboxlist[value]['path'])
+	var dir = Directory.new()
+	path = tboxlist[value]['path']
+	
+	dir.open('%s/Sheets' % path)
+	dir.list_dir_begin()
+	
+	while true:
+		var file = dir.get_next()
+		if file == "":
+			print("Get File break\n")
+			print("02525==> \nFiles: " , itens)
+			break
+		elif not file.begins_with("."):
+			print("Search For files in dir...")
+			print("Get file: %s \nFrom: %s\n" % [file , '%s/Sheets/%s' % [path, file] ])
+			item = {
+				'name': file,
+				'path': '%s/Sheets/%s' % [path, file]
+			}
+#			item['name'] = file
+#			item['path'] = '%s/Sheets/%s' % [path, file]
+			itens.append(item)
+	
+	dir.list_dir_end()
+	get_sub_itens()
+	
+#	dir.open('res://data/Tables')
+	
+	
 
+func get_sub_itens():
+	var dir2 = Directory.new()
+	
+	for i in itens.size():
+		var it 
+		if num <= itens.size():
+			it = itens[num]
+		if it != null:
+			print('Path065065: ', itens[num]['name'])
+			dir2.open(it['path'])
+			print("\n\nCorrent Dir is: ", it['path'])
+			num += 1
+			dir2.list_dir_begin()
+			while true:
+				var file = dir2.get_next()
+				if file == "":
+					print("Get File break\n")
+					print("06565==> \nFiles: " , sub_itens)
+					break
+				elif not file.begins_with("."):
+					print("Search For files in dir...")
+	#				print("Get file: %s \nFrom: %s\n" % [file , '%s/%s' % [it['path'], file] ])
+					item = {
+						'name': file,
+						'path': '%s/%s' % [it['path'], file]
+					}
+	#				item['name'] = file
+	#				item['path'] = '%s/%s' % [it['path'], file]
+					if not sub_itens.has(item):
+						sub_itens.append(item)
+		
+	dir2.list_dir_end()
+#		print("06565==> \nFiles: " , sub_itens)
+	var dn = 0
+	for x in sub_itens.size():
+		print("\n0878787==> \nFiles: " , sub_itens[dn], '\n')
+		dn += 1
+	delete_dir()
+
+func delete_dir():
+	var dir = Directory.new()
+	while sub_itens.size() > 0:
+		if dir.remove(sub_itens[0]['path']) == OK:
+			sub_itens.remove(0)
+		elif dir.remove(sub_itens[0]['path']) != OK:
+			var temp = sub_itens[0]
+			sub_itens.remove(0)
+			sub_itens.push_back(temp)
+
+	for i in itens.size():
+		print('Itens print delete ', itens)
+		dir.remove(itens[0]['path'])
+		itens.remove(0)
+	
+	dir.remove('%s/Sheets' % path)
+	dir.remove('C:/Users/Daniel/Documents/Godot Projects/RPG_Virtual_Table/data/Tables/Table' )
 
 func _play_scene(index):
 	var config = ConfigFile.new()
@@ -247,3 +338,5 @@ func _play_scene(index):
 
 #	get_tree().change_scene('res://Scenes/Table/Table.tscn')
 	get_tree().change_scene('res://Test_SandBox/Table_test.tscn')
+
+

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Test_SandBox/grid.gd" type="Script" id=1]
+
+[sub_resource type="StreamTexture" id=6]
+flags = 4
+
+[sub_resource type="TileSet" id=1]
+0/name = "player.png 0"
+0/texture = SubResource( 6 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( -10, -10, 115, 135 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource( 1 )
+cell_tile_origin = 1
+format = 1
+tile_data = PoolIntArray( 65551, 0, 0, 262150, 0, 0, 458762, 0, 0, 458764, 0, 0, 524305, 0, 0, 589827, 0, 0 )
+script = ExtResource( 1 )

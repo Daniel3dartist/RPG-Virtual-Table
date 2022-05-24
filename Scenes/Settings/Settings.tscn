@@ -209,8 +209,8 @@ rect_min_size = Vector2( 72, 0 )
 text = "Cancel"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_WBack_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_Button_button_up"]
+[connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WBack" to="." method="_on_WBack_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Window Mode_Container/HBoxContainer/WFront" to="." method="_on_WFront_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer/RBack" to="." method="_on_RBack_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Resolution_Container/HBoxContainer/RFront" to="." method="_on_RFront_button_up"]

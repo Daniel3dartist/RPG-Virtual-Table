@@ -1,0 +1,79 @@
+Godot Engine v3.4.4.stable.official.419e713a2 - https://godotengine.org
+OpenGL ES 3.0 Renderer: Radeon RX 460 Series
+OpenGL ES Batching: ON
+ 
+Initializing...
+Verificando se tem o diretorio de salvamento!
+This is the drr dir: res://
+on_dev_pc == true
+Dir data exist!
+Window: Window 
+Resolution: [1280 ,  720]
+
+Table List File exist... 
+
+TXT parse: ([{desc:none, name:Table, number:0, path:res://data/Tables/Table, pic:[1.357208, 1.941663, 0.990588]}, {desc:none, name:Table(1), number:1, path:res://data/Tables/Table(1), pic:[0.669069, 1.340982, 0.742321]}, {desc:none, name:Table(2), number:2, path:res://data/Tables/Table(2), pic:[0.694502, 0.513886, 1.455471]}, {desc:none, name:Table(3), number:3, path:res://data/Tables/Table(3), pic:[1.243334, 1.143055, 0.786006]}, {desc:none, name:Table(4), number:4, path:res://data/Tables/Table(4), pic:[1.357208, 1.941663, 0.990588]}, {desc:none, name:Table(5), number:5, path:res://data/Tables/Table(5), pic:[0.669069, 1.340982, 0.742321]}])
+6
+0
+N: 0
+Keysn: 6
+This is Num: 0
+This is Num: 0
+6
+1
+N: 0
+Keysn: 6
+This is Num: 1
+This is Num: 0
+6
+2
+N: 0
+Keysn: 6
+This is Num: 2
+This is Num: 0
+6
+3
+N: 0
+Keysn: 6
+This is Num: 3
+This is Num: 0
+6
+4
+N: 0
+Keysn: 6
+This is Num: 4
+This is Num: 0
+6
+5
+N: 0
+Keysn: 6
+This is Num: 5
+This is Num: 0
+Play get parent 01: 0
+Play get parent 02: {desc:none, name:Table, number:0, path:res://data/Tables/Table, pic:[1.357208, 1.941663, 0.990588]}
+ERROR: Condition "err" is true. Returned: err
+   at: load_source_code (modules/gdscript/gdscript.cpp:787) - Condition "err" is true. Returned: err
+ERROR: Cannot load source code from file 'res://Test_SandBox/Grid.gd'.
+   at: load (modules/gdscript/gdscript.cpp:2184) - Condition "err != OK" is true. Returned: RES()
+ERROR: Failed loading resource: res://Test_SandBox/Grid.gd. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:270) - Condition "found" is true. Returned: RES()
+ERROR: res://Test_SandBox/Grid.tscn:3 - Parse Error: [ext_resource] referenced nonexistent resource at: res://Test_SandBox/Grid.gd
+   at: poll (scene/resources/resource_format_text.cpp:412) - res://Test_SandBox/Grid.tscn:3 - Parse Error: [ext_resource] referenced nonexistent resource at: res://Test_SandBox/Grid.gd
+ERROR: Failed to load resource 'res://Test_SandBox/Grid.tscn'.
+   at: load (core/io/resource_loader.cpp:206) - Condition "err != OK" is true. Returned: RES()
+ERROR: Failed loading resource: res://Test_SandBox/Grid.tscn. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:270) - Condition "found" is true. Returned: RES()
+ERROR: res://Test_SandBox/Table_test.tscn:12 - Parse Error: [ext_resource] referenced nonexistent resource at: res://Test_SandBox/Grid.tscn
+   at: poll (scene/resources/resource_format_text.cpp:412) - res://Test_SandBox/Table_test.tscn:12 - Parse Error: [ext_resource] referenced nonexistent resource at: res://Test_SandBox/Grid.tscn
+ERROR: Failed to load resource 'res://Test_SandBox/Table_test.tscn'.
+   at: load (core/io/resource_loader.cpp:206) - Condition "err != OK" is true. Returned: RES()
+ERROR: Failed loading resource: res://Test_SandBox/Table_test.tscn. Make sure resources have been imported by opening the project in the editor at least once.
+   at: _load (core/io/resource_loader.cpp:270) - Condition "found" is true. Returned: RES()
+ERROR: Condition "_first != nullptr" is true.
+   at: ~List (./core/self_list.h:108) - Condition "_first != nullptr" is true.
+ERROR: Condition "_first != nullptr" is true.
+   at: ~List (./core/self_list.h:108) - Condition "_first != nullptr" is true.
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+   at: cleanup (core/object.cpp:2064) - ObjectDB instances leaked at exit (run with --verbose for details).
+ERROR: Resources still in use at exit (run with --verbose for details).
+   at: clear (core/resource.cpp:417) - Resources still in use at exit (run with --verbose for details).

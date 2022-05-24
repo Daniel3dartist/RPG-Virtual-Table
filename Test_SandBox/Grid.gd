@@ -1,4 +1,5 @@
-extends Node2D
+extends TileMap
+
 
 
 var tile_size = self.cell_size
@@ -7,16 +8,22 @@ var grid_size = Vector2(40 , 30)
 var color = "#ff0000"
 var LINE_COLOR = Color("%s" % color)
 var LINE_WIDTH = 3
+var BG = Color(1,1,1)
+
+onready var table = self.get_parent().get_parent().get_parent()
 
 func _ready():
-	_draw()
+	print('grid tree ', self.get_parent().get_parent().get_parent())
+	print('Table name? ', table)
+	table.connect('grid_settings', self, '_Grid_Settings')
+#	_draw()
 
 
 func _draw():
 	# Draw the backgroud grid rectangu
 	var position = Vector2(0, 0) 
 	var size = Vector2(grid_size.x*tile_size.x, (grid_size.y + 1) * tile_size.y) 
-	draw_rect(Rect2(position, size), Color(1,1,1))
+	draw_rect(Rect2(position, size), BG)
 	
 	# Draw grid line X
 	for x in range(grid_size.x + 1):
@@ -29,5 +36,17 @@ func _draw():
 		var row_pos = y * tile_size.y
 		var limit = grid_size.x * (tile_size.x)
 		draw_line(Vector2(0, row_pos), Vector2(limit, row_pos), LINE_COLOR, LINE_WIDTH)
+	
+
+func _Grid_Settings(gridsize, color, width, bg):
+	self.visible = false
+	print('Grid size recebido')
+	print('Grid size: %s \nColor: %s \nWidth: %s \n BG: %s' % [gridsize, color, width, bg])
+	grid_size = gridsize
+	LINE_COLOR = color
+	LINE_WIDTH = width
+	BG = Color(1,1,1)
+	_draw()
+	self.visible = true
 
 

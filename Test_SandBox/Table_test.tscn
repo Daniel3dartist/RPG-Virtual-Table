@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Test_SandBox/Table_test.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Dices/D3.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Scenes/Dices/D100.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Dices/D20.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Test_SandBox/Grid.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Test_SandBox/TileMap.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Test_SandBox/Camera2D.gd" type="Script" id=12]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
@@ -20,6 +22,18 @@ bg_color = Color( 0.266667, 0.262745, 0.262745, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.266667, 0.262745, 0.262745, 1 )
+
+[sub_resource type="StreamTexture" id=6]
+flags = 4
+
+[sub_resource type="AtlasTexture" id=7]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.0457746, 0.834507 )
+colors = PoolColorArray( 0.824219, 0.795242, 0.795242, 1, 0.823529, 0.796078, 0.796078, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
 [node name="Table" type="Control" groups=["grupo01"]]
 anchor_right = 1.0
@@ -61,6 +75,7 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+alignment = 1
 
 [node name="Chat" type="RichTextLabel" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput"]
 margin_right = 428.0
@@ -206,6 +221,62 @@ margin_right = 428.0
 margin_bottom = 20.0
 text = "Creat a sheet"
 
+[node name="Settings" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = 432.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 428, 664 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings"]
+margin_right = 428.0
+margin_bottom = 160.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_right = 428.0
+margin_bottom = 14.0
+text = "Grid"
+align = 1
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 18.0
+margin_right = 428.0
+margin_bottom = 78.0
+
+[node name="LineEdit" type="LineEdit" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer"]
+margin_left = 184.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 0
+align = 1
+
+[node name="Label2" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 82.0
+margin_right = 428.0
+margin_bottom = 96.0
+text = "x"
+align = 1
+valign = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 100.0
+margin_right = 428.0
+margin_bottom = 160.0
+
+[node name="LineEdit" type="LineEdit" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2"]
+margin_left = 184.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 0
+align = 1
+
 [node name="Base_Menu" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -234,8 +305,48 @@ __meta__ = {
 layer = 120
 
 [node name="Node2D" type="Node2D" parent="."]
+visible = false
 
 [node name="Grid" parent="Node2D" instance=ExtResource( 10 )]
+visible = false
+
+[node name="Camera2D" parent="Node2D/Grid" index="0"]
+current = false
+
+[node name="TileMap" parent="Node2D/Grid" index="1"]
+cell_size = Vector2( 100, 100 )
+
+[node name="Node2D2" type="Node2D" parent="."]
+
+[node name="Grid" type="Node2D" parent="Node2D2"]
+
+[node name="Camera2D" type="Camera2D" parent="Node2D2/Grid"]
+position = Vector2( 573.906, 339.029 )
+current = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 12 )
+
+[node name="Player" type="Sprite" parent="Node2D2/Grid/Camera2D"]
+position = Vector2( 0.0449219, -93.3797 )
+texture = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Node2D2/Grid/Camera2D"]
+texture = SubResource( 7 )
+
+[node name="TextureRect" type="TextureRect" parent="Node2D2/Grid/Camera2D"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4965.0
+margin_top = -3052.0
+margin_right = 4571.0
+margin_bottom = 3569.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 5 )
+expand = true
+
+[node name="TileMap" parent="Node2D2/Grid" instance=ExtResource( 11 )]
 
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
 [connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]
@@ -248,5 +359,9 @@ layer = 120
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d20_b" to="." method="_on_d20_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d100_b" to="." method="_on_d100_b_pressed"]
 [connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/Sheet Creator" to="." method="_on_Sheet_Creator_button_up"]
+[connection signal="text_changed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Main_Menu" to="." method="_on_Main_Menu_button_up"]
 [connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Settings" to="." method="_on_Settings_button_up"]
+
+[editable path="Node2D/Grid"]

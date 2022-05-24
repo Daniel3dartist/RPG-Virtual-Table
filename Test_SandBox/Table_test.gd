@@ -16,11 +16,19 @@ onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetL
 var sheet_call_Hbox = preload('res://Scenes/Table/SheetCallHBox.tscn')
 var sheet_call = preload("res://Scenes/Table/SheetCall.tscn")
 
+# Grid settings
+# Grid size - vector x input
+onready var grid_VX = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer/LineEdit'
+# Grid size - vector y input
+onready var grid_VY = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2/LineEdit'
+
 # signals
 signal receive_sheet_data(data_path)
+signal grid_settings(gridsize, color, width, bg)
 
 # Functions
 func _ready():
+	print("Table self ",self)
 	var config = ConfigFile.new()
 #	var err = config.load('res://data/last_played.ini')
 	var last = ConfigFile.new()
@@ -40,6 +48,11 @@ func _ready():
 	while num  > sz:
 		organize_sheet_list(sz)
 		sz += 1 
+
+
+func _input(event):
+	if Input.is_action_just_pressed("enter"):
+		emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), '#5C5C5C', 3)
 
 
 func check_exist_file():
@@ -78,7 +91,7 @@ func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_Hbox.instance()
 	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = '%s/Sheet/Sheet' % fpath
+	var SPath = '%s/Sheets/Sheet/Sheet' % fpath
 	var dir = Directory.new()
 	var Dname = txt
 	var Dpath =  '%s/Sheets' % fpath
@@ -88,9 +101,9 @@ func Creat_Character_Sheet():
 	if sheet_num > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath =fpath + '/'+ Dname + '/'+ Dname
+		SPath =fpath + '/Sheets/'+ Dname + '/'+ Dname
 		Dpath = Dpath + '/'+ Dname
-		print(Dpath)
+		print("SPath" ,SPath)
 
 	sheet = {
 		'Name': txt,
@@ -139,10 +152,10 @@ func _Call_Sheet(value):
 #	emit_signal("receive_sheet_data", sheet_list[snum]['Path'])
 
 
-
 func _Give_Data(index):
 	print('Give data...')
 	emit_signal("receive_sheet_data", sheet_list[snum]['Path'])
+
 
 func organize_sheet_list(sz):
 	var sheet_box_instance = sheet_call_Hbox.instance()
@@ -180,12 +193,34 @@ func _on_Main_Menu_button_up():
 func _Delete_Sheet(index):
 	var dir = Directory.new()
 	var name = sheet_list[index - 1]['Name']
-	name = name.replace(' ', '')
+	var remove_path
+	
+	if " " in name:
+		name = name.replace(' ', '')
+		print("Have space")
+		remove_path = fpath + '/Sheets/%s' % name
+	else:# sheet_list.size():
+		remove_path = fpath + '/Sheets'
+		name = 'Sheet'
+	name = '/' + name
 	print('Sheet_List: ', sheet_list[index - 1])
-	print('Name dir: ', name)
+	print('Name dir: ', fpath + '/Sheets/%s' % name)
 	dir.open(fpath + '/Sheets')
-	dir.remove(fpath + '/Sheets/%s' % name)
+	dir.remove(fpath + '/Sheets%s.save' % name.repeat(2))
+	dir.remove(fpath + '/Sheets%s' % name)
 	print('delete sheet ')
 	
 	sheet_list.remove(index - 1)
+	print('fpath: ', fpath)
+	print('fpath + name: ', fpath + '/Sheets/%s' % name)
+	print('Index - 1: ', index - 1)
 	update_list()
+
+
+func _on_LineEdit_text_entered(new_text):
+	print('text change')
+	emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), '#5C5C5C', 3, '#fffff')
+
+
+#func _on_LineEdit_text_changed(new_text):
+#	emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), '#5C5C5C', 3)

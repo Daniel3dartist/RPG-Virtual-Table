@@ -16,8 +16,8 @@ _global_script_class_icons={
 
 config/name="Rpg Virtual Table"
 run/main_scene="res://Scenes/Main Menu/Main Menu.tscn"
-config/icon="res://icon.png"
-config/windows_native_icon="res://RPG Virtual Table.ico"
+config/icon="res://Icon.png"
+config/windows_native_icon="res://Krita_Imagens/Icon_16x16.ico"
 
 [display]
 

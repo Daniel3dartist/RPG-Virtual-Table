@@ -1,11 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Test_SandBox/Grid.gd" type="Script" id=1]
+[ext_resource path="res://Test_SandBox/grid.gd" type="Script" id=1]
 [ext_resource path="res://Test_SandBox/Camera2D.gd" type="Script" id=3]
 
 [sub_resource type="StreamTexture" id=2]
 flags = 4
-load_path = "res://.import/player.png-76af97e0ee22ef8d82692aaa90b77d04.stex"
 
 [sub_resource type="AtlasTexture" id=3]
 
