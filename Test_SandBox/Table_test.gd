@@ -21,6 +21,13 @@ var sheet_call = preload("res://Scenes/Table/SheetCall.tscn")
 onready var grid_VX = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer/LineEdit'
 # Grid size - vector y input
 onready var grid_VY = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2/LineEdit'
+# Grid line color pick
+onready var line_color_pick = $"Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer3/LineColor"
+# BG color pick
+onready var bg_color_pick = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer4/BGColor'
+# Line size input
+onready var line_size = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit'
+
 
 # signals
 signal receive_sheet_data(data_path)
@@ -217,10 +224,18 @@ func _Delete_Sheet(index):
 	update_list()
 
 
+func update_grid():
+		emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), line_color_pick.color, int(line_size.text), bg_color_pick.color)
+
+
 func _on_LineEdit_text_entered(new_text):
 	print('text change')
-	emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), '#5C5C5C', 3, '#fffff')
+	update_grid()
 
 
-#func _on_LineEdit_text_changed(new_text):
-#	emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), '#5C5C5C', 3)
+func _on_LineColor_popup_closed():
+	update_grid()
+
+
+func _on_BGColor_popup_closed():
+	update_grid()

@@ -5,7 +5,7 @@ extends TileMap
 var tile_size = self.cell_size
 var grid_size = Vector2(40 , 30)
 
-var color = "#ff0000"
+var color = "#5c5c5c"
 var LINE_COLOR = Color("%s" % color)
 var LINE_WIDTH = 3
 var BG = Color(1,1,1)
@@ -45,7 +45,7 @@ func _Grid_Settings(gridsize, color, width, bg):
 	grid_size = gridsize
 	LINE_COLOR = color
 	LINE_WIDTH = width
-	BG = Color(1,1,1)
+	BG = bg
 	_draw()
 	self.visible = true
 
