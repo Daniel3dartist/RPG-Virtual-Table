@@ -1,6 +1,10 @@
 extends HTTPRequest
 
-var token := "Nzc5MTc0MDg2MjgxNTI3MzI4.X7csag.-GI0WKCN9kBemi5m3P6G29HgXuA" # Make sure to actually replace this with your token!
+signal receive_text_from_discord(value)
+
+var superuserid
+
+var token := "YourTokenHere" # Make sure to actually replace this with your token!
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float
@@ -8,7 +12,8 @@ var session_id : String
 var heartbeat_ack_received := true
 var invalid_session_is_resumable : bool
 
-func _ready() -> void:
+func _ready():
+	grabe_token()
 	randomize()
 	client = WebSocketClient.new()
 	client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
@@ -16,6 +21,12 @@ func _ready() -> void:
 	client.connect("connection_closed", self, "_connection_closed")
 	client.connect("server_close_request", self, "_server_close_request")
 	client.connect("data_received", self, "_data_received")
+
+func grabe_token():
+	var config = ConfigFile.new()
+	config.load('res://data/user_settings.ini')
+	token = config.get_value("User", "BotToken")
+	print('token: ', token)
 
 func _process(_delta : float) -> void:
 	# Check if the client is not disconnected, there's no point to poll it if it is
@@ -100,7 +111,7 @@ func handle_events(dict : Dictionary) -> void:
 			var headers := ["Authorization: Bot %s" % token]
 
 			# Get all channels of the guild
-			request("https://discord.com/api/guilds/%s/channels" % guild_id, headers)
+			request("https://discordapp.com/api/guilds/%s/channels" % guild_id, headers)
 			var data_received = yield(self, "request_completed") # await
 			var channels = JSON.parse(data_received[3].get_string_from_utf8()).result
 			var channel_id
@@ -110,24 +121,36 @@ func handle_events(dict : Dictionary) -> void:
 					channel_id = channel["id"]
 					break
 			if channel_id: # If we found at least one text channel
-				var username = dict["d"]["user"]["username"]
+#				var username = dict["d"]["user"]["username"]
+				var username = dict["d"]["username"]
 				var message_to_send := {"content" : "Welcome %s!" % username}
 				var query := JSON.print(message_to_send)
 				headers.append("Content-Type: application/json")
-				request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 		"MESSAGE_CREATE":
 			var channel_id = dict["d"]["channel_id"]
 			var message_content = dict["d"]["content"]
 
 			var headers := ["Authorization: Bot %s" % token, "Content-Type: application/json"]
 			var query : String
-
+			superuserid = dict["d"]["author"]["username"]
+			print('user: ', superuserid, '\n\n')
+			emit_signal('receive_text_from_discord', [superuserid , message_content])
+			
 			if message_content.to_upper() == "ORAMA":
 				var message_to_send := {"content" : "Interactive"}
 				query = JSON.print(message_to_send)
-			
+			elif message_content.to_upper() == "WEBSITE":
+				var message_to_send := {"content" : "http://oramagamestudios.com/"}
+				query = JSON.print(message_to_send)
+			elif message_content.to_upper() == "BLOG":
+				var message_to_send := {"content" : "https://functionoverload590613498.wordpress.com"}
+				query = JSON.print(message_to_send)
+			elif message_content.to_upper() == "GITHUB":
+				var message_to_send := {"content" : "https://github.com/OverloadedOrama"}
+				query = JSON.print(message_to_send)
 			if query:
-				request("https://discord.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 
 func _on_InvalidSessionTimer_timeout() -> void:
 	var d := {}

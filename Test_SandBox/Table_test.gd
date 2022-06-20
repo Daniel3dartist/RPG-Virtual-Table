@@ -10,6 +10,14 @@ var sheet = {
 		'Number': '',
 		'Path': '',
 	}
+
+#bot
+onready var bot = $'Bot/HTTPRequest'
+
+# Chat
+onready var chat = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Chat'
+onready var chat_input = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Chat_Input'
+
 var character_sheet_path = preload("res://Scenes/Sheet/Character_Sheet.tscn")
 
 onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList"
@@ -42,6 +50,7 @@ func _ready():
 	var sz = 0
 	var num
 	
+	bot.connect("receive_text_from_discord", self, "Receive_Text_from_Discord")
 	last.load('res://data/last_played.ini')
 	print(last.get_sections())
 	fpath = last.get_value("Last Played", "Last table")['path']
@@ -55,12 +64,16 @@ func _ready():
 	while num  > sz:
 		organize_sheet_list(sz)
 		sz += 1 
-
+	chat.append_bbcode('[center]Table Initialized!![/center]\n')
+	chat.append_bbcode('[center]Welcome![/center]\n')
 
 func _input(event):
-	if Input.is_action_just_pressed("enter"):
-		emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), '#5C5C5C', 3)
-
+	if self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput').visible == true:
+		if chat_input.text != '' and chat_input.text != ' ' and Input.is_action_just_pressed("enter"):
+			var txt = chat_input.text
+			chat.add_text(txt)
+		elif Input.is_action_just_released("enter"):
+			chat_input.text = ''
 
 func check_exist_file():
 	var config = ConfigFile.new()
@@ -239,3 +252,7 @@ func _on_LineColor_popup_closed():
 
 func _on_BGColor_popup_closed():
 	update_grid()
+
+func Receive_Text_from_Discord(value):
+	var txt =  '[color=#6eff90]%s[/color]: %s\n' % value
+	chat.append_bbcode(txt)

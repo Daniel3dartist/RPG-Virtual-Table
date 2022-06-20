@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Test_SandBox/Table_test.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Dices/D3.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/Dices/D100.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Dices/D20.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Test_SandBox/Grid.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Test_SandBox/Bot.gd" type="Script" id=11]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
@@ -29,6 +30,7 @@ script = ExtResource( 1 )
 [node name="Bot" type="Node" parent="."]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Bot"]
+script = ExtResource( 11 )
 
 [node name="HeartbeatTimer" type="Timer" parent="Bot/HTTPRequest"]
 
@@ -70,6 +72,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 6.41
 custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_constants/line_separation = 5
 custom_styles/normal = SubResource( 2 )
 bbcode_enabled = true
 scroll_following = true
