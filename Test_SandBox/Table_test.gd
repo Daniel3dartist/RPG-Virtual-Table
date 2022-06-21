@@ -1,5 +1,11 @@
 extends Control
 
+var on_dev_pc = false
+
+signal pass_chat_input(value)
+
+var app_username
+
 var fpath 
 
 var snum
@@ -43,6 +49,7 @@ signal grid_settings(gridsize, color, width, bg)
 
 # Functions
 func _ready():
+	get_self_username()
 	print("Table self ",self)
 	var config = ConfigFile.new()
 #	var err = config.load('res://data/last_played.ini')
@@ -70,8 +77,9 @@ func _ready():
 func _input(event):
 	if self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput').visible == true:
 		if chat_input.text != '' and chat_input.text != ' ' and Input.is_action_just_pressed("enter"):
-			var txt = chat_input.text
-			chat.add_text(txt)
+			var txt = '[color=#6eff90]%s[/color]: %s\n' % [app_username, chat_input.text]
+			pass_input()
+			chat.append_bbcode(txt)
 		elif Input.is_action_just_released("enter"):
 			chat_input.text = ''
 
@@ -254,5 +262,20 @@ func _on_BGColor_popup_closed():
 	update_grid()
 
 func Receive_Text_from_Discord(value):
-	var txt =  '[color=#6eff90]%s[/color]: %s\n' % value
+	var txt =  '[color=#52e7f7]%s[/color]: %s\n' % value
 	chat.append_bbcode(txt)
+
+func get_self_username():
+	var config = ConfigFile.new()
+	var path
+	if on_dev_pc == true:
+		path = 'res://data/user_settings.ini'
+	else:
+		path = OS.get_executable_path().get_base_dir() + '/data/user_settings.ini'
+	print(path)
+	config.load(path)
+	app_username = config.get_value("User", "Nickname")
+
+func pass_input():
+	var txt_parse = [app_username, chat_input.text]
+	emit_signal("pass_chat_input", txt_parse)

@@ -1,6 +1,6 @@
 extends Control
 
-var on_dev_pc = true
+var on_dev_pc = false
 var fpath = 'res://data/Settings.ini'
 
 #var types_of_windows_modes = ['Window', 'Full Screen', 'Borderless Window']

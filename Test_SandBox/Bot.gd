@@ -2,7 +2,7 @@ extends HTTPRequest
 
 signal receive_text_from_discord(value)
 
-var superuserid
+var app_username
 
 var token := "YourTokenHere" # Make sure to actually replace this with your token!
 var client : WebSocketClient
@@ -13,7 +13,9 @@ var heartbeat_ack_received := true
 var invalid_session_is_resumable : bool
 
 func _ready():
+	# Self
 	grabe_token()
+	# Web
 	randomize()
 	client = WebSocketClient.new()
 	client.connect_to_url("wss://gateway.discord.gg/?v=6&encoding=json")
@@ -26,6 +28,7 @@ func grabe_token():
 	var config = ConfigFile.new()
 	config.load('res://data/user_settings.ini')
 	token = config.get_value("User", "BotToken")
+	app_username = config.get_value("User", "Nickname")
 	print('token: ', token)
 
 func _process(_delta : float) -> void:
@@ -121,22 +124,37 @@ func handle_events(dict : Dictionary) -> void:
 					channel_id = channel["id"]
 					break
 			if channel_id: # If we found at least one text channel
-#				var username = dict["d"]["user"]["username"]
-				var username = dict["d"]["username"]
+				var username = dict["d"]["author"]["username"]
+#				var username = dict["d"]["username"]
 				var message_to_send := {"content" : "Welcome %s!" % username}
 				var query := JSON.print(message_to_send)
 				headers.append("Content-Type: application/json")
 				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 		"MESSAGE_CREATE":
+			var username = dict["d"]["author"]["username"]
 			var channel_id = dict["d"]["channel_id"]
 			var message_content = dict["d"]["content"]
 
 			var headers := ["Authorization: Bot %s" % token, "Content-Type: application/json"]
 			var query : String
-			superuserid = dict["d"]["author"]["username"]
-			print('user: ', superuserid, '\n\n')
-			emit_signal('receive_text_from_discord', [superuserid , message_content])
-			
+#			superuserid = dict["d"]["author"]["username"]
+#			print('user: ', superuserid, '\n\n')
+			print(username)
+			if username != 'RPG_Virtual_Table':
+				emit_signal('receive_text_from_discord', [username , message_content])
+			else:
+				var txt
+				var user
+				var message_signal
+				if message_content.split('</>'):
+					txt = message_content.split('</>')
+					user = txt[0]
+					txt = txt[1]
+				if user != app_username:
+					message_signal = [user, txt]
+					print(txt, '\n',user)
+					emit_signal('receive_text_from_discord', message_signal)
+
 			if message_content.to_upper() == "ORAMA":
 				var message_to_send := {"content" : "Interactive"}
 				query = JSON.print(message_to_send)
@@ -149,8 +167,9 @@ func handle_events(dict : Dictionary) -> void:
 			elif message_content.to_upper() == "GITHUB":
 				var message_to_send := {"content" : "https://github.com/OverloadedOrama"}
 				query = JSON.print(message_to_send)
-			if query:
-				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+#			if query:
+#				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+			request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 
 func _on_InvalidSessionTimer_timeout() -> void:
 	var d := {}
@@ -167,3 +186,16 @@ func _on_InvalidSessionTimer_timeout() -> void:
 			"d" : { "token" : token, "properties" : {} }
 		}
 	send_dictionary_as_packet(d)
+
+
+func _on_Table_pass_chat_input(value):
+	print('\n\n\nPassed table\n\n\n')
+	print(value)
+	var channel_id = '780392848884760599'
+	var headers = ["Authorization: Bot %s" % token, "Content-Type: application/json"]
+	var query : String
+	var txt = '%s</>%s' % value
+	var message_to_send := {"content" : txt}
+	if Input.is_action_just_pressed("enter"):
+		query = JSON.print(message_to_send)
+		request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
