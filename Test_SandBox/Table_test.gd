@@ -1,6 +1,6 @@
 extends Control
 
-var on_dev_pc = false
+var on_dev_pc = true
 
 signal pass_chat_input(value)
 
