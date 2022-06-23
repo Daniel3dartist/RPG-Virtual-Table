@@ -141,7 +141,7 @@ func handle_events(dict : Dictionary) -> void:
 #			print('user: ', superuserid, '\n\n')
 			print(username)
 			if username != 'RPG_Virtual_Table':
-				emit_signal('receive_text_from_discord', [username , message_content])
+				emit_signal('receive_text_from_discord', [username , '\n' + message_content])
 			else:
 				var txt
 				var user

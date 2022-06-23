@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Test_SandBox/Test_string_commands.gd" type="Script" id=1]
+
+[node name="Test_string_commands" type="Node"]
+script = ExtResource( 1 )
