@@ -132,6 +132,7 @@ margin_top = 0.0
 margin_right = 212.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
+text = "d8"
 
 [node name="d10_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 6 )]
 anchor_left = 0.0

@@ -1,6 +1,6 @@
 extends Control
 
-var on_dev_pc = true
+var on_dev_pc = false
 
 signal pass_chat_input(value)
 
@@ -76,11 +76,37 @@ func _ready():
 	chat.append_bbcode('[center]Welcome![/center]\n')
 
 func _input(event):
+	var user_color = '#6eff90'
+	var result
 	if self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput').visible == true:
 		if chat_input.text != '' and chat_input.text != ' ' and Input.is_action_just_pressed("enter"):
-			var txt = '[color=#6eff90]%s[/color]: %s\n' % [app_username, chat_input.text]
-			pass_input()
-			chat.append_bbcode(txt)
+			var roll = chat_input.text
+			request_user = '[color=%s]%s[/color]' % [user_color , app_username]
+			var txt = '[color=%s]%s[/color]: %s\n' % [user_color, app_username, chat_input.text]
+			pass_input(chat_input.text)
+#			chat.append_bbcode(txt)
+			if '/r' in roll:
+				if 'd3' in roll:
+					print('\n\n\n /rd3\n\n\n')
+					result = rolld3()
+				elif 'd4' in roll:
+					result = rolld4()
+				elif 'd6' in roll:
+					result = rolld6()
+				elif 'd8' in roll:
+					result = rolld8()
+				elif 'd10' in roll:
+					result = rolld10()
+				elif '12' in roll:
+					result = rolld12()
+				elif '20' in roll:
+					result = rolld20()
+				elif '100' in roll:
+					chat.append_bbcode(rolld100())
+			if result != null:
+				chat.append_bbcode(txt + result)
+			else:
+				chat.append_bbcode(txt)
 		elif Input.is_action_just_released("enter"):
 			chat_input.text = ''
 
@@ -266,28 +292,49 @@ func _on_BGColor_popup_closed():
 
 # Input received data from Discord
 func Receive_Text_from_Discord(value):
-	var content =  '[color=#52e7f7]%s[/color]: %s\n' % value
-	var txt = value[1]
+	var username
+	var user_color = '#52e7f7'
+	var text
+	var tokens
+	var content# =  '[color=]%s[/color]: %s\n' % value
+	var txt = value
+	
+	if "<username>" in value and "</username>" in value:
+		var user_ = value.find_last('<username>')
+		var _user = value.find_last('</username>')
+		var user_leng
+		user_ += '<username>'.length()
+		user_leng = _user - user_
+		username = value.substr(user_, user_leng)
+	if "<text>" in value and "</text>" in value:
+		var text_ = value.find_last('<text>')
+		var _text = value.find_last('</text>')
+		var text_leng
+		text_ += '<text>'.length()
+		text_leng = _text - text_
+		text = value.substr(text_ , text_leng)
+	
+	content = "[color=%s]%s[/color]: %s\n" % [user_color , username, text]
 	chat.append_bbcode(content)
-	if '/r d' in txt:
-		request_user = '[color=#52e7f7]%s[/color]' % value[0]
-		txt = txt.replace('/r d', '/rd')
-	if '/rd3' in txt:
-		rolld3()
-	elif '/rd4' in txt:
-		rolld4()
-	elif '/rd6' in txt:
-		rolld6()
-	elif '/rd8' in txt:
-		rolld8()
-	elif '/rd10' in txt:
-		rolld10()
-	elif '/rd12' in txt:
-		rolld12()
-	elif '/rd20' in txt:
-		rolld20()
-	elif '/rd100' in txt:
-		rolld100()
+
+	if '/r' in txt:
+		request_user = '[color=%s]%s[/color]' % [user_color , username]
+	if 'd3' in txt:
+		chat.append_bbcode(rolld3())
+	elif 'd4' in txt:
+		chat.append_bbcode(rolld4())
+	elif 'd6' in txt:
+		chat.append_bbcode(rolld6())
+	elif 'd8' in txt:
+		chat.append_bbcode(rolld8())
+	elif 'd10' in txt:
+		chat.append_bbcode(rolld10())
+	elif 'd12' in txt:
+		chat.append_bbcode(rolld12())
+	elif 'd20' in txt:
+		chat.append_bbcode(rolld20())
+	elif 'd100' in txt:
+		chat.append_bbcode(rolld100())
 
 # Get self username from local data
 func get_self_username():
@@ -302,90 +349,140 @@ func get_self_username():
 	app_username = config.get_value("User", "Nickname")
 
 # Parse string to HTTP bot for Discord
-func pass_input():
-	var txt_parse = [app_username, chat_input.text]
+func pass_input(value):
+	var txt_parse = '<username>%s</username><text>%s</text>' % [app_username , value]
 	emit_signal("pass_chat_input", txt_parse)
 
 ########################################## [ Roll Dice Functions ] ##########################################
-
+var success = '#14fa33'
+var fail = '#f73325'
 func rolld3():
 	var roll 
 	roll = randi() % 3 + 1
-#	if roll == 3:
-#		roll = 
-	chat.append_bbcode('%s \nRoll D3 = %s\n' % [request_user , roll])
+	if roll == 3:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D3 = %s\n' % roll
+#	chat.append_bbcode('%s \nRoll D3 = %s\n' % [request_user , roll])
 
 func rolld4():
 	var roll 
 	roll = randi() % 4 + 1
-	chat.append_bbcode('%s \nRoll D4 = %s\n' % [request_user , roll])
+	if roll == 4:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D4 = %s\n' % roll
+#	chat.append_bbcode('%s \nRoll D4 = %s\n' % [request_user , roll])
 
 func rolld6():
 	var roll 
 	roll = randi() % 6 + 1
-	chat.append_bbcode('%s: \nRoll D6 = %s\n' % [request_user , roll])
+	if roll == 6:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D6 = %s\n' % roll
+#	chat.append_bbcode('%s: \nRoll D6 = %s\n' % [request_user , roll])
 
 func rolld8():
 	var roll 
 	roll = randi() % 8 + 1
-	chat.append_bbcode('%s: \nRoll D8 = %s\n' % [request_user , roll])
+	if roll == 8:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D8 = %s\n' % roll
+#	chat.append_bbcode('%s: \nRoll D8 = %s\n' % [request_user , roll])
 
 func rolld10():
 	var roll 
 	roll = randi() % 10 + 1
-	chat.append_bbcode('%s \nRoll D10 = %s\n' % [request_user , roll])
+	if roll == 10:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D10 = %s\n' % roll
+#	chat.append_bbcode('%s \nRoll D10 = %s\n' % [request_user , roll])
 
 func rolld12():
 	var roll 
 	roll = randi() % 12 + 1
-	chat.append_bbcode('%s: \nRoll D12 = %s\n' % [request_user , roll])
+	if roll == 12:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D12 = %s\n' % roll
+#	chat.append_bbcode('%s: \nRoll D12 = %s\n' % [request_user , roll])
 
 func rolld20():
 	var roll 
 	roll = randi() % 20 + 1
-	chat.append_bbcode('%s: \nRoll D20 = %s\n' % [request_user , roll])
+	if roll == 20:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D20 = %s\n' % roll
+#	chat.append_bbcode('%s: \nRoll D20 = %s\n' % [request_user , roll])
 
 func rolld100():
 	var roll 
 	roll = randi() % 100 + 1
-	chat.append_bbcode('%s: \nRoll D100 = %s\n'  % [request_user , roll])
+	if roll == 100:
+		roll = '[color=%s]%s[/color]' % [success, roll]
+	elif roll == 1:
+		roll = '[color=%s]%s[/color]' % [fail, roll]
+	return 'Roll D100 = %s\n' % roll
+#	chat.append_bbcode('%s: \nRoll D100 = %s\n'  % [request_user , roll])
 
 
 func _on_d3_b_pressed():
+	var roll = rolld3()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld3()
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)
 
 
 func _on_d4_b_pressed():
+	var roll = rolld4()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld4()
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)
 
 
 func _on_d6_b_pressed():
+	var roll = rolld6()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld6()
-
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)
 
 func _on_d8_b_pressed():
+	var roll = rolld6()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld8()
-
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)
 
 func _on_d10_b_pressed():
+	var roll = rolld10()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld10()
-
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)
 
 func _on_d12_b_pressed():
+	var roll = rolld12()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld12()
-
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)
 
 func _on_d20_b_pressed():
+	var roll = rolld20()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld20()
-
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)
 
 func _on_d100_b_pressed():
+	var roll = rolld100()
 	request_user = '[color=#6eff90]%s[/color]' % app_username
-	rolld100()
+	chat.append_bbcode('%s: %s' % [request_user, roll])
+	pass_input(roll)

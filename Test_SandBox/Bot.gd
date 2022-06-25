@@ -141,35 +141,29 @@ func handle_events(dict : Dictionary) -> void:
 #			print('user: ', superuserid, '\n\n')
 			print(username)
 			if username != 'RPG_Virtual_Table':
-				emit_signal('receive_text_from_discord', [username , '\n' + message_content])
+				emit_signal('receive_text_from_discord', "<username>%s</username><text>%s</text>" % [username , message_content])
 			else:
-				var txt
-				var user
+				var user_
+				var _user
+				var dict_content : Dictionary = {
+					'username': '',
+					'text': '',
+					'tokens': ''
+				}
 				var message_signal
-				if message_content.split('</>'):
-					txt = message_content.split('</>')
-					user = txt[0]
-					txt = txt[1]
-				if user != app_username:
-					message_signal = [user, txt]
-					print(txt, '\n',user)
-					emit_signal('receive_text_from_discord', message_signal)
-
-			if message_content.to_upper() == "ORAMA":
-				var message_to_send := {"content" : "Interactive"}
-				query = JSON.print(message_to_send)
-			elif message_content.to_upper() == "WEBSITE":
-				var message_to_send := {"content" : "http://oramagamestudios.com/"}
-				query = JSON.print(message_to_send)
-			elif message_content.to_upper() == "BLOG":
-				var message_to_send := {"content" : "https://functionoverload590613498.wordpress.com"}
-				query = JSON.print(message_to_send)
-			elif message_content.to_upper() == "GITHUB":
-				var message_to_send := {"content" : "https://github.com/OverloadedOrama"}
-				query = JSON.print(message_to_send)
-#			if query:
-#				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
-			request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+				if '<username>' in message_content and '</username>' in message_content:
+					var user_leng
+					var content_leng
+					user_ = message_content.find_last('<username>')
+					_user = message_content.find_last('</username>')
+					user_ += '<username>'.length()
+					user_leng = _user - user_
+					dict_content['username'] = message_content.substr(user_, user_leng)
+				if dict_content['username'] != app_username:
+					emit_signal('receive_text_from_discord', message_content)
+			if query:
+				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+#			request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 
 func _on_InvalidSessionTimer_timeout() -> void:
 	var d := {}
@@ -194,8 +188,7 @@ func _on_Table_pass_chat_input(value):
 	var channel_id = '780392848884760599'
 	var headers = ["Authorization: Bot %s" % token, "Content-Type: application/json"]
 	var query : String
-	var txt = '%s</>%s' % value
+	var txt = value
 	var message_to_send := {"content" : txt}
-	if Input.is_action_just_pressed("enter"):
-		query = JSON.print(message_to_send)
-		request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+	query = JSON.print(message_to_send)
+	request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
