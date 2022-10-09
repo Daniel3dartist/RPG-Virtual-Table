@@ -1,12 +1,12 @@
 extends Control
 
-var on_dev_pc = false
-var fpath = 'res://data/Settings.ini'
+signal is_dir(value)
 
-#var types_of_windows_modes = ['Window', 'Full Screen', 'Borderless Window']
-#var resolutions = ['640 x 480', '800 x 600', '1024 x 768', '1152 x 864','1280 x 720', '1280 x 800', '1280 x 1024', '1366 x 768', '1440 x 900', '1600 x 900', '1680 x 1050', '1920 x 1080', '2560 x 1440', '2048 x 1080', '3840 x 2160', '7680 x 4320']
+var on_dev_pc = false
+var BASE_PATH = OS.get_executable_path().get_base_dir() + '/data/Settings.ini'
+
 var next_scene = 'res://Test_SandBox/Table_test.tscn'
-#var next_scene = 'res://Scenes/Table.tscn'
+
 var load_table_menu = 'res://Scenes/Load Table/Load Table Menu.tscn'
 
 var settings_menu = 'res://Scenes/Settings/Settings.tscn'
@@ -24,7 +24,7 @@ func _on_Exit_button_up():
 # Load last table
 func _on_Continue_button_up():
 	var config = ConfigFile.new()
-	var err = config.load('res://data/last_played.ini')
+	var err = config.load('%s/data/last_played.ini' % OS.get_executable_path().get_base_dir())
 	
 	if err != OK or config.get_value("Last Played", "Last table") == null:
 		get_tree().change_scene(load_table_menu)
@@ -46,7 +46,7 @@ func creat_directory():
 	var dirs
 	var dirpathtest = Directory.new()
 	
-	print('Verificando se tem o diretorio de salvamento!')
+	print('\nChecking if a save directory exists...\n')
 
 	if on_dev_pc == true:
 		drr = 'res://'
@@ -81,6 +81,7 @@ func creat_directory():
 	if Sdir != OK:
 		sheets.open('%sdata' % drr)
 		sheets.make_dir('Tables')
+	emit_signal("is_dir", true)
 
 func check_settings_file():
 	var config = ConfigFile.new()
@@ -89,7 +90,7 @@ func check_settings_file():
 	var resolution
 
 
-	err = config.load(fpath)
+	err = config.load(BASE_PATH)
 	if err != OK:
 		print("Settings file is missing")
 	else:

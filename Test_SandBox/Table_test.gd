@@ -3,11 +3,12 @@ extends Control
 var on_dev_pc = false
 
 signal pass_chat_input(value)
+signal pass_roll(value)
 
 var app_username
 var request_user
 
-var fpath 
+var BASE_PATH = OS.get_executable_path().get_base_dir()
 
 var snum
 var sheet_num = 0
@@ -15,6 +16,7 @@ var sheet_list = []
 var sheet = {
 		'Name': '',
 		'Number': '',
+		'Dir': '',
 		'Path': '',
 	}
 
@@ -59,13 +61,13 @@ func _ready():
 	var num
 	
 	bot.connect("receive_text_from_discord", self, "Receive_Text_from_Discord")
-	last.load('res://data/last_played.ini')
+	last.load('%s/data/last_played.ini' % BASE_PATH)
 	print(last.get_sections())
-	fpath = last.get_value("Last Played", "Last table")['path']
-	print('Self Index ready table: \n', fpath)
+	BASE_PATH = last.get_value("Last Played", "Last table")['path']
+	print('Self Index ready table: \n', BASE_PATH)
 	
 	check_exist_file()
-	config.load(fpath)
+	config.load(BASE_PATH)
 	for Sheets in config.get_sections():
 		sheet_list = config.get_value(Sheets, 'Sheets')
 	num = sheet_list.size()
@@ -115,16 +117,16 @@ func check_exist_file():
 	var err 
 	var dir = Directory.new()
 	
-	err = dir.open(fpath + '/Sheets')
+	err = dir.open(BASE_PATH + '/Sheets')
 	if err != OK:
-		dir.open(fpath)
+		dir.open(BASE_PATH)
 		dir.make_dir('Sheets')
 	
-	err = config.load(fpath + '/Sheet_List.save')
+	err = config.load(BASE_PATH + '/Sheet_List.save')
 	if err != OK:
 		print('File not found...')
 		config.set_value("Sheets", "Sheets", sheet_list)
-		config.save(fpath + '/Sheet_List.save')
+		config.save(BASE_PATH + '/Sheet_List.save')
 	else:
 		for Sheets in config.get_sections():
 			sheet_list = config.get_value(Sheets, "Sheets")
@@ -146,23 +148,24 @@ func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_Hbox.instance()
 	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = '%s/Sheets/Sheet/Sheet' % fpath
+	var SPath = '%s/Sheets/Sheet/Sheet' % BASE_PATH
 	var dir = Directory.new()
 	var Dname = txt
-	var Dpath =  '%s/Sheets' % fpath
+	var Dpath =  '%s/Sheets' % BASE_PATH
 
 	sheet_num = sheet_list.size()
 	print(Dpath)
 	if sheet_num > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath =fpath + '/Sheets/'+ Dname + '/'+ Dname
+		SPath =BASE_PATH + '/Sheets/'+ Dname + '/'+ Dname
 		Dpath = Dpath + '/'+ Dname
 		print("SPath" ,SPath)
 
 	sheet = {
 		'Name': txt,
 		'Number': sheet_num,
+		'Dir': '%s/Sheets/%s' % [BASE_PATH, Dname],
 		'Path': '%s.save' % SPath,
 	}
 	
@@ -170,7 +173,7 @@ func Creat_Character_Sheet():
 #	dir.open(Dpath)
 #	dir.make_dir(Dname)
 	
-	dir.open('%s/Sheets/' % fpath)
+	dir.open('%s/Sheets/' % BASE_PATH)
 	dir.make_dir(Dname)
 	
 	sheet_list.push_back(sheet)
@@ -184,16 +187,16 @@ func Creat_Character_Sheet():
 	var save = ConfigFile.new()
 	save.set_value("Sheet", "Name", txt)
 	save.save(sheet["Path"])
-	print('fpath: ', fpath)
+	print('BASE_PATH: ', BASE_PATH)
 	update_list()
 
 func update_list():
 	var config = ConfigFile.new()
-	var err = config.load(fpath + '/Sheet_List.save')
+	var err = config.load(BASE_PATH + '/Sheet_List.save')
 	
 	if err == OK:
 		config.set_value("Sheets", "Sheets", sheet_list)
-		config.save(fpath + '/Sheet_List.save')
+		config.save(BASE_PATH + '/Sheet_List.save')
 
 
 func _Call_Sheet(value):
@@ -216,13 +219,13 @@ func organize_sheet_list(sz):
 	var sheet_box_instance = sheet_call_Hbox.instance()
 	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = '%s/Sheet/Sheet' % fpath
+	var SPath = '%s/Sheet/Sheet' % BASE_PATH
 	var Dname = txt
 
 	if sz > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath = fpath + '/'+ Dname + '/'+ Dname
+		SPath = BASE_PATH + '/'+ Dname + '/'+ Dname
 		print('Spath SPath ',SPath)
 
 	sheet = {
@@ -252,22 +255,21 @@ func _Delete_Sheet(index):
 	
 	if " " in name:
 		name = name.replace(' ', '')
-		print("Have space")
-		remove_path = fpath + '/Sheets/%s' % name
+		remove_path = BASE_PATH + '/Sheets/%s' % name
 	else:# sheet_list.size():
-		remove_path = fpath + '/Sheets'
+		remove_path = BASE_PATH + '/Sheets'
 		name = 'Sheet'
 	name = '/' + name
 	print('Sheet_List: ', sheet_list[index - 1])
-	print('Name dir: ', fpath + '/Sheets/%s' % name)
-	dir.open(fpath + '/Sheets')
-	dir.remove(fpath + '/Sheets%s.save' % name.repeat(2))
-	dir.remove(fpath + '/Sheets%s' % name)
+	print('Name dir: ', BASE_PATH + '/Sheets/%s' % name)
+	dir.open(BASE_PATH + '/Sheets')
+	dir.remove(BASE_PATH + '/Sheets%s.save' % name.repeat(2))
+	dir.remove(BASE_PATH + '/Sheets%s' % name)
 	print('delete sheet ')
 	
 	sheet_list.remove(index - 1)
-	print('fpath: ', fpath)
-	print('fpath + name: ', fpath + '/Sheets/%s' % name)
+	print('BASE_PATH: ', BASE_PATH)
+	print('BASE_PATH + name: ', BASE_PATH + '/Sheets/%s' % name)
 	print('Index - 1: ', index - 1)
 	update_list()
 
@@ -318,24 +320,34 @@ func Receive_Text_from_Discord(value):
 	chat.append_bbcode(content)
 
 	if '/r' in txt:
+		var roll
 		request_user = '[color=%s]%s[/color]' % [user_color , username]
-	if 'd3' in txt:
-		chat.append_bbcode(rolld3())
-	elif 'd4' in txt:
-		chat.append_bbcode(rolld4())
-	elif 'd6' in txt:
-		chat.append_bbcode(rolld6())
-	elif 'd8' in txt:
-		chat.append_bbcode(rolld8())
-	elif 'd10' in txt:
-		chat.append_bbcode(rolld10())
-	elif 'd12' in txt:
-		chat.append_bbcode(rolld12())
-	elif 'd20' in txt:
-		chat.append_bbcode(rolld20())
-	elif 'd100' in txt:
-		chat.append_bbcode(rolld100())
-
+		if 'd3' in txt:
+			roll = rolld3()
+			chat.append_bbcode(roll)
+		elif 'd4' in txt:
+			roll = rolld4()
+			chat.append_bbcode(roll)
+		elif 'd6' in txt:
+			roll = rolld6()
+			chat.append_bbcode(roll)
+		elif 'd8' in txt:
+			roll = rolld8()
+			chat.append_bbcode(roll)
+		elif 'd10' in txt:
+			roll = rolld10()
+			chat.append_bbcode(roll)
+		elif 'd12' in txt:
+			roll = rolld12()
+			chat.append_bbcode(roll)
+		elif 'd20' in txt:
+			roll = rolld20()
+			chat.append_bbcode(roll)
+		elif 'd100' in txt:
+			roll = rolld100()
+			chat.append_bbcode(roll)
+		pass_roll(roll)
+	
 # Get self username from local data
 func get_self_username():
 	var config = ConfigFile.new()
@@ -353,7 +365,11 @@ func pass_input(value):
 	var txt_parse = '<username>%s</username><text>%s</text>' % [app_username , value]
 	emit_signal("pass_chat_input", txt_parse)
 
+func pass_roll(value):
+	emit_signal("pass_roll", value)
+
 ########################################## [ Roll Dice Functions ] ##########################################
+
 var success = '#14fa33'
 var fail = '#f73325'
 func rolld3():

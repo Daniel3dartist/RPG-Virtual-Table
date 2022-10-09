@@ -1,6 +1,6 @@
 extends Control
 
-var fpath 
+var BASE_PATH 
 var sheet
 var core_status= {
 		'str' : 10,

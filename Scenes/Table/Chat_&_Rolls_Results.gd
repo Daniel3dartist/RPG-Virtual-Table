@@ -42,7 +42,7 @@ var invalid_session_is_resumable : bool
 
 func _ready() -> void:
 	var config = ConfigFile.new()
-	var fpath = 'res://data/User_settings.ini'
+	var BASE_PATH = 'res://data/User_settings.ini'
 	var err
 
 	var save_game = File.new()
@@ -50,7 +50,7 @@ func _ready() -> void:
 	save_game.store_string(to_json('Isso mesmo'))
 	save_game.close()
 
-	err = config.load(fpath)
+	err = config.load(BASE_PATH)
 	if err != OK:
 		print('Config file not found')
 		token = ''

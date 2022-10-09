@@ -11,8 +11,8 @@ var path
 
 
 var t = true
-
-var fpath = 'res://data/table_list.save'
+var exe_path = OS.get_executable_path().get_base_dir()
+var BASE_PATH = OS.get_executable_path().get_base_dir() + '/data/table_list.save'  
 var main_menu = 'res://Scenes/Main Menu.tscn'
 
 # Number of table created
@@ -50,13 +50,14 @@ onready var table_list = $'ColorRect/VBoxContainer/VBoxContainer/ScrollContainer
 var next
 
 func _ready():
+	print("Fpath: ", BASE_PATH)
 	var f = File.new()
 	var txtparse
 	var size
 	var sz = 0
 
 	check_if_Table_List_File_Exist()
-	f.open(fpath, File.READ)
+	f.open(BASE_PATH, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
 	print('TXT parse: (%s)' % str(txtparse))
@@ -81,33 +82,42 @@ func _on_Add_a_New_Table_button_up():
 func Creat_Table_List():
 	var f = File.new()
 	
-	f = f.file_exists(fpath)
-	f = File.new()
-	f.open(fpath, File.WRITE)
+#	f = f.file_exists(BASE_PATH)
+#	f = File.new()
+	f.open(BASE_PATH, File.WRITE)
 	f.store_string(to_json([]))
 	table_num = 0
 	print('Table List File Created... \n')
+	Check_Table_Dir()
 
 
 func check_if_Table_List_File_Exist():
 	var f = File.new()
 	
-	f = f.file_exists(fpath)
+	f = f.file_exists(BASE_PATH)
 	if f != true:
 		Creat_Table_List()
 	else:
+		Check_Table_Dir()
 		print('Table List File exist... \n')
+
+func Check_Table_Dir():
+	var dir = Directory.new()
+	var path = exe_path + '/data/Tables'
+	
+	if not dir.dir_exists(path):
+		dir.make_dir(path)
 
 func update_list_json():
 	var f = File.new()
 	var txtparse
 
-	f.open(fpath, File.READ)
+	f.open(BASE_PATH, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
 	txtparse.remove(dkey)
 	
-	f.open(fpath, File.WRITE)
+	f.open(BASE_PATH, File.WRITE)
 	f.store_string(to_json(txtparse))
 #	f.close
 	print('Table List File updated... \n')
@@ -131,7 +141,7 @@ func organize_the_table_list(value):
 	var Crect = color_rec.instance()
 	var Hcont = table_description.instance()
 
-	f.open(fpath, File.READ)
+	f.open(BASE_PATH, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
 	f.close()
@@ -188,7 +198,7 @@ func add_table():
 	tcolor.color = Color(r, g, b)
 
 
-	f.open(fpath, File.READ)
+	f.open(BASE_PATH, File.READ)
 	txtparse = f.get_as_text()
 	txtparse = parse_json(txtparse)
 	tboxlist = txtparse
@@ -196,7 +206,7 @@ func add_table():
 	if table_num != 0 :
 		txt = txt + ('(%s)' % str(table_num))
 
-	dir.open('res://data/Tables/')
+	dir.open('%s/data/Tables/' % exe_path)
 	dir.make_dir(txt)
 
 	Tname.text = str(txt) 
@@ -217,10 +227,10 @@ func add_table():
 		'name': Tname.text,
 		'pic': [r,g,b],
 		'desc': 'none',
-		'path': 'res://data/Tables/%s' % txt
+		'path': '%s/data/Tables/%s' % [exe_path, txt]
 	}
 
-	f.open(fpath, File.WRITE)
+	f.open(BASE_PATH, File.WRITE)
 	txtparse.push_back(tboxdic)
 	f.store_string(to_json(txtparse))
 	f.close()
@@ -322,7 +332,7 @@ func delete_dir():
 
 func _play_scene(index):
 	var config = ConfigFile.new()
-	var test = config.load('res://data/last_played.ini')
+	var test = config.load('%s/data/last_played.ini' % exe_path)
 	var table = tboxlist[index]
 	var parent = index
 	
@@ -334,7 +344,7 @@ func _play_scene(index):
 		print("File 'last_played.ini' not found")
 		
 	config.set_value('Last Played', 'Last table', table)
-	config.save('res://data/last_played.ini')
+	config.save('%s/data/last_played.ini' % exe_path)
 
 #	get_tree().change_scene('res://Scenes/Table/Table.tscn')
 	get_tree().change_scene('res://Test_SandBox/Table_test.tscn')

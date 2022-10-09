@@ -3,6 +3,7 @@ extends HTTPRequest
 signal receive_text_from_discord(value)
 
 var app_username
+var BASE_PATH = OS.get_executable_path().get_base_dir()
 
 var token := "YourTokenHere" # Make sure to actually replace this with your token!
 var client : WebSocketClient
@@ -26,7 +27,7 @@ func _ready():
 
 func grabe_token():
 	var config = ConfigFile.new()
-	config.load('res://data/user_settings.ini')
+	config.load('%s/data/user_settings.ini' % BASE_PATH)
 	token = config.get_value("User", "BotToken")
 	app_username = config.get_value("User", "Nickname")
 	print('token: ', token)
@@ -142,7 +143,7 @@ func handle_events(dict : Dictionary) -> void:
 			print(username)
 			if username != 'RPG_Virtual_Table':
 				emit_signal('receive_text_from_discord', "<username>%s</username><text>%s</text>" % [username , message_content])
-			else:
+			elif '<username>' in message_content:
 				var user_
 				var _user
 				var dict_content : Dictionary = {
@@ -190,5 +191,18 @@ func _on_Table_pass_chat_input(value):
 	var query : String
 	var txt = value
 	var message_to_send := {"content" : txt}
+	query = JSON.print(message_to_send)
+	request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+
+
+func _on_Table_pass_roll(value):
+	var channel_id = '780392848884760599'
+	var headers = ["Authorization: Bot %s" % token, "Content-Type: application/json"]
+	var query : String
+	var txt = value
+	var message_to_send
+	txt.replace('[color=#14fa33]', '')
+	txt.replace('[/color]', '')
+	message_to_send = {"content" : txt}
 	query = JSON.print(message_to_send)
 	request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)

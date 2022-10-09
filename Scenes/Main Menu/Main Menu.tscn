@@ -97,6 +97,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="is_dir" from="." to="Bot&User" method="_on_Main_Menu_is_dir"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Load table" to="." method="_on_Load_table_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Settings" to="." method="_on_Settings_button_up"]

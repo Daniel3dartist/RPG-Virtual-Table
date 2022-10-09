@@ -1,8 +1,8 @@
 extends Control
 
 
-var fpath = "res://data/Settings.ini"
-
+#var BASE_PATH = "res://data/Settings.ini"
+var BASE_PATH = OS.get_executable_path().get_base_dir() + "data/Settings.ini"
 var types_of_windows_modes = ["Window", "Full Screen", "Borderless Window"]
 var resolutions = ["640 x 480", "800 x 600", "1024 x 768", "1152 x 864", "1280 x 720", "1280 x 800", "1280 x 1024", "1366 x 768", "1440 x 900", "1600 x 900", "1680 x 1050", "1920 x 1080", "2560 x 1440", "2048 x 1080", "3840 x 2160", "7680 x 4320"]
 
@@ -50,15 +50,15 @@ func _process(delta):
 func check_settings_file():
 	var config = ConfigFile.new()
 	var ftest = File.new()
-	var err = config.load(fpath)
+	var err = config.load(BASE_PATH)
 	
 	if err != OK:
 		print('Erro ao ler arquivo')
-		ftest = ftest.file_exists(fpath)
+		ftest = ftest.file_exists(BASE_PATH)
 		if ftest != true:
 			config.set_value("Video", "Window", "Window")
 			config.set_value("Video", "Resolution", "1280 x 720")
-			config.save(fpath)
+			config.save(BASE_PATH)
 
 	for Video in config.get_sections():
 		Wkey = config.get_value(Video, "Window")
@@ -189,7 +189,7 @@ func save():
 	
 	config.set_value("Video", "Window", Wkey)
 	config.set_value("Video", "Resolution", Rkey)
-	config.save(fpath)
+	config.save(BASE_PATH)
 
 
 func restore():

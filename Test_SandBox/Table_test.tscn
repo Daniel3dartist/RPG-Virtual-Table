@@ -361,6 +361,7 @@ layer = 120
 [node name="Grid2" parent="Node2D" instance=ExtResource( 10 )]
 
 [connection signal="pass_chat_input" from="." to="Bot/HTTPRequest" method="_on_Table_pass_chat_input"]
+[connection signal="pass_roll" from="." to="Bot/HTTPRequest" method="_on_Table_pass_roll"]
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
 [connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d3_b" to="." method="_on_d3_b_pressed"]
