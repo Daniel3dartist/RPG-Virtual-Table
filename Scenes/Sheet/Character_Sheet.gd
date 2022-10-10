@@ -41,6 +41,7 @@ onready var CHA_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/
 
 
 func _ready():
+#	print('get center: %s' % get_node("CanvasLayer/Node2D/ColorRect2").rect_position)
 	var table = self.get_parent().get_parent()
 	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
 	emit_signal("give_data", self.get_index())
@@ -151,25 +152,64 @@ func _input(event):
 
 # Drag-and-drop sheet
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-		off_set = rect_position - get_global_mouse_position()
-		pos = pos2d.position - rect_position
-		if event.is_pressed() == false:
-			dragging = false
-		if (event.position - pos2d.position).length() <= click_radius:
+		off_set = [rect_position - get_global_mouse_position(), get_node("CanvasLayer/ColorRect2").rect_position - get_global_mouse_position()]
+#		pos = pos2d.position - rect_position
+#		if (event.position - pos2d.position).length() <= click_radius:
 #		if rect_size.length() <= click_radius:
-			if not dragging and event.pressed:
-				dragging = true
-			if dragging and not event.pressed:
-				dragging = false
+#			if not dragging and event.pressed:
+#				dragging = true
+#			if dragging and not event.pressed:
+#				dragging = false
+
+		var area = get_node("CanvasLayer/ColorRect2").rect_size
+		var mouse = get_global_mouse_position()
+#		var dic = {
+#			'min_x': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.x - (area.x/2),
+#			'max_x': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.x + (area.x/2),
+#			'min_y': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.y - (area.y/2),
+#			'max_y': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.y + (area.y/2)
+#		}
+#		var dic = {
+#			'min_x': self.get_node("CanvasLayer/ColorRect2").rect_position.x - (area.x/2),
+#			'max_x': self.get_node("CanvasLayer/ColorRect2").rect_position.x + (area.x/2),
+#			'min_y': self.get_node("CanvasLayer/ColorRect2").rect_position.y - (area.y/2),
+#			'max_y': self.get_node("CanvasLayer/ColorRect2").rect_position.y + (area.y/2)
+#		}
+		var dic = {
+			'min_x': self.get_node("CanvasLayer/ColorRect2").margin_left,
+			'max_x': self.get_node("CanvasLayer/ColorRect2").margin_right,
+			'min_y': self.get_node("CanvasLayer/ColorRect2").margin_top,
+			'max_y': self.get_node("CanvasLayer/ColorRect2").margin_bottom
+		}
+		if mouse.x >= dic['min_x'] and mouse.x <= dic['max_x'] and mouse.y >= dic['min_y'] and mouse.y <= dic['max_y']:
+			print('Is mouse position\n')
+			set_default_cursor_shape(13)
+			dragging = true
+	if Input.is_action_just_released("left_mouse"):
+		dragging = false
 
 func _process(delta):
 #	 if self.get_node('Position2D').intersect_shape(get_viewport().get_mouse_position()):
 #		pass
+
+	var area = get_node("CanvasLayer/ColorRect2").rect_size
+	var mouse = get_global_mouse_position()
+	var dic = {
+		'min_x': self.get_node("CanvasLayer/ColorRect2").margin_left,
+		'max_x': self.get_node("CanvasLayer/ColorRect2").margin_right,
+		'min_y': self.get_node("CanvasLayer/ColorRect2").margin_top,
+		'max_y': self.get_node("CanvasLayer/ColorRect2").margin_bottom
+	}
+	if mouse.x >= dic['min_x'] and mouse.x <= dic['max_x'] and mouse.y >= dic['min_y'] and mouse.y <= dic['max_y']:
+		print('Is mouse position\n')
+
 	
 	if dragging == true:
+		
 		var view = get_viewport().get_mouse_position()
-		rect_position = view + off_set
-		pos2d.position = rect_position + pos
+		rect_position = view + off_set[0]
+		pos2d.position = pos2d.position - rect_position #rect_position + pos
+		get_node("CanvasLayer/ColorRect2").rect_position = view + off_set[1]
 
 
 func _on_Sheet_Exit_button_up():
@@ -230,4 +270,18 @@ func _Update_Save():
 	sheet_save.set_value('Sheet', 'Name', txt )
 	sheet_save.set_value('Status', 'core status', core_status )
 	sheet_save.save(sheet['path'])
+
+
+
+#func _on_Area2D_mouse_entered():
+#	print('Mouse entered')
+#	off_set = self.rect_position - get_global_mouse_position()
+#	if Input.is_action_pressed("left_mouse"):
+#		dragging = true
+
+
+#func _on_Area2D_mouse_exited():
+#	if Input.is_action_just_released("left_mouse"):
+#		dragging = false
+
 
