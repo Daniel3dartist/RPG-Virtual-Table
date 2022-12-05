@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Test_SandBox/Table_test.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Dices/D3.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Scenes/Dices/D20.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Test_SandBox/Grid.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Test_SandBox/Bot.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Settings/Settings.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
@@ -356,10 +357,17 @@ __meta__ = {
 [node name="Sheet_Spaw" type="CanvasLayer" parent="."]
 layer = 120
 
+[node name="Settings" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Settings2" parent="Settings" instance=ExtResource( 12 )]
+visible = false
+
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Grid2" parent="Node2D" instance=ExtResource( 10 )]
 
+[connection signal="on_table" from="." to="Settings/Settings2" method="_on_Table_on_table"]
 [connection signal="pass_chat_input" from="." to="Bot/HTTPRequest" method="_on_Table_pass_chat_input"]
 [connection signal="pass_roll" from="." to="Bot/HTTPRequest" method="_on_Table_pass_roll"]
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]

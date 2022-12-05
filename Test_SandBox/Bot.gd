@@ -130,7 +130,7 @@ func handle_events(dict : Dictionary) -> void:
 				var message_to_send := {"content" : "Welcome %s!" % username}
 				var query := JSON.print(message_to_send)
 				headers.append("Content-Type: application/json")
-				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+				request("https://discordapp.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 		"MESSAGE_CREATE":
 			var username = dict["d"]["author"]["username"]
 			var channel_id = dict["d"]["channel_id"]
@@ -143,6 +143,8 @@ func handle_events(dict : Dictionary) -> void:
 			print(username)
 			if username != 'RPG_Virtual_Table':
 				emit_signal('receive_text_from_discord', "<username>%s</username><text>%s</text>" % [username , message_content])
+				print("\nMensagem received from server\n<username>%s</username><text>%s</text>\n" % [username , message_content] + '\n'+ message_content)
+				print(dict["d"], '\n\n', dict)
 			elif '<username>' in message_content:
 				var user_
 				var _user
@@ -163,8 +165,8 @@ func handle_events(dict : Dictionary) -> void:
 				if dict_content['username'] != app_username:
 					emit_signal('receive_text_from_discord', message_content)
 			if query:
-				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
-#			request("https://discordapp.com/api/v9/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+#				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+				request("https://discordapp.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 
 func _on_InvalidSessionTimer_timeout() -> void:
 	var d := {}

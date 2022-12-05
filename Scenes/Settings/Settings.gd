@@ -1,5 +1,6 @@
 extends Control
 
+var on_table = false
 
 #var BASE_PATH = "res://data/Settings.ini"
 var BASE_PATH = OS.get_executable_path().get_base_dir() + "data/Settings.ini"
@@ -224,3 +225,15 @@ func windows_mod():
 		OS.window_borderless = true
 		OS.window_maximized = true
 
+
+
+func _on_Table_on_table(value):
+	on_table = value
+
+
+func _on_Main_Menu_button_up():
+	var main_menu = 'res://Scenes/Main Menu/Main Menu.tscn'
+	if on_table != true:
+		get_tree().change_scene(main_menu)
+	else:
+		self.visible = false

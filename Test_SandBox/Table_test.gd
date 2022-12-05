@@ -4,6 +4,7 @@ var on_dev_pc = false
 
 signal pass_chat_input(value)
 signal pass_roll(value)
+signal on_table(value)
 
 var app_username
 var request_user
@@ -76,6 +77,7 @@ func _ready():
 		sz += 1 
 	chat.append_bbcode('[center]Table Initialized!![/center]\n')
 	chat.append_bbcode('[center]Welcome![/center]\n')
+	emit_signal('on_table', true)
 
 func _input(event):
 	var user_color = '#6eff90'
@@ -301,6 +303,7 @@ func Receive_Text_from_Discord(value):
 	var content# =  '[color=]%s[/color]: %s\n' % value
 	var txt = value
 	
+	print("\nValue receive from discord \n", value,'\n')
 	if "<username>" in value and "</username>" in value:
 		var user_ = value.find_last('<username>')
 		var _user = value.find_last('</username>')
@@ -502,3 +505,7 @@ func _on_d100_b_pressed():
 	request_user = '[color=#6eff90]%s[/color]' % app_username
 	chat.append_bbcode('%s: %s' % [request_user, roll])
 	pass_input(roll)
+
+
+func _on_Settings_button_up():
+	get_node('Settings/Settings2').visible = true

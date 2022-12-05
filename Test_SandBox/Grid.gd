@@ -16,7 +16,6 @@ func _ready():
 	print('grid tree ', self.get_parent().get_parent().get_parent())
 	print('Table name? ', table)
 	table.connect('grid_settings', self, '_Grid_Settings')
-#	_draw()
 
 
 func _draw():

@@ -4,19 +4,22 @@ var off_set
 var can_move = false
 var mouse
 var motion
+var dif
 
 func _input(event):
+	var mouse_position
 	if event is InputEventMouseButton and event.button_index == BUTTON_MIDDLE:
-		off_set = self.position - get_viewport().get_mouse_position()
-		if event.is_pressed() == false:
-			can_move = false
-		else:
-			can_move = true
-
-	if event is InputEventMouseMotion and can_move == true:
+#	if Input.is_action_just_pressed("BUTTON_MIDDLE"):
+		mouse_position = get_viewport().get_mouse_position() 
+		dif = get_viewport().get_mouse_position() 
+		off_set = self.position - get_viewport().get_mouse_position() 
+		
+	if Input.is_action_pressed("BUTTON_MIDDLE"):
+		can_move = true
+	else:
+#	if Input.is_action_just_released("BUTTON_MIDDLE"):
+		can_move = false
 		motion = event.position
-	elif can_move == true:
-		motion = get_viewport().get_mouse_position()
 
 	if event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_UP and self.zoom > Vector2(0.1, 0.1):
 		self.zoom -= Vector2(0.05, 0.05)
@@ -27,5 +30,5 @@ func _input(event):
 func _process(delta):
 	var mouse = get_viewport().get_mouse_position() 
 	if can_move == true:
-		self.position =  mouse  + off_set
-		
+#		self.position = mouse + off_set
+		self.position -= (mouse - dif) * 0.08
