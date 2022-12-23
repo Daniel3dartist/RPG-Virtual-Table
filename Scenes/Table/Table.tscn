@@ -1,17 +1,17 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Scenes/Dices/D20.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Dices/D4.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Dices/D100.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Dices/D3.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Dices/D6.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Dices/D8.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/Dices/D10.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/Dices/D12.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Scenes/Table/Chat_&_Rolls_Results.gd" type="Script" id=9]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
+[ext_resource path="res://Scenes/Table/Table.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Dices/D3.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Dices/D4.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Dices/D6.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Dices/D8.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Dices/D10.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Dices/D12.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Dices/D100.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Dices/D20.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Table/Grid.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Test_SandBox/Bot.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Settings/Settings.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
@@ -26,11 +26,12 @@ bg_color = Color( 0.266667, 0.262745, 0.262745, 1 )
 [node name="Table" type="Control" groups=["grupo01"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 9 )
+script = ExtResource( 1 )
 
 [node name="Bot" type="Node" parent="."]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Bot"]
+script = ExtResource( 11 )
 
 [node name="HeartbeatTimer" type="Timer" parent="Bot/HTTPRequest"]
 
@@ -39,14 +40,6 @@ one_shot = true
 
 [node name="Background_base" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Background_base"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.831373, 0.831373, 0.831373, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Base_UI" type="CanvasLayer" parent="."]
 layer = 100
 
@@ -54,63 +47,41 @@ layer = 100
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
-margin_left = 449.0
-margin_right = 708.0
-margin_bottom = 715.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Sheets" type="Button" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer"]
-margin_right = 48.0
-margin_bottom = 20.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Sheet"
-
-[node name="SplitSheetList" type="HSplitContainer" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer"]
-margin_left = 52.0
-margin_right = 259.0
-margin_bottom = 715.0
-size_flags_horizontal = 3
-custom_styles/bg = SubResource( 1 )
-
-[node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList" groups=["grupo01"]]
-margin_right = 207.0
-margin_bottom = 715.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Sheet Creator" type="Button" parent="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList"]
-margin_right = 207.0
-margin_bottom = 20.0
-text = "Creat a sheet"
-
-[node name="Chat_Buttons_ChatInput" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
+[node name="TabContainer" type="TabContainer" parent="Base_UI/Chat_&_Rolls_Results"]
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 244.0
-margin_bottom = -20.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 446.0
+margin_bottom = -10.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.87
+tab_align = 0
 
-[node name="Chat" type="RichTextLabel" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput"]
+[node name="Chat_Buttons_ChatInput" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+alignment = 1
+
+[node name="Chat" type="RichTextLabel" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput"]
 margin_right = 428.0
-margin_bottom = 482.0
+margin_bottom = 465.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 6.41
 custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_constants/line_separation = 5
 custom_styles/normal = SubResource( 2 )
 bbcode_enabled = true
 scroll_following = true
 
-[node name="Dice_Buttons" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput"]
-margin_top = 486.0
+[node name="Dice_Buttons" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput"]
+margin_top = 469.0
 margin_right = 428.0
-margin_bottom = 526.0
+margin_bottom = 509.0
 rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -119,7 +90,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="d3_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 4 )]
+[node name="d3_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 2 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -130,7 +101,7 @@ margin_right = 50.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d4_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 2 )]
+[node name="d4_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 3 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -141,7 +112,7 @@ margin_right = 104.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d6_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 5 )]
+[node name="d6_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 4 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -152,7 +123,7 @@ margin_right = 158.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d8_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 6 )]
+[node name="d8_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 5 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -162,8 +133,9 @@ margin_top = 0.0
 margin_right = 212.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
+text = "d8"
 
-[node name="d10_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 7 )]
+[node name="d10_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 6 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -174,7 +146,7 @@ margin_right = 266.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d12_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 8 )]
+[node name="d12_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 7 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -185,7 +157,7 @@ margin_right = 320.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d20_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 1 )]
+[node name="d20_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 9 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -196,7 +168,7 @@ margin_right = 374.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="d100_b" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 3 )]
+[node name="d100_b" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons" instance=ExtResource( 8 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -207,10 +179,10 @@ margin_right = 428.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 50, 0 )
 
-[node name="Chat_Input" type="TextEdit" parent="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput"]
-margin_top = 530.0
+[node name="Chat_Input" type="TextEdit" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput"]
+margin_top = 513.0
 margin_right = 428.0
-margin_bottom = 680.0
+margin_bottom = 663.0
 rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -224,18 +196,150 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="Sheet Creator" type="Button" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList"]
+margin_right = 428.0
+margin_bottom = 20.0
+text = "Creat a sheet"
+
+[node name="Settings" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = 432.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 428, 664 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings"]
+margin_right = 428.0
+margin_bottom = 406.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_right = 428.0
+margin_bottom = 14.0
+text = "Grid"
+align = 1
+valign = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 18.0
+margin_right = 428.0
+margin_bottom = 78.0
+
+[node name="LineEdit" type="LineEdit" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer"]
+margin_left = 184.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 0
+text = "40"
+align = 1
+
+[node name="Label2" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 82.0
+margin_right = 428.0
+margin_bottom = 96.0
+text = "x"
+align = 1
+valign = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 100.0
+margin_right = 428.0
+margin_bottom = 160.0
+
+[node name="LineEdit" type="LineEdit" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2"]
+margin_left = 184.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 0
+text = "30"
+align = 1
+
+[node name="Label3" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 164.0
+margin_right = 428.0
+margin_bottom = 178.0
+text = "Line color"
+align = 1
+
+[node name="CenterContainer3" type="CenterContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 182.0
+margin_right = 428.0
+margin_bottom = 242.0
+
+[node name="LineColor" type="ColorPickerButton" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer3"]
+margin_left = 184.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+color = Color( 0.360784, 0.360784, 0.360784, 1 )
+
+[node name="Label4" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 246.0
+margin_right = 428.0
+margin_bottom = 260.0
+text = "Backgroud Color"
+align = 1
+
+[node name="CenterContainer4" type="CenterContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 264.0
+margin_right = 428.0
+margin_bottom = 324.0
+
+[node name="BGColor" type="ColorPickerButton" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer4"]
+margin_left = 184.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+color = Color( 0.823529, 0.792157, 0.792157, 1 )
+
+[node name="Label5" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 328.0
+margin_right = 428.0
+margin_bottom = 342.0
+text = "Line size"
+align = 1
+valign = 1
+
+[node name="CenterContainer5" type="CenterContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
+margin_top = 346.0
+margin_right = 428.0
+margin_bottom = 406.0
+
+[node name="LineEdit" type="LineEdit" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5"]
+margin_left = 184.0
+margin_right = 244.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+size_flags_horizontal = 0
+text = "3"
+align = 1
+
 [node name="Base_Menu" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -151.0
+margin_left = -160.0
+margin_top = 10.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Main_Menu" type="Button" parent="Base_UI/Chat_&_Rolls_Results/Base_Menu"]
 margin_right = 84.0
-margin_bottom = 40.0
+margin_bottom = 30.0
 text = "Main menu"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -244,7 +348,7 @@ __meta__ = {
 [node name="Settings" type="Button" parent="Base_UI/Chat_&_Rolls_Results/Base_Menu"]
 margin_left = 88.0
 margin_right = 151.0
-margin_bottom = 40.0
+margin_bottom = 30.0
 text = "Settings"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -253,16 +357,38 @@ __meta__ = {
 [node name="Sheet_Spaw" type="CanvasLayer" parent="."]
 layer = 120
 
+[node name="Settings" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="Settings2" parent="Settings" instance=ExtResource( 12 )]
+visible = false
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Grid2" parent="Node2D" instance=ExtResource( 10 )]
+
+[connection signal="on_table" from="." to="Settings/Settings2" method="_on_Table_on_table"]
+[connection signal="pass_chat_input" from="." to="Bot/HTTPRequest" method="_on_Table_pass_chat_input"]
+[connection signal="pass_roll" from="." to="Bot/HTTPRequest" method="_on_Table_pass_roll"]
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
 [connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]
-[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/HBoxContainer/SplitSheetList/SheetList/Sheet Creator" to="." method="_on_Sheet_Creator_button_up"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d3_b" to="." method="_on_d3_b_pressed"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d4_b" to="." method="_on_d4_b_pressed"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d6_b" to="." method="_on_d6_b_pressed"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d8_b" to="." method="_on_d8_b_pressed"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d10_b" to="." method="_on_d10_b_pressed"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d12_b" to="." method="_on_d12_b_pressed"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d20_b" to="." method="_on_d20_b_pressed"]
-[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/Chat_Buttons_ChatInput/Dice_Buttons/d100_b" to="." method="_on_d100_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d3_b" to="." method="_on_d3_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d4_b" to="." method="_on_d4_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d6_b" to="." method="_on_d6_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d8_b" to="." method="_on_d8_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d10_b" to="." method="_on_d10_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d12_b" to="." method="_on_d12_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d20_b" to="." method="_on_d20_b_pressed"]
+[connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d100_b" to="." method="_on_d100_b_pressed"]
+[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/Sheet Creator" to="." method="_on_Sheet_Creator_button_up"]
+[connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="text_changed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer2/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="popup_closed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer3/LineColor" to="." method="_on_LineColor_popup_closed"]
+[connection signal="popup_closed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer4/BGColor" to="." method="_on_BGColor_popup_closed"]
+[connection signal="text_changed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Main_Menu" to="." method="_on_Main_Menu_button_up"]
 [connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Settings" to="." method="_on_Settings_button_up"]
+
+[editable path="Node2D/Grid2"]

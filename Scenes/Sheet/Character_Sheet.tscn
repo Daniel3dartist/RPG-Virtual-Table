@@ -68,7 +68,7 @@ layer = 128
 position = Vector2( 639.388, 400 )
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
-margin_left = 207.0
+margin_left = 236.0
 margin_top = 60.0
 margin_right = 1139.0
 margin_bottom = 122.0

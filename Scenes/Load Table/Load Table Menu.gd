@@ -346,7 +346,7 @@ func _play_scene(index):
 	config.set_value('Last Played', 'Last table', table)
 	config.save('%s/data/last_played.ini' % exe_path)
 
-#	get_tree().change_scene('res://Scenes/Table/Table.tscn')
-	get_tree().change_scene('res://Test_SandBox/Table_test.tscn')
+	get_tree().change_scene('res://Scenes/Table/Table.tscn')
+#	get_tree().change_scene('res://Test_SandBox/Table_test.tscn')
 
 

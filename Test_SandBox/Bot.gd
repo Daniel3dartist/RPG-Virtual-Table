@@ -130,7 +130,7 @@ func handle_events(dict : Dictionary) -> void:
 				var message_to_send := {"content" : "Welcome %s!" % username}
 				var query := JSON.print(message_to_send)
 				headers.append("Content-Type: application/json")
-				request("https://discordapp.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
+				request("https://discordapp.com/api/v12/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 		"MESSAGE_CREATE":
 			var username = dict["d"]["author"]["username"]
 			var channel_id = dict["d"]["channel_id"]
@@ -167,7 +167,7 @@ func handle_events(dict : Dictionary) -> void:
 			if query:
 #				request("https://discordapp.com/api/v10/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
 				request("https://discordapp.com/api/v6/channels/%s/messages" % channel_id, headers, true, HTTPClient.METHOD_POST, query)
-
+			print(dict["d"]['content'])
 func _on_InvalidSessionTimer_timeout() -> void:
 	var d := {}
 	if invalid_session_is_resumable && session_id:

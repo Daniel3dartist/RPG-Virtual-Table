@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Test_SandBox/grid.gd" type="Script" id=1]
-[ext_resource path="res://Test_SandBox/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Table/grid.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Table/Camera2D.gd" type="Script" id=2]
 
 [sub_resource type="StreamTexture" id=2]
 flags = 4
@@ -38,7 +38,7 @@ position = Vector2( 573.906, 339.029 )
 current = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 
 [node name="Player" type="Sprite" parent="Camera2D"]
 position = Vector2( 0.0449219, -93.3797 )
@@ -54,6 +54,7 @@ margin_left = -4965.0
 margin_top = -3052.0
 margin_right = 4571.0
 margin_bottom = 3569.0
+mouse_default_cursor_shape = 13
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource( 5 )

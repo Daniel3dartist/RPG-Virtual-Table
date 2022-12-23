@@ -9,7 +9,7 @@
 [ext_resource path="res://Scenes/Dices/D12.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Dices/D100.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Dices/D20.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Test_SandBox/Grid.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Table/Grid.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Test_SandBox/Bot.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/Settings/Settings.tscn" type="PackedScene" id=12]
 

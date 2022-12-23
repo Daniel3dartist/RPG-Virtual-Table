@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Test_SandBox/grid.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Table/grid.gd" type="Script" id=1]
 
 [sub_resource type="StreamTexture" id=6]
 flags = 4
