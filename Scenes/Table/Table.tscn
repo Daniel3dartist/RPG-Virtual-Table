@@ -43,9 +43,34 @@ one_shot = true
 [node name="Base_UI" type="CanvasLayer" parent="."]
 layer = 100
 
+[node name="Base_Menu" type="HBoxContainer" parent="Base_UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -160.0
+margin_top = 10.0
+margin_bottom = 40.0
+
+[node name="Main_Menu" type="Button" parent="Base_UI/Base_Menu"]
+margin_right = 84.0
+margin_bottom = 30.0
+text = "Main menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" type="Button" parent="Base_UI/Base_Menu"]
+margin_left = 88.0
+margin_right = 151.0
+margin_bottom = 30.0
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Chat_&_Rolls_Results" type="Control" parent="Base_UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -830.0
 
 [node name="TabContainer" type="TabContainer" parent="Base_UI/Chat_&_Rolls_Results"]
 anchor_bottom = 1.0
@@ -330,30 +355,6 @@ size_flags_horizontal = 0
 text = "3"
 align = 1
 
-[node name="Base_Menu" type="HBoxContainer" parent="Base_UI/Chat_&_Rolls_Results"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -160.0
-margin_top = 10.0
-margin_bottom = 40.0
-
-[node name="Main_Menu" type="Button" parent="Base_UI/Chat_&_Rolls_Results/Base_Menu"]
-margin_right = 84.0
-margin_bottom = 30.0
-text = "Main menu"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Settings" type="Button" parent="Base_UI/Chat_&_Rolls_Results/Base_Menu"]
-margin_left = 88.0
-margin_right = 151.0
-margin_bottom = 30.0
-text = "Settings"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Sheet_Spaw" type="CanvasLayer" parent="."]
 layer = 120
 
@@ -363,15 +364,18 @@ layer = 128
 [node name="Settings2" parent="Settings" instance=ExtResource( 12 )]
 visible = false
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Grid" type="CanvasLayer" parent="."]
+layer = 2
 
-[node name="Grid2" parent="Node2D" instance=ExtResource( 10 )]
+[node name="Grid" parent="Grid" instance=ExtResource( 10 )]
 
 [connection signal="on_table" from="." to="Settings/Settings2" method="_on_Table_on_table"]
 [connection signal="pass_chat_input" from="." to="Bot/HTTPRequest" method="_on_Table_pass_chat_input"]
 [connection signal="pass_roll" from="." to="Bot/HTTPRequest" method="_on_Table_pass_roll"]
 [connection signal="timeout" from="Bot/HTTPRequest/HeartbeatTimer" to="Bot/HTTPRequest" method="_on_HeartbeatTimer_timeout"]
 [connection signal="timeout" from="Bot/HTTPRequest/InvalidSessionTimer" to="Bot/HTTPRequest" method="_on_InvalidSessionTimer_timeout"]
+[connection signal="button_up" from="Base_UI/Base_Menu/Main_Menu" to="." method="_on_Main_Menu_button_up"]
+[connection signal="button_up" from="Base_UI/Base_Menu/Settings" to="." method="_on_Settings_button_up"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d3_b" to="." method="_on_d3_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d4_b" to="." method="_on_d4_b_pressed"]
 [connection signal="pressed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Dice_Buttons/d6_b" to="." method="_on_d6_b_pressed"]
@@ -388,7 +392,5 @@ visible = false
 [connection signal="popup_closed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer4/BGColor" to="." method="_on_BGColor_popup_closed"]
 [connection signal="text_changed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_entered"]
-[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Main_Menu" to="." method="_on_Main_Menu_button_up"]
-[connection signal="button_up" from="Base_UI/Chat_&_Rolls_Results/Base_Menu/Settings" to="." method="_on_Settings_button_up"]
 
-[editable path="Node2D/Grid2"]
+[editable path="Grid/Grid"]

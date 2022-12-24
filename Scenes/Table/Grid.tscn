@@ -55,7 +55,6 @@ margin_left = -4965.0
 margin_top = -3052.0
 margin_right = 4571.0
 margin_bottom = 3569.0
-mouse_default_cursor_shape = 13
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource( 5 )
@@ -69,4 +68,4 @@ tile_data = PoolIntArray( 65551, 0, 0, 262150, 0, 0, 458762, 0, 0, 458764, 0, 0,
 script = ExtResource( 1 )
 
 [node name="Token" parent="." instance=ExtResource( 4 )]
-position = Vector2( 573.951, 245.649 )
+position = Vector2( 512, 256 )
