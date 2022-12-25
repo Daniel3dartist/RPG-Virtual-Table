@@ -1,25 +1,29 @@
 extends Node2D
 
 onready var tilemap = self.get_parent().get_child(1)
+var selected
 var grabed
 
 func _input(event):
-#func _physics_process(delta):
-	var mouse #= tilemap.world_to_map(get_global_mouse_position())
-	var token #= tilemap.world_to_map(self.position) 
-	print( '\nMouse: %s \nToken: %s \n' % [mouse, token])
-	print('Grabed: ', grabed)
+	var mouse 
+	var token 
 
 	if Input.is_action_just_pressed("left_mouse"):
 		mouse = tilemap.world_to_map(get_global_mouse_position())
 		token = tilemap.world_to_map(self.position)
-		if mouse[0] == token[0] and mouse[1] == token[1]:
-			print('\nGrabed == True\n')
-			get_node("Sprite").modulate = 'e71a1a'
+		if mouse == token:
+			selected = true
+			get_node("ColorRect2").visible = true
+			get_node("ColorRect2").modulate = '73ffffff'
+			get_node("Sprite").modulate = '73ccc1c1' #'e71a1a'
+			get_node("ColorRect").visible = true
 			grabed = true
+		else:
+			get_node("ColorRect2").visible = false
+			get_node("ColorRect").visible = false
+			selected = false
 
 	if grabed == true:
-		print('grabed')
 		var pos = tilemap.world_to_map(get_global_mouse_position())
 		pos = tilemap.map_to_world(pos)
 		self.position = pos
@@ -27,4 +31,4 @@ func _input(event):
 	if Input.is_action_just_released("left_mouse"):
 		grabed = false
 		get_node("Sprite").modulate = 'ffffff'
-
+		get_node("ColorRect2").modulate = 'ffffff'

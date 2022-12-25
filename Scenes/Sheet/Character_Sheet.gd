@@ -283,5 +283,3 @@ func _Update_Save():
 #func _on_Area2D_mouse_exited():
 #	if Input.is_action_just_released("left_mouse"):
 #		dragging = false
-
-

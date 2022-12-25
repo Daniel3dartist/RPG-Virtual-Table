@@ -6,7 +6,16 @@
 [node name="Token" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 72.0
+margin_bottom = 72.0
+color = Color( 0, 0.819608, 0.905882, 0.454902 )
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 margin_right = 64.0
 margin_bottom = 64.0
 mouse_default_cursor_shape = 13

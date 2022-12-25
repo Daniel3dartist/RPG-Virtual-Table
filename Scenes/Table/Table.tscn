@@ -394,3 +394,4 @@ layer = 2
 [connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_entered"]
 
 [editable path="Grid/Grid"]
+[editable path="Grid/Grid/Token"]
