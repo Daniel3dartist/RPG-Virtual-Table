@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Table/grid.gd" type="Script" id=1]
+[ext_resource path="res://Krita_Imagens/Alpha token prototype_Mask_Area.png" type="Texture" id=2]
 
 [sub_resource type="StreamTexture" id=6]
 flags = 4
@@ -21,9 +22,54 @@ flags = 4
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="VisualShaderNodeTexture" id=7]
+texture = ExtResource( 2 )
+
+[sub_resource type="VisualShader" id=8]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_2;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -126, 23 )
+mode = 1
+flags/light_only = false
+nodes/fragment/2/node = SubResource( 7 )
+nodes/fragment/2/position = Vector2( -20, 120 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+
 [node name="TileMap" type="TileMap"]
 tile_set = SubResource( 1 )
 cell_tile_origin = 1
 format = 1
 tile_data = PoolIntArray( 65551, 0, 0, 262150, 0, 0, 458762, 0, 0, 458764, 0, 0, 524305, 0, 0, 589827, 0, 0 )
 script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 9 )
+margin_right = 40.0
+margin_bottom = 40.0
