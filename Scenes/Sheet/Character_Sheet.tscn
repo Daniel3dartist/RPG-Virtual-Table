@@ -706,5 +706,3 @@ shape = SubResource( 5 )
 
 [connection signal="button_up" from="ColorRect/SheetArea/HBoxContainer/Sheet_Exit" to="." method="_on_Sheet_Exit_button_up"]
 [connection signal="char_image_path" from="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_char_image_path"]
-[connection signal="mouse_entered" from="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" to="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" method="_on_TextureRect_mouse_entered"]
-[connection signal="mouse_exited" from="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" to="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" method="_on_TextureRect_mouse_exited"]

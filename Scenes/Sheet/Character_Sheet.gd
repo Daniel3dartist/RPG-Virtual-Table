@@ -264,13 +264,10 @@ func _Initialize_Sheet():
 		# Verify if character sheet has a image
 		if sheet_save.get_value('Character_Image', 'Image') == null or sheet_save.get_value('Character_Image', 'Image') == '':
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , base_Char_Image)
-		else:
-			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , sheet_save.get_value('Character_Image', 'Image'))
-		
-		# Information to drag and drop image character
-		if self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.get_shader_param('tex_frg_2') == base_Char_Image:
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = true
 		else:
+			char_image = load(sheet_save.get_value('Character_Image', 'Image'))
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , char_image)
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = false
 
 func _Update_Save():
@@ -306,4 +303,21 @@ func _Update_Save():
 
 # Receive Character image from user
 func _on_TextureRect_char_image_path(path):
-	pass # Replace with function body.
+	var PATH = path
+	var dir = sheet['path']
+	var sheet_name = dir
+	var image_name
+	
+	sheet_name = sheet_name.split('/')
+	sheet_name = '/' + sheet_name[-1]
+	dir = dir.substr(0, dir.length() - sheet_name.length())
+	PATH = PATH.replace('\\','/')
+	image_name = PATH.split('.')
+	image_name = '/Char_Image.' + image_name[-1]
+	dir = dir + image_name
+	Directory.new().copy(PATH, dir)
+	char_image = dir
+	_Update_Save()
+	self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , load(char_image))
+
+
