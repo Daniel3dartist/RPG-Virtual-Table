@@ -1,0 +1,38 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_2;
+uniform vec3 color = vec3(0.549864, 0.549864, 0.549864);
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Color:4
+	vec3 n_out4p0 = color;
+	float n_out4p1 = 1.000000;
+
+// ColorOp:5
+	vec3 n_out5p0 = max(n_out2p0, n_out4p0);
+
+// Output:0
+	COLOR.rgb = n_out5p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+
+"

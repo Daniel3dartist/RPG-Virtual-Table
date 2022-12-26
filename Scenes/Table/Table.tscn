@@ -83,6 +83,7 @@ size_flags_stretch_ratio = 0.87
 tab_align = 0
 
 [node name="Chat_Buttons_ChatInput" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -222,7 +223,6 @@ __meta__ = {
 }
 
 [node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

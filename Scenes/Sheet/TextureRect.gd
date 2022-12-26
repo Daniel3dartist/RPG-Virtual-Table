@@ -11,3 +11,4 @@ func _input(event):
 		var texture = load('res://Krita_Imagens/Orc_do_Zé_01.jpg')
 #		print(self.ShaderMaterial.get_node_list())
 		self.material.set_shader_param("tex_frg_2", texture)
+

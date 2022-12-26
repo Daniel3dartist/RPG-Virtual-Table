@@ -10,6 +10,8 @@ var core_status= {
 		'wis': 10,
 		'cha': 10,
 	}
+var char_image = ''
+var player_color
 
 # Drag-and-drop vars
 var dragging = false
@@ -17,6 +19,9 @@ var click_radius = 450
 var off_set
 var pos
 onready var pos2d = self.get_node('CanvasLayer/Node2D')
+
+# Base Image for Char
+onready var base_Char_Image = preload('res://Base_Images/Char_Base_Image.png')
 
 signal give_data(index)
 
@@ -45,7 +50,7 @@ func _ready():
 	var table = self.get_parent().get_parent()
 	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
 	emit_signal("give_data", self.get_index())
-	print('iniciado')
+	print('Starting Sheet...')
 	_Initialize_Sheet()
 	
 
@@ -256,6 +261,17 @@ func _Initialize_Sheet():
 				chatxt.text = str(core_status['cha'])
 			else:
 				_Update_Save()
+		# Verify if character sheet has a image
+		if sheet_save.get_value('Character_Image', 'Image') == null or sheet_save.get_value('Character_Image', 'Image') == '':
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , base_Char_Image)
+		else:
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , sheet_save.get_value('Character_Image', 'Image'))
+		
+		# Information to drag and drop image character
+		if self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.get_shader_param('tex_frg_2') == base_Char_Image:
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = true
+		else:
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = false
 
 func _Update_Save():
 	var sheet_save = ConfigFile.new()
@@ -266,9 +282,13 @@ func _Update_Save():
 	if err != OK:
 		print('Erro when try to load sheet data...')
 		pass
+	else:
+		if char_image == null or char_image == '':
+			sheet_save.set_value('Character_Image', 'Image', base_Char_Image)
 	
 	sheet_save.set_value('Sheet', 'Name', txt )
 	sheet_save.set_value('Status', 'core status', core_status )
+	sheet_save.set_value('Character_Image', 'Image', char_image)
 	sheet_save.save(sheet['path'])
 
 
@@ -283,3 +303,7 @@ func _Update_Save():
 #func _on_Area2D_mouse_exited():
 #	if Input.is_action_just_released("left_mouse"):
 #		dragging = false
+
+# Receive Character image from user
+func _on_TextureRect_char_image_path(path):
+	pass # Replace with function body.
