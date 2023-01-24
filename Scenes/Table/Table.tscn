@@ -83,7 +83,6 @@ size_flags_stretch_ratio = 0.87
 tab_align = 0
 
 [node name="Chat_Buttons_ChatInput" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -223,6 +222,7 @@ __meta__ = {
 }
 
 [node name="SheetList" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -364,10 +364,10 @@ layer = 128
 [node name="Settings2" parent="Settings" instance=ExtResource( 12 )]
 visible = false
 
+[node name="Grid2" parent="." instance=ExtResource( 10 )]
+
 [node name="Grid" type="CanvasLayer" parent="."]
 layer = 2
-
-[node name="Grid" parent="Grid" instance=ExtResource( 10 )]
 
 [connection signal="on_table" from="." to="Settings/Settings2" method="_on_Table_on_table"]
 [connection signal="pass_chat_input" from="." to="Bot/HTTPRequest" method="_on_Table_pass_chat_input"]
@@ -393,5 +393,5 @@ layer = 2
 [connection signal="text_changed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_entered"]
 
-[editable path="Grid/Grid"]
-[editable path="Grid/Grid/Token"]
+[editable path="Grid2"]
+[editable path="Grid2/Token"]

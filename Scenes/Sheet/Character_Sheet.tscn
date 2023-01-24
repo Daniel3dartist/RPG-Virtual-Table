@@ -1,8 +1,6 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Sheet/Character_Sheet.gd" type="Script" id=1]
-[ext_resource path="res://Krita_Imagens/Settings-icon-symbol-vector_32b.png" type="Texture" id=2]
-[ext_resource path="res://Krita_Imagens/Orc_do_Zé_01.jpg" type="Texture" id=3]
 [ext_resource path="res://Scenes/Sheet/Token_Shader.gdshader" type="Shader" id=4]
 [ext_resource path="res://Base_Images/Char_Base_Image.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Sheet/TextureRect.gd" type="Script" id=6]
@@ -56,6 +54,7 @@ expand_margin_bottom = 3.0
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 7 )
 shader_param/color = Vector3( 0.549864, 0.549864, 0.549864 )
+shader_param/tex_frg_2 = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 4 )
@@ -63,7 +62,7 @@ shader_param/outline_color = Color( 0.196078, 1, 0, 1 )
 shader_param/inner_circle = 0.45
 shader_param/outer_circle = 0.5
 shader_param/smoothness = 0.01
-shader_param/tex_frg_2 = ExtResource( 3 )
+shader_param/tex_frg_2 = ExtResource( 5 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -110,11 +109,11 @@ margin_bottom = -20.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea"]
 margin_right = 960.0
-margin_bottom = 36.0
+margin_bottom = 20.0
 
 [node name="Sheet_Exit" type="Button" parent="ColorRect/SheetArea/HBoxContainer"]
 margin_right = 20.0
-margin_bottom = 36.0
+margin_bottom = 20.0
 size_flags_horizontal = 0
 text = "X"
 __meta__ = {
@@ -123,14 +122,13 @@ __meta__ = {
 
 [node name="Button" type="Button" parent="ColorRect/SheetArea/HBoxContainer"]
 margin_left = 24.0
-margin_right = 66.0
-margin_bottom = 36.0
-icon = ExtResource( 2 )
+margin_right = 36.0
+margin_bottom = 20.0
 
 [node name="CharacterBaseArea" type="HBoxContainer" parent="ColorRect/SheetArea"]
-margin_top = 40.0
+margin_top = 24.0
 margin_right = 960.0
-margin_bottom = 82.0
+margin_bottom = 66.0
 size_flags_horizontal = 3
 alignment = 1
 __meta__ = {
@@ -203,7 +201,7 @@ margin_right = 318.0
 margin_bottom = 42.0
 
 [node name="Sheet_TabContainer" type="TabContainer" parent="ColorRect/SheetArea"]
-margin_top = 86.0
+margin_top = 70.0
 margin_right = 960.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
@@ -627,36 +625,36 @@ margin_bottom = -1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Background"]
 margin_right = 958.0
-margin_bottom = 448.0
+margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer"]
 margin_right = 554.0
-margin_bottom = 448.0
+margin_bottom = 464.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer"]
 margin_left = 558.0
 margin_right = 958.0
-margin_bottom = 448.0
+margin_bottom = 464.0
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
 material = SubResource( 8 )
+margin_top = 8.0
 margin_right = 400.0
-margin_bottom = 448.0
+margin_bottom = 456.0
 rect_min_size = Vector2( 400, 448 )
 texture = ExtResource( 5 )
 expand = true
-stretch_mode = 7
 script = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
 margin_left = 138.0
-margin_top = 208.0
+margin_top = 216.0
 margin_right = 262.0
-margin_bottom = 239.0
+margin_bottom = 247.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Drop your file here.
 ( JPG, PNG, GIF)"
@@ -691,7 +689,7 @@ margin_left = 379.0
 margin_right = 579.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 expand = true
 stretch_mode = 1
 script = ExtResource( 6 )

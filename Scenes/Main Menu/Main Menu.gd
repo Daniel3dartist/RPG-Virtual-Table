@@ -3,7 +3,7 @@ extends Control
 signal is_dir(value)
 
 var on_dev_pc = false
-var BASE_PATH = OS.get_executable_path().get_base_dir() + '/data/Settings.ini'
+var BASE_PATH = OS.get_executable_path().get_base_dir() + '/data/settings.ini'
 
 var next_scene = 'res://Scenes/Table/Table.tscn'
 

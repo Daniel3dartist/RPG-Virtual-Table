@@ -2,8 +2,8 @@ extends Control
 
 var on_table = false
 
-#var BASE_PATH = "res://data/Settings.ini"
-var BASE_PATH = OS.get_executable_path().get_base_dir() + "data/Settings.ini"
+#var BASE_PATH = "res://data/settings.ini"
+var BASE_PATH = OS.get_executable_path().get_base_dir() + "/data/settings.ini"
 var types_of_windows_modes = ["Window", "Full Screen", "Borderless Window"]
 var resolutions = ["640 x 480", "800 x 600", "1024 x 768", "1152 x 864", "1280 x 720", "1280 x 800", "1280 x 1024", "1366 x 768", "1440 x 900", "1600 x 900", "1680 x 1050", "1920 x 1080", "2560 x 1440", "2048 x 1080", "3840 x 2160", "7680 x 4320"]
 
@@ -31,6 +31,7 @@ onready var popup = $'PopupMenu'
 
 
 func _ready():
+	print('\n\nBase Path: \n\n',BASE_PATH,'\n\n')
 	check_settings_file()
 	timer.set_wait_time(15)
 	popup.visible = false
