@@ -3,7 +3,8 @@
 [resource]
 code = "shader_type canvas_item;
 uniform sampler2D tex_frg_2;
-uniform vec3 color = vec3(0.549864, 0.549864, 0.549864);
+uniform sampler2D tex_frg_7;
+uniform float alpha;
 
 
 
@@ -19,14 +20,23 @@ void fragment() {
 	float n_out2p1 = tex_frg_2_read.a;
 
 // Color:4
-	vec3 n_out4p0 = color;
+	vec3 n_out4p0 = vec3(0.549864, 0.549864, 0.549864);
 	float n_out4p1 = 1.000000;
 
 // ColorOp:5
 	vec3 n_out5p0 = max(n_out2p0, n_out4p0);
 
+// Texture:7
+	vec4 tex_frg_7_read = texture(tex_frg_7, UV.xy);
+	vec3 n_out7p0 = tex_frg_7_read.rgb;
+	float n_out7p1 = tex_frg_7_read.a;
+
+// VectorScalarMix:6
+	float n_in6p2 = alpha;
+	vec3 n_out6p0 = mix(n_out5p0, n_out7p0, n_in6p2);
+
 // Output:0
-	COLOR.rgb = n_out5p0;
+	COLOR.rgb = n_out6p0;
 
 }
 
@@ -34,5 +44,4 @@ void light() {
 // Output:0
 
 }
-
 "

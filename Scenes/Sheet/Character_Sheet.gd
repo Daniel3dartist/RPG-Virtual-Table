@@ -317,7 +317,47 @@ func _on_TextureRect_char_image_path(path):
 	dir = dir + image_name
 	Directory.new().copy(PATH, dir)
 	char_image = dir
+	load_char_image(dir)
 	_Update_Save()
-	self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , load(char_image))
+	print('Char_Image: ', char_image)
+	
+
+func load_char_image(path):
+	var TexRect = $'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect'
+	var Token = $'ColorRect/SheetArea/Sheet_TabContainer/Token/CenterContainer/TextureRect'
+	var valid_image = load_external_tex(path)
+	
+	$'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label'.visible = false
+	TexRect.material.set_shader_param('tex_frg_7' , valid_image)
+	TexRect.material.set_shader_param('alpha', 1.000)
+	Token.material.set_shader_param('tex_frg_2' , valid_image)
 
 
+func load_external_tex(path):
+	var tex_file = File.new()
+	tex_file.open(path, File.READ)
+	var bytes = tex_file.get_buffer(tex_file.get_len())
+	var img = Image.new()
+	var data 
+	var file_type = path.split('.')
+	var is_valid: bool = true
+	
+	if file_type[-1] == 'png':
+		data = img.load_png_from_buffer(bytes)
+	elif file_type[-1] == 'jpg' or  file_type[-1] == 'jpeg':
+		data = img.load_jpg_from_buffer(bytes)
+	elif file_type[-1] == 'bmp':
+		data = img.load_bmp_from_buffer(bytes)
+	elif file_type[-1] == 'tga':
+		data = img.load_tga_from_buffer(bytes)
+	elif file_type[-1] == 'webp':
+		data = img.load_webp_from_buffer(bytes)
+	else:
+		is_valid = false
+		print('\nErro to load character image file. \nUse a valid image file format\n')
+	
+	var imgtex = ImageTexture.new()
+	imgtex.create_from_image(img)
+	tex_file.close()
+	
+	return imgtex

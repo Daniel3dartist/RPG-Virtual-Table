@@ -53,7 +53,7 @@ expand_margin_bottom = 3.0
 
 [sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 7 )
-shader_param/color = Vector3( 0.549864, 0.549864, 0.549864 )
+shader_param/alpha = null
 shader_param/tex_frg_2 = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=6]
@@ -216,7 +216,6 @@ __meta__ = {
 }
 
 [node name="Core Stats" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -647,7 +646,6 @@ margin_right = 400.0
 margin_bottom = 456.0
 rect_min_size = Vector2( 400, 448 )
 texture = ExtResource( 5 )
-expand = true
 script = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
