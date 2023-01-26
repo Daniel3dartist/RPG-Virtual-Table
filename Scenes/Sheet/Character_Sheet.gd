@@ -25,6 +25,7 @@ onready var pos2d = self.get_node('CanvasLayer/Node2D')
 onready var base_Char_Image = preload('res://Base_Images/Char_Base_Image.png')
 
 signal give_data(index)
+signal load_image_token(img)
 
 
 # ===============================================[ Score Attributes var ]============================================================= #
@@ -319,9 +320,11 @@ func load_char_image(path):
 	var valid_image = load_external_tex(path)
 	
 	$'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label'.visible = false
+	TexRect.texture = valid_image
 	TexRect.material.set_shader_param('tex_frg_7' , valid_image)
 	TexRect.material.set_shader_param('alpha', 1.000)
 	Token.material.set_shader_param('tex_frg_2' , valid_image)
+	emit_signal('load_image_token', valid_image)
 
 
 func load_external_tex(path):

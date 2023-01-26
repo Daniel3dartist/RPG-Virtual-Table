@@ -51,9 +51,9 @@ corner_radius_bottom_left = 10
 expand_margin_top = 3.0
 expand_margin_bottom = 3.0
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 7 )
-shader_param/alpha = null
+shader_param/alpha = 0.0
 shader_param/tex_frg_2 = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=6]
@@ -645,13 +645,25 @@ margin_left = 558.0
 margin_right = 958.0
 margin_bottom = 464.0
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
-material = SubResource( 8 )
+[node name="ColorRect" type="ColorRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
 margin_top = 8.0
 margin_right = 400.0
 margin_bottom = 456.0
 rect_min_size = Vector2( 400, 448 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
+material = SubResource( 7 )
+margin_top = 8.0
+margin_right = 400.0
+margin_bottom = 456.0
+rect_min_size = Vector2( 400, 448 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
 script = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
@@ -665,7 +677,6 @@ text = "Drop your file here.
 align = 1
 
 [node name="Token" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0

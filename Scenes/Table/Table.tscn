@@ -238,6 +238,7 @@ margin_bottom = 20.0
 text = "Creat a sheet"
 
 [node name="Settings" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
+visible = false
 margin_left = 4.0
 margin_top = 32.0
 margin_right = 432.0
