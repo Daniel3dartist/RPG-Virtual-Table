@@ -8,13 +8,12 @@ var grid_size = Vector2(40 , 30)
 var color = "#5c5c5c"
 var LINE_COLOR = Color("%s" % color)
 var LINE_WIDTH = 3
-var BG = Color(1,1,1)
+var BG = Color('d8d5d5')
 
-onready var table = self.get_parent().get_parent().get_parent()
+onready var table = self.get_parent().get_parent()#.get_parent()
 
 func _ready():
-	print('grid tree ', self.get_parent().get_parent().get_parent())
-	print('Table name? ', table)
+	print('\n\nTable name? %s \n\n' % table)
 	table.connect('grid_settings', self, '_Grid_Settings')
 
 

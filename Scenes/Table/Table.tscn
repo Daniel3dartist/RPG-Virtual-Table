@@ -238,7 +238,6 @@ margin_bottom = 20.0
 text = "Creat a sheet"
 
 [node name="Settings" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
-visible = false
 margin_left = 4.0
 margin_top = 32.0
 margin_right = 432.0
@@ -331,7 +330,7 @@ margin_left = 184.0
 margin_right = 244.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
-color = Color( 0.823529, 0.792157, 0.792157, 1 )
+color = Color( 0.847059, 0.835294, 0.835294, 1 )
 
 [node name="Label5" type="Label" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer"]
 margin_top = 328.0
