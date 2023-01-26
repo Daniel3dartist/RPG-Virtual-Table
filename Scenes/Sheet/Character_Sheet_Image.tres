@@ -27,7 +27,7 @@ void fragment() {
 	vec3 n_out5p0 = max(n_out2p0, n_out4p0);
 
 // Texture:7
-	vec4 tex_frg_7_read = texture(tex_frg_7, UV.xy);
+	vec4 tex_frg_7_read = texture(tex_frg_7, UV);
 	vec3 n_out7p0 = tex_frg_7_read.rgb;
 	float n_out7p1 = tex_frg_7_read.a;
 

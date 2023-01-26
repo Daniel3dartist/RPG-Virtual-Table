@@ -18,6 +18,7 @@ var dragging = false
 var click_radius = 450
 var off_set
 var pos
+#onready var pos2d = self.get_node('CanvasLayer/Node2D')
 onready var pos2d = self.get_node('CanvasLayer/Node2D')
 
 # Base Image for Char
@@ -47,6 +48,8 @@ onready var CHA_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/
 
 func _ready():
 #	print('get center: %s' % get_node("CanvasLayer/Node2D/ColorRect2").rect_position)
+	$'ColorRect'.rect_position = Vector2(140, 60)
+	$'CanvasLayer/ColorRect2'.rect_position = Vector2(235, 60)
 	var table = self.get_parent().get_parent()
 	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
 	emit_signal("give_data", self.get_index())
@@ -264,10 +267,10 @@ func _Initialize_Sheet():
 		# Verify if character sheet has a image
 		if sheet_save.get_value('Character_Image', 'Image') == null or sheet_save.get_value('Character_Image', 'Image') == '':
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , base_Char_Image)
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('alpha', 1.000)
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = true
 		else:
-			char_image = load(sheet_save.get_value('Character_Image', 'Image'))
-			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , char_image)
+			load_char_image(sheet_save.get_value('Character_Image', 'Image'))
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = false
 
 func _Update_Save():
@@ -288,18 +291,6 @@ func _Update_Save():
 	sheet_save.set_value('Character_Image', 'Image', char_image)
 	sheet_save.save(sheet['path'])
 
-
-
-#func _on_Area2D_mouse_entered():
-#	print('Mouse entered')
-#	off_set = self.rect_position - get_global_mouse_position()
-#	if Input.is_action_pressed("left_mouse"):
-#		dragging = true
-
-
-#func _on_Area2D_mouse_exited():
-#	if Input.is_action_just_released("left_mouse"):
-#		dragging = false
 
 # Receive Character image from user
 func _on_TextureRect_char_image_path(path):
