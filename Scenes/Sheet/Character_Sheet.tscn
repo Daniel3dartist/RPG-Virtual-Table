@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Sheet/Character_Sheet.gd" type="Script" id=1]
+[ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Sheet/Token_Shader.gdshader" type="Shader" id=4]
 [ext_resource path="res://Base_Images/Char_Base_Image.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Sheet/TextureRect.gd" type="Script" id=6]
@@ -62,7 +63,7 @@ shader_param/outline_color = Color( 0.196078, 1, 0, 1 )
 shader_param/inner_circle = 0.45
 shader_param/outer_circle = 0.5
 shader_param/smoothness = 0.01
-shader_param/tex_frg_2 = ExtResource( 5 )
+shader_param/tex_frg_2 = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -221,6 +222,7 @@ __meta__ = {
 }
 
 [node name="Core Stats" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -704,7 +706,7 @@ margin_left = 379.0
 margin_right = 579.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 200, 200 )
-texture = ExtResource( 5 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 1
 script = ExtResource( 6 )

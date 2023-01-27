@@ -78,7 +78,6 @@ margin_bottom = 446.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/bg = SubResource( 1 )
-scroll_horizontal_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

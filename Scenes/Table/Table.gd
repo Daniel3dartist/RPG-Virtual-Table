@@ -30,7 +30,7 @@ onready var chat_input = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Button
 
 var character_sheet_path = preload("res://Scenes/Sheet/Character_Sheet.tscn")
 
-onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList"
+onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer"
 var sheet_call_Hbox = preload('res://Scenes/Table/SheetCallHBox.tscn')
 var sheet_call = preload("res://Scenes/Table/SheetCall.tscn")
 

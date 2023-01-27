@@ -4,10 +4,10 @@
 [ext_resource path="res://Scenes/Table/Camera2D.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Sheet/Token.tscn" type="PackedScene" id=4]
 
-[sub_resource type="StreamTexture" id=2]
+[sub_resource type="StreamTexture" id=6]
 flags = 4
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=7]
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.0457746, 0.834507 )
@@ -18,7 +18,7 @@ gradient = SubResource( 4 )
 
 [sub_resource type="TileSet" id=1]
 0/name = "player.png 0"
-0/texture = SubResource( 2 )
+0/texture = SubResource( 6 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( -10, -10, 115, 135 )
@@ -43,10 +43,10 @@ script = ExtResource( 2 )
 
 [node name="Player" type="Sprite" parent="Camera2D"]
 position = Vector2( 0.0449219, -93.3797 )
-texture = SubResource( 2 )
+texture = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="Camera2D"]
-texture = SubResource( 3 )
+texture = SubResource( 7 )
 
 [node name="TextureRect" type="TextureRect" parent="Camera2D"]
 anchor_right = 1.0

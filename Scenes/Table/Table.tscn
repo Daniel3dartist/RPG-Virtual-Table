@@ -71,6 +71,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -830.0
+mouse_filter = 2
 
 [node name="TabContainer" type="TabContainer" parent="Base_UI/Chat_&_Rolls_Results"]
 anchor_bottom = 1.0
@@ -237,6 +238,21 @@ margin_right = 428.0
 margin_bottom = 20.0
 text = "Creat a sheet"
 
+[node name="ScrollContainer" type="ScrollContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList"]
+margin_top = 24.0
+margin_right = 428.0
+margin_bottom = 664.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer"]
+margin_right = 428.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer"]
+
 [node name="Settings" type="VBoxContainer" parent="Base_UI/Chat_&_Rolls_Results/TabContainer"]
 visible = false
 margin_left = 4.0
@@ -364,10 +380,14 @@ layer = 128
 [node name="Settings2" parent="Settings" instance=ExtResource( 12 )]
 visible = false
 
-[node name="Grid2" parent="." instance=ExtResource( 10 )]
-
-[node name="Grid" type="CanvasLayer" parent="."]
+[node name="Grid_Mouse_Space" type="CanvasLayer" parent="."]
 layer = 2
+
+[node name="Control" type="Control" parent="Grid_Mouse_Space"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Grid2" parent="." instance=ExtResource( 10 )]
 
 [connection signal="on_table" from="." to="Settings/Settings2" method="_on_Table_on_table"]
 [connection signal="pass_chat_input" from="." to="Bot/HTTPRequest" method="_on_Table_pass_chat_input"]
@@ -392,6 +412,8 @@ layer = 2
 [connection signal="popup_closed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer4/BGColor" to="." method="_on_BGColor_popup_closed"]
 [connection signal="text_changed" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="Base_UI/Chat_&_Rolls_Results/TabContainer/Settings/VBoxContainer/CenterContainer5/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="mouse_entered" from="Grid_Mouse_Space/Control" to="Grid2/Camera2D" method="_on_Control_mouse_entered"]
+[connection signal="mouse_exited" from="Grid_Mouse_Space/Control" to="Grid2/Camera2D" method="_on_Control_mouse_exited"]
 
 [editable path="Grid2"]
 [editable path="Grid2/Token"]

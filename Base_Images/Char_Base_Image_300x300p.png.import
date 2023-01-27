@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/png-clipart-orc-orc-thumbnail.png-d063f48b1e4d274c057a42f0cc8a0eca.stex"
+path="res://.import/Char_Base_Image_300x300p.png-9a61d1ad3987ccaafbe255ca89455469.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Sheet/png-clipart-orc-orc-thumbnail.png"
-dest_files=[ "res://.import/png-clipart-orc-orc-thumbnail.png-d063f48b1e4d274c057a42f0cc8a0eca.stex" ]
+source_file="res://Base_Images/Char_Base_Image_300x300p.png"
+dest_files=[ "res://.import/Char_Base_Image_300x300p.png-9a61d1ad3987ccaafbe255ca89455469.stex" ]
 
 [params]
 
