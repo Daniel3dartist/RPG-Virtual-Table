@@ -1,8 +1,7 @@
 extends TextureRect
 
-
 func _ready():
-	var char_sheet = self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+	var char_sheet = self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
 	char_sheet.connect('load_image_token', self, "_Load_Image_Token")
 
 func _Load_Image_Token(img):
@@ -11,14 +10,13 @@ func _Load_Image_Token(img):
 	
 func load_char_image(path):
 	var TexRect = $'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect'
-	var Token = $'ColorRect/SheetArea/Sheet_TabContainer/Token/CenterContainer/TextureRect'
 	var valid_image = load_external_tex(path)
 	
 	$'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label'.visible = false
 	TexRect.texture = valid_image
 	TexRect.material.set_shader_param('tex_frg_7' , valid_image)
-	TexRect.material.set_shader_param('alpha', 1.000)
-	Token.material.set_shader_param('tex_frg_2' , valid_image)
+#	TexRect.material.set_shader_param('alpha', 1.000)
+	self.material.set_shader_param('tex_frg_2' , valid_image)
 	emit_signal('load_image_token', valid_image)
 
 
@@ -50,3 +48,21 @@ func load_external_tex(path):
 	tex_file.close()
 	
 	return imgtex
+
+
+func _on_Y_Position_Input_VSlider_drag_started():
+	pass # Replace with function body.
+
+
+func _on_X_Position_Input_HSlider_drag_started():
+	pass # Replace with function body.
+
+
+func _on_X_Scale_Input_HSlider_value_changed(value):
+	var x = value#* 0.1
+	self.material.set_shader_param('uvs_x' , x)
+
+
+func _on_Y_Scale_Input_VSlider_value_changed(value):
+	var y = value #* 0.1
+	self.material.set_shader_param('uvs_y' , y)

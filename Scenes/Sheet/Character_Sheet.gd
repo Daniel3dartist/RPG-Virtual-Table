@@ -316,7 +316,7 @@ func _on_TextureRect_char_image_path(path):
 
 func load_char_image(path):
 	var TexRect = $'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect'
-	var Token = $'ColorRect/SheetArea/Sheet_TabContainer/Token/CenterContainer/TextureRect'
+	var Token = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect'
 	var valid_image = load_external_tex(path)
 	
 	$'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label'.visible = false

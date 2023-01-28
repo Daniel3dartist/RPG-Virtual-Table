@@ -5,7 +5,6 @@
 [ext_resource path="res://Scenes/Sheet/Token_Shader.gdshader" type="Shader" id=4]
 [ext_resource path="res://Base_Images/Char_Base_Image.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Sheet/TextureRect.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Sheet/Character_Sheet_Image.tres" type="Shader" id=7]
 [ext_resource path="res://Scenes/Sheet/Character_Image_File_Manager.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -52,8 +51,54 @@ corner_radius_bottom_left = 10
 expand_margin_top = 3.0
 expand_margin_bottom = 3.0
 
+[sub_resource type="Shader" id=8]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_2;
+uniform sampler2D tex_frg_7;
+uniform float alpha;
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Color:4
+	vec3 n_out4p0 = vec3(0.549864, 0.549864, 0.549864);
+	float n_out4p1 = 1.000000;
+
+// ColorOp:5
+	vec3 n_out5p0 = max(n_out2p0, n_out4p0);
+
+// Texture:7
+	vec4 tex_frg_7_read = texture(tex_frg_7, UV);
+	vec3 n_out7p0 = tex_frg_7_read.rgb;
+	float n_out7p1 = tex_frg_7_read.a;
+
+// VectorScalarMix:6
+	float n_in6p2 = alpha;
+	vec3 n_out6p0 = mix(n_out5p0, n_out7p0, n_in6p2);
+
+// Output:0
+	COLOR.rgb = n_out6p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
 [sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 7 )
+shader = SubResource( 8 )
 shader_param/alpha = 0.0
 shader_param/tex_frg_2 = ExtResource( 5 )
 
@@ -62,6 +107,10 @@ shader = ExtResource( 4 )
 shader_param/outline_color = Color( 0.196078, 1, 0, 1 )
 shader_param/inner_circle = 0.45
 shader_param/outer_circle = 0.5
+shader_param/uvs_x = 1.0
+shader_param/uvs_y = 1.0
+shader_param/uvm_x = null
+shader_param/uvm_y = null
 shader_param/smoothness = 0.01
 shader_param/tex_frg_2 = ExtResource( 2 )
 
@@ -685,31 +734,227 @@ margin_left = 1.0
 margin_top = 25.0
 margin_right = -1.0
 margin_bottom = -1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token"]
 margin_right = 958.0
-margin_bottom = 14.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Token"
 align = 1
+valign = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token"]
-margin_top = 18.0
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token"]
+margin_top = 34.0
 margin_right = 958.0
-margin_bottom = 218.0
+margin_bottom = 416.0
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/CenterContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer"]
+margin_right = 305.0
+margin_bottom = 382.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Scale_Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer2"]
+margin_right = 305.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Scale"
+align = 2
+valign = 1
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 305.0
+margin_bottom = 382.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer"]
+margin_left = 309.0
+margin_right = 649.0
+margin_bottom = 382.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="X_Scale_Input" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer"]
+margin_right = 340.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input"]
+margin_bottom = 16.0
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input"]
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 12.0
+margin_bottom = 15.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X"
+align = 1
+valign = 1
+
+[node name="X_Scale_Input_HSlider" type="HSlider" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input"]
+margin_left = 16.0
+margin_right = 256.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.1
+value = 1.0
+allow_greater = true
+tick_count = 10
+
+[node name="Container2" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input"]
+margin_left = 260.0
+margin_right = 340.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer"]
+margin_top = 20.0
+margin_right = 340.0
+margin_bottom = 362.0
+alignment = 1
+
+[node name="Y_Scale_Input" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 16.0
+margin_bottom = 342.0
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input"]
+margin_right = 16.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Y"
+align = 1
+valign = 1
+
+[node name="Y_Scale_Input_VSlider" type="VSlider" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input"]
+margin_top = 18.0
+margin_right = 16.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 0, 240 )
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.1
+value = 1.0
+allow_greater = true
+tick_count = 10
+
+[node name="Container2" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input"]
+margin_top = 262.0
+margin_right = 16.0
+margin_bottom = 342.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_horizontal = 3
+
+[node name="Token_TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2"]
 material = SubResource( 6 )
-margin_left = 379.0
-margin_right = 579.0
-margin_bottom = 200.0
-rect_min_size = Vector2( 200, 200 )
+margin_left = 20.0
+margin_right = 320.0
+margin_bottom = 342.0
+rect_min_size = Vector2( 300, 300 )
 texture = ExtResource( 2 )
 expand = true
-stretch_mode = 1
+stretch_mode = 6
 script = ExtResource( 6 )
+
+[node name="Y_Position_Input" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 324.0
+margin_right = 340.0
+margin_bottom = 342.0
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input"]
+margin_right = 16.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+
+[node name="Y_Position_Input_VSlider" type="VSlider" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input"]
+margin_top = 84.0
+margin_right = 16.0
+margin_bottom = 324.0
+rect_min_size = Vector2( 0, 240 )
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+tick_count = 10
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input"]
+margin_top = 328.0
+margin_right = 16.0
+margin_bottom = 342.0
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Y"
+align = 1
+valign = 1
+
+[node name="X_Position_Input" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer"]
+margin_top = 366.0
+margin_right = 340.0
+margin_bottom = 382.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input"]
+margin_right = 80.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="X_Position_Input_HSlider" type="HSlider" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input"]
+margin_left = 84.0
+margin_right = 324.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+tick_count = 10
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input"]
+margin_left = 328.0
+margin_top = 1.0
+margin_right = 336.0
+margin_bottom = 15.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "X"
+align = 1
+valign = 1
+
+[node name="Container2" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input"]
+margin_left = 340.0
+margin_right = 340.0
+margin_bottom = 16.0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer"]
+margin_left = 653.0
+margin_right = 958.0
+margin_bottom = 382.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3"]
+margin_right = 305.0
+margin_bottom = 364.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Position_Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3"]
+margin_top = 368.0
+margin_right = 305.0
+margin_bottom = 382.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Position"
+valign = 1
 
 [node name="Area2D" type="Area2D" parent="ColorRect/SheetArea/Sheet_TabContainer"]
 visible = false
@@ -721,3 +966,7 @@ shape = SubResource( 5 )
 
 [connection signal="button_up" from="ColorRect/SheetArea/HBoxContainer/Sheet_Exit" to="." method="_on_Sheet_Exit_button_up"]
 [connection signal="char_image_path" from="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_char_image_path"]
+[connection signal="value_changed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input/X_Scale_Input_HSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Scale_Input_HSlider_value_changed"]
+[connection signal="value_changed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Scale_Input_VSlider_value_changed"]
+[connection signal="drag_started" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input/Y_Position_Input_VSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Position_Input_VSlider_drag_started"]
+[connection signal="drag_started" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input/X_Position_Input_HSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Position_Input_HSlider_drag_started"]
