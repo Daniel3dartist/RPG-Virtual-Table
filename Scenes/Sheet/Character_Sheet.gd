@@ -14,15 +14,30 @@ var char_image = ''
 var player_color
 
 # Drag-and-drop vars
-var dragging = false
+var dragging: bool = false
+var is_block: bool = true
 var click_radius = 450
 var off_set
 var pos
-#onready var pos2d = self.get_node('CanvasLayer/Node2D')
+
 onready var pos2d = self.get_node('CanvasLayer/Node2D')
+onready var color_rect = self.get_node("CanvasLayer/ColorRect2")
 
 # Base Image for Char
 onready var base_Char_Image = preload('res://Base_Images/Char_Base_Image.png')
+# Token parameters
+var token_param : Dictionary = {
+	'ring_color': '',
+	'uv_scale': [0.0, 0.0],
+	'uv_offset': [0.0, 0.0],
+}
+
+onready var scale_x = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input/X_Scale_Input_HSlider'
+onready var scale_y = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider'
+onready var offset_x = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input/X_Position_Input_HSlider'
+onready var offset_y = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input/Y_Position_Input_VSlider'
+onready var color = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/ColorPickerButton'
+
 
 signal give_data(index)
 signal load_image_token(img)
@@ -50,7 +65,9 @@ onready var CHA_Mod_Value = $'ColorRect/SheetArea/Sheet_TabContainer/Core Stats/
 func _ready():
 #	print('get center: %s' % get_node("CanvasLayer/Node2D/ColorRect2").rect_position)
 	$'ColorRect'.rect_position = Vector2(140, 60)
-	$'CanvasLayer/ColorRect2'.rect_position = Vector2(235, 60)
+	color_rect.rect_position = Vector2(235, 60)
+	color_rect.connect("mouse_entered", self, "Mouse_Entered")
+	color_rect.connect("mouse_exited", self, "Mouse_Exited")
 	var table = self.get_parent().get_parent()
 	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
 	emit_signal("give_data", self.get_index())
@@ -162,35 +179,11 @@ func _input(event):
 # Drag-and-drop sheet
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		off_set = [rect_position - get_global_mouse_position(), get_node("CanvasLayer/ColorRect2").rect_position - get_global_mouse_position()]
-#		pos = pos2d.position - rect_position
-#		if (event.position - pos2d.position).length() <= click_radius:
-#		if rect_size.length() <= click_radius:
-#			if not dragging and event.pressed:
-#				dragging = true
-#			if dragging and not event.pressed:
-#				dragging = false
 
 		var area = get_node("CanvasLayer/ColorRect2").rect_size
 		var mouse = get_global_mouse_position()
-#		var dic = {
-#			'min_x': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.x - (area.x/2),
-#			'max_x': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.x + (area.x/2),
-#			'min_y': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.y - (area.y/2),
-#			'max_y': self.get_node("CanvasLayer/Node2D/ColorRect2").rect_position.y + (area.y/2)
-#		}
-#		var dic = {
-#			'min_x': self.get_node("CanvasLayer/ColorRect2").rect_position.x - (area.x/2),
-#			'max_x': self.get_node("CanvasLayer/ColorRect2").rect_position.x + (area.x/2),
-#			'min_y': self.get_node("CanvasLayer/ColorRect2").rect_position.y - (area.y/2),
-#			'max_y': self.get_node("CanvasLayer/ColorRect2").rect_position.y + (area.y/2)
-#		}
-		var dic = {
-			'min_x': self.get_node("CanvasLayer/ColorRect2").margin_left,
-			'max_x': self.get_node("CanvasLayer/ColorRect2").margin_right,
-			'min_y': self.get_node("CanvasLayer/ColorRect2").margin_top,
-			'max_y': self.get_node("CanvasLayer/ColorRect2").margin_bottom
-		}
-		if mouse.x >= dic['min_x'] and mouse.x <= dic['max_x'] and mouse.y >= dic['min_y'] and mouse.y <= dic['max_y']:
+		
+		if is_block == false:
 			print('Is mouse position\n')
 			set_default_cursor_shape(13)
 			dragging = true
@@ -198,29 +191,24 @@ func _input(event):
 		dragging = false
 
 func _process(delta):
-#	 if self.get_node('Position2D').intersect_shape(get_viewport().get_mouse_position()):
-#		pass
-
 	var area = get_node("CanvasLayer/ColorRect2").rect_size
 	var mouse = get_global_mouse_position()
-	var dic = {
-		'min_x': self.get_node("CanvasLayer/ColorRect2").margin_left,
-		'max_x': self.get_node("CanvasLayer/ColorRect2").margin_right,
-		'min_y': self.get_node("CanvasLayer/ColorRect2").margin_top,
-		'max_y': self.get_node("CanvasLayer/ColorRect2").margin_bottom
-	}
-	if mouse.x >= dic['min_x'] and mouse.x <= dic['max_x'] and mouse.y >= dic['min_y'] and mouse.y <= dic['max_y']:
-		print('Is mouse position\n')
-
 	
 	if dragging == true:
-		
 		var view = get_viewport().get_mouse_position()
 		rect_position = view + off_set[0]
 		pos2d.position = pos2d.position - rect_position #rect_position + pos
 		get_node("CanvasLayer/ColorRect2").rect_position = view + off_set[1]
 
 
+# Check if mouse isn't over anoter UI node. If so, the dragging command will be blocked.
+func Mouse_Entered(): # Free to dragging
+	is_block = false
+
+func Mouse_Exited(): # Blocked to dragging
+	is_block = true
+
+# Close the sheet UI
 func _on_Sheet_Exit_button_up():
 	self.queue_free()
 
@@ -233,7 +221,7 @@ func _Receive_Sheet_Data(data_path):
 	print('Data recebido ', data_path)
 
 
-
+# start I/O data check and load
 func _Initialize_Sheet():
 	var sheet_save = ConfigFile.new()
 	var err
@@ -250,6 +238,7 @@ func _Initialize_Sheet():
 	if err != OK:
 		print('Erro when try to load sheet data...')
 	else:
+		var token = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect'
 		if self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text == '':
 			self.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = sheet_save.get_value("Sheet", "Name")
 			print('config: ', sheet_save.get_value("Sheet", "Name"))
@@ -268,12 +257,34 @@ func _Initialize_Sheet():
 		# Verify if character sheet has a image
 		if sheet_save.get_value('Character_Image', 'Image') == null or sheet_save.get_value('Character_Image', 'Image') == '':
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('tex_frg_2' , base_Char_Image)
-			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('alpha', 1.000)
+			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect').material.set_shader_param('alpha', 0.000)
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = true
 		else:
 			load_char_image(sheet_save.get_value('Character_Image', 'Image'))
 			self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label').visible = false
+		
+		# Setting token parameters
+		if not sheet_save.get_value('Token Parameters', 'Parameters'):
+			_Update_Save()
+		else:
+			token_param = sheet_save.get_value('Token Parameters', 'Parameters')
+			scale_x.value = token_param['uv_scale'][0]
+			scale_y.value = token_param['uv_scale'][1]
+			offset_x.value = token_param['uv_offset'][0]
+			offset_y.value = token_param['uv_offset'][1]
+			color.color = token_param['ring_color']
+			
+			# Set Ring color
+			token.material.set_shader_param('outline_color', Color(token_param['ring_color']))
+			# Set UV scale
+			token.material.set_shader_param('uvs_x', token_param['uv_scale'][0])
+			token.material.set_shader_param('uvs_y', token_param['uv_scale'][1])
+			# Set UV offset
+			token.material.set_shader_param('uvm_x', token_param['uv_offset'][0])
+			token.material.set_shader_param('uvm_y', token_param['uv_offset'][1])
 
+
+# save edits
 func _Update_Save():
 	var sheet_save = ConfigFile.new()
 	var err
@@ -290,8 +301,10 @@ func _Update_Save():
 	sheet_save.set_value('Sheet', 'Name', txt )
 	sheet_save.set_value('Status', 'core status', core_status )
 	sheet_save.set_value('Character_Image', 'Image', char_image)
+	sheet_save.set_value('Token Parameters', 'Parameters', token_param)
 	sheet_save.save(sheet['path'])
 
+# ===============================================[ Load Texture Image of Player Character ]============================================================= #
 
 # Receive Character image from user
 func _on_TextureRect_char_image_path(path):
@@ -355,3 +368,10 @@ func load_external_tex(path):
 	tex_file.close()
 	
 	return imgtex
+
+
+
+func _on_Token_TextureRect_save_token_param(dict):
+	token_param = dict
+	print(token_param)
+	_Update_Save()

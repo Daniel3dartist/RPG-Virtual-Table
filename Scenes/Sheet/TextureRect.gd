@@ -1,7 +1,18 @@
 extends TextureRect
 
+onready var check_box = self.get_parent().get_node("CheckBox")
+var is_check : bool = true
+var token_param : Dictionary = {
+	'ring_color': '',
+	'uv_scale': [0.0, 0.0],
+	'uv_offset': [0.0, 0.0],
+}
+
+signal save_token_param(dict)
+
 func _ready():
 	var char_sheet = self.get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent()
+	check_box.pressed = is_check
 	char_sheet.connect('load_image_token', self, "_Load_Image_Token")
 
 func _Load_Image_Token(img):
@@ -50,19 +61,75 @@ func load_external_tex(path):
 	return imgtex
 
 
-func _on_Y_Position_Input_VSlider_drag_started():
-	pass # Replace with function body.
-
-
-func _on_X_Position_Input_HSlider_drag_started():
-	pass # Replace with function body.
+func save_token_param():
+	emit_signal("save_token_param", token_param)
 
 
 func _on_X_Scale_Input_HSlider_value_changed(value):
-	var x = value#* 0.1
-	self.material.set_shader_param('uvs_x' , x)
+	var y_scale = self.get_parent().get_parent().get_node("HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider")
+	
+	self.material.set_shader_param('uvs_x' , value)
+	token_param['uv_scale'][0] = value
+	if is_check == true:
+		self.material.set_shader_param('uvs_y' , value)
+		token_param['uv_scale'][1] = value
+		y_scale.value = value
+
 
 
 func _on_Y_Scale_Input_VSlider_value_changed(value):
-	var y = value #* 0.1
-	self.material.set_shader_param('uvs_y' , y)
+	var x_scale = self.get_parent().get_parent().get_node("X_Scale_Input/X_Scale_Input_HSlider")
+	self.material.set_shader_param('uvs_y' , value)
+	token_param['uv_scale'][1] = value
+	if is_check == true:
+		self.material.set_shader_param('uvs_x' , value)
+		token_param['uv_scale'][0] = value
+		x_scale.value = value
+
+
+func _on_Y_Position_Input_VSlider_value_changed(value):
+	self.material.set_shader_param('uvm_y' , value)
+	token_param['uv_offset'][0] = value
+
+
+func _on_X_Position_Input_HSlider_value_changed(value):
+	self.material.set_shader_param('uvm_x' , value)
+	token_param['uv_offset'][1] = value
+
+
+func _on_CheckBox_button_down():
+	is_check = true
+
+
+func _on_CheckBox_button_up():
+	is_check = false
+
+
+func _on_ColorPickerButton_color_changed(color):
+	self.material.set_shader_param('outline_color' , color)
+	token_param['ring_color'] = color
+
+
+func _on_X_Scale_Input_HSlider_drag_ended(value_changed):
+	save_token_param()
+
+
+func _on_Y_Scale_Input_VSlider_drag_ended(value_changed):
+	save_token_param()
+
+
+
+func _on_Y_Position_Input_VSlider_drag_ended(value_changed):
+	save_token_param()
+
+
+func _on_X_Position_Input_HSlider_drag_ended(value_changed):
+	save_token_param()
+
+
+func _on_ColorPickerButton_popup_closed():
+	save_token_param()
+
+
+func _on_CheckBox_toggled(button_pressed):
+	save_token_param()
