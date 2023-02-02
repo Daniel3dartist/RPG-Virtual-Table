@@ -1,12 +1,17 @@
 extends Button
 
 onready var name_txt = self.text
+onready var path = $'path'
 
 signal call_sheet(value)
 
+func _ready():
+	pass
 
 func _on_Sheet_button_up():
-	var index = self.get_parent().get_index() - 1
-	print(index)
-	emit_signal("call_sheet", index)
-
+	var dic : Dictionary = {
+		'name': self.text,
+		'path': path.text,
+		'index': self.get_index()
+	}
+	emit_signal("call_sheet", dic)

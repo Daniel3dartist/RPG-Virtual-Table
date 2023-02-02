@@ -3,7 +3,6 @@
 [ext_resource path="res://Scenes/Sheet/Character_Sheet.gd" type="Script" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
 [ext_resource path="res://Base_Images/Chain_Ico.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/Sheet/Token_Shader.gdshader" type="Shader" id=4]
 [ext_resource path="res://Base_Images/Char_Base_Image.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Sheet/TextureRect.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Sheet/Character_Image_File_Manager.gd" type="Script" id=8]
@@ -103,15 +102,65 @@ shader = SubResource( 8 )
 shader_param/alpha = 0.0
 shader_param/tex_frg_2 = ExtResource( 5 )
 
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+uniform sampler2D tex_frg_2;
+
+uniform vec4 outline_color:hint_color = vec4(1.0,1.0,0.0,1.0);
+uniform float inner_circle=0.45;
+uniform float outer_circle=0.5;
+
+uniform float uvs_x;
+uniform float uvs_y;
+
+uniform float uvm_x;
+uniform float uvm_y;
+
+const vec4 alpha_color= vec4(0,0,0,0);
+
+uniform float smoothness=0.01;
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// Texture:2
+	vec2 uv_scale = vec2(uvs_x, uvs_y);
+	vec4 tex_frg_2_read = texture(tex_frg_2, UV * uv_scale );
+	vec3 n_out2p0 = tex_frg_2_read.rgb;
+	float n_out2p1 = tex_frg_2_read.a;
+
+// Cicle
+	vec2 origin = UV-vec2(0.5,0.5);
+	
+	float dist =length(origin); //sqrt(dot(origin,origin));
+	vec2 uv_offset = vec2(uvm_x, uvm_y);
+	vec4 _color= mix (texture(tex_frg_2,(UV * uv_scale) - uv_offset),outline_color,smoothstep(inner_circle-smoothness,inner_circle+smoothness,dist));
+	 COLOR= mix (_color,alpha_color,smoothstep(outer_circle-smoothness,outer_circle+smoothness,dist));
+
+
+// Output:0
+//	COLOR.rgb = n_out2p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+
 [sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 4 )
-shader_param/outline_color = Color( 0.196078, 1, 0, 1 )
+shader = SubResource( 9 )
+shader_param/outline_color = Color( 0.34902, 0.419608, 0.435294, 1 )
 shader_param/inner_circle = 0.45
 shader_param/outer_circle = 0.5
 shader_param/uvs_x = 1.0
 shader_param/uvs_y = 1.0
-shader_param/uvm_x = null
-shader_param/uvm_y = null
+shader_param/uvm_x = 0.0
+shader_param/uvm_y = 0.0
 shader_param/smoothness = 0.01
 shader_param/tex_frg_2 = ExtResource( 2 )
 
@@ -131,13 +180,38 @@ layer = 128
 position = Vector2( 639.388, 400 )
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
-margin_left = 95.0
-margin_right = 1002.0
-margin_bottom = 64.0
+margin_left = 79.0
+margin_right = 921.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 0, 60 )
 focus_mode = 2
 mouse_filter = 1
 mouse_default_cursor_shape = 13
-color = Color( 0.647059, 0.321569, 0.145098, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+color = Color( 0.819608, 0.309804, 0.0352941, 0 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+visible = false
+margin_right = 1000.0
+margin_bottom = 600.0
+
+[node name="Container" type="Container" parent="CanvasLayer/HBoxContainer"]
+margin_right = 75.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_vertical = 0
+
+[node name="Container2" type="Container" parent="CanvasLayer/HBoxContainer"]
+margin_left = 79.0
+margin_right = 154.0
+rect_min_size = Vector2( 75, 0 )
+size_flags_vertical = 0
+
+[node name="is_checked" type="Label" parent="CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+text = "true"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1000.0
@@ -146,12 +220,12 @@ color = Color( 0.992188, 0.887543, 0.782898, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="ColorRect"]
 visible = false
-margin_left = 92.0
+margin_left = 80.0
 margin_top = 1.0
-margin_right = 999.0
+margin_right = 928.0
 margin_bottom = 63.0
 focus_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 mouse_default_cursor_shape = 13
 color = Color( 0.647059, 0.321569, 0.145098, 0.976471 )
 
@@ -176,10 +250,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="ColorRect/SheetArea/HBoxContainer"]
+[node name="Minimize" type="Button" parent="ColorRect/SheetArea/HBoxContainer"]
 margin_left = 24.0
-margin_right = 36.0
+margin_right = 48.0
 margin_bottom = 20.0
+text = "__"
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/HBoxContainer"]
+margin_left = 52.0
+margin_right = 915.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Save_Button" type="Button" parent="ColorRect/SheetArea/HBoxContainer"]
+margin_left = 919.0
+margin_right = 960.0
+margin_bottom = 20.0
+text = "Save"
 
 [node name="CharacterBaseArea" type="HBoxContainer" parent="ColorRect/SheetArea"]
 margin_top = 24.0
@@ -211,6 +298,7 @@ align = 1
 margin_top = 18.0
 margin_right = 317.0
 margin_bottom = 42.0
+align = 1
 
 [node name="CharacterRace_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
 margin_left = 321.0
@@ -233,6 +321,7 @@ align = 1
 margin_top = 18.0
 margin_right = 317.0
 margin_bottom = 42.0
+align = 1
 
 [node name="CharacterClass_BoxC" type="VBoxContainer" parent="ColorRect/SheetArea/CharacterBaseArea"]
 margin_left = 642.0
@@ -255,6 +344,7 @@ align = 1
 margin_top = 18.0
 margin_right = 318.0
 margin_bottom = 42.0
+align = 1
 
 [node name="Sheet_TabContainer" type="TabContainer" parent="ColorRect/SheetArea"]
 margin_top = 70.0
@@ -272,7 +362,6 @@ __meta__ = {
 }
 
 [node name="Core Stats" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -404,7 +493,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DEX_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column"]
+[node name="DEX_Input" type="LineEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Core Stats/HBoxContainer/Score_&_Mod/HBoxContainer/Score_Column" groups=["Persist"]]
 margin_top = 46.0
 margin_right = 58.0
 margin_bottom = 70.0
@@ -672,6 +761,7 @@ margin_right = -1.0
 margin_bottom = -1.0
 
 [node name="Background" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -728,6 +818,7 @@ text = "Drop your file here.
 align = 1
 
 [node name="Token" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -865,6 +956,12 @@ icon = ExtResource( 3 )
 align = 1
 icon_align = 2
 
+[node name="is_checked" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/CheckBox"]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+text = "true"
+
 [node name="Token_TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2"]
 material = SubResource( 6 )
 margin_left = 80.0
@@ -898,6 +995,8 @@ margin_right = 16.0
 margin_bottom = 324.0
 rect_min_size = Vector2( 0, 240 )
 size_flags_vertical = 3
+min_value = -1.0
+max_value = 0.0
 step = 0.01
 tick_count = 10
 
@@ -931,6 +1030,8 @@ margin_right = 444.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 240, 0 )
 size_flags_horizontal = 3
+min_value = -1.0
+max_value = 0.0
 step = 0.01
 tick_count = 10
 
@@ -1009,18 +1110,13 @@ position = Vector2( 0, 7.75 )
 shape = SubResource( 5 )
 
 [connection signal="button_up" from="ColorRect/SheetArea/HBoxContainer/Sheet_Exit" to="." method="_on_Sheet_Exit_button_up"]
+[connection signal="pressed" from="ColorRect/SheetArea/HBoxContainer/Save_Button" to="." method="_on_Save_Button_pressed"]
 [connection signal="char_image_path" from="ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_char_image_path"]
-[connection signal="drag_ended" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input/X_Scale_Input_HSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Scale_Input_HSlider_drag_ended"]
 [connection signal="value_changed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input/X_Scale_Input_HSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Scale_Input_HSlider_value_changed"]
-[connection signal="drag_ended" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Scale_Input_VSlider_drag_ended"]
 [connection signal="value_changed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Scale_Input_VSlider_value_changed"]
 [connection signal="button_down" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/CheckBox" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_CheckBox_button_down"]
 [connection signal="button_up" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/CheckBox" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_CheckBox_button_up"]
 [connection signal="toggled" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/CheckBox" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_CheckBox_toggled"]
-[connection signal="save_token_param" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" to="." method="_on_Token_TextureRect_save_token_param"]
-[connection signal="drag_ended" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input/Y_Position_Input_VSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Position_Input_VSlider_drag_ended"]
 [connection signal="value_changed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input/Y_Position_Input_VSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Position_Input_VSlider_value_changed"]
-[connection signal="drag_ended" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input/X_Position_Input_HSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Position_Input_HSlider_drag_ended"]
 [connection signal="value_changed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Position_Input/X_Position_Input_HSlider" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Position_Input_HSlider_value_changed"]
 [connection signal="color_changed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/ColorPickerButton" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_ColorPickerButton_color_changed"]
-[connection signal="popup_closed" from="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/ColorPickerButton" to="ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_ColorPickerButton_popup_closed"]

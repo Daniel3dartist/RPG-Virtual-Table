@@ -12,7 +12,24 @@ script = ExtResource( 2 )
 [node name="Delete" parent="." instance=ExtResource( 1 )]
 margin_left = 0.0
 margin_right = 55.0
-margin_bottom = 20.0
+margin_bottom = 50.0
 text = "Delete"
 
+[node name="Sheet" type="Button" parent="."]
+margin_left = 59.0
+margin_right = 1280.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 200, 50 )
+size_flags_horizontal = 3
+text = "Sheet"
+
+[node name="path" type="Label" parent="."]
+visible = false
+margin_left = 1280.0
+margin_top = 18.0
+margin_right = 1280.0
+margin_bottom = 32.0
+
 [connection signal="button_up" from="Delete" to="." method="_on_Delete_button_up"]
+[connection signal="button_up" from="Sheet" to="." method="_on_Sheet_button_up"]
+[connection signal="renamed" from="Sheet" to="." method="_on_Sheet_renamed"]

@@ -5,6 +5,7 @@ var on_dev_pc = false
 signal pass_chat_input(value)
 signal pass_roll(value)
 signal on_table(value)
+signal index(value)
 
 var app_username
 var request_user
@@ -56,7 +57,7 @@ func _ready():
 	get_self_username()
 	print("Table self ",self)
 	var config = ConfigFile.new()
-#	var err = config.load('res://data/last_played.ini')
+	var err = config.load('res://data/last_played.ini')
 	var last = ConfigFile.new()
 	var sz = 0
 	var num
@@ -82,6 +83,7 @@ func _ready():
 func _input(event):
 	var user_color = '#6eff90'
 	var result
+	
 	if self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput').visible == true:
 		if chat_input.text != '' and chat_input.text != ' ' and Input.is_action_just_pressed("enter"):
 			var roll = chat_input.text
@@ -150,47 +152,31 @@ func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_Hbox.instance()
 	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = '%s/Sheets/Sheet/Sheet' % BASE_PATH
+	var SPath = '%s/Sheets/Sheet.tscn' % BASE_PATH
 	var dir = Directory.new()
 	var Dname = txt
 	var Dpath =  '%s/Sheets' % BASE_PATH
 
-	sheet_num = sheet_list.size()
+	sheet_num = sheet_container.get_child_count()
 	print(Dpath)
 	if sheet_num > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath =BASE_PATH + '/Sheets/'+ Dname + '/'+ Dname
+		SPath =BASE_PATH + '/Sheets/' + '/'+ Dname + '.tscn'
 		Dpath = Dpath + '/'+ Dname
 		print("SPath" ,SPath)
-
-	sheet = {
-		'Name': txt,
-		'Number': sheet_num,
-		'Dir': '%s/Sheets/%s' % [BASE_PATH, Dname],
-		'Path': '%s.save' % SPath,
-	}
-	
-	
-#	dir.open(Dpath)
-#	dir.make_dir(Dname)
-	
-	dir.open('%s/Sheets/' % BASE_PATH)
-	dir.make_dir(Dname)
-	
-	sheet_list.push_back(sheet)
-	sheet_call_instance.text = txt
-	sheet_box_instance.add_child(sheet_call_instance)
 	sheet_container.add_child(sheet_box_instance)
+	sheet_container.get_child(sheet_num).get_node('Sheet').text = txt
+	sheet_container.get_child(sheet_num).get_node('path').text  = SPath
 	sheet_num = sheet_num + 1
 	sheet_box_instance.connect('delete_sheet', self, '_Delete_Sheet')
-	sheet_call_instance.connect("call_sheet", self, '_Call_Sheet')
+	sheet_box_instance.connect("call_sheet", self, '_Call_Sheet')
 	
-	var save = ConfigFile.new()
-	save.set_value("Sheet", "Name", txt)
-	save.save(sheet["Path"])
-	print('BASE_PATH: ', BASE_PATH)
-	update_list()
+#	var save = ConfigFile.new()
+#	save.set_value("Sheet", "Name", txt)
+#	save.save(sheet["Path"])
+#	print('BASE_PATH: ', BASE_PATH)
+#	update_list()
 
 func update_list():
 	var config = ConfigFile.new()
@@ -200,21 +186,20 @@ func update_list():
 		config.set_value("Sheets", "Sheets", sheet_list)
 		config.save(BASE_PATH + '/Sheet_List.save')
 
-
 func _Call_Sheet(value):
-	var csp = character_sheet_path.instance()
-#	csp.text = sheet_list[value]['Name']
-	snum = value 
-	print('num: ', snum)
-#	csp.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = sheet_list[value]['Name']
-	csp.connect('give_data', self, '_Give_Data')
-	$'Sheet_Spaw'.add_child(csp)
-#	emit_signal("receive_sheet_data", sheet_list[snum]['Path'])
-
+	var packed_scene = load(value['path'])
+	print('\n\nLabel Path: \n', self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer').get_child(value['id']).get_node('path').text, '\n\n')
+	if packed_scene == null:
+		packed_scene = load('res://Scenes/Sheet/Character_Sheet.tscn')
+	# Instance the scene
+	var my_scene = packed_scene.instance()
+#	emit_signal('index', value['index'])
+	$'Sheet_Spaw'.add_child(my_scene)
+	_Give_Data(value['id'])
 
 func _Give_Data(index):
 	print('Give data...')
-	emit_signal("receive_sheet_data", sheet_list[snum]['Path'])
+	emit_signal("receive_sheet_data", index)
 
 
 func organize_sheet_list(sz):
@@ -226,7 +211,7 @@ func organize_sheet_list(sz):
 
 	if sz > 0:
 		txt = 'Sheet (%s)' % sheet_num
-		Dname = Dname + '(%s)' % sheet_num
+		Dname = Dname + '(%s)' % sheet_num 
 		SPath = BASE_PATH + '/'+ Dname + '/'+ Dname
 		print('Spath SPath ',SPath)
 
@@ -236,13 +221,21 @@ func organize_sheet_list(sz):
 		'Path': '%s.save' % SPath,
 	}
 		
-		
-	sheet_call_instance.text = txt
-	sheet_box_instance.add_child(sheet_call_instance)
-	sheet_container.add_child(sheet_box_instance)
-	sheet_box_instance.connect('delete_sheet', self, '_Delete_Sheet')
-	sheet_call_instance.connect("call_sheet", self, '_Call_Sheet')
-	sheet_num += 1
+#	var config = ConfigFile.new()
+#	var err
+#	err = config.load(str(sheet['Path']))
+#	print('\n\nConfig\n\n', config, '\n\n')
+#	print('\nIs file\n',config.get_value("Status", "core status"))
+#	print('\n',sheet, '\n')
+#	sheet_call_instance.text = txt
+
+
+	
+#	sheet_box_instance.add_child(sheet_call_instance)
+#	sheet_container.add_child(sheet_box_instance)
+#	sheet_box_instance.connect('delete_sheet', self, '_Delete_Sheet')
+#	sheet_call_instance.connect("call_sheet", self, '_Call_Sheet')
+#	sheet_num += 1
 
 
 func _on_Main_Menu_button_up():
