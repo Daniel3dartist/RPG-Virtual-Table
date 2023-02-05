@@ -83,9 +83,10 @@ func _ready():
 	color_rect.connect("mouse_entered", self, "Mouse_Entered")
 	color_rect.connect("mouse_exited", self, "Mouse_Exited")
 	var table = self.get_parent().get_parent()
+	print('\n\n Parente Parente: %s\n\n' % table)
 	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
 	table.connect('index', self, '_Index')
-#	emit_signal("give_data", self.get_index())
+	emit_signal("give_data")
 	print('Starting Sheet...')
 	_Initialize_Sheet()
 	
@@ -228,18 +229,17 @@ func _on_Sheet_Exit_button_up():
 	self.queue_free()
 
 
-func _Receive_Sheet_Data(id):
-	sheet = {
-		'data': '',
-		'path': '',
-		'id': id
-	}
-	print('Data recebido ', id)
+func _Receive_Sheet_Data(dic):
+	sheet = dic
+	print('\n\nData recebido %s\n\n' % sheet)
 
 
 # start I/O data check and load
 func _Initialize_Sheet():
 	var txt_input_array = [STR_Input, DEX_Input, CON_Input, INT_Input, WIS_Input, CHA_Input, char_name, char_race, char_class]
+	
+#	if char_name.text == '' or char_name.text == null:
+	#	char_name.text = sheet['name']
 
 	for i in txt_input_array.size():
 		txt_input_array[i].text += ''

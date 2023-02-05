@@ -26,7 +26,7 @@ func _on_Continue_button_up():
 	var config = ConfigFile.new()
 	var err = config.load('%s/data/last_played.ini' % OS.get_executable_path().get_base_dir())
 	
-	if err != OK or config.get_value("Last Played", "Last table") == null:
+	if err != OK or config.get_value("Last Played", "path") == null:
 		get_tree().change_scene(load_table_menu)
 	else:
 		print('Not null')

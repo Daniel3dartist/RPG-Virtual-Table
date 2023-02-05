@@ -3,8 +3,10 @@
 [ext_resource path="res://Scenes/Sheet/Character_Sheet.gd" type="Script" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
 [ext_resource path="res://Base_Images/Chain_Ico.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Sheet/Token_Shader.gdshader" type="Shader" id=4]
 [ext_resource path="res://Base_Images/Char_Base_Image.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Sheet/TextureRect.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Sheet/Character_Sheet_Image.tres" type="Shader" id=7]
 [ext_resource path="res://Scenes/Sheet/Character_Image_File_Manager.gd" type="Script" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -51,109 +53,13 @@ corner_radius_bottom_left = 10
 expand_margin_top = 3.0
 expand_margin_bottom = 3.0
 
-[sub_resource type="Shader" id=8]
-code = "shader_type canvas_item;
-uniform sampler2D tex_frg_2;
-uniform sampler2D tex_frg_7;
-uniform float alpha;
-
-
-
-void vertex() {
-// Output:0
-
-}
-
-void fragment() {
-// Texture:2
-	vec4 tex_frg_2_read = texture(tex_frg_2, UV.xy);
-	vec3 n_out2p0 = tex_frg_2_read.rgb;
-	float n_out2p1 = tex_frg_2_read.a;
-
-// Color:4
-	vec3 n_out4p0 = vec3(0.549864, 0.549864, 0.549864);
-	float n_out4p1 = 1.000000;
-
-// ColorOp:5
-	vec3 n_out5p0 = max(n_out2p0, n_out4p0);
-
-// Texture:7
-	vec4 tex_frg_7_read = texture(tex_frg_7, UV);
-	vec3 n_out7p0 = tex_frg_7_read.rgb;
-	float n_out7p1 = tex_frg_7_read.a;
-
-// VectorScalarMix:6
-	float n_in6p2 = alpha;
-	vec3 n_out6p0 = mix(n_out5p0, n_out7p0, n_in6p2);
-
-// Output:0
-	COLOR.rgb = n_out6p0;
-
-}
-
-void light() {
-// Output:0
-
-}
-"
-
 [sub_resource type="ShaderMaterial" id=7]
-shader = SubResource( 8 )
+shader = ExtResource( 7 )
 shader_param/alpha = 0.0
 shader_param/tex_frg_2 = ExtResource( 5 )
 
-[sub_resource type="Shader" id=9]
-code = "shader_type canvas_item;
-uniform sampler2D tex_frg_2;
-
-uniform vec4 outline_color:hint_color = vec4(1.0,1.0,0.0,1.0);
-uniform float inner_circle=0.45;
-uniform float outer_circle=0.5;
-
-uniform float uvs_x;
-uniform float uvs_y;
-
-uniform float uvm_x;
-uniform float uvm_y;
-
-const vec4 alpha_color= vec4(0,0,0,0);
-
-uniform float smoothness=0.01;
-
-void vertex() {
-// Output:0
-
-}
-
-void fragment() {
-// Texture:2
-	vec2 uv_scale = vec2(uvs_x, uvs_y);
-	vec4 tex_frg_2_read = texture(tex_frg_2, UV * uv_scale );
-	vec3 n_out2p0 = tex_frg_2_read.rgb;
-	float n_out2p1 = tex_frg_2_read.a;
-
-// Cicle
-	vec2 origin = UV-vec2(0.5,0.5);
-	
-	float dist =length(origin); //sqrt(dot(origin,origin));
-	vec2 uv_offset = vec2(uvm_x, uvm_y);
-	vec4 _color= mix (texture(tex_frg_2,(UV * uv_scale) - uv_offset),outline_color,smoothstep(inner_circle-smoothness,inner_circle+smoothness,dist));
-	 COLOR= mix (_color,alpha_color,smoothstep(outer_circle-smoothness,outer_circle+smoothness,dist));
-
-
-// Output:0
-//	COLOR.rgb = n_out2p0;
-
-}
-
-void light() {
-// Output:0
-
-}
-"
-
 [sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 9 )
+shader = ExtResource( 4 )
 shader_param/outline_color = Color( 0.34902, 0.419608, 0.435294, 1 )
 shader_param/inner_circle = 0.45
 shader_param/outer_circle = 0.5
@@ -761,7 +667,6 @@ margin_right = -1.0
 margin_bottom = -1.0
 
 [node name="Background" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -1108,6 +1013,13 @@ position = Vector2( 479, -70 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/SheetArea/Sheet_TabContainer/Area2D"]
 position = Vector2( 0, 7.75 )
 shape = SubResource( 5 )
+
+[node name="path" type="Label" parent="."]
+margin_left = 448.0
+margin_top = 208.0
+margin_right = 488.0
+margin_bottom = 222.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [connection signal="button_up" from="ColorRect/SheetArea/HBoxContainer/Sheet_Exit" to="." method="_on_Sheet_Exit_button_up"]
 [connection signal="pressed" from="ColorRect/SheetArea/HBoxContainer/Save_Button" to="." method="_on_Save_Button_pressed"]

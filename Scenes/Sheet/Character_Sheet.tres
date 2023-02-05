@@ -1,8 +1,6 @@
-[gd_resource type="VisualShader" load_steps=6 format=2]
+[gd_resource type="VisualShader" load_steps=5 format=2]
 
 [sub_resource type="VisualShaderNodeTexture" id=6]
-
-[sub_resource type="VisualShaderNodeTexture" id=7]
 
 [sub_resource type="VisualShaderNodeTexture" id=8]
 
@@ -16,7 +14,6 @@ constant = Color( 0, 1, 0.015625, 1 )
 code = "shader_type canvas_item;
 uniform sampler2D tex_frg_2;
 uniform sampler2D tex_frg_4;
-uniform sampler2D tex_frg_3;
 
 
 
@@ -43,14 +40,8 @@ void fragment() {
 // VectorScalarMix:5
 	vec3 n_out5p0 = mix(n_out2p0, n_out6p0, n_out4p1);
 
-// Texture:3
-	vec4 tex_frg_3_read = texture(tex_frg_3, UV.xy);
-	vec3 n_out3p0 = tex_frg_3_read.rgb;
-	float n_out3p1 = tex_frg_3_read.a;
-
 // Output:0
 	COLOR.rgb = n_out5p0;
-	COLOR.a = n_out3p1;
 
 }
 
@@ -59,17 +50,16 @@ void light() {
 
 }
 "
+graph_offset = Vector2( -291.751, 10.5716 )
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2( 600, 160 )
 nodes/fragment/2/node = SubResource( 6 )
 nodes/fragment/2/position = Vector2( -440, 100 )
-nodes/fragment/3/node = SubResource( 7 )
-nodes/fragment/3/position = Vector2( 40, 460 )
 nodes/fragment/4/node = SubResource( 8 )
 nodes/fragment/4/position = Vector2( -420, 500 )
 nodes/fragment/5/node = SubResource( 9 )
 nodes/fragment/5/position = Vector2( 0, 200 )
 nodes/fragment/6/node = SubResource( 10 )
 nodes/fragment/6/position = Vector2( -380, 360 )
-nodes/fragment/connections = PoolIntArray( 3, 1, 0, 1, 4, 1, 5, 2, 6, 0, 5, 1, 2, 0, 5, 0, 5, 0, 0, 0 )
+nodes/fragment/connections = PoolIntArray( 4, 1, 5, 2, 6, 0, 5, 1, 2, 0, 5, 0, 5, 0, 0, 0 )

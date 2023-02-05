@@ -12,11 +12,11 @@ var path
 
 var t = true
 var exe_path = OS.get_executable_path().get_base_dir()
-var BASE_PATH = OS.get_executable_path().get_base_dir() + '/data/table_list.save'  
+var BASE_PATH = OS.get_executable_path().get_base_dir() + '/data/table_list.ini'  
 var main_menu = 'res://Scenes/Main Menu.tscn'
 
 # Number of table created
-var table_num = 0
+var table_num: int = 0
 var num_of_tables 
 var last_table = 0
 var n = 0
@@ -31,18 +31,10 @@ var tboxdic = {
 	'path': ''}
 
 # List of table container saved
-var tboxlist = []
+var tboxlist : Array = []
 
 # Default scenes to add
-var add_table = preload("res://Scenes/Table/Table.tscn")
-var table_description = preload("res://Scenes/Load Table/Table Description.tscn")
-var table_name = preload("res://Scenes/Load Table/Table Name.tscn")
-var table_color = preload("res://Scenes/Load Table/Table_color.tscn")
-var table_desc_itens = preload("res://Scenes/Load Table/Table_desc_itens.tscn")
 var tcard = preload('res://Scenes/Load Table/Card.tscn')
-var play_scene_button = preload('res://Scenes/Load Table/Play_Scene_Button.tscn')
-var txt_editor = preload('res://Scenes/Load Table/TextEdit.tscn')
-var color_rec = preload('res://Scenes/Load Table/ColorRect.tscn')
 
 # Place to list the tables
 onready var table_list = $'ColorRect/VBoxContainer/VBoxContainer/ScrollContainer/Table List'
@@ -51,25 +43,39 @@ var next
 
 func _ready():
 	print("Fpath: ", BASE_PATH)
-	var f = File.new()
+	var cfg = ConfigFile.new()
 	var txtparse
 	var size
 	var sz = 0
-
+	
+	cfg.load(BASE_PATH)
 	check_if_Table_List_File_Exist()
-	f.open(BASE_PATH, File.READ)
-	txtparse = f.get_as_text()
-	txtparse = parse_json(txtparse)
-	print('TXT parse: (%s)' % str(txtparse))
-	f.close()
-
-	size = txtparse.size()
-	while size > sz:
-		print(size)
-		print(sz)
-		print('N: ', n)
-		organize_the_table_list(sz)
-		sz += 1
+	var array = cfg.get_value('Tables', 'table_list')
+	if array != null:
+		tboxlist = array
+		for i in array:
+			var card = tcard.instance()
+			table_list.add_child(card)
+			
+			card = table_list.get_child(sz)
+			card.get_node('Table Description/Table_desc_itens/Table Name').text = array[sz]['name']
+			card.get_node('Table Description/Table_desc_itens/TextEdit').text = array[sz]['desc']
+			
+			var _texture = Texture.new()
+			var _material = ShaderMaterial.new()
+			var _shader = Shader.new()
+			var dice_tex = load("res://Base_Images/Table_Base_Image_d6_%s.png" % array[sz]['pic']['dice'])
+			_texture = dice_tex
+			_shader = load("res://Scenes/Load Table/Card.gdshader")
+			_material.shader = _shader
+			card.get_node('TextureRect').texture = _texture
+			card.get_node('TextureRect').material = _material
+			card.get_node('TextureRect').material.set_shader_param('Dice_Tex', dice_tex)
+			card.get_node('TextureRect').material.set_shader_param('color', array[sz]['pic']['rgb'])
+			card.get_node('TextureRect').material.set_shader_param('alpha', 0.0)
+			
+			sz += 1
+			table_num += 1
 
 func _on_Main_Menu_button_up():
 	get_tree().change_scene(main_menu)
@@ -80,12 +86,9 @@ func _on_Add_a_New_Table_button_up():
 
 
 func Creat_Table_List():
-	var f = File.new()
-	
-#	f = f.file_exists(BASE_PATH)
-#	f = File.new()
-	f.open(BASE_PATH, File.WRITE)
-	f.store_string(to_json([]))
+	var cfg = ConfigFile.new()
+	cfg.set_value('Tables', 'table_list', [])
+	cfg.save(BASE_PATH)
 	table_num = 0
 	print('Table List File Created... \n')
 	Check_Table_Dir()
@@ -108,20 +111,6 @@ func Check_Table_Dir():
 	if not dir.dir_exists(path):
 		dir.make_dir(path)
 
-func update_list_json():
-	var f = File.new()
-	var txtparse
-
-	f.open(BASE_PATH, File.READ)
-	txtparse = f.get_as_text()
-	txtparse = parse_json(txtparse)
-	txtparse.remove(dkey)
-	
-	f.open(BASE_PATH, File.WRITE)
-	f.store_string(to_json(txtparse))
-#	f.close
-	print('Table List File updated... \n')
-
 
 func organize_the_table_list(value):
 	var f = File.new()
@@ -129,53 +118,12 @@ func organize_the_table_list(value):
 	var txt = 'Table'
 	var txtparse
 	var keysn
-	
-	var tcolor = table_color.instance()
-	var Tname = table_name.instance()
-	var table = add_table.instance()
 	var card = tcard.instance()
-	var card_itens = table_description.instance()
-	var tdbox = table_desc_itens.instance()
-	var BplaySc = play_scene_button.instance()
-	var txted = txt_editor.instance()
-	var Crect = color_rec.instance()
-	var Hcont = table_description.instance()
-
-	f.open(BASE_PATH, File.READ)
-	txtparse = f.get_as_text()
-	txtparse = parse_json(txtparse)
-	f.close()
-	
-#	print('Esse é a lista do NUM: ', txtparse[n])
-	tboxlist = txtparse
-	keysn = txtparse.size() #+ 1
-	print('Keysn: ' , keysn)
-
-	tdbox.add_child(Tname)
-	#tdbox.add_child(Tname)
-	tcolor.color = Color(txtparse[value]['pic'][0],txtparse[value]['pic'][1],txtparse[value]['pic'][2])
-	Tname.text = txtparse[value]['name']
-	card_itens.add_child(tcolor)
-	Hcont.add_child(Crect)
-	Hcont.add_child(BplaySc)
-	tdbox.add_child(txted)
-	tdbox.add_child(Hcont)
-	card_itens.add_child(tdbox)
-	card.add_child(card_itens)
-	table_list.add_child(card)
-
-	card.connect('delet_table', self, '_delete_table')
-	BplaySc.connect('playscene', self, '_play_scene')
-
-	print('This is Num: ' , value)
-	print('This is Num: ', n)
-	table_num = value + 1
 
 
 func add_table():
-	var f = File.new()
 	var dir = Directory.new()
-	
+
 	var txt = 'Table'
 	var txtparse
 	
@@ -183,61 +131,65 @@ func add_table():
 	var g = randf() + randf()
 	var b = randf() + randf()
 	
-	var tcolor = table_color.instance()
-	var Tname = table_name.instance()
-	var table = add_table.instance()
+	for i in table_num:
+		r = randf() + randf()
+		g = randf() + randf()
+		b = randf() + randf()
+	
+	var dice = randi() % 6 + 1
+	
 	var card = tcard.instance()
-	var card_itens = table_description.instance()
-	var tdbox = table_desc_itens.instance()
-	var BplaySc = play_scene_button.instance()
-	var txted = txt_editor.instance()
-	var Crect = color_rec.instance()
-	var Hcont = table_description.instance()
 
-	tdbox.add_child(Tname)
-	tcolor.color = Color(r, g, b)
-
-
-	f.open(BASE_PATH, File.READ)
-	txtparse = f.get_as_text()
-	txtparse = parse_json(txtparse)
-	tboxlist = txtparse
-	f.close()
 	if table_num != 0 :
 		txt = txt + ('(%s)' % str(table_num))
+		
+	card.get_node("Table Description/Table_desc_itens/Table Name").text = txt
+#	card. = Color(r, g, b)
 
-	dir.open('%s/data/Tables/' % exe_path)
-	dir.make_dir(txt)
 
-	Tname.text = str(txt) 
-	card_itens.add_child(tcolor)
-	Hcont.add_child(Crect)
-	Hcont.add_child(BplaySc)
-	tdbox.add_child(txted)
-	tdbox.add_child(Hcont)
-	card_itens.add_child(tdbox)
-#	card_itens.add_child(BplaySc)
-	card.add_child(card_itens)
-	card.connect('delet_table', self, '_delete_table')
-	BplaySc.connect('playscene', self, '_play_scene')
-
+#	card.connect('delet_table', self, '_delete_table')
+#	BplaySc.connect('playscene', self, '_play_scene')
+	var card_pic : Dictionary = {
+				'dice': str(dice),
+				'rgb' : Vector3(r,g,b),
+				}
 
 	tboxdic = {
 		'number': table_num,
-		'name': Tname.text,
-		'pic': [r,g,b],
+		'name': card.get_node("Table Description/Table_desc_itens/Table Name").text,
+		'pic': card_pic,
 		'desc': 'none',
 		'path': '%s/data/Tables/%s' % [exe_path, txt]
 	}
-
-	f.open(BASE_PATH, File.WRITE)
-	txtparse.push_back(tboxdic)
-	f.store_string(to_json(txtparse))
-	f.close()
 	print('Table List File updated... \n')
+	
 	table_list.add_child(card)
+	card = table_list.get_child(table_num)
+	dice = str(dice)
+	var _path = "res://Base_Images/Table_Base_Image_d6_%s.png" % dice
+	var dice_pic = load(_path)
+
+	card.get_node("Table Description/Table_desc_itens/Table Name").text = txt
+	var tex = card.get_node("TextureRect")
+	var _material = ShaderMaterial.new()
+	var _shader = Shader.new()
+	_shader = load("res://Scenes/Load Table/Card.gdshader")
+	_material.shader = _shader
+	tex.material = _material
+#	tex.texture = Texture.new().load("res://Base_Images/Table_Base_Image_d6_6.png")
+	tex.material.set_shader_param('Dice_Tex', dice_pic)
+	tex.material.set_shader_param('color', Vector3(r,g,b))
+	card.connect('playscene', self, '_play_scene')
+	
+	dir.make_dir(tboxdic['path'])
+	
+	var cfg = ConfigFile.new()
+	tboxlist.push_back(tboxdic)
+	cfg.set_value('Tables', 'table_list', tboxlist)
+	cfg.save(BASE_PATH)
+	
 	table_num += 1
-	tboxlist = txtparse
+#	tboxlist = txtparse
 
 
 func _delete_table(value):
@@ -330,23 +282,5 @@ func delete_dir():
 	dir.remove('%s/Sheets' % path)
 	dir.remove('C:/Users/Daniel/Documents/Godot Projects/RPG_Virtual_Table/data/Tables/Table' )
 
-func _play_scene(index):
-	var config = ConfigFile.new()
-	var test = config.load('%s/data/last_played.ini' % exe_path)
-	var table = tboxlist[index]
-	var parent = index
-	
-	print('Play get parent 01: ', parent)
-	
-	print('Play get parent 02: ', table)
-
-	if test != OK:
-		print("File 'last_played.ini' not found")
-		
-	config.set_value('Last Played', 'Last table', table)
-	config.save('%s/data/last_played.ini' % exe_path)
-
-	get_tree().change_scene('res://Scenes/Table/Table.tscn')
-#	get_tree().change_scene('res://Test_SandBox/Table_test.tscn')
 
 

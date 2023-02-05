@@ -1,7 +1,5 @@
 extends Control
 
-var on_dev_pc = false
-
 signal pass_chat_input(value)
 signal pass_roll(value)
 signal on_table(value)
@@ -10,17 +8,11 @@ signal index(value)
 var app_username
 var request_user
 
-var BASE_PATH = OS.get_executable_path().get_base_dir()
+var BASE_PATH = OS.get_executable_path().get_base_dir() + '/data/Tables'
 
 var snum
 var sheet_num = 0
-var sheet_list = []
-var sheet = {
-		'Name': '',
-		'Number': '',
-		'Dir': '',
-		'Path': '',
-	}
+var sheet_list : Array = []
 
 #bot
 onready var bot = $'Bot/HTTPRequest'
@@ -33,7 +25,6 @@ var character_sheet_path = preload("res://Scenes/Sheet/Character_Sheet.tscn")
 
 onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer"
 var sheet_call_Hbox = preload('res://Scenes/Table/SheetCallHBox.tscn')
-var sheet_call = preload("res://Scenes/Table/SheetCall.tscn")
 
 # Grid settings
 # Grid size - vector x input
@@ -55,27 +46,33 @@ signal grid_settings(gridsize, color, width, bg)
 # Functions
 func _ready():
 	get_self_username()
-	print("Table self ",self)
+	var path = OS.get_executable_path().get_base_dir() + '/data/last_played.ini'  
 	var config = ConfigFile.new()
-	var err = config.load('res://data/last_played.ini')
+	var config2 = ConfigFile.new()
+#	var err = config.load('res://data/last_played.ini')
 	var last = ConfigFile.new()
-	var sz = 0
-	var num
+	var num = 0
+	config.load(path)
+	config2.load(config.get_value('Last Played', 'path'))
+	var _name = config2.get_value('Table', 'name')
+	print('\n\n_NAME: ', _name, '\n\n')
+	$'table_name'.text = _name
 	
-	bot.connect("receive_text_from_discord", self, "Receive_Text_from_Discord")
-	last.load('%s/data/last_played.ini' % BASE_PATH)
-	print(last.get_sections())
-	BASE_PATH = last.get_value("Last Played", "Last table")['path']
-	print('Self Index ready table: \n', BASE_PATH)
-	
+	if config2.get_value('Table', 'sheets') != null:
+		sheet_list = config2.get_value('Table', 'sheets')
+		for i in sheet_list:
+			var buttom = sheet_call_Hbox.instance()
+			sheet_container.add_child(buttom)
+			sheet_container.get_child(num).get_node('Sheet').text = sheet_list[num]['name']
+			sheet_container.get_child(num).get_node('path').text = sheet_list[num]['path']
+			print('\n\nIs Child: %s\n\n' % sheet_container.get_child(num).get_node('Sheet').text)
+			buttom.connect('delete_sheet', self, '_Delete_Sheet')
+			buttom.connect("call_sheet", self, '_Call_Sheet')
+			buttom.connect("update_sheet_buttom", self, '_Update_Sheet_Buttom')
+			sheet_num += 1
+			num += 1
 	check_exist_file()
-	config.load(BASE_PATH)
-	for Sheets in config.get_sections():
-		sheet_list = config.get_value(Sheets, 'Sheets')
-	num = sheet_list.size()
-	while num  > sz:
-		organize_sheet_list(sz)
-		sz += 1 
+	
 	chat.append_bbcode('[center]Table Initialized!![/center]\n')
 	chat.append_bbcode('[center]Welcome![/center]\n')
 	emit_signal('on_table', true)
@@ -117,27 +114,44 @@ func _input(event):
 			chat_input.text = ''
 
 func check_exist_file():
-	var config = ConfigFile.new()
+	var config = ConfigFile.new() 
 	var err 
 	var dir = Directory.new()
+	var _name = self.get_node("table_name").text
 	
-	err = dir.open(BASE_PATH + '/Sheets')
+
+	err = dir.open(BASE_PATH + '/%s/Sheets' %  _name)
 	if err != OK:
-		dir.open(BASE_PATH)
+		dir.open(BASE_PATH + '/%s' % _name)
 		dir.make_dir('Sheets')
 	
-	err = config.load(BASE_PATH + '/Sheet_List.save')
-	if err != OK:
-		print('File not found...')
-		config.set_value("Sheets", "Sheets", sheet_list)
-		config.save(BASE_PATH + '/Sheet_List.save')
+	err = config.load(BASE_PATH + '/%s/%s.ini' % [_name, _name])
+	if err == null:
+		print('File not found... ', _name)
+		_Save_Table()
+		print('File Created...')
 	else:
-		for Sheets in config.get_sections():
-			sheet_list = config.get_value(Sheets, "Sheets")
+		err = null
+		print('Has File...\n')
+		pass
 
+func _Save_Table():
+	var config = ConfigFile.new()
+	var _name = self.get_node("table_name").text
+	
+	config.set_value('Table', 'name', _name)
+	config.set_value('Table', 'sheets', sheet_list)
+	config.set_value('Layers', 'layers_list', sheet_list)
+	config.set_value('Grid', 'grid', '')
+	config.set_value('Grid', 'tokens', '')
+	config.save(BASE_PATH + '/%s/%s.ini' % [_name, _name])
+	print('\n\nDone...\n\n %s \n\n' % (BASE_PATH + '/%s/%s.ini' % [_name, _name]))
+	
 
 func _on_Sheet_Creator_button_up():
 	Creat_Character_Sheet()
+#	_Save_Table()
+	print('TName: ', $'table_name'.text)
 
 
 func _on_Sheets_button_up():
@@ -147,131 +161,87 @@ func _on_Sheets_button_up():
 	else:
 		split_sheet.visible = false
 
+func _Update_Sheet_Buttom(array):
+	var id = array[0]
+	var item = sheet_list[id]
+	sheet_list[id]['name'] = array[1]
+#	item['name'] = array[1]
+#	sheet_list.remove(id)
+#	sheet_list.push_back(item)
+	_Save_Table()
+	pass
 
 func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_Hbox.instance()
-	var sheet_call_instance = sheet_call.instance()
+#	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = '%s/Sheets/Sheet.tscn' % BASE_PATH
+	var SPath = '%s/%s/Sheets/Sheet.tscn' % [BASE_PATH, $'table_name'.text]
 	var dir = Directory.new()
 	var Dname = txt
 	var Dpath =  '%s/Sheets' % BASE_PATH
+	var sheet = {
+		'name': '',
+		'num': '',
+		'path': '',
+	}
 
 	sheet_num = sheet_container.get_child_count()
 	print(Dpath)
 	if sheet_num > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath =BASE_PATH + '/Sheets/' + '/'+ Dname + '.tscn'
+		SPath = '%s/%s/Sheets/%s.tscn' % [BASE_PATH, $'table_name'.text, txt]
 		Dpath = Dpath + '/'+ Dname
 		print("SPath" ,SPath)
 	sheet_container.add_child(sheet_box_instance)
 	sheet_container.get_child(sheet_num).get_node('Sheet').text = txt
 	sheet_container.get_child(sheet_num).get_node('path').text  = SPath
-	sheet_num = sheet_num + 1
+	sheet['name'] = txt
+	sheet['num'] = sheet_num
+	sheet['path'] = SPath.replace(' ', '')
+	print('Sheet dict? ', sheet_list)
+	sheet_list.push_back(sheet)
+	sheet_num =+ 1 
 	sheet_box_instance.connect('delete_sheet', self, '_Delete_Sheet')
 	sheet_box_instance.connect("call_sheet", self, '_Call_Sheet')
+	sheet_box_instance.connect("update_sheet_buttom", self, '_Update_Sheet_Buttom')
 	
-#	var save = ConfigFile.new()
-#	save.set_value("Sheet", "Name", txt)
-#	save.save(sheet["Path"])
-#	print('BASE_PATH: ', BASE_PATH)
-#	update_list()
+	_Save_Table()
 
-func update_list():
-	var config = ConfigFile.new()
-	var err = config.load(BASE_PATH + '/Sheet_List.save')
-	
-	if err == OK:
-		config.set_value("Sheets", "Sheets", sheet_list)
-		config.save(BASE_PATH + '/Sheet_List.save')
-
+var sheet_dic : Dictionary = {
+	'name': '',
+	'path': '',
+	'data': '',
+}
 func _Call_Sheet(value):
 	var packed_scene = load(value['path'])
 	print('\n\nLabel Path: \n', self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer').get_child(value['id']).get_node('path').text, '\n\n')
+	var _name = sheet_container.get_child(value['id']).get_node('Sheet').text
 	if packed_scene == null:
 		packed_scene = load('res://Scenes/Sheet/Character_Sheet.tscn')
 	# Instance the scene
 	var my_scene = packed_scene.instance()
 #	emit_signal('index', value['index'])
 	$'Sheet_Spaw'.add_child(my_scene)
-	_Give_Data(value['id'])
+	my_scene.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = _name
+	my_scene.connect('give_data', self, '_Give_Data')
+	sheet_dic = value
+	
+	emit_signal('receive_sheet_data', value)
 
 func _Give_Data(index):
-	print('Give data...')
-	emit_signal("receive_sheet_data", index)
-
-
-func organize_sheet_list(sz):
-	var sheet_box_instance = sheet_call_Hbox.instance()
-	var sheet_call_instance = sheet_call.instance()
-	var txt = 'Sheet'
-	var SPath = '%s/Sheet/Sheet' % BASE_PATH
-	var Dname = txt
-
-	if sz > 0:
-		txt = 'Sheet (%s)' % sheet_num
-		Dname = Dname + '(%s)' % sheet_num 
-		SPath = BASE_PATH + '/'+ Dname + '/'+ Dname
-		print('Spath SPath ',SPath)
-
-	sheet = {
-		'Name': txt,
-		'Number': sheet_num,
-		'Path': '%s.save' % SPath,
-	}
-		
-#	var config = ConfigFile.new()
-#	var err
-#	err = config.load(str(sheet['Path']))
-#	print('\n\nConfig\n\n', config, '\n\n')
-#	print('\nIs file\n',config.get_value("Status", "core status"))
-#	print('\n',sheet, '\n')
-#	sheet_call_instance.text = txt
-
-
-	
-#	sheet_box_instance.add_child(sheet_call_instance)
-#	sheet_container.add_child(sheet_box_instance)
-#	sheet_box_instance.connect('delete_sheet', self, '_Delete_Sheet')
-#	sheet_call_instance.connect("call_sheet", self, '_Call_Sheet')
-#	sheet_num += 1
-
+	print('Giving data...')
+	emit_signal('receive_sheet_data', sheet_dic)
 
 func _on_Main_Menu_button_up():
 	var main_menu = 'res://Scenes/Main Menu/Main Menu.tscn' # set main menu path
+	_Save_Table()
 	get_tree().change_scene(main_menu) # call the main menu scene
-
-
-func _Delete_Sheet(index):
-	var dir = Directory.new()
-	var name = sheet_list[index - 1]['Name']
-	var remove_path
-	
-	if " " in name:
-		name = name.replace(' ', '')
-		remove_path = BASE_PATH + '/Sheets/%s' % name
-	else:# sheet_list.size():
-		remove_path = BASE_PATH + '/Sheets'
-		name = 'Sheet'
-	name = '/' + name
-	print('Sheet_List: ', sheet_list[index - 1])
-	print('Name dir: ', BASE_PATH + '/Sheets/%s' % name)
-	dir.open(BASE_PATH + '/Sheets')
-	dir.remove(BASE_PATH + '/Sheets%s.save' % name.repeat(2))
-	dir.remove(BASE_PATH + '/Sheets%s' % name)
-	print('delete sheet ')
-	
-	sheet_list.remove(index - 1)
-	print('BASE_PATH: ', BASE_PATH)
-	print('BASE_PATH + name: ', BASE_PATH + '/Sheets/%s' % name)
-	print('Index - 1: ', index - 1)
-	update_list()
 
 
 func update_grid():
 		emit_signal("grid_settings", Vector2(int(grid_VX.text), int(grid_VY.text)), line_color_pick.color, int(line_size.text), bg_color_pick.color)
-
+		_Save_Table()
 
 func _on_LineEdit_text_entered(new_text):
 	print('text change')
@@ -348,10 +318,7 @@ func Receive_Text_from_Discord(value):
 func get_self_username():
 	var config = ConfigFile.new()
 	var path
-	if on_dev_pc == true:
-		path = 'res://data/user_settings.ini'
-	else:
-		path = OS.get_executable_path().get_base_dir() + '/data/user_settings.ini'
+	path = OS.get_executable_path().get_base_dir() + '/data/user_settings.ini'
 	print(path)
 	config.load(path)
 	app_username = config.get_value("User", "Nickname")

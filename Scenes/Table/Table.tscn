@@ -389,6 +389,12 @@ anchor_bottom = 1.0
 
 [node name="Grid2" parent="." instance=ExtResource( 10 )]
 
+[node name="table_name" type="Label" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Table"
+
 [connection signal="on_table" from="." to="Settings/Settings2" method="_on_Table_on_table"]
 [connection signal="pass_chat_input" from="." to="Bot/HTTPRequest" method="_on_Table_pass_chat_input"]
 [connection signal="pass_roll" from="." to="Bot/HTTPRequest" method="_on_Table_pass_roll"]
