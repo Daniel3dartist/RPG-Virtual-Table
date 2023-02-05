@@ -35,6 +35,7 @@ onready var color_rect = self.get_node("CanvasLayer/ColorRect2")
 onready var base_Char_Image = preload('res://Base_Images/Char_Base_Image.png')
 onready var token_base_Char_Image = preload('res://Base_Images/Char_Base_Image_300x300p.png')
 onready var checkbox = self.get_node('ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/CheckBox')
+
 # Token parameters
 var token_param : Dictionary = {
 	'ring_color': Color('#596b6f'),
@@ -42,6 +43,9 @@ var token_param : Dictionary = {
 	'uv_offset': [0.0, 0.0],
 	'checkbox': true,
 }
+
+onready var TexRect = $'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect'
+onready var Token = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect'
 
 onready var scale_x = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input/X_Scale_Input_HSlider'
 onready var scale_y = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider'
@@ -237,12 +241,19 @@ func _Receive_Sheet_Data(dic):
 # start I/O data check and load
 func _Initialize_Sheet():
 	var txt_input_array = [STR_Input, DEX_Input, CON_Input, INT_Input, WIS_Input, CHA_Input, char_name, char_race, char_class]
-	
-#	if char_name.text == '' or char_name.text == null:
-	#	char_name.text = sheet['name']
-
 	for i in txt_input_array.size():
 		txt_input_array[i].text += ''
+	
+	var is_default_image = $'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label'.visible
+	if is_default_image == true:
+		TexRect.material.set_shader_param('alpha', 0)
+		Token.material.set_shader_param('tex_frg_2', token_base_Char_Image)
+		Token.material.set_shader_param('outline_color', token_param['ring_color'])
+		Token.material.set_shader_param('uvs_x', scale_x.value)
+		Token.material.set_shader_param('uvs_y', scale_y.value)
+		Token.material.set_shader_param('uvm_x', offset_x)
+		Token.material.set_shader_param('uvm_y', offset_y)
+		color.color = token_param['ring_color']
 	pass
 
 
@@ -297,8 +308,6 @@ func _on_TextureRect_char_image_path(path):
 	
 
 func load_char_image(path):
-	var TexRect = $'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect'
-	var Token = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect'
 	var valid_image = load_external_tex(path)
 #	char_image = valid_image
 	
@@ -307,6 +316,7 @@ func load_char_image(path):
 	TexRect.material.set_shader_param('tex_frg_7' , valid_image)
 	TexRect.material.set_shader_param('alpha', 1.000)
 	Token.material.set_shader_param('tex_frg_2' , valid_image)
+	checkbox.pressed = true
 #	_Update_Save()
 	print('\n\nChar_Image: ', char_image, '\n\n')
 #	emit_signal('load_image_token', valid_image)
