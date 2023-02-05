@@ -164,12 +164,10 @@ func _on_Sheets_button_up():
 func _Update_Sheet_Buttom(array):
 	var id = array[0]
 	var item = sheet_list[id]
+
 	sheet_list[id]['name'] = array[1]
-#	item['name'] = array[1]
-#	sheet_list.remove(id)
-#	sheet_list.push_back(item)
+	sheet_list[id]['path'] = array[3]
 	_Save_Table()
-	pass
 
 func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_Hbox.instance()
@@ -225,6 +223,7 @@ func _Call_Sheet(value):
 	$'Sheet_Spaw'.add_child(my_scene)
 	my_scene.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = _name
 	my_scene.connect('give_data', self, '_Give_Data')
+	my_scene.connect('Save_sheet_path', sheet_container.get_child(value['id']), '_Save_sheet_path')
 	sheet_dic = value
 	
 	emit_signal('receive_sheet_data', value)

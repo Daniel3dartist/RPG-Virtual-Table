@@ -1,6 +1,9 @@
 extends Control
 
 signal give_index(value)
+signal give_data(index)
+signal load_image_token(img)
+signal Save_sheet_path(value)
 
 onready var BASE_PATH
 onready var sheet_list_path = self.get_parent().get_parent().get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer')
@@ -46,9 +49,6 @@ onready var offset_x = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContai
 onready var offset_y = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Position_Input/Y_Position_Input_VSlider'
 onready var color = $'ColorRect/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/ColorPickerButton'
 
-
-signal give_data(index)
-signal load_image_token(img)
 
 # ===============================================[ Character id var ]============================================================= #
 
@@ -280,6 +280,7 @@ func _Update_Save():
 	Directory.new().rename(str(old_path), str(path_label.text))
 	packed_scene.pack(self)
 	ResourceSaver.save(dir, packed_scene)
+	emit_signal("Save_sheet_path", [old_path, dir] )
 	pass
 
 # ===============================================[ Load Texture Image of Player Character ]============================================================= #

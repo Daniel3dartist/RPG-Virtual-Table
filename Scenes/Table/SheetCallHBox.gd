@@ -31,7 +31,8 @@ func _Pop_sheet():
 func _on_Sheet_renamed():
 	pass
 
-func _input(event):
-	if _name != $Sheet.text:
-		emit_signal('update_sheet_buttom',[self.get_index(), $Sheet.text])
-		
+func _Save_sheet_path(value):
+	var path = $'path'.text
+	$'path'.text = value[1]
+	if value[0] != value[1]:
+		emit_signal('update_sheet_buttom',[self.get_index(), $'Sheet'.text, value[0], value[1]])
