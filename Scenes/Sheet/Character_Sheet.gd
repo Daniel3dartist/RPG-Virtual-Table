@@ -123,25 +123,29 @@ func _input(event):
 		var num
 
 
-		num = int(STR_Input.text)
+		num = float(STR_Input.text)
 		strMod = num
 		core_status['str'] = num
-		strMod = str((strMod - 10) / 2)
+		strMod = str(floor((strMod - 10.0) / 2))
 		STR_Mod_Value.text = strMod
 		strCompareNum = num
-
+	elif strDefault == strCompareNum:
+		STR_Mod_Value.text = str(0)
 
 	# DEX Mod Input
 	if dexDefault != dexCompareNum:
 		var dexMod
 		var num
-		num = int(DEX_Input.text)
+		
+		num = float(DEX_Input.text)
 		core_status['dex'] = num
 		dexMod = num
-		dexMod = str((dexMod - 10) / 2)
+		dexMod = str(floor((dexMod - 10.0) / 2))
 		DEX_Mod_Value.text = dexMod
 		dexCompareNum = num
 	#	_Update_Save()
+	elif dexDefault == strCompareNum:
+		DEX_Mod_Value.text = str(0)
 
 
 	# CON Mod Input
@@ -149,52 +153,60 @@ func _input(event):
 		var conMod
 		var num
 
-		num = int(CON_Input.text)
+		num = float(CON_Input.text)
 		core_status['con'] = num
 		conMod = num
-		conMod = str((conMod - 10) / 2)
+		conMod = str(floor((conMod - 10) / 2))
 		CON_Mod_Value.text =conMod
 		conCompareNum = num
 	#	_Update_Save()
+	elif conDefault == strCompareNum:
+		CON_Mod_Value.text = str(0)
 
 	# INT Mod Input
 	if intDefault != intCompareNum:
 		var intMod
 		var num
 
-		num = int(INT_Input.text)
+		num = float(INT_Input.text)
 		core_status['int'] = num
 		intMod = num
-		intMod = str((intMod - 10) / 2)
+		intMod = str(floor((intMod - 10) / 2))
 		INT_Mod_Value.text = intMod
 		intCompareNum = num
 	#	_Update_Save()
+	elif intDefault == strCompareNum:
+		INT_Mod_Value.text = str(0)
 
 	# WIS Mod Input
 	if wisDefault != wisCompareNum:
 		var wisMod
 		var num
 
-		num = int(WIS_Input.text)
+		num = float(WIS_Input.text)
 		core_status['wis'] = num
 		wisMod = num
-		wisMod = str((wisMod - 10) / 2)
-		WIS_Mod_Value.text =wisMod
+		wisMod = str(floor((wisMod - 10) / 2))
+		WIS_Mod_Value.text = wisMod
 		wisCompareNum = num
 	#	_Update_Save()
+	elif wisDefault == strCompareNum:
+		WIS_Mod_Value.text = str(0)
 
 	# CHA Mod Input
 	if chaDefault != chaCompareNum:
 		var chaMod
 		var num
 
-		num = int(CHA_Input.text)
+		num = float(CHA_Input.text)
 		core_status['cha'] = num
 		chaMod = num
-		chaMod = str((chaMod - 10) / 2)
+		chaMod = str(floor((chaMod - 10) / 2))
 		CHA_Mod_Value.text = chaMod
 		chaCompareNum = num
 	#	_Update_Save()
+	elif chaDefault == strCompareNum:
+		CHA_Mod_Value.text = str(0)
 
 # Drag-and-drop sheet
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
