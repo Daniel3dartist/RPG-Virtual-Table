@@ -57,6 +57,9 @@ func _ready():
 			var card = tcard.instance()
 			table_list.add_child(card)
 			
+			card.connect('playscene', self, '_play_scene')
+			card.connect('save_changes', self, '_Save_Changes')
+			
 			card = table_list.get_child(sz)
 			card.get_node('Table Description/Table_desc_itens/Table Name').text = array[sz]['name']
 			card.get_node('Table Description/Table_desc_itens/TextEdit').text = array[sz]['desc']
@@ -180,6 +183,7 @@ func add_table():
 	tex.material.set_shader_param('Dice_Tex', dice_pic)
 	tex.material.set_shader_param('color', Vector3(r,g,b))
 	card.connect('playscene', self, '_play_scene')
+	card.connect('save_changes', self, '_Save_Changes')
 	
 	dir.make_dir(tboxdic['path'])
 	
@@ -222,8 +226,36 @@ func _delete_table(value):
 	get_sub_itens()
 	
 #	dir.open('res://data/Tables')
+
+
+func _Save_Changes(dic):
+	var dir = Directory.new()
+	var cfg = ConfigFile.new()
+	var old_dic : Dictionary = {
+		'name': tboxlist[dic['id']]['name'],
+		'num': tboxlist[dic['id']]['number'],
+		'dir': exe_path + '/data/tables/%s' % tboxlist[dic['id']]['name'],
+		'path': tboxlist[dic['id']]['path']
+	}
 	
+	dir.rename(exe_path + '/data/tables/%s' % old_dic['name'], dic['path'])
+	dir.rename(exe_path + '/data/tables/%s/%s.ini' % [dic['name'], old_dic['name']], exe_path + '/data/tables/%s/%s.ini' % [dic['name'], dic['name']])
+#	dir.rename(exe_path + '/data/tables/table(1)', exe_path + '/data/tables/Julinhos02')
 	
+	tboxlist[dic['id']]['name'] = dic['name']
+	tboxlist[dic['id']]['desc'] = dic['desc']
+	tboxlist[dic['id']]['path'] = dic['path']
+
+	cfg.load(BASE_PATH)
+	cfg.set_value('Tables', 'table_list', tboxlist)
+	cfg.save(BASE_PATH)
+
+#tboxdic = {
+#	'number': '',
+#	'name': '',
+#	'pic': '',
+#	'desc': '',
+#	'path': ''}
 
 func get_sub_itens():
 	var dir2 = Directory.new()
