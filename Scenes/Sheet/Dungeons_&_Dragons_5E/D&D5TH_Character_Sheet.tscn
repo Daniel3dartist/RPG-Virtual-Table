@@ -162,8 +162,16 @@ margin_right = 48.0
 margin_bottom = 20.0
 text = "__"
 
-[node name="Container" type="Container" parent="ColorRect/SheetArea/HBoxContainer"]
+[node name="Label" type="Label" parent="ColorRect/SheetArea/HBoxContainer"]
 margin_left = 52.0
+margin_top = 3.0
+margin_right = 205.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Dungeons & Dragons 5E"
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/HBoxContainer"]
+margin_left = 209.0
 margin_right = 915.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
@@ -667,6 +675,7 @@ margin_right = -1.0
 margin_bottom = -1.0
 
 [node name="Background" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
