@@ -2,7 +2,7 @@ extends HBoxContainer
 
 var BASE_PATH =  OS.get_executable_path().get_base_dir()
 
-signal delet_table(value)
+signal delete_table(value)
 signal playscene(index)
 signal save_changes(value)
 
@@ -12,9 +12,9 @@ onready var play_buttom = $"Table Description/Table_desc_itens/HBoxContainer/Pla
 onready var save_buttom = $"Table Description/Table_desc_itens/HBoxContainer/Save"
 
 func _on_Delete_Table_button_up():
-	emit_signal("delet_table", self.get_index())
+	emit_signal("delete_table", self.get_index())
 	print('Delete_table signal emited...')
-	self.queue_free()
+#	self.queue_free()
 
 
 func _on_Edit_Table_button_up():

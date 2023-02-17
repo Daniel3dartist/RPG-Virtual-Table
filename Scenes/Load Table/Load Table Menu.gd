@@ -59,6 +59,8 @@ func _ready():
 			
 			card.connect('playscene', self, '_play_scene')
 			card.connect('save_changes', self, '_Save_Changes')
+#			card.connect('delete_table ', self, '_Delete_Table')
+			card.connect("delete_table", self, '_Delete_Table')
 			
 			card = table_list.get_child(sz)
 			card.get_node('Table Description/Table_desc_itens/Table Name').text = array[sz]['name']
@@ -79,6 +81,7 @@ func _ready():
 			
 			sz += 1
 			table_num += 1
+
 
 func _on_Main_Menu_button_up():
 	get_tree().change_scene(main_menu)
@@ -184,6 +187,7 @@ func add_table():
 	tex.material.set_shader_param('color', Vector3(r,g,b))
 	card.connect('playscene', self, '_play_scene')
 	card.connect('save_changes', self, '_Save_Changes')
+	card.connect('delete_table ', self, '_Delete_Table')
 	
 	dir.make_dir(tboxdic['path'])
 	
@@ -196,36 +200,9 @@ func add_table():
 #	tboxlist = txtparse
 
 
-func _delete_table(value):
-#func get_itens():
-	print('This is Value: ', tboxlist[value]['path'])
-	var dir = Directory.new()
-	path = tboxlist[value]['path']
-	
-	dir.open('%s/Sheets' % path)
-	dir.list_dir_begin()
-	
-	while true:
-		var file = dir.get_next()
-		if file == "":
-			print("Get File break\n")
-			print("02525==> \nFiles: " , itens)
-			break
-		elif not file.begins_with("."):
-			print("Search For files in dir...")
-			print("Get file: %s \nFrom: %s\n" % [file , '%s/Sheets/%s' % [path, file] ])
-			item = {
-				'name': file,
-				'path': '%s/Sheets/%s' % [path, file]
-			}
-#			item['name'] = file
-#			item['path'] = '%s/Sheets/%s' % [path, file]
-			itens.append(item)
-	
-	dir.list_dir_end()
-	get_sub_itens()
-	
-#	dir.open('res://data/Tables')
+func _Delete_Table(value):
+	print('Deleting...\n',tboxlist)
+	get_sub_itens(value)
 
 
 func _Save_Changes(dic):
@@ -250,27 +227,20 @@ func _Save_Changes(dic):
 	cfg.set_value('Tables', 'table_list', tboxlist)
 	cfg.save(BASE_PATH)
 
-#tboxdic = {
-#	'number': '',
-#	'name': '',
-#	'pic': '',
-#	'desc': '',
-#	'path': ''}
 
-func get_sub_itens():
+func get_sub_itens(id):
 	var dir2 = Directory.new()
-	
-	for i in itens.size():
-		var it 
-		if num <= itens.size():
-			it = itens[num]
-		if it != null:
-			print('Path065065: ', itens[num]['name'])
-			dir2.open(it['path'])
-			print("\n\nCorrent Dir is: ", it['path'])
-			num += 1
-			dir2.list_dir_begin()
-			while true:
+	itens = tboxlist
+	var it 
+	it = itens[id]
+	if it != null:
+		print('Path065065: ', itens[id]['name'])
+		
+		dir2.open(it['path'] + '/Sheets')
+		
+		print("\n\nCorrent Dir is: ", it['path'])
+		dir2.list_dir_begin()
+		while true:
 				var file = dir2.get_next()
 				if file == "":
 					print("Get File break\n")
@@ -281,7 +251,7 @@ func get_sub_itens():
 	#				print("Get file: %s \nFrom: %s\n" % [file , '%s/%s' % [it['path'], file] ])
 					item = {
 						'name': file,
-						'path': '%s/%s' % [it['path'], file]
+						'path': '%s/%s' % [it['path'] + '/Sheets', file]
 					}
 	#				item['name'] = file
 	#				item['path'] = '%s/%s' % [it['path'], file]
@@ -289,12 +259,19 @@ func get_sub_itens():
 						sub_itens.append(item)
 		
 	dir2.list_dir_end()
+	print('Itens\n',sub_itens, '\n')
+	var num = 0
+	if itens != null:
+		for i in itens:
+			Directory.new().remove(sub_itens[num]['path'])
+			num+=1
+#		itens.remove(num)
 #		print("06565==> \nFiles: " , sub_itens)
-	var dn = 0
-	for x in sub_itens.size():
-		print("\n0878787==> \nFiles: " , sub_itens[dn], '\n')
-		dn += 1
-	delete_dir()
+#	var dn = 0
+#	for x in sub_itens.size():
+#		print("\n0878787==> \nFiles: " , sub_itens[dn], '\n')
+#		dn += 1
+#	delete_dir()
 
 func delete_dir():
 	var dir = Directory.new()
