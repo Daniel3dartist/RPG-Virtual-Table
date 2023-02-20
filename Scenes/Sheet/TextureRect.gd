@@ -55,6 +55,7 @@ func _on_X_Position_Input_HSlider_value_changed(value):
 	self.material.set_shader_param('uvm_x' , value)
 	token_param['uv_offset'][1] = value
 
+
 func _on_CheckBox_button_down():
 	is_check = true
 	label_is_checked.text = 'true'
