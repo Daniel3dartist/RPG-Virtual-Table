@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Sheet/TextureRect.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Sheet/Character_Sheet_Image.tres" type="Shader" id=7]
 [ext_resource path="res://Scenes/Sheet/Character_Image_File_Manager.gd" type="Script" id=8]
+[ext_resource path="res://Base_Images/fblands1.png" type="Texture" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 5.0
@@ -45,6 +46,28 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.227451, 0.223529, 0.223529, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="Theme" id=8]
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.227451, 0.223529, 0.223529, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_top = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="Theme" id=10]
+
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.227451, 0.223529, 0.223529, 1 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -119,7 +142,8 @@ margin_bottom = 14.0
 text = "true"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1000.0
+margin_left = 75.0
+margin_right = 1075.0
 margin_bottom = 600.0
 color = Color( 0.992188, 0.887543, 0.782898, 1 )
 
@@ -133,6 +157,33 @@ focus_mode = 2
 mouse_filter = 2
 mouse_default_cursor_shape = 13
 color = Color( 0.647059, 0.321569, 0.145098, 0.976471 )
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -306.0
+margin_top = 95.0
+margin_right = -50.0
+margin_bottom = 168.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -128.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 169.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 1
 
 [node name="SheetArea" type="VBoxContainer" parent="ColorRect"]
 anchor_right = 1.0
@@ -251,8 +302,231 @@ margin_right = 318.0
 margin_bottom = 42.0
 align = 1
 
-[node name="Sheet_TabContainer" type="TabContainer" parent="ColorRect/SheetArea"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/SheetArea"]
 margin_top = 70.0
+margin_right = 317.0
+margin_bottom = 158.0
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/HBoxContainer2"]
+margin_right = 317.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 317, 0 )
+size_flags_horizontal = 3
+
+[node name="WP_Box" type="HBoxContainer" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer"]
+margin_right = 317.0
+margin_bottom = 24.0
+alignment = 1
+
+[node name="Willpower" type="Label" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 25.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 22, 0 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "WP"
+align = 1
+
+[node name="VSeparator" type="VSeparator" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 29.0
+margin_right = 33.0
+margin_bottom = 24.0
+
+[node name="CheckBox1" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 37.0
+margin_right = 61.0
+margin_bottom = 24.0
+
+[node name="CheckBox2" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 65.0
+margin_right = 89.0
+margin_bottom = 24.0
+
+[node name="CheckBox3" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 93.0
+margin_right = 117.0
+margin_bottom = 24.0
+
+[node name="CheckBox4" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 121.0
+margin_right = 145.0
+margin_bottom = 24.0
+
+[node name="CheckBox5" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 149.0
+margin_right = 173.0
+margin_bottom = 24.0
+
+[node name="CheckBox6" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 177.0
+margin_right = 201.0
+margin_bottom = 24.0
+
+[node name="CheckBox7" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 205.0
+margin_right = 229.0
+margin_bottom = 24.0
+
+[node name="CheckBox8" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 233.0
+margin_right = 257.0
+margin_bottom = 24.0
+
+[node name="CheckBox9" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 261.0
+margin_right = 285.0
+margin_bottom = 24.0
+
+[node name="CheckBox10" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/WP_Box"]
+margin_left = 289.0
+margin_right = 313.0
+margin_bottom = 24.0
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer"]
+margin_top = 28.0
+margin_right = 317.0
+margin_bottom = 32.0
+
+[node name="XP_Box" type="HBoxContainer" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer"]
+margin_top = 36.0
+margin_right = 317.0
+margin_bottom = 88.0
+alignment = 1
+
+[node name="XP" type="Label" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box"]
+margin_left = 3.0
+margin_right = 25.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 22, 0 )
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "XP"
+align = 1
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box"]
+margin_left = 29.0
+margin_right = 33.0
+margin_bottom = 52.0
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box"]
+margin_left = 37.0
+margin_right = 313.0
+margin_bottom = 52.0
+columns = 10
+
+[node name="CheckBox1" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="CheckBox2" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 28.0
+margin_right = 52.0
+margin_bottom = 24.0
+
+[node name="CheckBox3" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 56.0
+margin_right = 80.0
+margin_bottom = 24.0
+
+[node name="CheckBox4" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 84.0
+margin_right = 108.0
+margin_bottom = 24.0
+
+[node name="CheckBox5" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 112.0
+margin_right = 136.0
+margin_bottom = 24.0
+
+[node name="CheckBox6" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 140.0
+margin_right = 164.0
+margin_bottom = 24.0
+
+[node name="CheckBox7" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 168.0
+margin_right = 192.0
+margin_bottom = 24.0
+
+[node name="CheckBox8" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 196.0
+margin_right = 220.0
+margin_bottom = 24.0
+
+[node name="CheckBox9" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 224.0
+margin_right = 248.0
+margin_bottom = 24.0
+
+[node name="CheckBox10" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 252.0
+margin_right = 276.0
+margin_bottom = 24.0
+
+[node name="CheckBox11" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_top = 28.0
+margin_right = 24.0
+margin_bottom = 52.0
+
+[node name="CheckBox12" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 52.0
+margin_bottom = 52.0
+
+[node name="CheckBox13" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 80.0
+margin_bottom = 52.0
+
+[node name="CheckBox14" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 108.0
+margin_bottom = 52.0
+
+[node name="CheckBox15" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 112.0
+margin_top = 28.0
+margin_right = 136.0
+margin_bottom = 52.0
+
+[node name="CheckBox16" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 140.0
+margin_top = 28.0
+margin_right = 164.0
+margin_bottom = 52.0
+
+[node name="CheckBox17" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 168.0
+margin_top = 28.0
+margin_right = 192.0
+margin_bottom = 52.0
+
+[node name="CheckBox18" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 196.0
+margin_top = 28.0
+margin_right = 220.0
+margin_bottom = 52.0
+
+[node name="CheckBox19" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 224.0
+margin_top = 28.0
+margin_right = 248.0
+margin_bottom = 52.0
+
+[node name="CheckBox20" type="CheckBox" parent="ColorRect/SheetArea/HBoxContainer2/VBoxContainer/XP_Box/GridContainer"]
+margin_left = 252.0
+margin_top = 28.0
+margin_right = 276.0
+margin_bottom = 52.0
+
+[node name="Sheet_TabContainer" type="TabContainer" parent="ColorRect/SheetArea"]
+margin_top = 162.0
 margin_right = 960.0
 margin_bottom = 560.0
 size_flags_horizontal = 3
@@ -262,6 +536,7 @@ custom_colors/font_color_fg = Color( 0, 0, 0, 1 )
 custom_styles/tab_fg = SubResource( 1 )
 custom_styles/tab_bg = SubResource( 2 )
 custom_styles/panel = SubResource( 3 )
+tab_align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -275,50 +550,48 @@ margin_right = -1.0
 margin_bottom = -1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main"]
-margin_right = 958.0
-margin_bottom = 154.0
+margin_right = 946.0
+margin_bottom = 388.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer"]
-margin_right = 958.0
+margin_right = 946.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer"]
 margin_top = 14.0
-margin_right = 958.0
-margin_bottom = 140.0
+margin_right = 946.0
+margin_bottom = 172.0
 size_flags_horizontal = 3
-alignment = 1
-
-[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer"]
-margin_right = 10.0
-margin_bottom = 126.0
-rect_min_size = Vector2( 10, 0 )
 
 [node name="Attributes" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer"]
-margin_left = 14.0
-margin_right = 477.0
-margin_bottom = 126.0
+margin_right = 464.0
+margin_bottom = 158.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-alignment = 1
+
+[node name="Container4" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes"]
+margin_right = 464.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 10, 10 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes"]
-margin_right = 463.0
-margin_bottom = 14.0
+margin_top = 14.0
+margin_right = 464.0
+margin_bottom = 28.0
 
 [node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes/HBoxContainer2"]
-margin_right = 127.0
+margin_right = 128.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="Attributes" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes/HBoxContainer2"]
-margin_left = 131.0
-margin_right = 331.0
+margin_left = 132.0
+margin_right = 332.0
 margin_bottom = 14.0
-rect_min_size = Vector2( 200, 0 )
+rect_min_size = Vector2( 200, 14 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -328,21 +601,28 @@ align = 1
 valign = 1
 
 [node name="Container2" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes/HBoxContainer2"]
-margin_left = 335.0
-margin_right = 463.0
+margin_left = 336.0
+margin_right = 464.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
+[node name="Container3" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes"]
+margin_top = 32.0
+margin_right = 464.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 10, 10 )
+
 [node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes"]
-margin_top = 18.0
-margin_right = 463.0
-margin_bottom = 126.0
+margin_top = 46.0
+margin_right = 464.0
+margin_bottom = 154.0
 alignment = 1
 
 [node name="Attributes_Column" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes/HBoxContainer"]
-margin_left = 38.0
-margin_right = 424.0
+margin_left = 39.0
+margin_right = 425.0
 margin_bottom = 108.0
+rect_min_size = Vector2( 0, 108 )
 
 [node name="Strength_Line" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Attributes/HBoxContainer/Attributes_Column"]
 margin_right = 386.0
@@ -663,41 +943,46 @@ margin_bottom = 24.0
 text = "0"
 align = 1
 
-[node name="Conditions" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer"]
-margin_left = 481.0
-margin_right = 944.0
-margin_bottom = 126.0
-size_flags_horizontal = 3
+[node name="GridContainer" type="GridContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 412.0
+margin_right = 532.0
+margin_bottom = 244.0
+grow_horizontal = 0
+grow_vertical = 2
+rect_min_size = Vector2( 120, 0 )
+columns = 2
+
+[node name="Sleeples_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer"]
+margin_right = 54.0
+margin_bottom = 78.0
+size_flags_vertical = 0
 alignment = 1
 
-[node name="Sleeples_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions"]
-margin_left = 138.0
-margin_right = 192.0
-margin_bottom = 126.0
-
-[node name="Sleeples" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Sleeples_Itens"]
+[node name="Sleeples" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Sleeples_Itens"]
 margin_right = 54.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Sleeples"
+align = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Sleeples_Itens"]
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Sleeples_Itens"]
 margin_top = 18.0
 margin_right = 54.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Sleeples_Itens/CenterContainer2"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Sleeples_Itens/CenterContainer2"]
 margin_left = 11.0
 margin_right = 43.0
 margin_bottom = 32.0
 texture = ExtResource( 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Sleeples_Itens"]
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Sleeples_Itens"]
 margin_top = 54.0
 margin_right = 54.0
 margin_bottom = 78.0
 
-[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Sleeples_Itens/CenterContainer"]
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Sleeples_Itens/CenterContainer"]
 margin_left = 15.0
 margin_right = 39.0
 margin_bottom = 24.0
@@ -705,34 +990,37 @@ rect_min_size = Vector2( 24, 24 )
 align = 1
 icon_align = 1
 
-[node name="Thirsty_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions"]
-margin_left = 196.0
-margin_right = 239.0
-margin_bottom = 126.0
+[node name="Thirsty_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer"]
+margin_left = 58.0
+margin_right = 101.0
+margin_bottom = 78.0
+size_flags_vertical = 0
+alignment = 1
 
-[node name="Thirsty" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Thirsty_Itens"]
+[node name="Thirsty" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Thirsty_Itens"]
 margin_right = 43.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Thirsty"
+align = 1
 
-[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Thirsty_Itens"]
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Thirsty_Itens"]
 margin_top = 18.0
 margin_right = 43.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Thirsty_Itens/CenterContainer2"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Thirsty_Itens/CenterContainer2"]
 margin_left = 5.0
 margin_right = 37.0
 margin_bottom = 32.0
 texture = ExtResource( 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Thirsty_Itens"]
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Thirsty_Itens"]
 margin_top = 54.0
 margin_right = 43.0
 margin_bottom = 78.0
 
-[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Thirsty_Itens/CenterContainer"]
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Thirsty_Itens/CenterContainer"]
 margin_left = 9.0
 margin_right = 33.0
 margin_bottom = 24.0
@@ -740,34 +1028,255 @@ rect_min_size = Vector2( 24, 24 )
 align = 1
 icon_align = 1
 
-[node name="Hungry_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions"]
-margin_left = 243.0
-margin_right = 288.0
-margin_bottom = 126.0
+[node name="Hungry_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer"]
+margin_top = 82.0
+margin_right = 54.0
+margin_bottom = 160.0
+size_flags_vertical = 0
+alignment = 1
 
-[node name="Hungry" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Hungry_Itens"]
+[node name="Hungry" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Hungry_Itens"]
+margin_right = 54.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Hungry"
+align = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Hungry_Itens"]
+margin_top = 18.0
+margin_right = 54.0
+margin_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Hungry_Itens/CenterContainer2"]
+margin_left = 11.0
+margin_right = 43.0
+margin_bottom = 32.0
+texture = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Hungry_Itens"]
+margin_top = 54.0
+margin_right = 54.0
+margin_bottom = 78.0
+
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Hungry_Itens/CenterContainer"]
+margin_left = 15.0
+margin_right = 39.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+align = 1
+icon_align = 1
+
+[node name="Cold_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer"]
+margin_left = 58.0
+margin_top = 82.0
+margin_right = 101.0
+margin_bottom = 160.0
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Cold" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Cold_Itens"]
+margin_right = 43.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Cold"
+align = 1
+
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Cold_Itens"]
+margin_top = 18.0
+margin_right = 43.0
+margin_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Cold_Itens/CenterContainer2"]
+margin_left = 5.0
+margin_right = 37.0
+margin_bottom = 32.0
+texture = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Cold_Itens"]
+margin_top = 54.0
+margin_right = 43.0
+margin_bottom = 78.0
+
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/GridContainer/Cold_Itens/CenterContainer"]
+margin_left = 9.0
+margin_right = 33.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+align = 1
+icon_align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer"]
+margin_left = 468.0
+margin_right = 932.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
+margin_right = 470.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 464.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 14.0
+margin_right = 464.0
+margin_bottom = 158.0
+size_flags_horizontal = 3
+
+[node name="Container3" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 450.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 450.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 14 )
+theme = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+text = "Critical Injuries"
+align = 1
+
+[node name="Container" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 450.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="TextEdit" type="TextEdit" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 450.0
+margin_bottom = 154.0
+rect_min_size = Vector2( 0, 108 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Container2" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 158.0
+margin_right = 450.0
+margin_bottom = 158.0
+size_flags_vertical = 3
+
+[node name="Conditions" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer"]
+visible = false
+margin_top = 162.0
+margin_right = 470.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Sleeples_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions"]
+margin_left = 142.0
+margin_right = 196.0
+margin_bottom = 78.0
+size_flags_vertical = 0
+
+[node name="Sleeples" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Sleeples_Itens"]
+margin_right = 54.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Sleeples"
+
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Sleeples_Itens"]
+margin_top = 18.0
+margin_right = 54.0
+margin_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Sleeples_Itens/CenterContainer2"]
+margin_left = 11.0
+margin_right = 43.0
+margin_bottom = 32.0
+texture = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Sleeples_Itens"]
+margin_top = 54.0
+margin_right = 54.0
+margin_bottom = 78.0
+
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Sleeples_Itens/CenterContainer"]
+margin_left = 15.0
+margin_right = 39.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+align = 1
+icon_align = 1
+
+[node name="Thirsty_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions"]
+margin_left = 200.0
+margin_right = 243.0
+margin_bottom = 78.0
+size_flags_vertical = 0
+
+[node name="Thirsty" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Thirsty_Itens"]
+margin_right = 43.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Thirsty"
+
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Thirsty_Itens"]
+margin_top = 18.0
+margin_right = 43.0
+margin_bottom = 50.0
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Thirsty_Itens/CenterContainer2"]
+margin_left = 5.0
+margin_right = 37.0
+margin_bottom = 32.0
+texture = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Thirsty_Itens"]
+margin_top = 54.0
+margin_right = 43.0
+margin_bottom = 78.0
+
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Thirsty_Itens/CenterContainer"]
+margin_left = 9.0
+margin_right = 33.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+align = 1
+icon_align = 1
+
+[node name="Hungry_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions"]
+margin_left = 247.0
+margin_right = 292.0
+margin_bottom = 78.0
+size_flags_vertical = 0
+
+[node name="Hungry" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Hungry_Itens"]
 margin_right = 45.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Hungry"
 
-[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Hungry_Itens"]
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Hungry_Itens"]
 margin_top = 18.0
 margin_right = 45.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Hungry_Itens/CenterContainer2"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Hungry_Itens/CenterContainer2"]
 margin_left = 6.0
 margin_right = 38.0
 margin_bottom = 32.0
 texture = ExtResource( 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Hungry_Itens"]
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Hungry_Itens"]
 margin_top = 54.0
 margin_right = 45.0
 margin_bottom = 78.0
 
-[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Hungry_Itens/CenterContainer"]
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Hungry_Itens/CenterContainer"]
 margin_left = 10.0
 margin_right = 34.0
 margin_bottom = 24.0
@@ -775,33 +1284,34 @@ rect_min_size = Vector2( 24, 24 )
 align = 1
 icon_align = 1
 
-[node name="Cold_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions"]
-margin_left = 292.0
-margin_right = 324.0
-margin_bottom = 126.0
+[node name="Cold_Itens" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions"]
+margin_left = 296.0
+margin_right = 328.0
+margin_bottom = 78.0
+size_flags_vertical = 0
 
-[node name="Cold" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Cold_Itens"]
+[node name="Cold" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Cold_Itens"]
 margin_right = 32.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Cold"
 
-[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Cold_Itens"]
+[node name="CenterContainer2" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Cold_Itens"]
 margin_top = 18.0
 margin_right = 32.0
 margin_bottom = 50.0
 
-[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Cold_Itens/CenterContainer2"]
+[node name="TextureRect" type="TextureRect" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Cold_Itens/CenterContainer2"]
 margin_right = 32.0
 margin_bottom = 32.0
 texture = ExtResource( 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Cold_Itens"]
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Cold_Itens"]
 margin_top = 54.0
 margin_right = 32.0
 margin_bottom = 78.0
 
-[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/Conditions/Cold_Itens/CenterContainer"]
+[node name="CheckBox" type="CheckBox" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer/VBoxContainer/Conditions/Cold_Itens/CenterContainer"]
 margin_left = 4.0
 margin_right = 28.0
 margin_bottom = 24.0
@@ -810,19 +1320,237 @@ align = 1
 icon_align = 1
 
 [node name="Container2" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/HBoxContainer"]
-margin_left = 948.0
-margin_right = 958.0
-margin_bottom = 126.0
+margin_left = 936.0
+margin_right = 946.0
+margin_bottom = 158.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Container2" type="Container" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer"]
-margin_top = 144.0
-margin_right = 958.0
-margin_bottom = 154.0
+margin_top = 176.0
+margin_right = 946.0
+margin_bottom = 186.0
 rect_min_size = Vector2( 0, 10 )
 
-[node name="Skills" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
-visible = false
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer"]
+margin_top = 190.0
+margin_right = 946.0
+margin_bottom = 204.0
+theme = SubResource( 10 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 11 )
+text = "Skills"
+align = 1
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer"]
+margin_top = 208.0
+margin_right = 946.0
+margin_bottom = 384.0
+columns = 2
+
+[node name="Strength_Box" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer"]
+margin_right = 471.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box"]
+margin_right = 471.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Strength"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 86.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box/VBoxContainer"]
+margin_right = 471.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Might"
+
+[node name="Label2" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box/VBoxContainer"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Endurance"
+
+[node name="Label3" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box/VBoxContainer"]
+margin_top = 36.0
+margin_right = 471.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Melee"
+
+[node name="Label4" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box/VBoxContainer"]
+margin_top = 54.0
+margin_right = 471.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Crafting"
+
+[node name="Strength_Box2" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer"]
+margin_left = 475.0
+margin_right = 946.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box2"]
+margin_right = 471.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Strength"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box2"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 86.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box2/VBoxContainer"]
+margin_right = 471.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Might"
+
+[node name="Label2" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box2/VBoxContainer"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Endurance"
+
+[node name="Label3" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box2/VBoxContainer"]
+margin_top = 36.0
+margin_right = 471.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Melee"
+
+[node name="Label4" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box2/VBoxContainer"]
+margin_top = 54.0
+margin_right = 471.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Crafting"
+
+[node name="Strength_Box3" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer"]
+margin_top = 90.0
+margin_right = 471.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box3"]
+margin_right = 471.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Strength"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box3"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 86.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box3/VBoxContainer"]
+margin_right = 471.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Might"
+
+[node name="Label2" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box3/VBoxContainer"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Endurance"
+
+[node name="Label3" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box3/VBoxContainer"]
+margin_top = 36.0
+margin_right = 471.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Melee"
+
+[node name="Label4" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box3/VBoxContainer"]
+margin_top = 54.0
+margin_right = 471.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Crafting"
+
+[node name="Strength_Box4" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer"]
+margin_left = 475.0
+margin_top = 90.0
+margin_right = 946.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box4"]
+margin_right = 471.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Strength"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box4"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 86.0
+alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box4/VBoxContainer"]
+margin_right = 471.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Might"
+
+[node name="Label2" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box4/VBoxContainer"]
+margin_top = 18.0
+margin_right = 471.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Endurance"
+
+[node name="Label3" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box4/VBoxContainer"]
+margin_top = 36.0
+margin_right = 471.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Melee"
+
+[node name="Label4" type="Label" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer/GridContainer/Strength_Box4/VBoxContainer"]
+margin_top = 54.0
+margin_right = 471.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Crafting"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer/Main/VBoxContainer"]
+margin_top = 388.0
+margin_right = 946.0
+margin_bottom = 388.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Inventory" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
 margin_left = 1.0
 margin_top = 25.0
 margin_right = 1.0
@@ -835,7 +1563,7 @@ margin_top = 25.0
 margin_right = 1.0
 margin_bottom = 25.0
 
-[node name="Spellbook" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
+[node name="Talents" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
 visible = false
 margin_left = 1.0
 margin_top = 25.0
@@ -843,13 +1571,6 @@ margin_right = 1.0
 margin_bottom = 25.0
 
 [node name="Armour" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
-visible = false
-margin_left = 1.0
-margin_top = 25.0
-margin_right = 1.0
-margin_bottom = 25.0
-
-[node name="Inventory" type="VBoxContainer" parent="ColorRect/SheetArea/Sheet_TabContainer"]
 visible = false
 margin_left = 1.0
 margin_top = 25.0
@@ -1200,6 +1921,13 @@ position = Vector2( 479, -70 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/SheetArea/Sheet_TabContainer/Area2D"]
 position = Vector2( 0, 7.75 )
 shape = SubResource( 5 )
+
+[node name="VScrollBar" type="VScrollBar" parent="ColorRect"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -12.0
 
 [node name="path" type="Label" parent="."]
 margin_left = 448.0
