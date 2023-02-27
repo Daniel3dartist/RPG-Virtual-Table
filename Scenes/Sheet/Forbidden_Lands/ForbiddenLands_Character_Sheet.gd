@@ -7,19 +7,19 @@ var off_set
 var dragging: bool = false
 var is_block: bool = true
 onready var pos2d = $'CanvasLayer/Node2D'
-onready var color_rect = $"CanvasLayer/ColorRect2"
+onready var color_rect = $'Panel/Container' #$"CanvasLayer/ColorRect2"
 
-onready var char_name = $'Panel/SheetArea/Sheet_TabContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name'
+onready var char_name = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name'
 var _index: int = 0
 var old_name: String
 var sheet
 var reputation_total: int = 0
 
-onready var race_menu = $'Panel/SheetArea/Sheet_TabContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterRace_BoxC/Panel/MenuButton'
+onready var race_menu = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterRace_BoxC/Panel/MenuButton'
 
 func _ready():
 	old_name = char_name.text
-	color_rect.rect_position = Vector2(280, 60)
+#	color_rect.rect_position = Vector2(280, 60)
 	$'Panel'.rect_position = Vector2(235-15, 60)
 	var table = self.get_parent().get_parent()
 	print('\n\n Parente Parente: %s\n\n' % table)
@@ -30,11 +30,11 @@ func _ready():
 
 var is_age
 func _input(event):
-	var age_label = $'Panel/SheetArea/Sheet_TabContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Label2'
-	var reputation_age_mod = $'Panel/SheetArea/Sheet_TabContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Label2'
-	var reputation = $'Panel/SheetArea/Sheet_TabContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Panel/SpinBox'
+	var age_label = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Label2'
+	var reputation_age_mod = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Label2'
+	var reputation = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Panel/SpinBox'
 	if Input.is_action_just_released("enter") or Input.is_action_just_released("left_mouse"):
-		var value = $'Panel/SheetArea/Sheet_TabContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox'.value
+		var value = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox'.value
 		print(value)
 		if int(value) < 22:
 			age_label.text = 'Young'
@@ -52,9 +52,9 @@ func _input(event):
 
 # Drag-and-drop sheet
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
-		off_set = [rect_position - get_global_mouse_position(), color_rect.rect_position - get_global_mouse_position()]
+		off_set = rect_position - get_global_mouse_position()
 
-		var area = color_rect.rect_size
+#		var area = color_rect.rect_size
 		var mouse = get_global_mouse_position()
 		
 		if is_block == false:
@@ -65,14 +65,14 @@ func _input(event):
 		dragging = false
 
 func _process(delta):
-	var area = color_rect.rect_size
+#	var area = color_rect.rect_size
 	var mouse = get_global_mouse_position()
 	
 	if dragging == true and get_viewport().get_mouse_position().y > 0.0:
 		var view = get_viewport().get_mouse_position()
-		rect_position = view + off_set[0]
-		pos2d.position = pos2d.position - rect_position #rect_position + pos
-		color_rect.rect_position = view + off_set[1]
+		rect_position = view + off_set
+		pos2d.position = pos2d.position - rect_position 
+#		color_rect.rect_position = view + off_set
 
 
 func _Receive_Sheet_Data(dic):
@@ -155,11 +155,11 @@ func _on_Sheet_Exit_button_up():
 	self.queue_free()
 
 
-func _on_ColorRect2_mouse_entered():
+func _on_Container_mouse_entered():
 	is_block = false
 
 
-func _on_ColorRect2_mouse_exited():
+func _on_Container_mouse_exited():
 	is_block = true
 
 
@@ -173,3 +173,5 @@ func _on_SpinBox_mouse_entered():
 
 func _on_SpinBox_mouse_exited():
 	is_age = false
+
+
