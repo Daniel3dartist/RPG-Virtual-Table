@@ -1,0 +1,17 @@
+[gd_scene format=2]
+
+[node name="Sheets_Options" type="PopupMenu"]
+margin_right = 350.0
+margin_bottom = 166.0
+
+[node name="PopupMenu" type="PopupMenu" parent="."]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="PopupMenu" type="PopupMenu" parent="PopupMenu"]
+margin_right = 20.0
+margin_bottom = 20.0
+
+[node name="PopupMenu" type="PopupMenu" parent="PopupMenu/PopupMenu"]
+margin_right = 20.0
+margin_bottom = 20.0

@@ -21,7 +21,7 @@ onready var bot = $'Bot/HTTPRequest'
 onready var chat = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Chat'
 onready var chat_input = $'Base_UI/Chat_&_Rolls_Results/TabContainer/Chat_Buttons_ChatInput/Chat_Input'
 
-var character_sheet_path = preload("res://Scenes/Sheet/Character_Sheet.tscn")
+var character_sheet_path
 
 onready var sheet_container = $"Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer"
 var sheet_call_Hbox = preload('res://Scenes/Table/SheetCallHBox.tscn')
@@ -58,6 +58,25 @@ func _ready():
 	print('\n\n_NAME: ', _name, '\n\n')
 	$'table_name'.text = _name
 	
+	var system = config.get_value('Last Played', 'system')
+	print('\n\n',system, '\n\n')
+	var item_path : Array
+	match system:
+		'Dungeons & Dragons - 5E':
+			item_path = ['Dungeons_&_Dragons_5E', 'D&D5TH_Character_Sheet']
+		'Forbidden Lands':
+			print('\n\nforbidden\n\n')
+			item_path = ['Forbidden_Lands', 'ForbiddenLands_Character_Sheet']
+		'Tormenta RPG':
+			pass
+		'Pathfinder':
+			pass
+		'Pathfinder 2.0':
+			pass 
+		'...':
+			pass
+	character_sheet_path = "res://Scenes/Sheet/%s/%s.tscn" % item_path
+
 	if config2.get_value('Table', 'sheets') != null:
 		sheet_list = config2.get_value('Table', 'sheets')
 		for i in sheet_list:
@@ -216,15 +235,16 @@ func _Call_Sheet(value):
 	print('\n\nLabel Path: \n', self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer').get_child(value['id']).get_node('path').text, '\n\n')
 	var _name = sheet_container.get_child(value['id']).get_node('Sheet').text
 	if packed_scene == null:
-		packed_scene = load('res://Scenes/Sheet/Character_Sheet.tscn')
+		print('\n\n\n%s\n\n\n' % character_sheet_path)
+		packed_scene = load(character_sheet_path)
 	# Instance the scene
 	var my_scene = packed_scene.instance()
 #	emit_signal('index', value['index'])
 	$'Sheet_Spaw'.add_child(my_scene)
-	my_scene.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = _name
-	my_scene.connect('give_data', self, '_Give_Data')
-	my_scene.connect('Save_sheet_path', sheet_container.get_child(value['id']), '_Save_sheet_path')
-	sheet_dic = value
+#	my_scene.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = _name
+#	my_scene.connect('give_data', self, '_Give_Data')
+#	my_scene.connect('Save_sheet_path', sheet_container.get_child(value['id']), '_Save_sheet_path')
+#	sheet_dic = value
 	
 	emit_signal('receive_sheet_data', value)
 

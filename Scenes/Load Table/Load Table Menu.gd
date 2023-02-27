@@ -28,7 +28,9 @@ var tboxdic = {
 	'name': '',
 	'pic': '',
 	'desc': '',
-	'path': ''}
+	'path': '',
+	'system': ''
+	}
 
 # List of table container saved
 var tboxlist : Array = []
@@ -65,6 +67,8 @@ func _ready():
 			card = table_list.get_child(sz)
 			card.get_node('Table Description/Table_desc_itens/Table Name').text = array[sz]['name']
 			card.get_node('Table Description/Table_desc_itens/TextEdit').text = array[sz]['desc']
+			card.get_node('Table Description/Table_desc_itens/HBoxContainer/Panel/MenuButton').text = array[sz]['system']
+			card.get_node('Table Description/Table_desc_itens/HBoxContainer/System_name').text = array[sz]['system']
 			
 			var _texture = Texture.new()
 			var _material = ShaderMaterial.new()
@@ -165,7 +169,8 @@ func add_table():
 		'name': card.get_node("Table Description/Table_desc_itens/Table Name").text,
 		'pic': card_pic,
 		'desc': 'none',
-		'path': '%s/data/Tables/%s' % [exe_path, txt]
+		'path': '%s/data/Tables/%s' % [exe_path, txt],
+		'system': card.get_node('Table Description/Table_desc_itens/HBoxContainer/Panel/MenuButton').text
 	}
 	print('Table List File updated... \n')
 	
@@ -212,7 +217,8 @@ func _Save_Changes(dic):
 		'name': tboxlist[dic['id']]['name'],
 		'num': tboxlist[dic['id']]['number'],
 		'dir': exe_path + '/data/tables/%s' % tboxlist[dic['id']]['name'],
-		'path': tboxlist[dic['id']]['path']
+		'path': tboxlist[dic['id']]['path'],
+		'system': tboxlist[dic['id']]['system']
 	}
 	
 	dir.rename(exe_path + '/data/tables/%s' % old_dic['name'], dic['path'])
@@ -222,6 +228,7 @@ func _Save_Changes(dic):
 	tboxlist[dic['id']]['name'] = dic['name']
 	tboxlist[dic['id']]['desc'] = dic['desc']
 	tboxlist[dic['id']]['path'] = dic['path']
+	tboxlist[dic['id']]['system'] = dic['system']
 
 	cfg.load(BASE_PATH)
 	cfg.set_value('Tables', 'table_list', tboxlist)
