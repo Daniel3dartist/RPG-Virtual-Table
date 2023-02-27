@@ -158,6 +158,8 @@ func _Save_Table():
 	var config = ConfigFile.new()
 	var _name = self.get_node("table_name").text
 	
+	config.load(BASE_PATH + '/%s/%s.ini' % [_name, _name])
+#	sheet_list = config.get_value('Table', 'sheets')
 	config.set_value('Table', 'name', _name)
 	config.set_value('Table', 'sheets', sheet_list)
 	config.set_value('Layers', 'layers_list', sheet_list)
@@ -232,25 +234,27 @@ var sheet_dic : Dictionary = {
 }
 func _Call_Sheet(value):
 	var packed_scene = load(value['path'])
-	print('\n\nLabel Path: \n', self.get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer').get_child(value['id']).get_node('path').text, '\n\n')
 	var _name = sheet_container.get_child(value['id']).get_node('Sheet').text
 	if packed_scene == null:
 		print('\n\n\n%s\n\n\n' % character_sheet_path)
 		packed_scene = load(character_sheet_path)
-	# Instance the scene
+# Instance the scene
 	var my_scene = packed_scene.instance()
-#	emit_signal('index', value['index'])
 	$'Sheet_Spaw'.add_child(my_scene)
-#	my_scene.get_node('ColorRect/SheetArea/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = _name
-#	my_scene.connect('give_data', self, '_Give_Data')
-#	my_scene.connect('Save_sheet_path', sheet_container.get_child(value['id']), '_Save_sheet_path')
-#	sheet_dic = value
+	my_scene.connect('update_sheet_list', self, '_UpDate_Sheet_List')
+
 	
 	emit_signal('receive_sheet_data', value)
 
 func _Give_Data(index):
 	print('Giving data...')
 	emit_signal('receive_sheet_data', sheet_dic)
+
+
+func _UpDate_Sheet_List(array):
+	print('\n\n Array received\n\n')
+	sheet_list = array
+
 
 func _on_Main_Menu_button_up():
 	var main_menu = 'res://Scenes/Main Menu/Main Menu.tscn' # set main menu path

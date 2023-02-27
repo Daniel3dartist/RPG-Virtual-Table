@@ -1,5 +1,7 @@
 extends Control
 
+signal update_sheet_list(array)
+
 onready var BASE_PATH = OS.get_executable_path().get_base_dir()
 onready var sheet_list_path = self.get_parent().get_parent().get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer')
 
@@ -125,6 +127,7 @@ func _Update_Save():
 	sheet_list[sheet['id']]['name'] = char_name.text
 	sheet_list[sheet['id']]['path'] = dir
 	cfg.set_value('Table', 'sheets', sheet_list)
+	emit_signal('update_sheet_list', sheet_list)
 	cfg.save(table_path)
 	print(sheet_list)
 #	emit_signal("Save_sheet_path", [old_path, dir] )
