@@ -68,13 +68,13 @@ func _ready():
 			print('\n\nforbidden\n\n')
 			item_path = ['Forbidden_Lands', 'ForbiddenLands_Character_Sheet']
 		'Tormenta RPG':
-			pass
+			item_path = ['Dungeons_&_Dragons_5E', 'D&D5TH_Character_Sheet'] # Just for testing ( change later )
 		'Pathfinder':
-			pass
+			item_path = ['Dungeons_&_Dragons_5E', 'D&D5TH_Character_Sheet'] # Just for testing ( change later )
 		'Pathfinder 2.0':
-			pass 
+			item_path = ['Dungeons_&_Dragons_5E', 'D&D5TH_Character_Sheet'] # Just for testing ( change later )
 		'...':
-			pass
+			item_path = ['Dungeons_&_Dragons_5E', 'D&D5TH_Character_Sheet'] # Just for testing ( change later )
 	character_sheet_path = "res://Scenes/Sheet/%s/%s.tscn" % item_path
 
 	if config2.get_value('Table', 'sheets') != null:

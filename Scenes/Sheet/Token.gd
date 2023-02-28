@@ -13,13 +13,11 @@ func _input(event):
 		token = tilemap.world_to_map(self.position)
 		if mouse == token:
 			selected = true
-			get_node("ColorRect2").visible = true
-			get_node("ColorRect2").modulate = '73ffffff'
-			get_node("Sprite").modulate = '73ccc1c1' #'e71a1a'
 			get_node("ColorRect").visible = true
+			get_node("ColorRect").modulate = '73ffffff'
+			get_node("Sprite").modulate = '73ccc1c1' #'e71a1a'
 			grabed = true
 		else:
-			get_node("ColorRect2").visible = false
 			get_node("ColorRect").visible = false
 			selected = false
 
@@ -31,4 +29,4 @@ func _input(event):
 	if Input.is_action_just_released("left_mouse"):
 		grabed = false
 		get_node("Sprite").modulate = 'ffffff'
-		get_node("ColorRect2").modulate = 'ffffff'
+		get_node("ColorRect").modulate = 'ffffff'

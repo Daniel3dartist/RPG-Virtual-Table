@@ -15,9 +15,52 @@ onready var char_name = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBo
 var _index: int = 0
 var old_name: String
 var sheet
-var reputation_total: int = 0
 
 onready var race_menu = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterRace_BoxC/Panel/MenuButton'
+var is_age
+var age_category: Dictionary = {
+	"max_min":  {
+		"Young": [16,25],
+		"Adult": [26,50],
+		"Old": [51]
+	},
+	'Human': {
+		"Young": [16,25],
+		"Adult": [26,50],
+		"Old": [51]
+	},
+	'Half-Elf': {
+		"Young": [16,30],
+		"Adult": [31,100],
+		"Old": [101]
+	},
+	'Dwarf': {
+		"Young": [20,40],
+		"Adult": [41,80],
+		"Old": [81]
+	},
+	'Halfling': {
+		"Young": [16,25],
+		"Adult": [26,60],
+		"Old": [61]
+	},
+	'Wolfkin': {
+		"Young": [13,20],
+		"Adult": [21,40],
+		"Old": [41]
+	},
+	'Orc': {
+		"Young": [13,20],
+		"Adult": [21,45],
+		"Old": [46]
+	},
+	'Goblin': {
+		"Young": [16,25],
+		"Adult": [26,60],
+		"Old": [61]
+	},
+}
+
 
 func _ready():
 	old_name = char_name.text
@@ -30,26 +73,13 @@ func _ready():
 	emit_signal("give_data")
 	race_menu.get_popup().connect("id_pressed", self, "Popup_id_pressed")
 
-var is_age
 func _input(event):
 	var age_label = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Label2'
 	var reputation_age_mod = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Label2'
 	var reputation = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Panel/SpinBox'
+	var rep_total = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Reputation_Total'
 	if Input.is_action_just_released("enter") or Input.is_action_just_released("left_mouse"):
-		var value = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox'.value
-		print(value)
-		if int(value) < 22:
-			age_label.text = 'Young'
-			reputation_age_mod.text = '%s+' % 0
-			reputation.value = 0 + reputation_total
-		elif int(value) < 30:
-			age_label.text = 'Adult'
-			reputation_age_mod.text = '%s+' % 1
-			reputation.value = 1 + reputation_total
-		elif int(value) > 32:
-			age_label.text = 'Older'
-			reputation_age_mod.text = '%s+' % 2
-			reputation.value = 2 + reputation_total
+		_set_age_mod()
 
 
 # Drag-and-drop sheet
@@ -133,25 +163,51 @@ func _Update_Save():
 #	emit_signal("Save_sheet_path", [old_path, dir] )
 #	pass
 
+func _set_age_mod():
+	var age_label = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Label2'
+	var reputation_age_mod = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Label2'
+	var reputation = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Panel/SpinBox'
+	var rep_total = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Reputation_Total'
+	var value = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox'.value
+	print(value)
+	if int(value) >= age_category['max_min']['Young'][0] and int(value) <= age_category['max_min']['Young'][1]:
+		age_label.text = 'Young'
+		reputation_age_mod.text = '%s+' % 0
+		rep_total.text = str(0 + reputation.value)
+	elif int(value) >= age_category['max_min']['Adult'][0] and int(value) <= age_category['max_min']['Adult'][1]:
+		age_label.text = 'Adult'
+		reputation_age_mod.text = '%s+' % 1
+		rep_total.text = str(1 + reputation.value)
+	elif int(value)>= age_category['max_min']['Old'][0]:
+		age_label.text = 'Old'
+		reputation_age_mod.text = '%s+' % 2
+		rep_total.text = str(2 + reputation.value)
+
 
 func Popup_id_pressed(id):
 	match id:
 		0:
 			race_menu.text = 'Human'
+			age_category['max_min'] = age_category['Human']
 		1:
-			race_menu.text = 'Elf'
-		2:
 			race_menu.text = 'Half-Elf'
-		3:
+			age_category['max_min'] = age_category['Half-Elf']
+		2:
 			race_menu.text = 'Dwarf'
-		4:
+			age_category['max_min'] = age_category['Dwarf']
+		3:
 			race_menu.text = 'Halfling'
-		5:
+			age_category['max_min'] = age_category['Halfling']
+		4:
 			race_menu.text = 'Wolfkin'
-		6:
+			age_category['max_min'] = age_category['WolfKin']
+		5:
 			race_menu.text = 'Orc'
-		7:
+			age_category['max_min'] = age_category['Orc']
+		6:
 			race_menu.text = 'Goblin'
+			age_category['max_min'] = age_category['Goblin']
+	_set_age_mod()
 
 
 func _on_Sheet_Exit_button_up():
