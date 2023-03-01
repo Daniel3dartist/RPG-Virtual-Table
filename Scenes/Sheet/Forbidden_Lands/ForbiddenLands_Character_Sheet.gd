@@ -61,23 +61,18 @@ var age_category: Dictionary = {
 	},
 }
 
+onready var class_menu = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterClass_BoxC/Panel2/MenuButton'
 
 func _ready():
 	old_name = char_name.text
-<<<<<<< HEAD
-	color_rect.rect_position = Vector2(0.0,0.0)
-	$'Panel'.rect_position = Vector2(0.0,0.0)
-	color_rect.rect_position = Vector2(280, 60)
-=======
-#	color_rect.rect_position = Vector2(280, 60)
->>>>>>> 8a0ec910bfcfddf5a70b62c93e214271a893bc22
 	$'Panel'.rect_position = Vector2(235-15, 60)
 	var table = self.get_parent().get_parent()
 	print('\n\n Parente Parente: %s\n\n' % table)
 	table.connect('receive_sheet_data', self, '_Receive_Sheet_Data')
 	table.connect('index', self, '_Index')
 	emit_signal("give_data")
-	race_menu.get_popup().connect("id_pressed", self, "Popup_id_pressed")
+	race_menu.get_popup().connect("id_pressed", self, "Popup_race_id_pressed")
+	class_menu.get_popup().connect("id_pressed", self, "Popup_class_id_pressed")
 
 func _input(event):
 	var age_label = $'Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Label2'
@@ -192,36 +187,53 @@ func _set_age_mod():
 		rep_total.text = str(2 + reputation.value)
 
 
-func Popup_id_pressed(id):
+func Popup_race_id_pressed(id):
 	match id:
 		0:
-			race_menu.text = 'Human'
+			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['Human']
 		1:
-			race_menu.text = 'Half-Elf'
+			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['Half-Elf']
 		2:
-			race_menu.text = 'Dwarf'
+			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['Dwarf']
 		3:
-			race_menu.text = 'Halfling'
+			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['Halfling']
 		4:
-			race_menu.text = 'Wolfkin'
+			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['WolfKin']
 		5:
-			race_menu.text = 'Orc'
+			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['Orc']
 		6:
-			race_menu.text = 'Goblin'
+			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['Goblin']
 	_set_age_mod()
 
 
+func Popup_class_id_pressed(id):
+	match id:
+		0:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+		1:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+		2:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+		3:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+		4:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+		5:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+		6:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+		7:
+			class_menu.text = class_menu.get_popup().get_item_text(id)
+
+
 func _on_Sheet_Exit_button_up():
-	color_rect.rect_position = Vector2(280, 60)
-	$'Panel'.rect_position = Vector2(235-15, 60)
-	
 	self.queue_free()
 
 

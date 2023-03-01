@@ -88,14 +88,14 @@ func Popup_id_pressed(id):
 #var popup = $'Table Description/Table_desc_itens/HBoxContainer/Panel/MenuButton'
 	match id:
 		0:
-			menubutton.text = 'Dungeons & Dragons - 5E'
+			menubutton.text = menubutton.get_popup().get_item_text(id)
 		1:
-			menubutton.text = 'Forbidden Lands'
+			menubutton.text = menubutton.get_popup().get_item_text(id)
 		2:
-			menubutton.text = 'Tormenta RPG'
+			menubutton.text = menubutton.get_popup().get_item_text(id)
 		3:
-			menubutton.text = 'Pathfinder'
+			menubutton.text = menubutton.get_popup().get_item_text(id)
 		4:
-			menubutton.text = 'Pathfinder 2.0'
+			menubutton.text = menubutton.get_popup().get_item_text(id)
 		5: 
-			menubutton.text = '...'
+			menubutton.text = menubutton.get_popup().get_item_text(id)
