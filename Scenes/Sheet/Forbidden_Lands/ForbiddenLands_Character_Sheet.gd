@@ -19,6 +19,8 @@ onready var race_menu = $'Panel/SheetArea/Sheet_TabContainer/HBoxContainer/VBoxC
 
 func _ready():
 	old_name = char_name.text
+	color_rect.rect_position = Vector2(0.0,0.0)
+	$'Panel'.rect_position = Vector2(0.0,0.0)
 	color_rect.rect_position = Vector2(280, 60)
 	$'Panel'.rect_position = Vector2(235-15, 60)
 	var table = self.get_parent().get_parent()
@@ -113,6 +115,8 @@ func _Update_Save():
 	path_label.text = dir
 	print('\nTXT:', dir)
 	Directory.new().rename(str(old_path), str(path_label.text))
+	color_rect.rect_position = Vector2(280, 60)
+	$'Panel'.rect_position = Vector2(235-15, 60)
 	packed_scene.pack(self)
 	ResourceSaver.save(dir, packed_scene)
 	var cfg = ConfigFile.new()
@@ -152,6 +156,9 @@ func Popup_id_pressed(id):
 
 
 func _on_Sheet_Exit_button_up():
+	color_rect.rect_position = Vector2(280, 60)
+	$'Panel'.rect_position = Vector2(235-15, 60)
+	
 	self.queue_free()
 
 
