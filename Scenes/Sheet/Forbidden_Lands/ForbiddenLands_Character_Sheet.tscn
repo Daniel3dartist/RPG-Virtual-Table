@@ -4396,6 +4396,7 @@ margin_right = 86.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 48 )
+script = ExtResource( 26 )
 
 [node name="CheckBox3" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 90.0
@@ -4403,6 +4404,7 @@ margin_right = 114.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 49 )
+script = ExtResource( 26 )
 
 [node name="CheckBox4" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 118.0
@@ -4410,6 +4412,7 @@ margin_right = 142.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 50 )
+script = ExtResource( 26 )
 
 [node name="CheckBox5" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 146.0
@@ -4417,6 +4420,7 @@ margin_right = 170.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 51 )
+script = ExtResource( 26 )
 
 [node name="CheckBox6" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 174.0
@@ -4424,6 +4428,7 @@ margin_right = 198.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 52 )
+script = ExtResource( 26 )
 
 [node name="CheckBox7" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 202.0
@@ -4431,6 +4436,7 @@ margin_right = 226.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 53 )
+script = ExtResource( 26 )
 
 [node name="CheckBox8" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 230.0
@@ -4438,6 +4444,7 @@ margin_right = 254.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 54 )
+script = ExtResource( 26 )
 
 [node name="CheckBox9" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 258.0
@@ -4445,6 +4452,7 @@ margin_right = 282.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 55 )
+script = ExtResource( 26 )
 
 [node name="CheckBox10" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 286.0
@@ -4452,6 +4460,7 @@ margin_right = 310.0
 margin_bottom = 24.0
 theme = ExtResource( 20 )
 group = SubResource( 56 )
+script = ExtResource( 26 )
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/Panel/HBoxContainer2"]
 margin_left = 322.0

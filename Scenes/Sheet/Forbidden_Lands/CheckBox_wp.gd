@@ -1,5 +1,6 @@
 extends CheckBox
 
+signal give_checks_data(id)
 
 func _ready():
 	self.connect("gui_input", self, "_gui_input")
@@ -13,9 +14,9 @@ func _gui_input(event):
 
 func _is_pressed(id):
 	print(id)
-	if self.pressed != true:
-			self.pressed = true
-			self.modulate = 'ffffff'
-	elif self.pressed == true:
-			self.pressed = false
-			self.modulate = '#fd7575'
+	if self.get_index() <= id and self.pressed != true:
+		self.pressed = true
+		self.modulate = 'ffffff'
+	elif self.get_index() >= id  and self.pressed == true:
+		self.pressed = false
+		self.modulate = 'ffffff'
