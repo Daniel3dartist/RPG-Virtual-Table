@@ -257,3 +257,4 @@ func _on_SpinBox_mouse_exited():
 	is_age = false
 
 
+

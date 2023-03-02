@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
@@ -20,6 +20,12 @@
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Attributes.gd" type="Script" id=18]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Attributes_Points_buttongroup.tres" type="ButtonGroup" id=19]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Attributes_Points_button_styles_Radio.tres" type="Theme" id=20]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/CheckBox_status.gd" type="Script" id=21]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Points.gd" type="Script" id=22]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Skill_Roll_main.gd" type="Script" id=23]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Skill_Roll_button.gd" type="Script" id=24]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/WP_Box.gd" type="Script" id=25]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/CheckBox_wp.gd" type="Script" id=26]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -176,6 +182,26 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 
 [sub_resource type="Theme" id=12]
+
+[sub_resource type="ButtonGroup" id=47]
+
+[sub_resource type="ButtonGroup" id=48]
+
+[sub_resource type="ButtonGroup" id=49]
+
+[sub_resource type="ButtonGroup" id=50]
+
+[sub_resource type="ButtonGroup" id=51]
+
+[sub_resource type="ButtonGroup" id=52]
+
+[sub_resource type="ButtonGroup" id=53]
+
+[sub_resource type="ButtonGroup" id=54]
+
+[sub_resource type="ButtonGroup" id=55]
+
+[sub_resource type="ButtonGroup" id=56]
 
 [node name="Character_Sheet" type="Control"]
 anchor_right = 1.0
@@ -498,7 +524,7 @@ tab_align = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
-margin_top = 34.0
+margin_top = 35.0
 margin_right = -1.0
 margin_bottom = -1.0
 rect_min_size = Vector2( 1028, 500 )
@@ -1167,12 +1193,14 @@ valign = 1
 margin_left = 74.0
 margin_right = 238.0
 margin_bottom = 30.0
+script = ExtResource( 22 )
 
 [node name="CheckBox1" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points"]
 margin_right = 24.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = ExtResource( 19 )
+script = ExtResource( 21 )
 
 [node name="CheckBox2" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points"]
 margin_left = 28.0
@@ -1180,6 +1208,7 @@ margin_right = 52.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 26 )
+script = ExtResource( 21 )
 
 [node name="CheckBox3" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points"]
 margin_left = 56.0
@@ -1187,6 +1216,7 @@ margin_right = 80.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 24 )
+script = ExtResource( 21 )
 
 [node name="CheckBox4" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points"]
 margin_left = 84.0
@@ -1194,6 +1224,7 @@ margin_right = 108.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 25 )
+script = ExtResource( 21 )
 
 [node name="CheckBox5" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points"]
 margin_left = 112.0
@@ -1201,6 +1232,7 @@ margin_right = 136.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 27 )
+script = ExtResource( 21 )
 
 [node name="CheckBox6" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points"]
 margin_left = 140.0
@@ -1208,6 +1240,7 @@ margin_right = 164.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 28 )
+script = ExtResource( 21 )
 
 [node name="Points_Input" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer"]
 margin_left = 242.0
@@ -1292,12 +1325,14 @@ valign = 1
 margin_left = 74.0
 margin_right = 238.0
 margin_bottom = 30.0
+script = ExtResource( 22 )
 
 [node name="CheckBox1" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer/Points"]
 margin_right = 24.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 29 )
+script = ExtResource( 21 )
 
 [node name="CheckBox2" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer/Points"]
 margin_left = 28.0
@@ -1305,6 +1340,7 @@ margin_right = 52.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 30 )
+script = ExtResource( 21 )
 
 [node name="CheckBox3" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer/Points"]
 margin_left = 56.0
@@ -1312,6 +1348,7 @@ margin_right = 80.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 31 )
+script = ExtResource( 21 )
 
 [node name="CheckBox4" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer/Points"]
 margin_left = 84.0
@@ -1319,6 +1356,7 @@ margin_right = 108.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 32 )
+script = ExtResource( 21 )
 
 [node name="CheckBox5" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer/Points"]
 margin_left = 112.0
@@ -1326,6 +1364,7 @@ margin_right = 136.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 33 )
+script = ExtResource( 21 )
 
 [node name="CheckBox6" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer/Points"]
 margin_left = 140.0
@@ -1333,6 +1372,7 @@ margin_right = 164.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 34 )
+script = ExtResource( 21 )
 
 [node name="Points_Input" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer"]
 margin_left = 242.0
@@ -1383,6 +1423,7 @@ margin_bottom = 76.0
 margin_top = 83.0
 margin_right = 491.0
 margin_bottom = 113.0
+script = ExtResource( 22 )
 
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line"]
 margin_right = 40.0
@@ -1416,12 +1457,14 @@ valign = 1
 margin_left = 74.0
 margin_right = 238.0
 margin_bottom = 30.0
+script = ExtResource( 22 )
 
 [node name="CheckBox1" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer/Points"]
 margin_right = 24.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 35 )
+script = ExtResource( 21 )
 
 [node name="CheckBox2" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer/Points"]
 margin_left = 28.0
@@ -1429,6 +1472,7 @@ margin_right = 52.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 36 )
+script = ExtResource( 21 )
 
 [node name="CheckBox3" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer/Points"]
 margin_left = 56.0
@@ -1436,6 +1480,7 @@ margin_right = 80.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 37 )
+script = ExtResource( 21 )
 
 [node name="CheckBox4" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer/Points"]
 margin_left = 84.0
@@ -1443,6 +1488,7 @@ margin_right = 108.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 38 )
+script = ExtResource( 21 )
 
 [node name="CheckBox5" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer/Points"]
 margin_left = 112.0
@@ -1450,6 +1496,7 @@ margin_right = 136.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 39 )
+script = ExtResource( 21 )
 
 [node name="CheckBox6" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer/Points"]
 margin_left = 140.0
@@ -1457,6 +1504,7 @@ margin_right = 164.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 40 )
+script = ExtResource( 21 )
 
 [node name="Points_Input" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer"]
 margin_left = 242.0
@@ -1540,12 +1588,14 @@ valign = 1
 margin_left = 74.0
 margin_right = 238.0
 margin_bottom = 30.0
+script = ExtResource( 22 )
 
 [node name="CheckBox1" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer/Points"]
 margin_right = 24.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 41 )
+script = ExtResource( 21 )
 
 [node name="CheckBox2" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer/Points"]
 margin_left = 28.0
@@ -1553,6 +1603,7 @@ margin_right = 52.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 42 )
+script = ExtResource( 21 )
 
 [node name="CheckBox3" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer/Points"]
 margin_left = 56.0
@@ -1560,6 +1611,7 @@ margin_right = 80.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 43 )
+script = ExtResource( 21 )
 
 [node name="CheckBox4" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer/Points"]
 margin_left = 84.0
@@ -1567,6 +1619,7 @@ margin_right = 108.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 44 )
+script = ExtResource( 21 )
 
 [node name="CheckBox5" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer/Points"]
 margin_left = 112.0
@@ -1574,6 +1627,7 @@ margin_right = 136.0
 margin_bottom = 30.0
 theme = ExtResource( 20 )
 group = SubResource( 45 )
+script = ExtResource( 21 )
 
 [node name="CheckBox6" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer/Points"]
 margin_left = 140.0
@@ -1583,6 +1637,7 @@ theme = ExtResource( 20 )
 group = SubResource( 46 )
 align = 1
 icon_align = 1
+script = ExtResource( 21 )
 
 [node name="Points_Input" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer"]
 margin_left = 242.0
@@ -2490,14 +2545,14 @@ margin_bottom = 307.0
 alignment = 1
 
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3"]
-margin_left = 28.0
-margin_right = 35.0
+margin_left = 32.0
+margin_right = 39.0
 margin_bottom = 280.0
 rect_min_size = Vector2( 7, 0 )
 
 [node name="GridContainer" type="GridContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3"]
-margin_left = 39.0
-margin_right = 463.0
+margin_left = 43.0
+margin_right = 459.0
 margin_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -2508,7 +2563,7 @@ custom_constants/hseparation = 10
 columns = 2
 
 [node name="Strenght_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
-margin_right = 207.0
+margin_right = 203.0
 margin_bottom = 135.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -2526,6 +2581,7 @@ custom_styles/panel = ExtResource( 10 )
 anchor_right = 1.0
 rect_min_size = Vector2( 164, 16 )
 custom_styles/panel = ExtResource( 12 )
+script = ExtResource( 23 )
 
 [node name="Label2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box/Panel2/Panel"]
 anchor_top = 0.5
@@ -2595,6 +2651,7 @@ size_flags_horizontal = 0
 text = "Might"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 121.0
@@ -2621,6 +2678,7 @@ size_flags_horizontal = 0
 text = "Endurance"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
 margin_left = 121.0
@@ -2639,7 +2697,7 @@ margin_top = 56.0
 margin_right = 203.0
 margin_bottom = 80.0
 
-[node name="Endurance2" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
+[node name="Melee" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
@@ -2647,6 +2705,7 @@ size_flags_horizontal = 0
 text = "Melee"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
 margin_left = 121.0
@@ -2673,6 +2732,7 @@ size_flags_horizontal = 0
 text = "Crafting"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
 margin_left = 121.0
@@ -2686,15 +2746,9 @@ margin_bottom = 24.0
 max_value = 5.0
 align = 1
 
-[node name="Strength_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Strenght_Box"]
-margin_left = 207.0
-margin_right = 207.0
-margin_bottom = 135.0
-alignment = 1
-
 [node name="Agility_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
-margin_left = 217.0
-margin_right = 424.0
+margin_left = 213.0
+margin_right = 416.0
 margin_bottom = 135.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -2712,6 +2766,7 @@ custom_styles/panel = ExtResource( 10 )
 anchor_right = 1.0
 rect_min_size = Vector2( 164, 16 )
 custom_styles/panel = ExtResource( 12 )
+script = ExtResource( 23 )
 
 [node name="Label2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Agility_Box/Panel2/Panel"]
 anchor_top = 0.5
@@ -2781,6 +2836,7 @@ size_flags_horizontal = 0
 text = "Stealth"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Agility_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 121.0
@@ -2807,6 +2863,7 @@ size_flags_horizontal = 0
 text = "Sleight of hand"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Agility_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
 margin_left = 121.0
@@ -2833,6 +2890,7 @@ size_flags_horizontal = 0
 text = "Move"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Agility_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
 margin_left = 121.0
@@ -2859,6 +2917,7 @@ size_flags_horizontal = 0
 text = "Marksmanship"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Agility_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
 margin_left = 121.0
@@ -2872,12 +2931,6 @@ margin_bottom = 24.0
 max_value = 5.0
 align = 1
 
-[node name="Strength_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Agility_Box"]
-margin_left = 207.0
-margin_right = 207.0
-margin_bottom = 135.0
-alignment = 1
-
 [node name="Wits_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
 margin_top = 145.0
 margin_right = 203.0
@@ -2888,7 +2941,7 @@ size_flags_vertical = 0
 alignment = 1
 
 [node name="Panel2" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box"]
-margin_right = 199.0
+margin_right = 203.0
 margin_bottom = 135.0
 rect_min_size = Vector2( 164, 135 )
 size_flags_horizontal = 3
@@ -2899,6 +2952,7 @@ custom_styles/panel = ExtResource( 10 )
 anchor_right = 1.0
 rect_min_size = Vector2( 164, 16 )
 custom_styles/panel = ExtResource( 12 )
+script = ExtResource( 23 )
 
 [node name="Label2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel"]
 anchor_top = 0.5
@@ -2927,7 +2981,7 @@ margin_bottom = 14.0
 
 [node name="Lv" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/Label2"]
 margin_left = 129.0
-margin_right = 180.0
+margin_right = 184.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -2942,8 +2996,8 @@ margin_right = 145.0
 margin_bottom = 14.0
 
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/Label2"]
-margin_left = 184.0
-margin_right = 199.0
+margin_left = 188.0
+margin_right = 203.0
 margin_bottom = 14.0
 rect_min_size = Vector2( 15, 0 )
 custom_styles/panel = SubResource( 15 )
@@ -2960,14 +3014,15 @@ alignment = 1
 margin_right = 203.0
 margin_bottom = 24.0
 
-[node name="Might" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
+[node name="Scouting" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
-text = "Might"
+text = "Scouting"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 121.0
@@ -2986,14 +3041,15 @@ margin_top = 28.0
 margin_right = 203.0
 margin_bottom = 52.0
 
-[node name="Endurance" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
+[node name="Lore" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
-text = "Endurance"
+text = "Lore"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
 margin_left = 121.0
@@ -3012,14 +3068,15 @@ margin_top = 56.0
 margin_right = 203.0
 margin_bottom = 80.0
 
-[node name="Endurance2" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
+[node name="Survival" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
-text = "Melee"
+text = "Survival"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
 margin_left = 121.0
@@ -3038,14 +3095,15 @@ margin_top = 84.0
 margin_right = 203.0
 margin_bottom = 108.0
 
-[node name="Crafting" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
+[node name="Insight" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
-text = "Crafting"
+text = "Insight"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
 margin_left = 121.0
@@ -3059,16 +3117,10 @@ margin_bottom = 24.0
 max_value = 5.0
 align = 1
 
-[node name="Strength_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Wits_Box"]
-margin_left = 203.0
-margin_right = 203.0
-margin_bottom = 135.0
-alignment = 1
-
 [node name="Empathy_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer"]
-margin_left = 217.0
+margin_left = 213.0
 margin_top = 145.0
-margin_right = 424.0
+margin_right = 416.0
 margin_bottom = 280.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -3086,6 +3138,7 @@ custom_styles/panel = ExtResource( 10 )
 anchor_right = 1.0
 rect_min_size = Vector2( 164, 16 )
 custom_styles/panel = ExtResource( 12 )
+script = ExtResource( 23 )
 
 [node name="Label2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel"]
 anchor_top = 0.5
@@ -3147,14 +3200,15 @@ alignment = 1
 margin_right = 203.0
 margin_bottom = 24.0
 
-[node name="Might" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
+[node name="Manipulation" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
-text = "Might"
+text = "Manipulation"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 121.0
@@ -3173,14 +3227,15 @@ margin_top = 28.0
 margin_right = 203.0
 margin_bottom = 52.0
 
-[node name="Endurance" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
+[node name="Performance" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
-text = "Endurance"
+text = "Performance"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer2"]
 margin_left = 121.0
@@ -3199,14 +3254,15 @@ margin_top = 56.0
 margin_right = 203.0
 margin_bottom = 80.0
 
-[node name="Endurance2" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
+[node name="Healing" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
-text = "Melee"
+text = "Healing"
 align = 0
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer3"]
 margin_left = 121.0
@@ -3225,13 +3281,14 @@ margin_top = 84.0
 margin_right = 203.0
 margin_bottom = 108.0
 
-[node name="Animal_Handling" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
+[node name="Animal Handling" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
 margin_right = 117.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 117, 0 )
 size_flags_horizontal = 0
 text = "Animal Handling"
 icon_align = 1
+script = ExtResource( 24 )
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box/Panel2/Panel/VBoxContainer/HBoxContainer4"]
 margin_left = 121.0
@@ -3244,12 +3301,6 @@ margin_right = 203.0
 margin_bottom = 24.0
 max_value = 5.0
 align = 1
-
-[node name="Strength_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer/Empathy_Box"]
-margin_left = 207.0
-margin_right = 207.0
-margin_bottom = 135.0
-alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer"]
 visible = false
@@ -4315,6 +4366,7 @@ margin_left = 8.0
 margin_right = 318.0
 margin_bottom = 24.0
 size_flags_vertical = 0
+script = ExtResource( 25 )
 
 [node name="Willpower" type="Label" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_top = 5.0
@@ -4334,51 +4386,72 @@ margin_bottom = 24.0
 margin_left = 34.0
 margin_right = 58.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 47 )
+script = ExtResource( 26 )
 
 [node name="CheckBox2" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 62.0
 margin_right = 86.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 48 )
 
 [node name="CheckBox3" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 90.0
 margin_right = 114.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 49 )
 
 [node name="CheckBox4" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 118.0
 margin_right = 142.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 50 )
 
 [node name="CheckBox5" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 146.0
 margin_right = 170.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 51 )
 
 [node name="CheckBox6" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 174.0
 margin_right = 198.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 52 )
 
 [node name="CheckBox7" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 202.0
 margin_right = 226.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 53 )
 
 [node name="CheckBox8" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 230.0
 margin_right = 254.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 54 )
 
 [node name="CheckBox9" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 258.0
 margin_right = 282.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 55 )
 
 [node name="CheckBox10" type="CheckBox" parent="Panel/Panel/HBoxContainer2/WP_Box"]
 margin_left = 286.0
 margin_right = 310.0
 margin_bottom = 24.0
+theme = ExtResource( 20 )
+group = SubResource( 56 )
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/Panel/HBoxContainer2"]
 margin_left = 322.0
@@ -4451,6 +4524,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 [connection signal="mouse_entered" from="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox" to="." method="_on_SpinBox_mouse_entered"]
 [connection signal="mouse_exited" from="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox" to="." method="_on_SpinBox_mouse_exited"]
 [connection signal="value_changed" from="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox" to="." method="_on_SpinBox_value_changed"]
+[connection signal="changed" from="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points_Input/Panel/SpinBox2" to="Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel" method="_on_SpinBox2_changed"]
 [connection signal="char_image_path" from="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_char_image_path"]
 [connection signal="value_changed" from="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input/X_Scale_Input_HSlider" to="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Scale_Input_HSlider_value_changed"]
 [connection signal="value_changed" from="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider" to="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Scale_Input_VSlider_value_changed"]

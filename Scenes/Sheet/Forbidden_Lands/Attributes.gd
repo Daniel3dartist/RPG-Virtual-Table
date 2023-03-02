@@ -23,7 +23,6 @@ func _ready():
 func _input(event):
 	if Input.is_action_just_released("left_mouse") or Input.is_action_just_released("enter"):
 		_check_attributes()
-#		_set_previus_checked()
 
 func _check_attributes():
 	for i in attributes.size():
@@ -57,7 +56,7 @@ func _attributes_manipulations(current, total):
 		for i in num02:
 			if i > (num01 - 1):
 				_bool = false
-				is_disabled = true
+#				is_disabled = true
 				points_check.get_child(i).modulate = '#fd7575'
 			else:
 				is_disabled = false
@@ -67,8 +66,4 @@ func _attributes_manipulations(current, total):
 			points_check.get_child(i).disabled = is_disabled
 
 
-func _set_previus_checked():
-	pass
-#		points_check.get_child(x).pressed = true
-#		points_check.get_child(x).modulate = 'ffffff'
-#		points_check.get_child(x).disabled = false
+
