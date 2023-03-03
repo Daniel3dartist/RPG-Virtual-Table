@@ -1,22 +1,20 @@
 extends CheckBox
 
-signal give_checks_data(id)
+var is_enter: bool = false
 
 func _ready():
-	self.connect("gui_input", self, "_gui_input")
-	self.get_parent().connect('is_pressed', self, '_is_pressed')
+	self.connect("mouse_entered", self, 'mouse_entered')
+	self.connect("mouse_exited", self, 'mouse_exited')
 
 
-func _gui_input(event):
-	if event is InputEventMouseButton:
-		emit_signal("give_checks_data", self.get_index())
+func _input(event):
+	if Input.is_action_just_released("left_mouse"):
+		if self.pressed == true and is_enter == true:
+			self.pressed = false
 
 
-func _is_pressed(id):
-	print(id)
-	if self.get_index() <= id and self.pressed != true:
-		self.pressed = true
-		self.modulate = 'ffffff'
-	elif self.get_index() >= id  and self.pressed == true:
-		self.pressed = false
-		self.modulate = 'ffffff'
+func mouse_entered():
+	is_enter = true
+
+func mouse_exited():
+	is_enter = false

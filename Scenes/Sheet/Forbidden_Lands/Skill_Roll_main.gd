@@ -22,7 +22,6 @@ func _roll_skill(_name, attribute, level, id):
 	var attribute_mod = char_sheet.get_node('Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/%s_Line/Panel/HboxContainer/Points_Input/SpinBox' % attribute)
 	
 	parent.get_node('Sheet_Spaw').add_child(panel)
-	panel.connect("add_roll_test_to_chat", self, '_add_roll_test_to_chat')
 	panel.get_node("VBoxContainer/Label").text = _name
 	panel.get_node("VBoxContainer/VBoxContainer/Attribut/Label").text = attribute
 	panel.get_node("VBoxContainer/VBoxContainer/Attribut/Label2").text = '%s' % attribute_mod.value
@@ -32,9 +31,4 @@ func _roll_skill(_name, attribute, level, id):
 	self.get_tree().get_root()
 
 
-func _add_roll_test_to_chat(string):
-	var _str = str(string).replace('Null', '') # for some reason its came 'Null' value with the string
-	chat.append_bbcode('[img=<width>16x16<height>]%s[/img]' % "res://Base_Images/Table_Base_Image_d6_6.png")
-	
-#	chat.append_bbcode(_str)
 
