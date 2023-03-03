@@ -14,6 +14,8 @@ func _ready():
 	child_list = self.get_node("VBoxContainer")
 	for i in child_list.get_child_count():
 		child_list.get_child(i).get_child(0).connect("roll_skill", self, "_roll_skill")
+	
+
 
 func _roll_skill(_name, attribute, level, id):
 	var panel = roll_panel.instance()
@@ -24,6 +26,7 @@ func _roll_skill(_name, attribute, level, id):
 	panel.get_node("VBoxContainer/Label").text = _name
 	panel.get_node("VBoxContainer/VBoxContainer/Attribut/Label").text = attribute
 	panel.get_node("VBoxContainer/VBoxContainer/Attribut/Label2").text = '%s' % attribute_mod.value
+	panel.get_node("VBoxContainer/VBoxContainer/Skill/Label").text = _name
 	panel.get_node("VBoxContainer/VBoxContainer/Skill/Label2").text = str(child_list.get_child(id).get_child(2).value)
 	panel.get_node("VBoxContainer/VBoxContainer/Mods/Label2"). text = '%s' % 0
 	self.get_tree().get_root()
@@ -31,5 +34,7 @@ func _roll_skill(_name, attribute, level, id):
 
 func _add_roll_test_to_chat(string):
 	var _str = str(string).replace('Null', '') # for some reason its came 'Null' value with the string
-	chat.append_bbcode(_str)
+	chat.append_bbcode('[img=<width>16x16<height>]%s[/img]' % "res://Base_Images/Table_Base_Image_d6_6.png")
+	
+#	chat.append_bbcode(_str)
 

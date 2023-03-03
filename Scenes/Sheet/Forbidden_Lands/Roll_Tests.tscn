@@ -105,7 +105,7 @@ margin_bottom = 32.0
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/Attribut"]
 margin_right = 280.0
 margin_bottom = 14.0
-text = "Atribut"
+text = "Attribute"
 align = 1
 valign = 1
 
