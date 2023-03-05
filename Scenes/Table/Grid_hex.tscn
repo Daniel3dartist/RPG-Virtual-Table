@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Scenes/Table/grid.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Table/grid_hex.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Table/Camera2D.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Sheet/Token.tscn" type="PackedScene" id=4]
 
@@ -51,17 +51,16 @@ texture = SubResource( 7 )
 [node name="TextureRect" type="TextureRect" parent="Camera2D"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -4965.0
-margin_top = -3052.0
-margin_right = 4571.0
-margin_bottom = 3569.0
+margin_left = -5407.91
+margin_top = -3226.03
+margin_right = 4128.09
+margin_bottom = 3394.97
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource( 5 )
 expand = true
 
 [node name="TileMap" type="TileMap" parent="."]
-mode = 2
 tile_set = SubResource( 1 )
 cell_tile_origin = 1
 format = 1
