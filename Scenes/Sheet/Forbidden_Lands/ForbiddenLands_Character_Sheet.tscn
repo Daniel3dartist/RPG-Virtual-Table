@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Skill_Roll_button.gd" type="Script" id=24]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/CheckBox_wp.gd" type="Script" id=25]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Dices/d6_img/Base_Dice/Ruin.png" type="Texture" id=26]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Inventory.gd" type="Script" id=27]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -521,7 +522,6 @@ custom_styles/panel = SubResource( 3 )
 tab_align = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -3969,6 +3969,7 @@ margin_bottom = 310.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Inventory" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
+visible = false
 margin_left = 1.0
 margin_top = 34.0
 margin_right = 41.0
@@ -3976,6 +3977,7 @@ margin_bottom = 74.0
 rect_min_size = Vector2( 1030, 0 )
 size_flags_horizontal = 3
 alignment = 1
+script = ExtResource( 27 )
 
 [node name="Inventory2" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory"]
 margin_right = 1030.0

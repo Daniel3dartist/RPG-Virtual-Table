@@ -113,14 +113,12 @@ func grab_item():
 			_name = parent.get_node("HBoxContainer/LineEdit").text
 			txt = parent.get_node("TextEdit").text
 			dic = {
-				'name': parent.get_node("HBoxContainer/LineEdit").text,
+				'name': _name,
 				'class': "Armor",
-				'handle': parent.get_node("HBoxContainer2/Handle/SpinBox").value,
-				'bonus':  parent.get_node("HBoxContainer2/Bonus/SpinBox").value,
-				'damage': parent.get_node("HBoxContainer2/Damage/SpinBox").value,
-				'range': parent.get_node("HBoxContainer2/Range/MenuButton").text.replace(' [V]', ''),
+				'bonus':  parent.get_node("HBoxContainer2/ValordeArmadura/SpinBox").value,
+				'body_party': parent.get_node("HBoxContainer2/Body_Part/MenuButton").text.replace(' [V]', ''),
 				'cost': parent.get_node("HBoxContainer2/Cost/SpinBox").value,
-				'property': [parent.get_node("TextEdit").text, property_type]
+				'property': [txt, property_type]
 			}
 			if armor == null:
 				armor = [dic]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Attributes_Points_button_styles_Radio.tres" type="Theme" id=1]
+
+[node name="CheckBox_item" type="CheckBox"]
+margin_right = 58.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 90 )
+theme = ExtResource( 1 )
+text = "item"
+icon_align = 1

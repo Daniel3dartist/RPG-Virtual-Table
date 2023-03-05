@@ -1,0 +1,96 @@
+extends Panel
+
+var is_block: bool = false
+var dragging: bool = false
+var off_set
+
+var file = "items_list.ini"
+var BASE_PATH = "res://Scenes/Sheet/Forbidden_Lands/Itens/"
+
+onready var tab = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ScrollContainer/TabContainer
+onready var weapons_grid = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ScrollContainer/TabContainer/Weapons_grid
+onready var shields_grid = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ScrollContainer/TabContainer/Shield_grid
+onready var armor_grid = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ScrollContainer/TabContainer/Armor_grid
+onready var class_select = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer
+
+onready var item = preload("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_Selection_Buttom.tscn")
+
+var dic: Dictionary
+
+func _ready():
+	var _class
+	var cfg = ConfigFile.new()
+	cfg.load(BASE_PATH + file)
+	dic = {
+		'weapons': cfg.get_value("Items List", 'weapons'),
+		'shields': cfg.get_value("Items List", 'shields'),
+		'armor': cfg.get_value("Items List", 'armor'),
+	}
+	class_select.get_node("CheckBox_Weapons").pressed = true
+	
+	var item_array = ['weapons','shields', 'armor']
+	for i in item_array.size():
+		_class = item_array[i]
+		for x in dic[_class].size():
+			if dic[_class][x] == null:
+				pass
+			else:
+				print(dic[_class])
+				var item_ui = item.instance()
+				if _class =='weapons':
+					weapons_grid.add_child(item_ui)
+				elif _class =='shields':
+					shields_grid.add_child(item_ui)
+				elif _class == 'armor':
+					armor_grid.add_child(item_ui)
+				item_ui.text = dic[_class][x]['name']
+
+
+func _input(event):
+	# Drag-and-drop sheet
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+		off_set = rect_position - get_global_mouse_position()
+
+#		var area = color_rect.rect_size
+		var mouse = get_global_mouse_position()
+		
+		if is_block == false:
+			print('Is mouse position\n')
+#			set_default_cursor_shape(13)
+			dragging = true
+	if Input.is_action_just_released("left_mouse"):
+		dragging = false
+
+func _process(delta):
+#	var area = color_rect.rect_size
+	var mouse = get_global_mouse_position()
+	
+	if dragging == true and get_viewport().get_mouse_position().y > 0.0:
+		var view = get_viewport().get_mouse_position()
+		rect_position = view + off_set
+
+
+func _on_CheckBox_Weapons_pressed():
+	tab.current_tab = 0
+	print(0)
+
+func _on_CheckBox_Shields_pressed():
+	tab.current_tab = 1
+	print(1)
+
+
+func _on_CheckBox_Armor_pressed():
+	tab.current_tab = 2
+	print(2)
+
+
+func _on_Button_button_up():
+	self.queue_free()
+
+
+func _on_Container_mouse_entered():
+	is_block == false
+
+
+func _on_Container_mouse_exited():
+	is_block == true

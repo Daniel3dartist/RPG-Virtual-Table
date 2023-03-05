@@ -13,8 +13,8 @@ var BG = Color('d8d5d5')
 
 onready var table = self.get_parent().get_parent()#.get_parent()
 
-func _ready():
-	print('\n\nTable name? %s \n\n' % table)
+#func _ready():
+#	print('\n\nTable name? %s \n\n' % table)
 #	table.connect('grid_settings', self, '_Grid_Settings')
 
 
@@ -23,19 +23,32 @@ func _draw():
 	var position = Vector2(0, 0) 
 	var size = Vector2(grid_size.x*tile_size.x, (grid_size.y + 1) * tile_size.y) 
 #	draw_rect(Rect2(position, size), BG)
+	var face: float = 64*2
+	face/=6
+	print(face)
+	var array: PoolVector2Array
+	var ar_color: Array
+	for i in range(1):
+		var h = 32
+		var tan_x = atan(h)
+		var l = 21.33333333333333 / 2
 	
+		array= [Vector2(h/2, h*2), Vector2(h, h), Vector2(h/2, h-h), Vector2(-h/2, h-h), Vector2(-h, h), Vector2(-h/2, h*2), Vector2(h/2, h*2)]
+		ar_color = ["#5c5c5c"]
+		draw_polyline_colors(array, ar_color, LINE_WIDTH)
+
 	# Draw grid line X
 	for x in range(grid_size.x + 1):
 		var col_pos = x  * tile_size.x 
 		var limit = (grid_size.y + 1) * tile_size.y
-		var array: PoolVector2Array
-		var ar_color: Array
-		for i in range(6):
-			var Ah = ''#i * (6*pow(32,2)*sqrt(3)/4)
-		array = [Vector2(-32, 16), Vector2(-32, -16), Vector2(-16, -32), Vector2(16, -32), Vector2(32, -16), Vector2(32, 16), Vector2(16, 32), Vector2(-16, 32), Vector2(-32, 16)]
-		ar_color.append("#5c5c5c")
+#		var ar_color: Array
+#		for i in range(6):
+#			var dot
+#			var Ah = ''#i * (6*pow(32,2)*sqrt(3)/4)
+#		array = [Vector2(-32, 0), Vector2(-15.5, -32), Vector2(15.5, -32), Vector2(32, 0), Vector2(15.5,32), Vector2(-15.5, 32), Vector2(-32,0)]
+#		ar_color.append("#5c5c5c")
 #		draw_line(Vector2(col_pos*grid_size.y/2*x, grid_size.y),Vector2(col_pos, limit), LINE_COLOR, LINE_WIDTH)
-		draw_polyline_colors(array, ar_color, LINE_WIDTH)
+#		draw_polyline_colors(array, ar_color, LINE_WIDTH)
 #		draw_line(Vector2(-32, 16), Vector2(-32, -16),LINE_COLOR, LINE_WIDTH)
 #		draw_line(Vector2(-32, -16), Vector2(-16, -32),LINE_COLOR, LINE_WIDTH)
 #		draw_line(Vector2(-16, -32), Vector2(16, -32),LINE_COLOR, LINE_WIDTH)
@@ -45,7 +58,7 @@ func _draw():
 	for y in range(grid_size.y + 2):
 		var row_pos = y * tile_size.y
 		var limit = grid_size.x * (tile_size.x)
-		draw_line(Vector2(0, row_pos), Vector2(limit, row_pos), LINE_COLOR, LINE_WIDTH)
+#		draw_line(Vector2(0, row_pos), Vector2(limit, row_pos), LINE_COLOR, LINE_WIDTH)
 	
 
 func _Grid_Settings(gridsize, color, width, bg):

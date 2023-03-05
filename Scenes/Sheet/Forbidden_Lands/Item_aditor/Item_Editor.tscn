@@ -48,6 +48,7 @@ margin_bottom = 434.0
 rect_min_size = Vector2( 0, 400 )
 
 [node name="Weapons" type="VBoxContainer" parent="Panel/VBoxContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -221,13 +222,13 @@ margin_bottom = -4.0
 script = ExtResource( 2 )
 
 [node name="Container" type="Container" parent="Panel/VBoxContainer/TabContainer/Shields"]
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/TabContainer/Shields"]
 margin_top = 34.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 58.0
 
 [node name="Name_Label" type="Label" parent="Panel/VBoxContainer/TabContainer/Shields/HBoxContainer"]
@@ -238,19 +239,19 @@ text = "Name"
 
 [node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/TabContainer/Shields/HBoxContainer"]
 margin_left = 42.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="Container2" type="Container" parent="Panel/VBoxContainer/TabContainer/Shields"]
 margin_top = 62.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 77.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/TabContainer/Shields"]
 margin_top = 81.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 123.0
 
 [node name="Handle" type="VBoxContainer" parent="Panel/VBoxContainer/TabContainer/Shields/HBoxContainer2"]
@@ -359,24 +360,23 @@ max_value = 200.0
 
 [node name="Container3" type="Container" parent="Panel/VBoxContainer/TabContainer/Shields"]
 margin_top = 127.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 142.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="Property" type="Label" parent="Panel/VBoxContainer/TabContainer/Shields"]
 margin_top = 146.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 160.0
 text = "property:"
 
 [node name="TextEdit" type="TextEdit" parent="Panel/VBoxContainer/TabContainer/Shields"]
 margin_top = 164.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 364.0
 size_flags_vertical = 3
 
 [node name="Armor" type="VBoxContainer" parent="Panel/VBoxContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -386,13 +386,13 @@ margin_bottom = -4.0
 script = ExtResource( 2 )
 
 [node name="Container" type="Container" parent="Panel/VBoxContainer/TabContainer/Armor"]
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/TabContainer/Armor"]
 margin_top = 34.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 58.0
 
 [node name="Name_Label" type="Label" parent="Panel/VBoxContainer/TabContainer/Armor/HBoxContainer"]
@@ -403,19 +403,19 @@ text = "Name"
 
 [node name="LineEdit" type="LineEdit" parent="Panel/VBoxContainer/TabContainer/Armor/HBoxContainer"]
 margin_left = 42.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="Container2" type="Container" parent="Panel/VBoxContainer/TabContainer/Armor"]
 margin_top = 62.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 77.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/TabContainer/Armor"]
 margin_top = 81.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 123.0
 
 [node name="ValordeArmadura" type="VBoxContainer" parent="Panel/VBoxContainer/TabContainer/Armor/HBoxContainer2"]
@@ -482,19 +482,19 @@ items = [ "Head", null, 0, false, false, 0, 0, null, "", false, "Body", null, 0,
 
 [node name="Container3" type="Container" parent="Panel/VBoxContainer/TabContainer/Armor"]
 margin_top = 127.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 142.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="Property" type="Label" parent="Panel/VBoxContainer/TabContainer/Armor"]
 margin_top = 146.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 160.0
 text = "property:"
 
 [node name="TextEdit" type="TextEdit" parent="Panel/VBoxContainer/TabContainer/Armor"]
 margin_top = 164.0
-margin_right = 418.0
+margin_right = 565.0
 margin_bottom = 364.0
 size_flags_vertical = 3
 

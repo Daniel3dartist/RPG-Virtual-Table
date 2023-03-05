@@ -94,6 +94,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CC" type="Label" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "MIT License - Copyright (c) 2023 Daniel Bento Sobrinho"
+align = 1
+valign = 1
+
+[node name="Version" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = -14.0
+margin_right = 146.0
+size_flags_horizontal = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Alpha v0.0.0.1"
+align = 1
+valign = 1
+
 [connection signal="is_dir" from="." to="Bot&User" method="_on_Main_Menu_is_dir"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Continue" to="." method="_on_Continue_button_up"]
 [connection signal="button_up" from="VBoxContainer/VBoxContainer/Load table" to="." method="_on_Load_table_button_up"]
