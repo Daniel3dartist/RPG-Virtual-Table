@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_Class_checkbox_Group.tres" type="ButtonGroup" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Itens/Item_illustrations/Large_Shield.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Attributes_Points_button_styles_Radio.tres" type="Theme" id=3]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Items_list_menu.gd" type="Script" id=4]
 
@@ -137,9 +137,14 @@ size_flags_horizontal = 3
 margin_right = 527.0
 margin_bottom = 64.0
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/HBoxContainer"]
 margin_right = 64.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/HBoxContainer/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_min_size = Vector2( 64, 64 )
 texture = ExtResource( 2 )
 expand = true
@@ -189,7 +194,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15
-columns = 8
+columns = 3
 
 [node name="Shield_grid" type="GridContainer" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ScrollContainer/TabContainer"]
 visible = false
@@ -203,7 +208,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15
-columns = 8
+columns = 3
 
 [node name="Armor_grid" type="GridContainer" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/VBoxContainer/ScrollContainer/TabContainer"]
 visible = false
@@ -217,7 +222,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15
-columns = 8
+columns = 3
 
 [node name="Container2" type="Container" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/VBoxContainer"]
 visible = false
@@ -239,12 +244,21 @@ rect_min_size = Vector2( 250, 0 )
 size_flags_vertical = 3
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer2"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer2"]
 margin_right = 250.0
 margin_bottom = 259.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 1, 0.968627, 0.886275, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer2/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_min_size = Vector2( 250, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+expand = true
+stretch_mode = 6
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer2"]
 margin_top = 263.0

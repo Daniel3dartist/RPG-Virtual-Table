@@ -48,7 +48,6 @@ margin_bottom = 434.0
 rect_min_size = Vector2( 0, 400 )
 
 [node name="Weapons" type="VBoxContainer" parent="Panel/VBoxContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -377,6 +376,7 @@ margin_bottom = 364.0
 size_flags_vertical = 3
 
 [node name="Armor" type="VBoxContainer" parent="Panel/VBoxContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -432,7 +432,7 @@ margin_top = 18.0
 margin_right = 74.0
 margin_bottom = 42.0
 min_value = 1.0
-max_value = 2.0
+max_value = 10.0
 value = 1.0
 
 [node name="VSeparator" type="VSeparator" parent="Panel/VBoxContainer/TabContainer/Armor/HBoxContainer2"]

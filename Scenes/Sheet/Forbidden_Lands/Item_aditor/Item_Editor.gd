@@ -28,9 +28,9 @@ func init():
 		print('File not exist...')
 		pass
 	else:
-		weapons.push_back(cfg.get_value("Items List", 'weapons'))
-		armor.push_back(cfg.get_value("Items List", 'armor'))
-		shields.push_back(cfg.get_value("Items List", 'shields'))
+		weapons = cfg.get_value("Items List", 'weapons')
+		armor = cfg.get_value("Items List", 'armor')
+		shields = cfg.get_value("Items List", 'shields')
 	
 	var array = [weapons, armor, shields]
 	for i in array.size():
@@ -89,6 +89,7 @@ func grab_item():
 			if weapons == null:
 				weapons = [dic]
 			else:
+				check_item(_name, dic['class'])
 				weapons.push_back(dic)
 		1:
 			parent = TabCont.get_node("Shields")
@@ -107,11 +108,14 @@ func grab_item():
 			if shields == null:
 				shields = [dic]
 			else:
+				check_item(_name, dic['class'])
 				shields.push_back(dic)
 		2:
 			parent = TabCont.get_node("Armor")
 			_name = parent.get_node("HBoxContainer/LineEdit").text
 			txt = parent.get_node("TextEdit").text
+			if txt == null or txt == '' or txt == ' ':
+				txt = '__'
 			dic = {
 				'name': _name,
 				'class': "Armor",
@@ -123,6 +127,24 @@ func grab_item():
 			if armor == null:
 				armor = [dic]
 			else:
+				check_item(_name, dic['class'])
 				armor.push_back(dic)
 	print(dic)
 
+func check_item(_name, _class):
+	var item
+	match _class:
+		'Weapons':
+			item = weapons
+		'Shields':
+			item = shields
+		'Armor':
+			item = armor
+	remove_item(item, _name)
+
+func remove_item(item, _name):
+	var array = item
+	for i in item.size():
+		print(array[i]['name'])
+		if item[i]['name'] == _name:
+			array.remove(i)
