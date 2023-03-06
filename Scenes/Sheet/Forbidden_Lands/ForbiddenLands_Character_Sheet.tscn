@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
@@ -27,6 +27,7 @@
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/CheckBox_wp.gd" type="Script" id=25]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Dices/d6_img/Base_Dice/Ruin.png" type="Texture" id=26]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Inventory.gd" type="Script" id=27]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Itens/Item_illustrations/Longsword.png" type="Texture" id=28]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -160,6 +161,13 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxFlat" id=15]
 bg_color = Color( 0.545098, 0.541176, 0.541176, 1 )
 corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id=57]
+bg_color = Color( 0.741176, 0.741176, 0.741176, 1 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 7 )
@@ -522,6 +530,7 @@ custom_styles/panel = SubResource( 3 )
 tab_align = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -3969,11 +3978,12 @@ margin_bottom = 310.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Inventory" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
-visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 1.0
-margin_top = 34.0
-margin_right = 41.0
-margin_bottom = 74.0
+margin_top = 35.0
+margin_right = -1.0
+margin_bottom = -1.0
 rect_min_size = Vector2( 1030, 0 )
 size_flags_horizontal = 3
 alignment = 1
@@ -4030,7 +4040,7 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3"]
 margin_right = 1002.0
-margin_bottom = 133.0
+margin_bottom = 179.0
 rect_min_size = Vector2( 0, 70 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4068,16 +4078,243 @@ size_flags_horizontal = 3
 [node name="CenterContainer" type="CenterContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer"]
 margin_top = 46.0
 margin_right = 1002.0
-margin_bottom = 46.0
+margin_bottom = 179.0
+rect_min_size = Vector2( 0, 133 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer"]
-margin_left = 501.0
-margin_right = 501.0
+[node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer"]
+margin_top = 6.0
+margin_right = 1002.0
+margin_bottom = 126.0
+rect_min_size = Vector2( 1002, 120 )
+custom_styles/panel = ExtResource( 10 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 997, 0 )
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
+margin_right = 1002.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 0, 15 )
+custom_styles/panel = ExtResource( 13 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_right = 100.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 100, 0 )
+
+[node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 104.0
+margin_right = 108.0
+margin_bottom = 15.0
+
+[node name="Item" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 112.0
+margin_right = 262.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+text = "Item"
+align = 1
+valign = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 266.0
+margin_right = 270.0
+margin_bottom = 15.0
+
+[node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 274.0
+margin_right = 410.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Class"
+align = 1
+
+[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 414.0
+margin_right = 418.0
+margin_bottom = 15.0
+
+[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 422.0
+margin_right = 558.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Handle"
+align = 1
+
+[node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 562.0
+margin_right = 566.0
+margin_bottom = 15.0
+
+[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 570.0
+margin_right = 706.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Damage"
+align = 1
+
+[node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 710.0
+margin_right = 714.0
+margin_bottom = 15.0
+
+[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 718.0
+margin_right = 854.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Range"
+align = 1
+
+[node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 858.0
+margin_right = 862.0
+margin_bottom = 15.0
+
+[node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/Panel/HBoxContainer2"]
+margin_left = 866.0
+margin_right = 1002.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Cost"
+align = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer"]
+margin_top = 19.0
+margin_right = 1002.0
+margin_bottom = 19.0
+
+[node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer"]
+visible = false
+margin_right = 1002.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 1002, 30 )
+custom_styles/panel = SubResource( 57 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 30 )
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 100, 0 )
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 7
+
+[node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
+margin_left = 104.0
+margin_right = 108.0
+margin_bottom = 30.0
+
+[node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
+margin_left = 112.0
+margin_right = 262.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 150, 0 )
+text = "BroadSword"
+icon_align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
+margin_left = 266.0
+margin_right = 1002.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 30.0
+
+[node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 144.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12"
+align = 1
+
+[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 148.0
+margin_right = 152.0
+margin_bottom = 30.0
+
+[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 156.0
+margin_top = 8.0
+margin_right = 292.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12"
+align = 1
+
+[node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 296.0
+margin_right = 300.0
+margin_bottom = 30.0
+
+[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 304.0
+margin_top = 8.0
+margin_right = 440.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12"
+align = 1
+
+[node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 444.0
+margin_right = 448.0
+margin_bottom = 30.0
+
+[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 452.0
+margin_top = 8.0
+margin_right = 588.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12"
+align = 1
+
+[node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 592.0
+margin_right = 596.0
+margin_bottom = 30.0
+
+[node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/VBoxContainer/CenterContainer/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
+margin_left = 600.0
+margin_top = 8.0
+margin_right = 736.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12"
+align = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3"]
-margin_top = 137.0
+margin_top = 183.0
 margin_right = 1002.0
-margin_bottom = 270.0
+margin_bottom = 293.0
 rect_min_size = Vector2( 0, 70 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -4123,7 +4360,7 @@ margin_left = 501.0
 margin_right = 501.0
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3"]
-margin_top = 274.0
+margin_top = 297.0
 margin_right = 1002.0
 margin_bottom = 407.0
 rect_min_size = Vector2( 0, 70 )
