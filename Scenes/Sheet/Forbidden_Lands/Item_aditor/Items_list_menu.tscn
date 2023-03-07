@@ -141,6 +141,7 @@ margin_bottom = 64.0
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
+color = Color( 1, 0.968627, 0.886275, 1 )
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/HBoxContainer/ColorRect"]
 anchor_right = 1.0
@@ -290,9 +291,18 @@ margin_bottom = 619.0
 size_flags_vertical = 3
 
 [node name="Container" type="Container" parent="VBoxContainer/HBoxContainer"]
-margin_right = 966.0
+margin_right = 862.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 866.0
+margin_top = 10.0
+margin_right = 966.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+text = "Equipped"
+align = 1
 
 [node name="Add" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 970.0
@@ -313,3 +323,4 @@ rect_min_size = Vector2( 15, 0 )
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer/CheckBox_Weapons" to="." method="_on_CheckBox_Weapons_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer/CheckBox_Shields" to="." method="_on_CheckBox_Shields_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer/CheckBox_Armor" to="." method="_on_CheckBox_Armor_pressed"]
+[connection signal="button_up" from="VBoxContainer/HBoxContainer/Add" to="." method="_on_Add_button_up"]

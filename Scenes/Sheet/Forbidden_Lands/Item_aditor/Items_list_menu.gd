@@ -1,5 +1,7 @@
 extends Panel
 
+signal add_item(item, box)
+
 var is_block: bool = false
 var dragging: bool = false
 var off_set
@@ -106,7 +108,7 @@ func _on_CheckBox_Shields_pressed():
 func _on_CheckBox_Armor_pressed():
 	tab.current_tab = 2
 	class_title.text = "Armor"
-	class_image.texture = load("res://Scenes/Sheet/Forbidden_Lands/Itens/Item_illustrations/Studdend_Leather_cap.png")
+	class_image.texture = load("res://Scenes/Sheet/Forbidden_Lands/Itens/Item_illustrations/Leather_Armor.png")
 	print(2)
 
 
@@ -120,3 +122,22 @@ func _on_Container_mouse_entered():
 
 func _on_Container_mouse_exited():
 	is_block == true
+
+
+func _on_Add_button_up():
+	var array: Array
+	var box = $VBoxContainer/HBoxContainer/Label.text
+	match tab.current_tab:
+		0:
+			for i in weapons_grid.get_child_count():
+				if weapons_grid.get_child(i).pressed == true:
+					array.push_back(dic['weapons'][i])
+		1:
+			for i in shields_grid.get_child_count():
+				if shields_grid.get_child(i).pressed == true:
+					array.push_back(dic['shields'][i])
+		2:
+			for i in armor_grid.get_child_count():
+				if armor_grid.get_child(i).pressed == true:
+					array.push_back(dic['armor'][i])
+	emit_signal("add_item", array, box)
