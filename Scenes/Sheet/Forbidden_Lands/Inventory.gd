@@ -49,8 +49,10 @@ func _add_item(item, box):# $Inventory2/ScrollContainer/HBoxContainer/VBoxContai
 			_item.get_node("HBoxContainer/HBoxContainer/Handle").text = str(item[i]['handle'])
 			_item.get_node("HBoxContainer/HBoxContainer/Range").text = item[i]['range']
 		else:
-# CA			_item.get_node()
-# Body Part		_item.get_node()
+# CA			
+			_item.get_node('HBoxContainer/HBoxContainer/Bonus').text = item[i]['bonus']
+# Body Part
+			_item.get_node('HBoxContainer/HBoxContainer/Body_Part').text = item[i]['body_part']
 			pass
 
 

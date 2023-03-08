@@ -538,7 +538,6 @@ custom_styles/panel = SubResource( 3 )
 tab_align = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -3986,6 +3985,7 @@ margin_bottom = 310.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Inventory" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0

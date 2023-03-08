@@ -12,4 +12,5 @@ text = "item"
 expand_icon = true
 script = ExtResource( 2 )
 
+[connection signal="gui_input" from="." to="." method="_on_CheckBox_item_gui_input"]
 [connection signal="pressed" from="." to="." method="_on_CheckBox_item_pressed"]

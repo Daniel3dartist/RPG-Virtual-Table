@@ -3,6 +3,7 @@ extends Control
 var BASE_PATH = "res://Scenes/Sheet/Forbidden_Lands/Itens/"
 var file = 'items_list.ini'
 
+#onready var item_menu = preload("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Items_list_menu.tscn")
 onready var TabCont = $'Panel/VBoxContainer/TabContainer'
 var tab_id = 0
 
@@ -36,11 +37,32 @@ func init():
 	for i in array.size():
 		if array[i] == null:
 			array[i].clear()
-
+	
+	var item_id = cfg.get_value('Edit', 'item')
+	if item_id != null:
+		var item
+		var _name = self.get_node('Panel/VBoxContainer/TabContainer/%s/HBoxContainer/LineEdit' % item_id[1])
+		var _cost = self.get_node('Panel/VBoxContainer/TabContainer/%s/HBoxContainer2/Cost/SpinBox' % item_id[1])
+		var _desc = self.get_node('Panel/VBoxContainer/TabContainer/%s/TextEdit' % item_id[1])
+		match item_id[1]:
+			'Weapons':
+				item = weapons[item_id[0]]
+				TabCont.current_tab = 0
+			'Shields':
+				item = shields[item_id[0]]
+				TabCont.current_tab = 1
+			'Armor':
+				item = armor[item_id[0]]
+				TabCont.current_tab = 2
+		_name.text = str(item['name'])
+		_cost.value = item['cost']
+		_desc.text = item['property'][0]
 
 func _on_Save_button_up():
 	grab_item()
 	save_item()
+	_back_to_item_menu()
+	
 
 
 func save_item():
@@ -55,6 +77,7 @@ func save_item():
 	cfg.set_value("Items List", 'weapons', weapons)
 	cfg.set_value("Items List", 'armor', armor)
 	cfg.set_value("Items List", 'shields', shields)
+	cfg.set_value('Edit', 'item', null)
 	cfg.save(path)
 
 
@@ -69,7 +92,6 @@ func grab_item():
 	for i in checkers.get_child_count():
 		if checkers.get_child(i).pressed == true:
 			property_type.push_back(checkers.get_child(i).text)
-			print(checkers.get_child(i).text)
 
 	match TabCont.current_tab:
 		0:
@@ -120,7 +142,7 @@ func grab_item():
 				'name': _name,
 				'class': "Armor",
 				'bonus':  parent.get_node("HBoxContainer2/ValordeArmadura/SpinBox").value,
-				'body_party': parent.get_node("HBoxContainer2/Body_Part/MenuButton").text.replace(' [V]', ''),
+				'body_part': parent.get_node("HBoxContainer2/Body_Part/MenuButton").text.replace(' [V]', ''),
 				'cost': parent.get_node("HBoxContainer2/Cost/SpinBox").value,
 				'property': [txt, property_type]
 			}
@@ -129,7 +151,7 @@ func grab_item():
 			else:
 				check_item(_name, dic['class'])
 				armor.push_back(dic)
-	print(dic)
+
 
 func check_item(_name, _class):
 	var item
@@ -140,11 +162,37 @@ func check_item(_name, _class):
 			item = shields
 		'Armor':
 			item = armor
-	remove_item(item, _name)
+	remove_item(item, _name, _class)
 
-func remove_item(item, _name):
+func remove_item(item, _name, _class):
 	var array = item
-	for i in item.size():
-		print(array[i]['name'])
-		if item[i]['name'] == _name:
-			array.remove(i)
+	var list = array
+	var num = 0
+	for i in array:
+		var _name_ = array[num]["name"]
+		if _name_ == _name:
+			list.remove(num)
+		else:
+			pass
+		num+=1
+	array = list
+	match _class:
+		'Weapons':
+			weapons = array
+		'Shields':
+			shields = array
+		'armor':
+			armor = array
+
+
+func _on_Exit_button_up():
+	_back_to_item_menu()
+#	self.queue_free()
+
+
+func _on_Cancel_button_up():
+	_back_to_item_menu()
+
+
+func _back_to_item_menu():
+	get_tree().change_scene("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Items_list_menu.tscn")

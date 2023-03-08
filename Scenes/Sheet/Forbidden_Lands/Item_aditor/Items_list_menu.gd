@@ -18,12 +18,18 @@ onready var armor_grid = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContain
 onready var class_select = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer
 onready var item_image = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer2/ColorRect/TextureRect
 
-
 onready var item = preload("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_Selection_Buttom.tscn")
+onready var item_edit = preload("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_Editor.tscn")
+
 
 var dic: Dictionary
 
+
 func _ready():
+	var dirpath = '%s/data' % OS.get_executable_path().get_base_dir()
+	print('Has Data')
+	if Directory.new().open(dirpath) == OK:
+		BASE_PATH = '%s/RPGsys/Forbidden_Lands/item/' % dirpath
 	var _class
 	var cfg = ConfigFile.new()
 	cfg.load(BASE_PATH + file)
@@ -42,7 +48,6 @@ func _ready():
 			if dic[_class][x] == null:
 				pass
 			else:
-				print(dic[_class])
 				var item_ui = item.instance()
 				if _class =='weapons':
 					weapons_grid.add_child(item_ui)
@@ -54,6 +59,7 @@ func _ready():
 				var path = "res://Scenes/Sheet/Forbidden_Lands/Itens/Item_illustrations/%s.png"  % item_ui.text.replace(' ', '_')
 				item_ui.icon = load(path)
 				item_ui.connect("_item_button_up", self, "_item_button_up")
+				item_ui.connect("_edit_item", self, "_edit_item")
 
 
 func _input(event):
@@ -71,6 +77,7 @@ func _input(event):
 	if Input.is_action_just_released("left_mouse"):
 		dragging = false
 
+
 func _process(delta):
 #	var area = color_rect.rect_size
 	var mouse = get_global_mouse_position()
@@ -78,6 +85,16 @@ func _process(delta):
 	if dragging == true and get_viewport().get_mouse_position().y > 0.0:
 		var view = get_viewport().get_mouse_position()
 		rect_position = view + off_set
+
+
+func _edit_item(id):
+	var _class = $VBoxContainer/HBoxContainer3/HBoxContainer/VBoxContainer3/HBoxContainer/Class.text
+	if $VBoxContainer/HBoxContainer/Label.text == 'Edit Mode':
+		var cfg = ConfigFile.new()
+		cfg.load(BASE_PATH + file)
+		cfg.set_value('Edit', 'item', [id, _class])
+		cfg.save(BASE_PATH + file)
+		get_tree().change_scene("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_Editor.tscn")
 
 
 func _item_button_up(id, tab, _name):

@@ -42,10 +42,7 @@ func _input(event):
 	# Drag-and-drop sheet
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 		off_set = rect_position - get_global_mouse_position()
-
-#		var area = color_rect.rect_size
 		var mouse = get_global_mouse_position()
-		
 		if is_block == false:
 			print('Is mouse position\n')
 #			set_default_cursor_shape(13)
@@ -54,14 +51,10 @@ func _input(event):
 		dragging = false
 
 func _process(delta):
-#	var area = color_rect.rect_size
 	var mouse = get_global_mouse_position()
-	
 	if dragging == true and get_viewport().get_mouse_position().y > 0.0:
 		var view = get_viewport().get_mouse_position()
 		rect_position = view + off_set
-#		'$VBoxContainer/VBoxContainer2.rect_position = rect_position'
-#		color_rect.rect_position = view + off_set
 
 
 func _on_Exit_button_up():

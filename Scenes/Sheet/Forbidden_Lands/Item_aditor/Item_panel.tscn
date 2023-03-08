@@ -4,7 +4,6 @@
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_panel.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=57]
-bg_color = Color( 0.741176, 0.741176, 0.741176, 1 )
 border_color = Color( 0.180392, 0.180392, 0.180392, 1 )
 border_blend = true
 corner_radius_top_left = 10
@@ -65,59 +64,39 @@ margin_bottom = 30.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
-visible = false
-margin_right = 4.0
+[node name="Bonus" type="Label" parent="HBoxContainer/HBoxContainer"]
+margin_top = 8.0
+margin_right = 168.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "12"
+align = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
+margin_left = 172.0
+margin_right = 176.0
 margin_bottom = 30.0
 
 [node name="Class" type="Label" parent="HBoxContainer/HBoxContainer"]
+margin_left = 180.0
 margin_top = 8.0
-margin_right = 132.0
+margin_right = 348.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "12"
 align = 1
 
-[node name="VSeparator3" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
-margin_left = 136.0
-margin_right = 140.0
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
+margin_left = 352.0
+margin_right = 356.0
 margin_bottom = 30.0
 
-[node name="Handle" type="Label" parent="HBoxContainer/HBoxContainer"]
-margin_left = 144.0
+[node name="Cost" type="Label" parent="HBoxContainer/HBoxContainer"]
+margin_left = 360.0
 margin_top = 8.0
-margin_right = 276.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator4" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
-margin_left = 280.0
-margin_right = 284.0
-margin_bottom = 30.0
-
-[node name="Damage" type="Label" parent="HBoxContainer/HBoxContainer"]
-margin_left = 288.0
-margin_top = 8.0
-margin_right = 420.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator5" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
-margin_left = 424.0
-margin_right = 428.0
-margin_bottom = 30.0
-
-[node name="Range" type="Label" parent="HBoxContainer/HBoxContainer"]
-margin_left = 432.0
-margin_top = 8.0
-margin_right = 564.0
+margin_right = 528.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -125,19 +104,23 @@ text = "12"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="HBoxContainer/HBoxContainer"]
-margin_left = 568.0
-margin_right = 572.0
+margin_left = 532.0
+margin_right = 536.0
 margin_bottom = 30.0
 
-[node name="Cost" type="Label" parent="HBoxContainer/HBoxContainer"]
-margin_left = 576.0
+[node name="Body_Part" type="Label" parent="HBoxContainer/HBoxContainer"]
+margin_left = 540.0
 margin_top = 8.0
 margin_right = 709.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
+text = "Body"
 align = 1
 
 [connection signal="gui_input" from="HBoxContainer" to="." method="_on_HBoxContainer_gui_input"]
+[connection signal="mouse_entered" from="HBoxContainer" to="." method="_on_HBoxContainer_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer" to="." method="_on_HBoxContainer_mouse_exited"]
 [connection signal="gui_input" from="HBoxContainer/Panel/TextureRect" to="." method="_on_TextureRect_gui_input"]
+[connection signal="mouse_entered" from="HBoxContainer/Panel/TextureRect" to="." method="_on_TextureRect_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Panel/TextureRect" to="." method="_on_TextureRect_mouse_exited"]
