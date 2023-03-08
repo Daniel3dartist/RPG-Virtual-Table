@@ -44,19 +44,36 @@ func init():
 		var _name = self.get_node('Panel/VBoxContainer/TabContainer/%s/HBoxContainer/LineEdit' % item_id[1])
 		var _cost = self.get_node('Panel/VBoxContainer/TabContainer/%s/HBoxContainer2/Cost/SpinBox' % item_id[1])
 		var _desc = self.get_node('Panel/VBoxContainer/TabContainer/%s/TextEdit' % item_id[1])
-		match item_id[1]:
-			'Weapons':
-				item = weapons[item_id[0]]
-				TabCont.current_tab = 0
-			'Shields':
-				item = shields[item_id[0]]
-				TabCont.current_tab = 1
-			'Armor':
-				item = armor[item_id[0]]
-				TabCont.current_tab = 2
-		_name.text = str(item['name'])
-		_cost.value = item['cost']
-		_desc.text = item['property'][0]
+		var CA
+		var body_party
+		var property_type = self.get_node('Panel/VBoxContainer/HBoxContainer/property_type')
+		if item_id[0] != null:
+			match item_id[1]:
+				'Weapons':
+					item = weapons[item_id[0]]
+					TabCont.current_tab = 0
+				'Shields':
+					item = shields[item_id[0]]
+					TabCont.current_tab = 1
+				'Armor':
+					CA = self.get_node('Panel/VBoxContainer/TabContainer/Armor/HBoxContainer2/ValordeArmadura/SpinBox')
+					body_party = self.get_node('Panel/VBoxContainer/TabContainer/Armor/HBoxContainer2/Body_Part/MenuButton')
+					item = armor[item_id[0]]
+					CA.value = item['bonus']
+					body_party.text = item['body_part']
+					TabCont.current_tab = 2
+			_name.text = str(item['name'])
+			_cost.value = item['cost']
+			_desc.text = item['property'][0]
+			for i in property_type.get_child_count():
+				var _name_ = item['property'][1]
+				print(_name_)
+				if _name_ != null:
+					for x in _name_.size():
+						if property_type.get_child(i).text == _name_[x]:
+							property_type.get_child(i).pressed = true
+		else:
+			TabCont.current_tab = item_id[1]
 
 func _on_Save_button_up():
 	grab_item()

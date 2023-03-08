@@ -122,7 +122,10 @@ func _edit_item(id):
 	if $VBoxContainer/HBoxContainer/Label.text == 'Edit Mode':
 		var cfg = ConfigFile.new()
 		cfg.load(BASE_PATH + file)
-		cfg.set_value('Edit', 'item', [id, _class])
+		if id == null:
+			cfg.set_value('Edit', 'item', [id, tab.current_tab])
+		else:
+			cfg.set_value('Edit', 'item', [id, _class])
 		cfg.save(BASE_PATH + file)
 		get_tree().change_scene("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_Editor.tscn")
 
@@ -174,17 +177,20 @@ func _on_Container_mouse_exited():
 func _on_Add_button_up():
 	var array: Array
 	var box = $VBoxContainer/HBoxContainer/Label.text
-	match tab.current_tab:
-		0:
-			for i in weapons_grid.get_child_count():
-				if weapons_grid.get_child(i).pressed == true:
-					array.push_back(dic['weapons'][i])
-		1:
-			for i in shields_grid.get_child_count():
-				if shields_grid.get_child(i).pressed == true:
-					array.push_back(dic['shields'][i])
-		2:
-			for i in armor_grid.get_child_count():
-				if armor_grid.get_child(i).pressed == true:
-					array.push_back(dic['armor'][i])
-	emit_signal("add_item", array, box)
+	if $VBoxContainer/HBoxContainer/Label.text != 'Edit Mode': 
+		match tab.current_tab:
+			0:
+				for i in weapons_grid.get_child_count():
+					if weapons_grid.get_child(i).pressed == true:
+						array.push_back(dic['weapons'][i])
+			1:
+				for i in shields_grid.get_child_count():
+					if shields_grid.get_child(i).pressed == true:
+						array.push_back(dic['shields'][i])
+			2:
+				for i in armor_grid.get_child_count():
+					if armor_grid.get_child(i).pressed == true:
+						array.push_back(dic['armor'][i])
+		emit_signal("add_item", array, box)
+	else:
+		_edit_item(null)
