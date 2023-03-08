@@ -26,10 +26,10 @@ var dic: Dictionary
 
 
 func _ready():
-	var dirpath = '%s/data' % OS.get_executable_path().get_base_dir()
+	var dirpath = '%s/data/RPGsys/Forbidden_Lands/item/' % OS.get_executable_path().get_base_dir()
 	print('Has Data')
 	if Directory.new().open(dirpath) == OK:
-		BASE_PATH = '%s/RPGsys/Forbidden_Lands/item/' % dirpath
+		BASE_PATH = dirpath
 	var _class
 	var cfg = ConfigFile.new()
 	cfg.load(BASE_PATH + file)
@@ -76,6 +76,36 @@ func _input(event):
 			dragging = true
 	if Input.is_action_just_released("left_mouse"):
 		dragging = false
+	if Input.is_action_just_released("Del"):
+		var cfg = ConfigFile.new()
+		var del_list: Array
+		var _class
+		var array: Array
+		cfg.load(BASE_PATH + file)
+		
+		match tab.current_tab:
+			0:
+				_class = 'Weapons_grid'
+				array = dic['weapons']
+					
+			1:
+				_class = 'Shield_grid'
+				array = dic['shields']
+			2:
+				_class = 'Armor_grid'
+				array = dic['armor']
+
+		for i in tab.get_node(_class).get_child_count():
+			var item = tab.get_node(_class).get_child(i)
+			if item.modulate == Color('#98e0ff'):
+				del_list.push_back(i)
+		for i in del_list.size():
+			tab.get_node(_class).get_child(del_list[i]).queue_free()
+			array.remove(del_list[i])
+		_class = _class.split('_')
+		_class = _class[0].to_lower()
+		cfg.set_value("Items List", _class, array)
+		cfg.save(BASE_PATH + file)
 
 
 func _process(delta):

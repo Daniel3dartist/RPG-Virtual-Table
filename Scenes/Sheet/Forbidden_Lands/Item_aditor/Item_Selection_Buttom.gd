@@ -16,5 +16,15 @@ func _on_CheckBox_item_gui_input(event):
 	if Input.is_action_just_released("left_mouse"):
 		if num < 1:
 			num+=1
+			if self.modulate != Color('#98e0ff'):
+				self.modulate = Color('#98e0ff')
+			else:
+				self.modulate = Color('#ffffff')
 		else:
+			self.modulate = Color('#ffffff')
 			emit_signal("_edit_item", self.get_index())
+
+
+func _on_CheckBox_item_mouse_exited():
+	num = 0
+

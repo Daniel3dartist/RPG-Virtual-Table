@@ -538,6 +538,7 @@ custom_styles/panel = SubResource( 3 )
 tab_align = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -3985,7 +3986,6 @@ margin_bottom = 310.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="Inventory" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -7528,41 +7528,41 @@ margin_bottom = 25.0
 
 [node name="Background" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
 visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 1.0
-margin_top = 34.0
-margin_right = 405.0
-margin_bottom = 473.0
+margin_top = 35.0
+margin_right = -1.0
+margin_bottom = -1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Background"]
-margin_right = 958.0
-margin_bottom = 464.0
+margin_right = 1030.0
+margin_bottom = 448.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer"]
-margin_right = 554.0
-margin_bottom = 464.0
+margin_right = 626.0
+margin_bottom = 448.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer"]
-margin_left = 558.0
-margin_right = 958.0
-margin_bottom = 464.0
+margin_left = 630.0
+margin_right = 1030.0
+margin_bottom = 448.0
 
 [node name="ColorRect" type="ColorRect" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
-margin_top = 8.0
 margin_right = 400.0
-margin_bottom = 456.0
+margin_bottom = 448.0
 rect_min_size = Vector2( 400, 448 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
 material = SubResource( 7 )
-margin_top = 8.0
 margin_right = 400.0
-margin_bottom = 456.0
+margin_bottom = 448.0
 rect_min_size = Vector2( 400, 448 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -7573,9 +7573,9 @@ script = ExtResource( 8 )
 
 [node name="Label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
 margin_left = 138.0
-margin_top = 216.0
+margin_top = 208.0
 margin_right = 262.0
-margin_bottom = 247.0
+margin_bottom = 239.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Drop your file here.
 ( JPG, PNG, GIF)"
@@ -7583,15 +7583,17 @@ align = 1
 
 [node name="Token" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
 visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 1.0
-margin_top = 34.0
-margin_right = 558.0
-margin_bottom = 441.0
+margin_top = 35.0
+margin_right = -1.0
+margin_bottom = -1.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Token"]
-margin_right = 958.0
+margin_right = 1030.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -7601,17 +7603,17 @@ valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Token"]
 margin_top = 34.0
-margin_right = 958.0
+margin_right = 1030.0
 margin_bottom = 416.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer"]
-margin_right = 245.0
+margin_right = 281.0
 margin_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Scale_Label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer2"]
-margin_right = 245.0
+margin_right = 281.0
 margin_bottom = 14.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Scale"
@@ -7620,14 +7622,14 @@ valign = 1
 
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer2"]
 margin_top = 18.0
-margin_right = 245.0
+margin_right = 281.0
 margin_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer"]
-margin_left = 249.0
-margin_right = 709.0
+margin_left = 285.0
+margin_right = 745.0
 margin_bottom = 382.0
 size_flags_horizontal = 3
 alignment = 1
@@ -7813,8 +7815,8 @@ margin_right = 460.0
 margin_bottom = 16.0
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer"]
-margin_left = 713.0
-margin_right = 958.0
+margin_left = 749.0
+margin_right = 1030.0
 margin_bottom = 382.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -7850,14 +7852,14 @@ icon_align = 1
 
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3"]
 margin_top = 68.0
-margin_right = 245.0
+margin_right = 281.0
 margin_bottom = 364.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Position_Label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer3"]
 margin_top = 368.0
-margin_right = 245.0
+margin_right = 281.0
 margin_bottom = 382.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Position"

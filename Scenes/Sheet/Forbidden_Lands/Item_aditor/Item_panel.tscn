@@ -4,6 +4,7 @@
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_panel.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxFlat" id=57]
+bg_color = Color( 0.741176, 0.741176, 0.741176, 1 )
 border_color = Color( 0.180392, 0.180392, 0.180392, 1 )
 border_blend = true
 corner_radius_top_left = 10
