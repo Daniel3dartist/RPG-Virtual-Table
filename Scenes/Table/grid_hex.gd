@@ -28,14 +28,18 @@ func _draw():
 	print(face)
 	var array: PoolVector2Array
 	var ar_color: Array
-	for i in range(1):
+	var _x = 0
+	var _y = 32
+	for i in range(6):
 		var h = 32
 		var tan_x = atan(h)
 		var l = 21.33333333333333 / 2
 	
-		array= [Vector2(h/2, h*2), Vector2(h, h), Vector2(h/2, h-h), Vector2(-h/2, h-h), Vector2(-h, h), Vector2(-h/2, h*2), Vector2(h/2, h*2)]
-		ar_color = ["#5c5c5c"]
-		draw_polyline_colors(array, ar_color, LINE_WIDTH)
+#		array.push_back([_x.sin(),_y.cos()])
+		_x+=32
+		_y+=32
+	ar_color = ["#5c5c5c"]
+	draw_polyline_colors(array, ar_color, LINE_WIDTH)
 
 	# Draw grid line X
 	for x in range(grid_size.x + 1):

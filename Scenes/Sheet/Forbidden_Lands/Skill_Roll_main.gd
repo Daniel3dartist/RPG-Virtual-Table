@@ -19,7 +19,7 @@ func _ready():
 
 func _roll_skill(_name, attribute, level, id):
 	var panel = roll_panel.instance()
-	var attribute_mod = char_sheet.get_node('Panel/SheetArea/Sheet_TabContainer/ScrollContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/%s_Line/Panel/HboxContainer/Points_Input/SpinBox' % attribute)
+	var attribute_mod = char_sheet.get_node('Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/%s_Line/Panel/HboxContainer/Points_Input/SpinBox' % attribute)
 	
 	parent.get_node('Sheet_Spaw').add_child(panel)
 	panel.get_node("VBoxContainer/Label").text = _name
