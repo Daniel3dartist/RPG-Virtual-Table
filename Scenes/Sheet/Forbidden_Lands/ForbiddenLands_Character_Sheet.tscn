@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
@@ -31,7 +31,6 @@
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/hide-show_item_class.gd" type="Script" id=29]
 [ext_resource path="res://Base_Images/hide-private-hidden-icon.png" type="Texture" id=30]
 [ext_resource path="res://Base_Images/view-icon.png" type="Texture" id=31]
-[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_panel.tscn" type="PackedScene" id=32]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -4091,7 +4090,7 @@ rect_min_size = Vector2( 1002, 150 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer"]
 margin_right = 1002.0
-margin_bottom = 352.0
+margin_bottom = 440.0
 size_flags_vertical = 3
 
 [node name="Weapons_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer"]
@@ -4185,61 +4184,75 @@ margin_bottom = 30.0
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
 margin_left = 299.0
 margin_top = 8.0
-margin_right = 430.0
+margin_right = 406.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
 [node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 434.0
-margin_right = 438.0
+margin_left = 410.0
+margin_right = 414.0
 margin_bottom = 30.0
 
 [node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 442.0
+margin_left = 418.0
 margin_top = 8.0
-margin_right = 573.0
+margin_right = 525.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Handle"
 align = 1
 
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 577.0
-margin_right = 581.0
+margin_left = 529.0
+margin_right = 533.0
+margin_bottom = 30.0
+
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 537.0
+margin_top = 8.0
+margin_right = 644.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Bonus"
+align = 1
+
+[node name="VSeparator7" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 648.0
+margin_right = 652.0
 margin_bottom = 30.0
 
 [node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 585.0
+margin_left = 656.0
 margin_top = 8.0
-margin_right = 716.0
+margin_right = 763.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Damage"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 720.0
-margin_right = 724.0
+margin_left = 767.0
+margin_right = 771.0
 margin_bottom = 30.0
 
 [node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 728.0
+margin_left = 775.0
 margin_top = 8.0
-margin_right = 859.0
+margin_right = 882.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Range"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 863.0
-margin_right = 867.0
+margin_left = 886.0
+margin_right = 890.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 871.0
+margin_left = 894.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -4270,7 +4283,7 @@ size_flags_vertical = 3
 [node name="Shields_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer"]
 margin_top = 155.0
 margin_right = 1002.0
-margin_bottom = 218.0
+margin_bottom = 306.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box"]
 margin_right = 1002.0
@@ -4291,14 +4304,14 @@ text = "Shields"
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box"]
 margin_top = 18.0
 margin_right = 1002.0
-margin_bottom = 63.0
-rect_min_size = Vector2( 1002, 45 )
+margin_bottom = 151.0
+rect_min_size = Vector2( 1002, 133 )
 custom_styles/panel = ExtResource( 10 )
 script = ExtResource( 29 )
 
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel"]
 anchor_right = 1.0
-rect_min_size = Vector2( 0, 30 )
+rect_min_size = Vector2( 1002, 30 )
 custom_styles/panel = ExtResource( 13 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel"]
@@ -4309,19 +4322,19 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_right = 100.0
+margin_right = 125.0
 margin_bottom = 30.0
-rect_min_size = Vector2( 100, 0 )
+rect_min_size = Vector2( 125, 0 )
 alignment = 1
 
 [node name="Container2" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_right = 29.0
+margin_right = 42.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="Hide_show" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_left = 33.0
-margin_right = 66.0
+margin_left = 46.0
+margin_right = 79.0
 margin_bottom = 30.0
 mouse_filter = 1
 theme = SubResource( 58 )
@@ -4330,20 +4343,20 @@ align = 1
 icon_align = 1
 
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_left = 70.0
-margin_right = 100.0
+margin_left = 83.0
+margin_right = 125.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 104.0
-margin_right = 108.0
+margin_left = 129.0
+margin_right = 133.0
 margin_bottom = 30.0
 
 [node name="Item" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 112.0
+margin_left = 137.0
 margin_top = 8.0
-margin_right = 262.0
+margin_right = 287.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -4352,68 +4365,82 @@ align = 1
 valign = 1
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 266.0
-margin_right = 270.0
+margin_left = 291.0
+margin_right = 295.0
 margin_bottom = 30.0
 
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 274.0
+margin_left = 299.0
 margin_top = 8.0
-margin_right = 410.0
+margin_right = 406.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
 [node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 414.0
-margin_right = 418.0
+margin_left = 410.0
+margin_right = 414.0
 margin_bottom = 30.0
 
 [node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 422.0
+margin_left = 418.0
 margin_top = 8.0
-margin_right = 558.0
+margin_right = 525.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Handle"
 align = 1
 
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 562.0
-margin_right = 566.0
+margin_left = 529.0
+margin_right = 533.0
+margin_bottom = 30.0
+
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 537.0
+margin_top = 8.0
+margin_right = 644.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Bonus"
+align = 1
+
+[node name="VSeparator7" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 648.0
+margin_right = 652.0
 margin_bottom = 30.0
 
 [node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 570.0
+margin_left = 656.0
 margin_top = 8.0
-margin_right = 706.0
+margin_right = 763.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Damage"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 710.0
-margin_right = 714.0
+margin_left = 767.0
+margin_right = 771.0
 margin_bottom = 30.0
 
 [node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 718.0
+margin_left = 775.0
 margin_top = 8.0
-margin_right = 854.0
+margin_right = 882.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Range"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 858.0
-margin_right = 862.0
+margin_left = 886.0
+margin_right = 890.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 866.0
+margin_left = 894.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -4428,125 +4455,6 @@ margin_top = 39.0
 rect_min_size = Vector2( 997, 0 )
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
-visible = false
-margin_right = 1002.0
-margin_bottom = 30.0
-
-[node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer"]
-margin_right = 1002.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 1002, 30 )
-custom_styles/panel = SubResource( 57 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 30 )
-size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 0 )
-texture = ExtResource( 28 )
-expand = true
-stretch_mode = 7
-
-[node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 104.0
-margin_right = 108.0
-margin_bottom = 30.0
-
-[node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 112.0
-margin_right = 262.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 150, 0 )
-text = "BroadSword"
-icon_align = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 266.0
-margin_right = 1002.0
-margin_bottom = 30.0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_right = 4.0
-margin_bottom = 30.0
-
-[node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 144.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 148.0
-margin_right = 152.0
-margin_bottom = 30.0
-
-[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 156.0
-margin_top = 8.0
-margin_right = 292.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 296.0
-margin_right = 300.0
-margin_bottom = 30.0
-
-[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 304.0
-margin_top = 8.0
-margin_right = 440.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 444.0
-margin_right = 448.0
-margin_bottom = 30.0
-
-[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 452.0
-margin_top = 8.0
-margin_right = 588.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 592.0
-margin_right = 596.0
-margin_bottom = 30.0
-
-[node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 600.0
-margin_top = 8.0
-margin_right = 736.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
 visible = false
 margin_right = 1002.0
@@ -4554,17 +4462,16 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
-visible = false
 margin_right = 1002.0
-margin_bottom = 6.0
+margin_bottom = 94.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/ScrollContainer"]
 
 [node name="Armor_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer"]
-margin_top = 222.0
+margin_top = 310.0
 margin_right = 1002.0
-margin_bottom = 285.0
+margin_bottom = 373.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box"]
 margin_right = 1002.0
@@ -4637,7 +4544,7 @@ margin_bottom = 30.0
 [node name="Item" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
 margin_left = 112.0
 margin_top = 8.0
-margin_right = 262.0
+margin_right = 280.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -4646,68 +4553,54 @@ align = 1
 valign = 1
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 266.0
-margin_right = 270.0
+margin_left = 284.0
+margin_right = 288.0
 margin_bottom = 30.0
 
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 274.0
+margin_left = 292.0
 margin_top = 8.0
-margin_right = 410.0
+margin_right = 460.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
-[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 414.0
-margin_right = 418.0
-margin_bottom = 30.0
-
-[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 422.0
-margin_top = 8.0
-margin_right = 558.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-text = "Handle"
-align = 1
-
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 562.0
-margin_right = 566.0
+margin_left = 464.0
+margin_right = 468.0
 margin_bottom = 30.0
 
-[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 570.0
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 472.0
 margin_top = 8.0
-margin_right = 706.0
+margin_right = 641.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "Damage"
+text = "Bonus"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 710.0
-margin_right = 714.0
+margin_left = 645.0
+margin_right = 649.0
 margin_bottom = 30.0
 
-[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 718.0
+[node name="Body_Party" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 653.0
 margin_top = 8.0
-margin_right = 854.0
+margin_right = 821.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "Range"
+text = "Body Party"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 858.0
-margin_right = 862.0
+margin_left = 825.0
+margin_right = 829.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 866.0
+margin_left = 833.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -4856,9 +4749,9 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/VBoxContainer/ScrollContainer"]
 
 [node name="Misc_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer"]
-margin_top = 289.0
+margin_top = 377.0
 margin_right = 1002.0
-margin_bottom = 352.0
+margin_bottom = 440.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer/VBoxContainer/Misc_Box"]
 margin_right = 1002.0
@@ -5173,7 +5066,6 @@ margin_bottom = 14.0
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Backpack:"
-valign = 1
 
 [node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/HBoxContainer"]
 margin_left = 67.0
@@ -5196,7 +5088,7 @@ rect_min_size = Vector2( 1002, 150 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer"]
 margin_right = 1002.0
-margin_bottom = 352.0
+margin_bottom = 440.0
 size_flags_vertical = 3
 
 [node name="Weapons_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer"]
@@ -5229,7 +5121,7 @@ script = ExtResource( 29 )
 
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel"]
 anchor_right = 1.0
-rect_min_size = Vector2( 0, 30 )
+rect_min_size = Vector2( 1002, 30 )
 custom_styles/panel = ExtResource( 13 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel"]
@@ -5290,61 +5182,75 @@ margin_bottom = 30.0
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
 margin_left = 299.0
 margin_top = 8.0
-margin_right = 430.0
+margin_right = 406.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
 [node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 434.0
-margin_right = 438.0
+margin_left = 410.0
+margin_right = 414.0
 margin_bottom = 30.0
 
 [node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 442.0
+margin_left = 418.0
 margin_top = 8.0
-margin_right = 573.0
+margin_right = 525.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Handle"
 align = 1
 
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 577.0
-margin_right = 581.0
+margin_left = 529.0
+margin_right = 533.0
+margin_bottom = 30.0
+
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 537.0
+margin_top = 8.0
+margin_right = 644.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Bonus"
+align = 1
+
+[node name="VSeparator7" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 648.0
+margin_right = 652.0
 margin_bottom = 30.0
 
 [node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 585.0
+margin_left = 656.0
 margin_top = 8.0
-margin_right = 716.0
+margin_right = 763.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Damage"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 720.0
-margin_right = 724.0
+margin_left = 767.0
+margin_right = 771.0
 margin_bottom = 30.0
 
 [node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 728.0
+margin_left = 775.0
 margin_top = 8.0
-margin_right = 859.0
+margin_right = 882.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Range"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 863.0
-margin_right = 867.0
+margin_left = 886.0
+margin_right = 890.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 871.0
+margin_left = 894.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -5372,13 +5278,10 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/VBoxContainer/ScrollContainer"]
 
-[node name="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 32 )]
-visible = false
-
 [node name="Shields_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer"]
 margin_top = 155.0
 margin_right = 1002.0
-margin_bottom = 218.0
+margin_bottom = 306.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box"]
 margin_right = 1002.0
@@ -5399,14 +5302,14 @@ text = "Shields"
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box"]
 margin_top = 18.0
 margin_right = 1002.0
-margin_bottom = 63.0
-rect_min_size = Vector2( 1002, 45 )
+margin_bottom = 151.0
+rect_min_size = Vector2( 1002, 133 )
 custom_styles/panel = ExtResource( 10 )
 script = ExtResource( 29 )
 
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel"]
 anchor_right = 1.0
-rect_min_size = Vector2( 0, 30 )
+rect_min_size = Vector2( 1002, 30 )
 custom_styles/panel = ExtResource( 13 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel"]
@@ -5417,19 +5320,19 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_right = 100.0
+margin_right = 125.0
 margin_bottom = 30.0
-rect_min_size = Vector2( 100, 0 )
+rect_min_size = Vector2( 125, 0 )
 alignment = 1
 
 [node name="Container2" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_right = 29.0
+margin_right = 42.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="Hide_show" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_left = 33.0
-margin_right = 66.0
+margin_left = 46.0
+margin_right = 79.0
 margin_bottom = 30.0
 mouse_filter = 1
 theme = SubResource( 58 )
@@ -5438,20 +5341,20 @@ align = 1
 icon_align = 1
 
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_left = 70.0
-margin_right = 100.0
+margin_left = 83.0
+margin_right = 125.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 104.0
-margin_right = 108.0
+margin_left = 129.0
+margin_right = 133.0
 margin_bottom = 30.0
 
 [node name="Item" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 112.0
+margin_left = 137.0
 margin_top = 8.0
-margin_right = 262.0
+margin_right = 287.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -5460,68 +5363,82 @@ align = 1
 valign = 1
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 266.0
-margin_right = 270.0
+margin_left = 291.0
+margin_right = 295.0
 margin_bottom = 30.0
 
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 274.0
+margin_left = 299.0
 margin_top = 8.0
-margin_right = 410.0
+margin_right = 406.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
 [node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 414.0
-margin_right = 418.0
+margin_left = 410.0
+margin_right = 414.0
 margin_bottom = 30.0
 
 [node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 422.0
+margin_left = 418.0
 margin_top = 8.0
-margin_right = 558.0
+margin_right = 525.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Handle"
 align = 1
 
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 562.0
-margin_right = 566.0
+margin_left = 529.0
+margin_right = 533.0
+margin_bottom = 30.0
+
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 537.0
+margin_top = 8.0
+margin_right = 644.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Bonus"
+align = 1
+
+[node name="VSeparator7" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 648.0
+margin_right = 652.0
 margin_bottom = 30.0
 
 [node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 570.0
+margin_left = 656.0
 margin_top = 8.0
-margin_right = 706.0
+margin_right = 763.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Damage"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 710.0
-margin_right = 714.0
+margin_left = 767.0
+margin_right = 771.0
 margin_bottom = 30.0
 
 [node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 718.0
+margin_left = 775.0
 margin_top = 8.0
-margin_right = 854.0
+margin_right = 882.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Range"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 858.0
-margin_right = 862.0
+margin_left = 886.0
+margin_right = 890.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 866.0
+margin_left = 894.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -5536,125 +5453,6 @@ margin_top = 39.0
 rect_min_size = Vector2( 997, 0 )
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
-visible = false
-margin_right = 1002.0
-margin_bottom = 30.0
-
-[node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer"]
-margin_right = 1002.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 1002, 30 )
-custom_styles/panel = SubResource( 57 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 30 )
-size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 0 )
-texture = ExtResource( 28 )
-expand = true
-stretch_mode = 7
-
-[node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 104.0
-margin_right = 108.0
-margin_bottom = 30.0
-
-[node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 112.0
-margin_right = 262.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 150, 0 )
-text = "BroadSword"
-icon_align = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 266.0
-margin_right = 1002.0
-margin_bottom = 30.0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_right = 4.0
-margin_bottom = 30.0
-
-[node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 144.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 148.0
-margin_right = 152.0
-margin_bottom = 30.0
-
-[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 156.0
-margin_top = 8.0
-margin_right = 292.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 296.0
-margin_right = 300.0
-margin_bottom = 30.0
-
-[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 304.0
-margin_top = 8.0
-margin_right = 440.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 444.0
-margin_right = 448.0
-margin_bottom = 30.0
-
-[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 452.0
-margin_top = 8.0
-margin_right = 588.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 592.0
-margin_right = 596.0
-margin_bottom = 30.0
-
-[node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 600.0
-margin_top = 8.0
-margin_right = 736.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
 visible = false
 margin_right = 1002.0
@@ -5662,17 +5460,16 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
-visible = false
 margin_right = 1002.0
-margin_bottom = 6.0
+margin_bottom = 94.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/ScrollContainer"]
 
 [node name="Armor_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer"]
-margin_top = 222.0
+margin_top = 310.0
 margin_right = 1002.0
-margin_bottom = 285.0
+margin_bottom = 373.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box"]
 margin_right = 1002.0
@@ -5745,7 +5542,7 @@ margin_bottom = 30.0
 [node name="Item" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
 margin_left = 112.0
 margin_top = 8.0
-margin_right = 262.0
+margin_right = 280.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -5754,68 +5551,54 @@ align = 1
 valign = 1
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 266.0
-margin_right = 270.0
+margin_left = 284.0
+margin_right = 288.0
 margin_bottom = 30.0
 
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 274.0
+margin_left = 292.0
 margin_top = 8.0
-margin_right = 410.0
+margin_right = 460.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
-[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 414.0
-margin_right = 418.0
-margin_bottom = 30.0
-
-[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 422.0
-margin_top = 8.0
-margin_right = 558.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-text = "Handle"
-align = 1
-
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 562.0
-margin_right = 566.0
+margin_left = 464.0
+margin_right = 468.0
 margin_bottom = 30.0
 
-[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 570.0
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 472.0
 margin_top = 8.0
-margin_right = 706.0
+margin_right = 641.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "Damage"
+text = "Bonus"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 710.0
-margin_right = 714.0
+margin_left = 645.0
+margin_right = 649.0
 margin_bottom = 30.0
 
-[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 718.0
+[node name="Body_Party" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 653.0
 margin_top = 8.0
-margin_right = 854.0
+margin_right = 821.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "Range"
+text = "Body Party"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 858.0
-margin_right = 862.0
+margin_left = 825.0
+margin_right = 829.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 866.0
+margin_left = 833.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -5964,9 +5747,9 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/VBoxContainer/ScrollContainer"]
 
 [node name="Misc_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer"]
-margin_top = 289.0
+margin_top = 377.0
 margin_right = 1002.0
-margin_bottom = 352.0
+margin_bottom = 440.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/ScrollContainer/VBoxContainer/Misc_Box"]
 margin_right = 1002.0
@@ -6270,20 +6053,19 @@ margin_right = 1002.0
 margin_bottom = 10.0
 rect_min_size = Vector2( 0, 10 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box"]
 margin_top = 14.0
 margin_right = 1002.0
 margin_bottom = 34.0
 
-[node name="Dropped_label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/HBoxContainer2"]
+[node name="Dropped_label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/HBoxContainer"]
 margin_right = 59.0
 margin_bottom = 14.0
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Dropped:"
-valign = 1
 
-[node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/HBoxContainer2"]
+[node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/HBoxContainer"]
 margin_left = 63.0
 margin_right = 83.0
 margin_bottom = 20.0
@@ -6304,7 +6086,7 @@ rect_min_size = Vector2( 1002, 150 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer"]
 margin_right = 1002.0
-margin_bottom = 352.0
+margin_bottom = 440.0
 size_flags_vertical = 3
 
 [node name="Weapons_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer"]
@@ -6337,7 +6119,7 @@ script = ExtResource( 29 )
 
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel"]
 anchor_right = 1.0
-rect_min_size = Vector2( 0, 30 )
+rect_min_size = Vector2( 1002, 30 )
 custom_styles/panel = ExtResource( 13 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel"]
@@ -6398,61 +6180,75 @@ margin_bottom = 30.0
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
 margin_left = 299.0
 margin_top = 8.0
-margin_right = 430.0
+margin_right = 406.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
 [node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 434.0
-margin_right = 438.0
+margin_left = 410.0
+margin_right = 414.0
 margin_bottom = 30.0
 
 [node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 442.0
+margin_left = 418.0
 margin_top = 8.0
-margin_right = 573.0
+margin_right = 525.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Handle"
 align = 1
 
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 577.0
-margin_right = 581.0
+margin_left = 529.0
+margin_right = 533.0
+margin_bottom = 30.0
+
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 537.0
+margin_top = 8.0
+margin_right = 644.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Bonus"
+align = 1
+
+[node name="VSeparator7" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 648.0
+margin_right = 652.0
 margin_bottom = 30.0
 
 [node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 585.0
+margin_left = 656.0
 margin_top = 8.0
-margin_right = 716.0
+margin_right = 763.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Damage"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 720.0
-margin_right = 724.0
+margin_left = 767.0
+margin_right = 771.0
 margin_bottom = 30.0
 
 [node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 728.0
+margin_left = 775.0
 margin_top = 8.0
-margin_right = 859.0
+margin_right = 882.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Range"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 863.0
-margin_right = 867.0
+margin_left = 886.0
+margin_right = 890.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 871.0
+margin_left = 894.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -6480,13 +6276,10 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/VBoxContainer/ScrollContainer"]
 
-[node name="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Weapons_Box/Panel/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 32 )]
-visible = false
-
 [node name="Shields_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer"]
 margin_top = 155.0
 margin_right = 1002.0
-margin_bottom = 218.0
+margin_bottom = 306.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box"]
 margin_right = 1002.0
@@ -6507,14 +6300,14 @@ text = "Shields"
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box"]
 margin_top = 18.0
 margin_right = 1002.0
-margin_bottom = 63.0
-rect_min_size = Vector2( 1002, 45 )
+margin_bottom = 151.0
+rect_min_size = Vector2( 1002, 133 )
 custom_styles/panel = ExtResource( 10 )
 script = ExtResource( 29 )
 
 [node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel"]
 anchor_right = 1.0
-rect_min_size = Vector2( 0, 30 )
+rect_min_size = Vector2( 1002, 30 )
 custom_styles/panel = ExtResource( 13 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel"]
@@ -6525,19 +6318,19 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_right = 100.0
+margin_right = 125.0
 margin_bottom = 30.0
-rect_min_size = Vector2( 100, 0 )
+rect_min_size = Vector2( 125, 0 )
 alignment = 1
 
 [node name="Container2" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_right = 29.0
+margin_right = 42.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="Hide_show" type="CheckBox" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_left = 33.0
-margin_right = 66.0
+margin_left = 46.0
+margin_right = 79.0
 margin_bottom = 30.0
 mouse_filter = 1
 theme = SubResource( 58 )
@@ -6546,20 +6339,20 @@ align = 1
 icon_align = 1
 
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2/HBoxContainer"]
-margin_left = 70.0
-margin_right = 100.0
+margin_left = 83.0
+margin_right = 125.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 
 [node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 104.0
-margin_right = 108.0
+margin_left = 129.0
+margin_right = 133.0
 margin_bottom = 30.0
 
 [node name="Item" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 112.0
+margin_left = 137.0
 margin_top = 8.0
-margin_right = 262.0
+margin_right = 287.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -6568,68 +6361,82 @@ align = 1
 valign = 1
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 266.0
-margin_right = 270.0
+margin_left = 291.0
+margin_right = 295.0
 margin_bottom = 30.0
 
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 274.0
+margin_left = 299.0
 margin_top = 8.0
-margin_right = 410.0
+margin_right = 406.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
 [node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 414.0
-margin_right = 418.0
+margin_left = 410.0
+margin_right = 414.0
 margin_bottom = 30.0
 
 [node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 422.0
+margin_left = 418.0
 margin_top = 8.0
-margin_right = 558.0
+margin_right = 525.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Handle"
 align = 1
 
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 562.0
-margin_right = 566.0
+margin_left = 529.0
+margin_right = 533.0
+margin_bottom = 30.0
+
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 537.0
+margin_top = 8.0
+margin_right = 644.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Bonus"
+align = 1
+
+[node name="VSeparator7" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 648.0
+margin_right = 652.0
 margin_bottom = 30.0
 
 [node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 570.0
+margin_left = 656.0
 margin_top = 8.0
-margin_right = 706.0
+margin_right = 763.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Damage"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 710.0
-margin_right = 714.0
+margin_left = 767.0
+margin_right = 771.0
 margin_bottom = 30.0
 
 [node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 718.0
+margin_left = 775.0
 margin_top = 8.0
-margin_right = 854.0
+margin_right = 882.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Range"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 858.0
-margin_right = 862.0
+margin_left = 886.0
+margin_right = 890.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 866.0
+margin_left = 894.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -6644,125 +6451,6 @@ margin_top = 39.0
 rect_min_size = Vector2( 997, 0 )
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
-visible = false
-margin_right = 1002.0
-margin_bottom = 30.0
-
-[node name="Panel" type="Panel" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer"]
-margin_right = 1002.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 1002, 30 )
-custom_styles/panel = SubResource( 57 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 30 )
-size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 100, 0 )
-texture = ExtResource( 28 )
-expand = true
-stretch_mode = 7
-
-[node name="VSeparator" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 104.0
-margin_right = 108.0
-margin_bottom = 30.0
-
-[node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 112.0
-margin_right = 262.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 150, 0 )
-text = "BroadSword"
-icon_align = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer"]
-margin_left = 266.0
-margin_right = 1002.0
-margin_bottom = 30.0
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_right = 4.0
-margin_bottom = 30.0
-
-[node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 144.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 148.0
-margin_right = 152.0
-margin_bottom = 30.0
-
-[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 156.0
-margin_top = 8.0
-margin_right = 292.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 296.0
-margin_right = 300.0
-margin_bottom = 30.0
-
-[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 304.0
-margin_top = 8.0
-margin_right = 440.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 444.0
-margin_right = 448.0
-margin_bottom = 30.0
-
-[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 452.0
-margin_top = 8.0
-margin_right = 588.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
-[node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 592.0
-margin_right = 596.0
-margin_bottom = 30.0
-
-[node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/VBoxContainer/Panel/HBoxContainer/HBoxContainer"]
-margin_left = 600.0
-margin_top = 8.0
-margin_right = 736.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "12"
-align = 1
-
 [node name="Container" type="Container" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
 visible = false
 margin_right = 1002.0
@@ -6770,17 +6458,16 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer"]
-visible = false
 margin_right = 1002.0
-margin_bottom = 6.0
+margin_bottom = 94.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Shields_Box/Panel/VBoxContainer/ScrollContainer"]
 
 [node name="Armor_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer"]
-margin_top = 222.0
+margin_top = 310.0
 margin_right = 1002.0
-margin_bottom = 285.0
+margin_bottom = 373.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box"]
 margin_right = 1002.0
@@ -6853,7 +6540,7 @@ margin_bottom = 30.0
 [node name="Item" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
 margin_left = 112.0
 margin_top = 8.0
-margin_right = 262.0
+margin_right = 280.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
@@ -6862,68 +6549,54 @@ align = 1
 valign = 1
 
 [node name="VSeparator2" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 266.0
-margin_right = 270.0
+margin_left = 284.0
+margin_right = 288.0
 margin_bottom = 30.0
 
 [node name="Class" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 274.0
+margin_left = 292.0
 margin_top = 8.0
-margin_right = 410.0
+margin_right = 460.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "Class"
 align = 1
 
-[node name="VSeparator3" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 414.0
-margin_right = 418.0
-margin_bottom = 30.0
-
-[node name="Handle" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 422.0
-margin_top = 8.0
-margin_right = 558.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-text = "Handle"
-align = 1
-
 [node name="VSeparator4" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 562.0
-margin_right = 566.0
+margin_left = 464.0
+margin_right = 468.0
 margin_bottom = 30.0
 
-[node name="Damage" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 570.0
+[node name="Bonus" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 472.0
 margin_top = 8.0
-margin_right = 706.0
+margin_right = 641.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "Damage"
+text = "Bonus"
 align = 1
 
 [node name="VSeparator5" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 710.0
-margin_right = 714.0
+margin_left = 645.0
+margin_right = 649.0
 margin_bottom = 30.0
 
-[node name="Range" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 718.0
+[node name="Body_Party" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
+margin_left = 653.0
 margin_top = 8.0
-margin_right = 854.0
+margin_right = 821.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "Range"
+text = "Body Party"
 align = 1
 
 [node name="VSeparator6" type="VSeparator" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 858.0
-margin_right = 862.0
+margin_left = 825.0
+margin_right = 829.0
 margin_bottom = 30.0
 
 [node name="Cost" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/Panel/HBoxContainer2"]
-margin_left = 866.0
+margin_left = 833.0
 margin_top = 8.0
 margin_right = 1002.0
 margin_bottom = 22.0
@@ -7072,9 +6745,9 @@ size_flags_vertical = 3
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Armor_Box/Panel/VBoxContainer/ScrollContainer"]
 
 [node name="Misc_Box" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer"]
-margin_top = 289.0
+margin_top = 377.0
 margin_right = 1002.0
-margin_bottom = 352.0
+margin_bottom = 440.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/ScrollContainer/VBoxContainer/Misc_Box"]
 margin_right = 1002.0

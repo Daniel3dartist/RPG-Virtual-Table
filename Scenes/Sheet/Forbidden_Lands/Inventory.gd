@@ -2,10 +2,10 @@ extends HBoxContainer
 
 onready var equipped_b = $Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/HBoxContainer/Button
 onready var backpack_b = $Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Backpack_Box/HBoxContainer/Button
-onready var dropped_b = $Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/HBoxContainer2/Button
+onready var dropped_b = $Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Dropped_Box/HBoxContainer/Button
 
 onready var item_list = preload("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Items_list_menu.tscn")
-onready var item_panel = preload('res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_panel.tscn')
+var item_panel 
 
 func _ready():
 	equipped_b.connect("button_up", self, 'add_equipped')
@@ -37,20 +37,24 @@ func _add_item(item, box):# $Inventory2/ScrollContainer/HBoxContainer/VBoxContai
 	var _box = self.get_node('Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/%s_Box/ScrollContainer/VBoxContainer/%s_Box/Panel/VBoxContainer/ScrollContainer/VBoxContainer' % [box, item[0]['class']])
 #	var hide_show = self.get_node('Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/%s_Box/ScrollContainer/VBoxContainer/%s_Box/Panel/Panel/HBoxContainer2/HBoxContainer/Hide_show' % [box, item[0]['class']])
 	for i in item.size():
+		if item[i]['class'] == 'Armor':
+			item_panel = load("res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_panel_armor.tscn")
+		else:
+			item_panel = load('res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Item_panel.tscn')
 		var _item = item_panel.instance()
 		var _name = item[i]['name']
 		_box.add_child(_item)
 		_item.get_node("HBoxContainer/Panel/TextureRect").texture = load("res://Scenes/Sheet/Forbidden_Lands/Itens/Item_illustrations/%s.png" % _name.replace(' ', '_')) 
 		_item.get_node("HBoxContainer/Button").text = _name
 		_item.get_node("HBoxContainer/HBoxContainer/Cost").text = str(item[i]['cost'])
+		_item.get_node("HBoxContainer/HBoxContainer/Class").text = item[i]['class']
 		if item[i]['class'] != 'Armor':
-			_item.get_node("HBoxContainer/HBoxContainer/Class").text = item[i]['class']
 			_item.get_node("HBoxContainer/HBoxContainer/Damage").text = str(item[i]['damage'])
 			_item.get_node("HBoxContainer/HBoxContainer/Handle").text = str(item[i]['handle'])
 			_item.get_node("HBoxContainer/HBoxContainer/Range").text = item[i]['range']
 		else:
 # CA			
-			_item.get_node('HBoxContainer/HBoxContainer/Bonus').text = item[i]['bonus']
+			_item.get_node('HBoxContainer/HBoxContainer/Bonus').text = str(item[i]['bonus'])
 # Body Part
 			_item.get_node('HBoxContainer/HBoxContainer/Body_Part').text = item[i]['body_part']
 			pass
