@@ -194,10 +194,11 @@ func Creat_Character_Sheet():
 	var sheet_box_instance = sheet_call_Hbox.instance()
 #	var sheet_call_instance = sheet_call.instance()
 	var txt = 'Sheet'
-	var SPath = '%s/%s/Sheets/Sheet.tscn' % [BASE_PATH, $'table_name'.text]
+	var SPath = '%s/%s/Sheets/Sheet/Sheet.save' % [BASE_PATH, $'table_name'.text]
 	var dir = Directory.new()
+	var cfg = ConfigFile.new()
 	var Dname = txt
-	var Dpath =  '%s/Sheets' % BASE_PATH
+	var Dpath =  '%s/%s/Sheets/%s' % [BASE_PATH, $'table_name'.text, txt]
 	var sheet = {
 		'name': '',
 		'num': '',
@@ -209,15 +210,20 @@ func Creat_Character_Sheet():
 	if sheet_num > 0:
 		txt = 'Sheet (%s)' % sheet_num
 		Dname = Dname + '(%s)' % sheet_num
-		SPath = '%s/%s/Sheets/%s.tscn' % [BASE_PATH, $'table_name'.text, txt]
-		Dpath = Dpath + '/'+ Dname
-		print("SPath" ,SPath)
+		SPath = '%s/%s/Sheets/%s/%s.save' % [BASE_PATH, $'table_name'.text,  txt.replace(' ', ''), txt]
+		Dpath =  '%s/%s/Sheets/%s' % [BASE_PATH, $'table_name'.text, txt.replace(' ', '')]
+		print("SPath" ,SPath, '\n\n%s\n\n' % dir.dir_exists(Dpath))
+	print("SPath" ,Dpath, '\n\n%s\n\n' % dir.dir_exists(Dpath))
+	if dir.dir_exists(Dpath) == false:
+		dir.make_dir(Dpath)
+	if dir.file_exists(SPath) == false:
+		cfg.save(SPath)
 	sheet_container.add_child(sheet_box_instance)
 	sheet_container.get_child(sheet_num).get_node('Sheet').text = txt
 	sheet_container.get_child(sheet_num).get_node('path').text  = SPath
 	sheet['name'] = txt
 	sheet['num'] = sheet_num
-	sheet['path'] = SPath.replace(' ', '')
+	sheet['path'] = SPath
 	print('Sheet dict? ', sheet_list)
 	sheet_list.push_back(sheet)
 	sheet_num =+ 1 
@@ -233,15 +239,14 @@ var sheet_dic : Dictionary = {
 	'data': '',
 }
 func _Call_Sheet(value):
-	var packed_scene = load(value['path'])
-	var _name = sheet_container.get_child(value['id']).get_node('Sheet').text
-	if packed_scene == null:
-		print('\n\n\n%s\n\n\n' % character_sheet_path)
-		packed_scene = load(character_sheet_path)
+	var packed_scene = load(character_sheet_path)
+	var _name = value['name']
 # Instance the scene
 	var my_scene = packed_scene.instance()
+	my_scene.get_node('path').text = value['path']
+	my_scene.get_node('Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = value['name']
 	$'Sheet_Spaw'.add_child(my_scene)
-	my_scene.connect('update_sheet_list', self, '_UpDate_Sheet_List')
+#	my_scene.connect('Save_sheet_path', self, '_UpDate_Sheet_List')
 
 	
 	emit_signal('receive_sheet_data', value)
@@ -258,7 +263,7 @@ func _UpDate_Sheet_List(array):
 
 func _on_Main_Menu_button_up():
 	var main_menu = 'res://Scenes/Main Menu/Main Menu.tscn' # set main menu path
-	_Save_Table()
+#	_Save_Table()
 	get_tree().change_scene(main_menu) # call the main menu scene
 
 
@@ -353,6 +358,27 @@ func pass_input(value):
 
 func pass_roll(value):
 	emit_signal("pass_roll", value)
+
+
+func _Delete_Sheet(id, _name):
+	var cfg = ConfigFile.new()
+	var dir = Directory.new()
+	cfg.load(OS.get_executable_path().get_base_dir() + '/data/last_played.ini')
+	var path =  cfg.get_value("Last Played", "path")
+	cfg.load(path)
+	var list = cfg.get_value('Table', 'sheets')
+#	for i in list:
+#		if list[i]['name'] == _name:
+	var dir_path = list[id]['path']
+	dir_path = dir_path.split('/')
+	dir_path.remove(-1)
+	dir_path = dir_path.join('/')
+	dir.remove(dir_path+'/char_image.png')
+	dir.remove(list[id]['path'])
+	dir.remove(dir_path)
+	list.remove(id)
+	sheet_list = list
+	_Save_Table()
 
 ########################################## [ Roll Dice Functions ] ##########################################
 

@@ -1,6 +1,7 @@
 extends HBoxContainer
 
 var BASE_PATH =  OS.get_executable_path().get_base_dir()
+var last_table = BASE_PATH + '/data/last_played.ini'
 
 signal delete_table(value)
 signal playscene(index)
@@ -15,6 +16,8 @@ onready var system_name = $"Table Description/Table_desc_itens/HBoxContainer/Sys
 onready var panel_menubutton = $"Table Description/Table_desc_itens/HBoxContainer/Panel"
 onready var menubutton = $'Table Description/Table_desc_itens/HBoxContainer/Panel/MenuButton'
 
+var old_name
+
 func _ready():
 	var popup = menubutton.get_popup()
 	popup.connect("id_pressed", self, "Popup_id_pressed")
@@ -27,6 +30,7 @@ func _on_Delete_Table_button_up():
 
 
 func _on_Edit_Table_button_up():
+	old_name = name_line.text
 	name_line.editable = true
 	txt_edit.readonly = false
 	play_button.visible = false
@@ -58,9 +62,9 @@ func _on_Save_button_up():
 	config.set_value('Last Played', 'name', _name)
 	config.set_value('Last Played', 'path', save_path)
 	config.set_value('Last Played', 'system', menubutton.text)
-	config.save(OS.get_executable_path().get_base_dir() + '/data/last_played.ini')
-	
+	config.save(last_table)
 	emit_signal('save_changes', dic)
+#	replace_path(_name)
 
 
 func _on_Play_Scene_button_up():
@@ -80,7 +84,7 @@ func _on_Play_Scene_button_up():
 	config2.set_value('Last Played', 'name', _name)
 	config2.set_value('Last Played', 'path', save_path)
 	config2.set_value('Last Played', 'system', menubutton.text)
-	config2.save(OS.get_executable_path().get_base_dir() + '/data/last_played.ini')
+	config2.save(last_table)
 	get_tree().change_scene(path)
 	
 

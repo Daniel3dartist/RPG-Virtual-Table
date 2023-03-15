@@ -116,40 +116,39 @@ func _Receive_Sheet_Data(dic):
 
 # save edits
 func _Update_Save():
-	var packed_scene = PackedScene.new()
-	var _name = old_name
+#	var packed_scene = PackedScene.new()
+	var _name = char_name.text
 	var dir = Directory.new()
 	var buttom = sheet_list_path.get_child(sheet['id']).get_child(1)
 	var path_label = sheet_list_path.get_child(sheet['id']).get_child(2)
 	var old_path = path_label.text
-	var txt = path_label.text
-	print('\n\nPath_Label: \n', txt.replace('%s.tscn'%buttom.text, '%s.tscn'% 'maria'))
+	var old_dir
+	var new_dir
+	var txt = 'C:/Users/Daniel/Documents/Godot/Godot_V3.5.1/data/Tables/Table/Sheets/Sheet/Sheet.save'
+#	print('\n\nPath_Label: \n', txt.replace('%s.save'%buttom.text, '%s.save'% 'maria'))
 	old_name = buttom.text
-	var sub = txt.find_last('Sheets')
-	var knum = 'Sheets'.length()
+	var file_name
+
 
 	if old_name != char_name.text:
-		_name = char_name.text +'.tscn' 
-		if buttom.text == old_name:
-			buttom.text = char_name.text
-			old_path = path_label.text
-			old_name = buttom.text + '.tscn'
-			print(txt)
-			txt = txt.substr(0, sub + knum)
-			txt = txt + '/%s' % _name
-#			var list = '/'.join(txt)
-#			print('list: ',list)
-#			path_label.text = txt 
-			print('\n\nOld: \n', old_path, '\n\nNew: \n', _name,'\n\n', txt)
-	dir = txt
+		txt = str(path_label.text)
+		var array = Array(txt.split('/'))
+		array.pop_back()
+		old_dir = array
+		old_dir = '/'.join(old_dir)
+		array.pop_back()
+		new_dir = array
+		new_dir.push_back(_name)
+		new_dir = '/'.join(new_dir)
+		$path.text = '%s/%s.save' % [new_dir, _name]
 	buttom.text = char_name.text
-	path_label.text = dir
+	path_label.text = '%s/%s.save' % [new_dir, _name]
 	print('\nTXT:', dir)
-	Directory.new().rename(str(old_path), str(path_label.text))
-	color_rect.rect_position = Vector2(280, 60)
+	if old_dir != new_dir:
+		dir.rename(old_dir, new_dir)
+		dir.rename('%s/%s.save' % [new_dir, old_name], '%s/%s.save' % [new_dir, _name])
+	dir = '%s/%s.save' % [new_dir, _name]
 	$'Panel'.rect_position = Vector2(235-15, 60)
-	packed_scene.pack(self)
-	ResourceSaver.save(dir, packed_scene)
 	var cfg = ConfigFile.new()
 	var table_path = '%s/data/last_played.ini' % BASE_PATH
 	print('\n\n\n%s\n\n\n' % table_path)
@@ -163,7 +162,7 @@ func _Update_Save():
 	emit_signal('update_sheet_list', sheet_list)
 	cfg.save(table_path)
 	print(sheet_list)
-#	emit_signal("Save_sheet_path", [old_path, dir] )
+	emit_signal("Save_sheet_path", [old_path, dir] )
 #	pass
 
 func _set_age_mod():

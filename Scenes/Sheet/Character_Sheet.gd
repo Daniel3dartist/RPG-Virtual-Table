@@ -271,39 +271,41 @@ func _Initialize_Sheet():
 
 # save edits
 func _Update_Save():
-	var packed_scene = PackedScene.new()
 	var _name = old_name
 	var dir = Directory.new()
 	var buttom = sheet_list_path.get_child(sheet['id']).get_child(1)
-	var path_label = sheet_list_path.get_child(sheet['id']).get_child(2)
-	var old_path = path_label.text
+	var path_label = $'path'.text
+	var old_path = sheet['path']#path_label.text
 	var txt = path_label.text
-	print('\n\nPath_Label: \n', txt.replace('%s.tscn'%buttom.text, '%s.tscn'% 'maria'))
+	print('\n\nPath_Label: \n', txt.replace('%s.save'%buttom.text, '%s.save'% 'maria'))
 	old_name = buttom.text
 	var sub = txt.find_last('Sheets')
 	var knum = 'Sheets'.length()
 
 	if old_name != char_name.text:
-		_name = char_name.text +'.tscn' 
+		_name = char_name.text +'.save' 
 		if buttom.text == old_name:
 			buttom.text = char_name.text
-			old_path = path_label.text
-			old_name = buttom.text + '.tscn'
-			print(txt)
-			txt = txt.substr(0, sub + knum)
-			txt = txt + '/%s' % _name
+	#		old_path = path_label.text
+	#		old_name = buttom.text + '.save'
+	#		print(txt)
+	#		txt = txt.substr(0, sub + knum)
+	#		txt = txt + '/%s' % _name
 #			var list = '/'.join(txt)
 #			print('list: ',list)
 #			path_label.text = txt 
 			print('\n\nOld: \n', old_path, '\n\nNew: \n', _name,'\n\n', txt)
 	dir = txt
 	buttom.text = char_name.text
-	path_label.text = dir
+#	path_label.text = dir
 	print('\nTXT:', dir)
-	Directory.new().rename(str(old_path), str(path_label.text))
-	packed_scene.pack(self)
-	ResourceSaver.save(dir, packed_scene)
-	emit_signal("Save_sheet_path", [old_path, dir] )
+#	if Directory.new().file_exists(old_path) == true:
+#		Directory.new().rename(str(old_path), str(path_label.text))
+#	else:
+	var cfg= ConfigFile.new()
+	var _path = $path.text
+	cfg.save('C:/Users/Daniel/Documents/Godot/Godot_V3.5.1/data/Tables/Table/Sheets/Sheet/Sheet.save')
+#	emit_signal("Save_sheet_path", [old_path, dir] )
 	pass
 
 # ===============================================[ Load Texture Image of Player Character ]============================================================= #

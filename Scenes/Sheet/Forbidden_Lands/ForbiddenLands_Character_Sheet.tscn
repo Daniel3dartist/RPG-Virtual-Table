@@ -529,7 +529,7 @@ rect_min_size = Vector2( 0, 20 )
 [node name="Sheet_TabContainer" type="TabContainer" parent="Panel/SheetArea"]
 margin_top = 57.0
 margin_right = 1032.0
-margin_bottom = 619.0
+margin_bottom = 591.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_colors/font_color_bg = Color( 0, 0, 0, 1 )
@@ -540,7 +540,6 @@ custom_styles/panel = SubResource( 3 )
 tab_align = 2
 
 [node name="Main" type="ScrollContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0
@@ -7069,6 +7068,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Food"
 
 [node name="MenuButton" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Food_Box" instance=ExtResource( 26 )]
+items = [ "D12", null, 0, false, false, 0, 0, null, "", false, "D10", null, 0, false, false, 1, 0, null, "", false, "D8", null, 0, false, false, 2, 0, null, "", false, "none", null, 0, false, false, 3, 0, null, "", false ]
 
 [node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Food_Box"]
 margin_left = 59.0
@@ -7095,6 +7095,7 @@ text = "Water"
 [node name="MenuButton" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Water_Box" instance=ExtResource( 26 )]
 margin_left = 42.0
 margin_right = 62.0
+items = [ "D12", null, 0, false, false, 0, 0, null, "", false, "D10", null, 0, false, false, 1, 0, null, "", false, "D8", null, 0, false, false, 2, 0, null, "", false, "none", null, 0, false, false, 3, 0, null, "", false ]
 
 [node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Water_Box"]
 margin_left = 66.0
@@ -7121,6 +7122,7 @@ text = "Arrows"
 [node name="MenuButton" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Arrows_Box" instance=ExtResource( 26 )]
 margin_left = 48.0
 margin_right = 68.0
+items = [ "D12", null, 0, false, false, 0, 0, null, "", false, "D10", null, 0, false, false, 1, 0, null, "", false, "D8", null, 0, false, false, 2, 0, null, "", false, "none", null, 0, false, false, 3, 0, null, "", false ]
 
 [node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Arrows_Box"]
 margin_left = 72.0
@@ -7147,6 +7149,7 @@ text = "Torches"
 [node name="MenuButton" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Torches_Box" instance=ExtResource( 26 )]
 margin_left = 54.0
 margin_right = 74.0
+items = [ "D12", null, 0, false, false, 0, 0, null, "", false, "D10", null, 0, false, false, 1, 0, null, "", false, "D8", null, 0, false, false, 2, 0, null, "", false, "none", null, 0, false, false, 3, 0, null, "", false ]
 
 [node name="Button" type="Button" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/HBoxContainer/Torches_Box"]
 margin_left = 78.0
@@ -7158,6 +7161,7 @@ icon_align = 1
 expand_icon = true
 
 [node name="Talents" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 1.0

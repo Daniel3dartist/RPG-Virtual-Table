@@ -5,7 +5,7 @@ signal receive_text_from_discord(value)
 var app_username
 var BASE_PATH = OS.get_executable_path().get_base_dir()
 
-var token := "YourTokenHere" # Make sure to actually replace this with your token!
+var token := 'Nzc5MTc0MDg2MjgxNTI3MzI4.G3IvIf.FiJ2nAbhLxU5SrNwulzzSJy56KZ7YHiGFMAGsU'#"YourTokenHere" # Make sure to actually replace this with your token!
 var client : WebSocketClient
 var heartbeat_interval : float
 var last_sequence : float
@@ -15,7 +15,7 @@ var invalid_session_is_resumable : bool
 
 func _ready():
 	# Self
-	grabe_token()
+#	grabe_token()
 	# Web
 	randomize()
 	client = WebSocketClient.new()

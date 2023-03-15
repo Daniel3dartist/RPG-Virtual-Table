@@ -1016,6 +1016,7 @@ position = Vector2( 0, 7.75 )
 shape = SubResource( 5 )
 
 [node name="path" type="Label" parent="."]
+visible = false
 margin_left = 448.0
 margin_top = 208.0
 margin_right = 488.0

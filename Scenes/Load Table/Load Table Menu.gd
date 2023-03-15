@@ -233,6 +233,32 @@ func _Save_Changes(dic):
 	cfg.load(BASE_PATH)
 	cfg.set_value('Tables', 'table_list', tboxlist)
 	cfg.save(BASE_PATH)
+	if old_dic['name'] != dic['name']:
+		replace_path(dic['name'], old_dic['name'], dic['path'])
+
+func replace_path(_name, old_name, path):
+	var sheets
+	var cfg = ConfigFile.new()
+#	var cfg2 = ConfigFile.new()
+#	cfg.load(last_table)
+#	var path = cfg.get_value('Last Played', 'path')
+	print(path)
+#	cfg.close()
+	cfg.load(str(path+ "/%s.ini" % _name))
+	sheets = cfg.get_value('Table', 'sheets')
+	print(sheets, '\n', cfg.get_value('Table', 'sheets'))
+	for i in sheets.size():
+		var _path = sheets[i]['path']
+		_path = Array(_path.split('/'))
+		for x in _path.size():
+			if _path[x] == old_name:
+				_path[x] = _path[x].replace(old_name, _name)
+				_path = "/".join(_path)
+		sheets[i]['path'] = _path
+		print('Sheet Path: ', "\n",sheets[i]['path'],'\n', sheets)
+	cfg.set_value('Last Played', 'path', path+ "/%s.ini" % _name)
+	cfg.set_value('Table', 'sheets', sheets)
+	cfg.save(str(path+ "/%s.ini" % _name))
 
 
 func get_sub_itens(id):

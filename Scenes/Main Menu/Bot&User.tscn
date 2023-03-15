@@ -42,7 +42,7 @@ margin_right = 284.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
-text = "Insert your Bot Token here..."
+text = "1fb0fb9b667c1b828b168908ac1392aa5d47d56de53134511e5c96ab5801a01a"
 
 [node name="User" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 3.0

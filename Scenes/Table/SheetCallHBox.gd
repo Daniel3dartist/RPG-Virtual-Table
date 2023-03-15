@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-signal delete_sheet(index)
+signal delete_sheet(index, _name)
 signal call_sheet(dic)
 signal update_sheet_buttom(array)
 
@@ -12,6 +12,7 @@ func _ready():
 func _on_Delete_button_up():
 	var dir = Directory.new()
 	dir.remove($'path'.text)
+	emit_signal("delete_sheet", self.get_index(), $Sheet.text)
 	self.queue_free()
 
 
@@ -34,5 +35,5 @@ func _on_Sheet_renamed():
 func _Save_sheet_path(value):
 	var path = $'path'.text
 	$'path'.text = value[1]
-	if value[0] != value[1]:
-		emit_signal('update_sheet_buttom',[self.get_index(), $'Sheet'.text, value[0], value[1]])
+	#if value[0] != value[1]:
+	#	emit_signal('update_sheet_buttom',[self.get_index(), $'Sheet'.text, value[0], value[1]])
