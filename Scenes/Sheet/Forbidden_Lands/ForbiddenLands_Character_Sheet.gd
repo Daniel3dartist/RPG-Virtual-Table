@@ -12,6 +12,9 @@ onready var pos2d = $'CanvasLayer/Node2D'
 onready var color_rect = $'Panel/Container' #$"CanvasLayer/ColorRect2"
 
 onready var char_name = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name'
+onready var char_race = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterRace_BoxC/Panel/MenuButton'
+onready var char_class = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterClass_BoxC/Panel2/MenuButton'
+
 var _index: int = 0
 var old_name: String
 var sheet
@@ -169,7 +172,15 @@ func _Update_Save():
 	cfg.save(table_path)
 	print(sheet_list)
 	emit_signal("Save_sheet_path", [old_path, dir] )
-#	pass
+	_save_sheet(dir)
+
+
+func _save_sheet(path):
+	var dic = {
+		'name': char_name.text,
+		'race': char_race.text,
+		'class': char_class.text
+	}
 
 
 # ===============================================[ Load Texture Image of Player Character ]============================================================= #
@@ -178,19 +189,21 @@ func _Update_Save():
 func _on_TextureRect_char_image_path(path):
 	var PATH = path
 	var image_name
-	image_name = PATH.split('/')
+	image_name = PATH.split('\\')
 	image_name = '%s' % image_name[-1]
 	print('\n\nImage_name\n\n', image_name, '\n\n')
 	char_image = PATH
 	load_char_image(PATH)
-	
+	_copy_img(PATH)
+
 
 func load_char_image(path):
-	_copy_img(path)
+#	_copy_img(path)
 	var valid_image = load_external_tex(path)
 #	char_image = valid_image
+	var label = $Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label
 	
-	$'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label'.visible = false
+	label.visible = false
 	TexRect.texture = valid_image
 	TexRect.material.set_shader_param('tex_frg_7' , valid_image)
 	TexRect.material.set_shader_param('alpha', 1.000)
@@ -245,12 +258,12 @@ func _copy_img(path):
 			dir_path = sheets[i]['path']
 #		else:
 #			pass
-	dir_path = dir_path.split('/')
-	dir_path.remove(-1)
+	dir_path = Array(dir_path.split('/'))
+	dir_path.pop_back()
 	dir_path.push_back('char_img.png')
 	dir_path = '/'.join(dir_path)
 	print('DIR: \n%s\n' % dir_path)
-	dir.copy(path, BASE_PATH+'/data/char_img.png')
+	dir.copy(path, dir_path)
 	return dir_path
 
 

@@ -1,13 +1,11 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=85 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
 [ext_resource path="res://Base_Images/Chain_Ico.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Sheet/Token_Shader.gdshader" type="Shader" id=4]
-[ext_resource path="res://Base_Images/Char_Base_Image.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Sheet/Character_img.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Sheet/TextureRect.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Sheet/Character_Sheet_Image.tres" type="Shader" id=7]
-[ext_resource path="res://Scenes/Sheet/Character_Image_File_Manager.gd" type="Script" id=8]
 [ext_resource path="res://Base_Images/fblands1.png" type="Texture" id=9]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Skill_Card_Forbidden_Lands.tres" type="StyleBox" id=10]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Main_Panel_BG_style.tres" type="StyleBox" id=11]
@@ -34,7 +32,6 @@
 [ext_resource path="res://Base_Images/dice-game-icon02.png" type="Texture" id=32]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Resources_Box.gd" type="Script" id=33]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Talents.gd" type="Script" id=34]
-[ext_resource path="res://Scenes/Sheet/char_img_load.tscn" type="PackedScene" id=35]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -179,11 +176,6 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="ShaderMaterial" id=7]
-shader = ExtResource( 7 )
-shader_param/alpha = 0.0
-shader_param/tex_frg_2 = ExtResource( 5 )
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 4 )
@@ -7388,17 +7380,7 @@ rect_min_size = Vector2( 400, 448 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
-material = SubResource( 7 )
-margin_right = 400.0
-margin_bottom = 448.0
-rect_min_size = Vector2( 400, 448 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 6
-script = ExtResource( 8 )
+[node name="TextureRect" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer" instance=ExtResource( 5 )]
 
 [node name="Label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer"]
 margin_left = 138.0
@@ -7699,8 +7681,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Position"
 valign = 1
 
-[node name="char_img_load" parent="Panel/SheetArea/Sheet_TabContainer" instance=ExtResource( 35 )]
-
 [node name="Panel" type="Panel" parent="Panel"]
 margin_left = 16.0
 margin_top = 53.0
@@ -7969,7 +7949,6 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 [connection signal="value_changed" from="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="changed" from="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points_Input/Panel/SpinBox2" to="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel" method="_on_SpinBox2_changed"]
 [connection signal="button_up" from="Panel/SheetArea/Sheet_TabContainer/Talents/HBoxContainer/add" to="Panel/SheetArea/Sheet_TabContainer/Talents" method="_on_add_button_up"]
-[connection signal="char_image_path" from="Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect" to="Panel/SheetArea/Sheet_TabContainer/char_img_load" method="_on_TextureRect_char_image_path"]
 [connection signal="value_changed" from="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/X_Scale_Input/X_Scale_Input_HSlider" to="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_X_Scale_Input_HSlider_value_changed"]
 [connection signal="value_changed" from="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Y_Scale_Input/Y_Scale_Input_VSlider" to="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_Y_Scale_Input_VSlider_value_changed"]
 [connection signal="button_down" from="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/CheckBox" to="Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect" method="_on_CheckBox_button_down"]
