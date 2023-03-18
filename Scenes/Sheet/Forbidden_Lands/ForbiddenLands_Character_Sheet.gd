@@ -1,6 +1,7 @@
 extends Control
 
 signal update_sheet_list(array)
+signal _set_att()
 
 onready var BASE_PATH = OS.get_executable_path().get_base_dir()
 onready var sheet_list_path = self.get_parent().get_parent().get_node('Base_UI/Chat_&_Rolls_Results/TabContainer/SheetList/ScrollContainer/VBoxContainer')
@@ -14,6 +15,18 @@ onready var color_rect = $'Panel/Container' #$"CanvasLayer/ColorRect2"
 onready var char_name = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name'
 onready var char_race = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterRace_BoxC/Panel/MenuButton'
 onready var char_class = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterClass_BoxC/Panel2/MenuButton'
+
+
+onready var age = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox
+onready var reputation = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Panel/SpinBox
+onready var conditions = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/Conditions2/VBoxContainer/HBoxContainer
+onready var _str = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Strength_Line/Panel/HboxContainer/Points_Input
+onready var _agi = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Agility_Line/Panel/HboxContainer/Points_Input
+onready var _wits = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Wits_Line/Panel/HboxContainer/Points_Input
+onready var _emp = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/Panel/HBoxContainer/Attributes_Column/Empathy_Line/Panel/HboxContainer/Points_Input
+onready var injurie = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/TextEdit
+onready var skills = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer3/GridContainer
+
 
 var _index: int = 0
 var old_name: String
@@ -121,6 +134,17 @@ func _Receive_Sheet_Data(dic):
 	sheet = dic
 	char_name.text = dic['name']
 	print('\n\nData recebido %s\n\n' % sheet)
+	if sheet['path'] == "Null/%s.save" % sheet['name']:
+		var cfg = ConfigFile.new()
+		cfg.load(BASE_PATH + '/data/last_played.ini')
+		var table = cfg.get_value('Last Played', 'path')
+		cfg.load(table)
+		var _path = Array(table.split('/'))
+		_path.pop_back()
+		_path.push_back('Sheets/%s/%s.save' % [sheet['name'], sheet['name']])
+		_path = '/'.join(_path)
+		sheet['path'] = _path
+	_Initialize_Sheet(sheet['path'])
 
 
 # save edits
@@ -137,7 +161,6 @@ func _Update_Save():
 #	print('\n\nPath_Label: \n', txt.replace('%s.save'%buttom.text, '%s.save'% 'maria'))
 	old_name = buttom.text
 	var file_name
-
 
 	if old_name != char_name.text:
 		txt = str(path_label.text)
@@ -156,7 +179,8 @@ func _Update_Save():
 	if old_dir != new_dir:
 		dir.rename(old_dir, new_dir)
 		dir.rename('%s/%s.save' % [new_dir, old_name], '%s/%s.save' % [new_dir, _name])
-	dir = '%s/%s.save' % [new_dir, _name]
+		sheet['path'] = '%s/%s.save' % [new_dir, _name]
+	dir = sheet['path']
 	$'Panel'.rect_position = Vector2(235-15, 60)
 	var cfg = ConfigFile.new()
 	var table_path = '%s/data/last_played.ini' % BASE_PATH
@@ -167,20 +191,102 @@ func _Update_Save():
 	var sheet_list = cfg.get_value('Table', 'sheets')
 	sheet_list[sheet['id']]['name'] = char_name.text
 	sheet_list[sheet['id']]['path'] = dir
+	print('Sheet List: ',sheet_list)
 	cfg.set_value('Table', 'sheets', sheet_list)
 	emit_signal('update_sheet_list', sheet_list)
 	cfg.save(table_path)
 	print(sheet_list)
-	emit_signal("Save_sheet_path", [old_path, dir] )
+#	emit_signal("Save_sheet_path", [sheet_list] )
 	_save_sheet(dir)
 
 
 func _save_sheet(path):
-	var dic = {
-		'name': char_name.text,
-		'race': char_race.text,
-		'class': char_class.text
+#	print('SHeet Path: \n', path)
+	var condition_array: Array
+	for i in conditions.get_child_count() - 1:
+		var type = ['Sleeples', 'Thirsty', 'Hungry', 'Cold']
+		var item = conditions.get_node('%s_Itens/CenterContainer/CheckBox' % type[i - 1])
+		if item.pressed == true:
+			condition_array.push_back([i, item.pressed])
+	var skills_dic = {
+		'str': [],
+		'agi': [],
+		'wit': [],
+		'emp': []
 	}
+	for i in skills.get_child_count():
+		var type = ['Strenght', 'Agility', 'Wits', 'Empathy']
+		var item = skills.get_node("%s_Box/Panel2/Panel/VBoxContainer" % type[i])
+		for x in item.get_child_count():
+#			var _name = type[i].substr(0,3)
+			skills_dic['%s' % type[i].substr(0,3).to_lower()].push_back(item.get_child(x).get_node('SpinBox').value)
+	var dic = {
+		'Main':{
+			'name': char_name.text,
+			'race': char_race.text,
+			'class': char_class.text,
+			'age': age.value,
+			'reputation': reputation.value,
+			'conditions': condition_array,
+			'attributes': {
+				'str': [_str.get_node("SpinBox").value, _str.get_node("Panel/SpinBox2").value],
+				'agi': [_agi.get_node("SpinBox").value, _agi.get_node("Panel/SpinBox2").value],
+				'wits': [_wits.get_node("SpinBox").value, _wits.get_node("Panel/SpinBox2").value],
+				'emp': [_emp.get_node("SpinBox").value, _emp.get_node("Panel/SpinBox2").value]
+			},
+			'injuries': injurie.text,
+			'skills': skills_dic
+			}
+	}
+
+	var cfg = ConfigFile.new()
+#	cfg.load(path)
+	cfg.set_value('Sheet', 'main', dic['Main'])
+	cfg.save(path)
+
+# Load sheet data
+func _Initialize_Sheet(path):
+	var cfg = ConfigFile.new()
+	cfg.load(path)
+	var main = cfg.get_value('Sheet', 'main')
+	print(path, '\n',main)
+	if main != null:
+		char_name.text = main['name']
+		char_race.text = main['race']
+		char_class.text = main['class']
+		age.value = main['age']
+		reputation.value = main['reputation']
+		_set_age_mod()
+		
+	#	Set Conditions
+		for i in main['conditions'].size():
+			conditions.get_child(main['conditions'][i][0]).get_node('CenterContainer/CheckBox').pressed = main['conditions'][i][1]
+	
+	# set attribute values
+		_str.get_node("SpinBox").max_value = main['attributes']['str'][1]
+		_str.get_node("SpinBox").value = main['attributes']['str'][0]
+		_str.get_node("Panel/SpinBox2").value = main['attributes']['str'][1]
+		_agi.get_node("SpinBox").max_value = main['attributes']['agi'][1]
+		_agi.get_node("SpinBox").value = main['attributes']['agi'][0]
+		_agi.get_node("Panel/SpinBox2").value = main['attributes']['agi'][1]
+		_wits.get_node("SpinBox").max_value = main['attributes']['wits'][1]
+		_wits.get_node("SpinBox").value = main['attributes']['wits'][0]
+		_wits.get_node("Panel/SpinBox2").value = main['attributes']['wits'][1]
+		_emp.get_node("SpinBox").max_value = main['attributes']['emp'][1]
+		_emp.get_node("SpinBox").value = main['attributes']['emp'][0]
+		_emp.get_node("Panel/SpinBox2").value = main['attributes']['emp'][1]
+		emit_signal('_set_att') # set attributes bool on checkerboxs
+
+	#	Set Injuries
+		injurie.text = main['injuries']
+
+	#	Set Skill Levels
+		for i in skills.get_child_count():
+				var type = ['Strenght', 'Agility', 'Wits', 'Empathy']
+				var item = skills.get_node("%s_Box/Panel2/Panel/VBoxContainer" % type[i])
+				for x in item.get_child_count():
+		#			var _name = type[i].substr(0,3)
+					item.get_child(x).get_node('SpinBox').value = main['skills']['%s' % type[i].substr(0,3).to_lower()][x]
 
 
 # ===============================================[ Load Texture Image of Player Character ]============================================================= #
@@ -267,7 +373,7 @@ func _copy_img(path):
 	return dir_path
 
 
-# ===============================================[ END ]============================================================= #
+# ===============================================[ END - Load Texture Image of Player Character - END ]============================================================= #
 
 
 func _set_age_mod():

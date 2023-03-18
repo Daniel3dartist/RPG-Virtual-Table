@@ -17,7 +17,8 @@ var str_points = {
 }
 
 func _ready():
-	_check_attributes()
+	var main = $"../../../../../../../../../.."
+	main.connect("_set_att", self, "_set_att")
 
 
 func _input(event):
@@ -66,4 +67,5 @@ func _attributes_manipulations(current, total):
 			points_check.get_child(i).disabled = is_disabled
 
 
-
+func _set_att():
+	_check_attributes()

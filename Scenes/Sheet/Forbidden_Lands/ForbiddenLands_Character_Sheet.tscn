@@ -1802,7 +1802,7 @@ align = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer"]
 visible = false
 margin_top = 24.0
-margin_right = 984.0
+margin_right = 836.0
 margin_bottom = 159.0
 size_flags_horizontal = 7
 size_flags_vertical = 3
@@ -1816,8 +1816,7 @@ margin_bottom = 146.0
 rect_min_size = Vector2( 5, 0 )
 
 [node name="Strenght_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 74.0
-margin_right = 281.0
+margin_right = 207.0
 margin_bottom = 135.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -1998,8 +1997,8 @@ margin_bottom = 135.0
 alignment = 1
 
 [node name="Agility_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 285.0
-margin_right = 492.0
+margin_left = 211.0
+margin_right = 418.0
 margin_bottom = 135.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -2180,8 +2179,8 @@ margin_bottom = 135.0
 alignment = 1
 
 [node name="Wits_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 496.0
-margin_right = 699.0
+margin_left = 422.0
+margin_right = 625.0
 margin_bottom = 135.0
 rect_min_size = Vector2( 203, 0 )
 size_flags_horizontal = 0
@@ -2363,8 +2362,8 @@ margin_bottom = 135.0
 alignment = 1
 
 [node name="Empathy_Box" type="HBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 703.0
-margin_right = 910.0
+margin_left = 629.0
+margin_right = 836.0
 margin_bottom = 135.0
 size_flags_horizontal = 0
 size_flags_vertical = 0

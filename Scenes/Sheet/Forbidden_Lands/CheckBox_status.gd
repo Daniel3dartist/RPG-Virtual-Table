@@ -4,7 +4,7 @@ signal give_checks_data(data)
 var current
 
 func _ready():
-	self.connect("gui_input", self, "_gui_input")
+	self.connect("pressed", self, "_gui_input")
 	self.get_parent().connect('is_pressed', self, '_is_pressed')
 	current = self.get_parent().get_parent().get_node("Points_Input/SpinBox")
 

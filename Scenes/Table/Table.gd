@@ -239,6 +239,7 @@ var sheet_dic : Dictionary = {
 	'data': '',
 }
 func _Call_Sheet(value):
+	print('Value: ', value)
 	var packed_scene = load(character_sheet_path)
 	var _name = value['name']
 # Instance the scene
@@ -246,7 +247,7 @@ func _Call_Sheet(value):
 	my_scene.get_node('path').text = value['path']
 	my_scene.get_node('Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name').text = value['name']
 	$'Sheet_Spaw'.add_child(my_scene)
-#	my_scene.connect('Save_sheet_path', self, '_UpDate_Sheet_List')
+	my_scene.connect('Save_sheet_path', self, '_UpDate_Sheet_List')
 
 	
 	emit_signal('receive_sheet_data', value)
