@@ -63,6 +63,12 @@ var age_category: Dictionary = {
 
 onready var class_menu = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterClass_BoxC/Panel2/MenuButton'
 
+var char_image
+onready var TexRect = $Panel/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/TextureRect
+onready var Token = $Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/Token_TextureRect
+onready var checkbox = $Panel/SheetArea/Sheet_TabContainer/Token/HBoxContainer/VBoxContainer/HBoxContainer2/CheckBox
+
+
 func _ready():
 	old_name = char_name.text
 	$'Panel'.rect_position = Vector2(235-15, 60)
@@ -164,6 +170,92 @@ func _Update_Save():
 	print(sheet_list)
 	emit_signal("Save_sheet_path", [old_path, dir] )
 #	pass
+
+
+# ===============================================[ Load Texture Image of Player Character ]============================================================= #
+
+# Receive Character image from user
+func _on_TextureRect_char_image_path(path):
+	var PATH = path
+	var image_name
+	image_name = PATH.split('/')
+	image_name = '%s' % image_name[-1]
+	print('\n\nImage_name\n\n', image_name, '\n\n')
+	char_image = PATH
+	load_char_image(PATH)
+	
+
+func load_char_image(path):
+	_copy_img(path)
+	var valid_image = load_external_tex(path)
+#	char_image = valid_image
+	
+	$'ColorRect/SheetArea/Sheet_TabContainer/Background/HBoxContainer/CenterContainer/Label'.visible = false
+	TexRect.texture = valid_image
+	TexRect.material.set_shader_param('tex_frg_7' , valid_image)
+	TexRect.material.set_shader_param('alpha', 1.000)
+	Token.material.set_shader_param('tex_frg_2' , valid_image)
+	checkbox.pressed = true
+#	_Update_Save()
+	print('\n\nChar_Image: ', char_image, '\n\n')
+#	emit_signal('load_image_token', valid_image)
+
+
+
+func load_external_tex(path):
+	var tex_file = File.new()
+	tex_file.open(path, File.READ)
+	var bytes = tex_file.get_buffer(tex_file.get_len())
+	var img = Image.new()
+	var data 
+	var file_type = path.split('.')
+	var is_valid: bool = true
+	
+	if file_type[-1] == 'png':
+		data = img.load_png_from_buffer(bytes)
+	elif file_type[-1] == 'jpg' or  file_type[-1] == 'jpeg':
+		data = img.load_jpg_from_buffer(bytes)
+	elif file_type[-1] == 'bmp':
+		data = img.load_bmp_from_buffer(bytes)
+	elif file_type[-1] == 'tga':
+		data = img.load_tga_from_buffer(bytes)
+	elif file_type[-1] == 'webp':
+		data = img.load_webp_from_buffer(bytes)
+	else:
+		is_valid = false
+		print('\nErro to load character image file. \nUse a valid image file format\n')
+	
+	var imgtex = ImageTexture.new()
+	imgtex.create_from_image(img)
+	tex_file.close()
+	
+	return imgtex
+
+
+func _copy_img(path):
+	var _name = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name
+	var dir = Directory.new()
+	var cfg = ConfigFile.new()
+	cfg.load(BASE_PATH+'/data/last_played.ini')
+	var dir_path = cfg.get_value('Last Played', 'path')
+	cfg.load(dir_path)
+	var sheets = cfg.get_value('Table', 'sheets')
+	for i in sheets.size():
+		if sheets[i]['name'] == _name.text:
+			dir_path = sheets[i]['path']
+#		else:
+#			pass
+	dir_path = dir_path.split('/')
+	dir_path.remove(-1)
+	dir_path.push_back('char_img.png')
+	dir_path = '/'.join(dir_path)
+	print('DIR: \n%s\n' % dir_path)
+	dir.copy(path, BASE_PATH+'/data/char_img.png')
+	return dir_path
+
+
+# ===============================================[ END ]============================================================= #
+
 
 func _set_age_mod():
 	var age_label = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Label2'
