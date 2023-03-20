@@ -12,10 +12,12 @@ var is_block: bool = true
 onready var pos2d = $'CanvasLayer/Node2D'
 onready var color_rect = $'Panel/Container' #$"CanvasLayer/ColorRect2"
 
+onready var wp = $Panel/Panel/HBoxContainer2/HBoxContainer2
+onready var xp = $Panel/Panel/HBoxContainer2/XP_Box/SpinBox
+
 onready var char_name = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterName_BoxC/Character_Name'
 onready var char_race = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterRace_BoxC/Panel/MenuButton'
 onready var char_class = $'Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/CharacterBaseArea/CharacterClass_BoxC/Panel2/MenuButton'
-
 
 onready var age = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Age/HBoxContainer/Panel/SpinBox
 onready var reputation = $Panel/SheetArea/Sheet_TabContainer/Main/HBoxContainer/VBoxContainer/HBoxContainer3/VBoxContainer/HBoxContainer/Reputation/HBoxContainer/Panel/SpinBox
@@ -202,12 +204,19 @@ func _Update_Save():
 
 func _save_sheet(path):
 #	print('SHeet Path: \n', path)
-	var condition_array: Array
-	for i in conditions.get_child_count() - 1:
-		var type = ['Sleeples', 'Thirsty', 'Hungry', 'Cold']
-		var item = conditions.get_node('%s_Itens/CenterContainer/CheckBox' % type[i - 1])
+	var wp_array : Array
+	for i in wp.get_child_count():
+		var item = wp.get_child(i)
 		if item.pressed == true:
-			condition_array.push_back([i, item.pressed])
+			wp_array.push_back([i, item.pressed])
+
+	var condition_array: Array
+	for i in conditions.get_child_count():
+		if i > 0 and i < 5:
+			var type = ['Sleeples', 'Thirsty', 'Hungry', 'Cold']
+			var item = conditions.get_node('%s_Itens/CenterContainer/CheckBox' % type[i - 1])
+			if item.pressed == true:
+				condition_array.push_back([i, item.pressed])
 	var skills_dic = {
 		'str': [],
 		'agi': [],
@@ -222,6 +231,8 @@ func _save_sheet(path):
 			skills_dic['%s' % type[i].substr(0,3).to_lower()].push_back(item.get_child(x).get_node('SpinBox').value)
 	var dic = {
 		'Main':{
+			'wp': wp_array,
+			'xp': xp.value,
 			'name': char_name.text,
 			'race': char_race.text,
 			'class': char_class.text,
@@ -251,6 +262,10 @@ func _Initialize_Sheet(path):
 	var main = cfg.get_value('Sheet', 'main')
 	print(path, '\n',main)
 	if main != null:
+		for i in main['wp'].size():
+			wp.get_child(main['wp'][i][0]).pressed = main['wp'][i][1]
+		xp.value = main['xp']
+
 		char_name.text = main['name']
 		char_race.text = main['race']
 		char_class.text = main['class']
@@ -259,8 +274,8 @@ func _Initialize_Sheet(path):
 		_set_age_mod()
 		
 	#	Set Conditions
-		for i in main['conditions'].size():
-			conditions.get_child(main['conditions'][i][0]).get_node('CenterContainer/CheckBox').pressed = main['conditions'][i][1]
+		for i in main['conditions']:
+			conditions.get_child(i[0]).get_node('CenterContainer/CheckBox').pressed = true #main['conditions'][i][1]
 	
 	# set attribute values
 		_str.get_node("SpinBox").max_value = main['attributes']['str'][1]
@@ -407,17 +422,20 @@ func Popup_race_id_pressed(id):
 			age_category['max_min'] = age_category['Half-Elf']
 		2:
 			race_menu.text = race_menu.get_popup().get_item_text(id)
-			age_category['max_min'] = age_category['Dwarf']
+			age_category['max_min'] = age_category['Half-Elf']
 		3:
 			race_menu.text = race_menu.get_popup().get_item_text(id)
-			age_category['max_min'] = age_category['Halfling']
+			age_category['max_min'] = age_category['Dwarf']
 		4:
 			race_menu.text = race_menu.get_popup().get_item_text(id)
-			age_category['max_min'] = age_category['WolfKin']
+			age_category['max_min'] = age_category['Halfling']
 		5:
 			race_menu.text = race_menu.get_popup().get_item_text(id)
-			age_category['max_min'] = age_category['Orc']
+			age_category['max_min'] = age_category['Wolfkin']
 		6:
+			race_menu.text = race_menu.get_popup().get_item_text(id)
+			age_category['max_min'] = age_category['Orc']
+		7:
 			race_menu.text = race_menu.get_popup().get_item_text(id)
 			age_category['max_min'] = age_category['Goblin']
 	_set_age_mod()
