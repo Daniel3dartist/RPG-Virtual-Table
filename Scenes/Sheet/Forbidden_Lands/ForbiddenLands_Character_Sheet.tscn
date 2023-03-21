@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=2]
+[gd_scene load_steps=90 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Base_Images/Char_Base_Image_300x300p.png" type="Texture" id=2]
@@ -35,6 +35,7 @@
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Item_aditor/Resources_Box.gd" type="Script" id=33]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Talents.gd" type="Script" id=34]
 [ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Hide_show.gd" type="Script" id=35]
+[ext_resource path="res://Scenes/Sheet/Forbidden_Lands/Itens_ScrollContainer.gd" type="Script" id=36]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 499, 28.75 )
@@ -4072,7 +4073,6 @@ theme = SubResource( 59 )
 pressed = true
 align = 1
 icon_align = 1
-script = ExtResource( 35 )
 
 [node name="Equipped_label" type="Label" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/HBoxContainer"]
 margin_left = 37.0
@@ -4103,6 +4103,7 @@ margin_top = 50.0
 margin_right = 1002.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 1002, 250 )
+script = ExtResource( 36 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/SheetArea/Sheet_TabContainer/Inventory/Inventory2/ScrollContainer/HBoxContainer/VBoxContainer3/Equipped_Box/ScrollContainer"]
 margin_right = 1002.0
